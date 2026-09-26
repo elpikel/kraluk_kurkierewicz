@@ -1,0 +1,284 @@
+/* See the Tailwind configuration guide for advanced usage
+   https://tailwindcss.com/docs/configuration */
+
+@import "tailwindcss" source(none);
+@source "../css";
+@source "../js";
+@source "../../lib/kraluk_kurkierewicz_web";
+
+/* A Tailwind plugin that makes "hero-#{ICON}" classes available.
+   The heroicons installation itself is managed by your mix.exs */
+@plugin "../vendor/heroicons";
+
+/* Add variants based on LiveView classes */
+@custom-variant phx-click-loading (.phx-click-loading&, .phx-click-loading &);
+@custom-variant phx-submit-loading (.phx-submit-loading&, .phx-submit-loading &);
+@custom-variant phx-change-loading (.phx-change-loading&, .phx-change-loading &);
+
+/* Use the data attribute for dark mode  */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+/* Make LiveView wrapper divs transparent for layout */
+[data-phx-session], [data-phx-teleported-src] { display: contents }
+
+/* This file is for your main application CSS */
+
+/* ============================================================================
+   Kraluk Kurkierewicz design system (home page)
+   Folded in from the standalone Tailwind v4 mockup. Primary token/component
+   system for the marketing home page; daisyUI above is kept for app pages.
+   Note: @theme resets Tailwind's default breakpoints to the design's px scale.
+   ============================================================================ */
+
+/* ── Design tokens ─────────────────────────────────────────────── */
+@theme {
+    /* Breakpoints matched to the original design (px in comments) */
+    --breakpoint-*: initial;
+    --breakpoint-xs: 26.25rem;
+    /* 420 */
+    --breakpoint-sm: 35rem;
+    /* 560 */
+    --breakpoint-md: 53.75rem;
+    /* 860 */
+    --breakpoint-lg: 60rem;
+    /* 960 */
+    --breakpoint-xl: 67.5rem;
+    /* 1080 */
+
+    /* Pastel, warm palette */
+    --color-ink: #3d5878;
+    /* headings, logo */
+    --color-ink-deep: #2f4766;
+    --color-sky: #ecf0f2;
+    /* powder blue in the hero */
+    --color-paper: #faf8f4;
+    /* warm ivory section background */
+    --color-cream: #fffefc;
+    /* page background */
+    --color-brass: #cfae7e;
+    /* champagne gold accent */
+    --color-brass-soft: #f4ead9;
+    --color-brass-deep: #8c6a3a;
+    /* small gold text (readable) */
+    --color-brass-text: #a98450;
+    /* large italic headline */
+    --color-copy: #3a4656;
+    /* body text */
+    --color-muted: #69717c;
+    --color-line: #e7e2d9;
+    --color-line-soft: rgb(61 88 120 / 0.09);
+
+    --font-sans: "Figtree", "Segoe UI", system-ui, sans-serif;
+    --font-display: "Cormorant Garamond", Georgia, serif;
+
+    --spacing-section: clamp(4rem, 8vw, 6.5rem);
+
+    --shadow-card: 0 1px 2px rgb(47 71 102 / 0.05), 0 12px 32px -18px rgb(47 71 102 / 0.28);
+    --shadow-card-hover: 0 2px 4px rgb(47 71 102 / 0.06), 0 20px 40px -20px rgb(47 71 102 / 0.34);
+}
+
+/* ── Base ──────────────────────────────────────────────────────── */
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: calc(4rem + env(safe-area-inset-top, 0px));
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        background-color: var(--color-cream);
+    }
+
+    body {
+        color: var(--color-copy);
+        background-color: var(--color-cream);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    h1,
+    h2,
+    h3 {
+        font-family: var(--font-display);
+        font-weight: 500;
+        line-height: 1.1;
+        color: var(--color-ink);
+    }
+
+    h2 {
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        margin-bottom: 1.25rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        max-width: 64ch;
+    }
+
+    :where(a, button, input, textarea):focus-visible {
+        outline: 3px solid var(--color-brass);
+        outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+    }
+}
+
+/* ── Components ────────────────────────────────────────────────── */
+@layer components {
+    .btn {
+        display: inline-block;
+        padding: 0.9rem 1.6rem;
+        border: 1px solid #bf9c6a;
+        border-radius: 6px;
+        background-image: linear-gradient(180deg, #dcc096 0%, var(--color-brass) 55%, #c3a06e 100%);
+        color: var(--color-ink-deep);
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.28), 0 1px 2px rgb(47 71 102 / 0.12), 0 8px 18px -10px rgb(150 110 55 / 0.75);
+        transition: transform 0.15s, box-shadow 0.2s, filter 0.2s;
+    }
+
+    .btn:hover {
+        filter: brightness(1.05);
+        transform: translateY(-1px);
+        box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.3), 0 2px 4px rgb(47 71 102 / 0.12), 0 14px 26px -12px rgb(150 110 55 / 0.8);
+    }
+
+    .btn:active {
+        transform: none;
+        box-shadow: inset 0 1px 2px rgb(47 71 102 / 0.2);
+    }
+
+    .btn-ghost {
+        background: rgb(255 255 255 / 0.55);
+        color: var(--color-ink);
+        border-color: rgb(61 88 120 / 0.45);
+        box-shadow: 0 1px 2px rgb(47 71 102 / 0.06);
+    }
+
+    .btn-ghost:hover {
+        filter: none;
+        background: var(--color-cream);
+        border-color: var(--color-ink);
+        box-shadow: 0 1px 2px rgb(47 71 102 / 0.06), 0 10px 22px -14px rgb(47 71 102 / 0.35);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .btn {
+            transition: none;
+        }
+
+        .btn:hover {
+            transform: none;
+        }
+    }
+
+    /* Gdańsk skyline (inline SVG in the hero) */
+    .sk * {
+        stroke: var(--color-ink);
+        stroke-width: 1;
+        stroke-opacity: 0.55;
+        stroke-linejoin: round;
+        vector-effect: non-scaling-stroke;
+    }
+
+    .sk .t {
+        fill: none;
+        stroke-opacity: 0.3;
+    }
+
+    .sk .w {
+        fill: #efe9df;
+    }
+
+    .sk .dr {
+        fill: var(--color-ink);
+        fill-opacity: 0.35;
+    }
+
+    .sk .fin {
+        fill: var(--color-brass);
+        fill-opacity: 0.6;
+    }
+}
+
+/* ── Custom utilities (multi-layer gradients, masks) ──────────── */
+@utility wrap {
+    width: 100%;
+    max-width: 1140px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 5vw, 56px);
+}
+
+/* Gold segment + line, used on step and card dividers */
+@utility border-rule {
+    border-image: linear-gradient(90deg, var(--color-brass) 0 56px, var(--color-line) 56px 100%) 1;
+}
+
+@utility border-rule-fade {
+    border-image: linear-gradient(90deg, var(--color-brass), rgb(207 174 126 / 0.12)) 1;
+}
+
+@utility border-rule-fade-y {
+    border-image: linear-gradient(180deg, var(--color-brass), rgb(207 174 126 / 0.08)) 1;
+}
+
+/* Soft golden circle in the hero */
+@utility hero-orb {
+    background:
+        radial-gradient(circle at 38% 36%, rgb(232 205 160 / 0.38) 0%, rgb(232 205 160 / 0) 30%),
+        radial-gradient(circle closest-side, rgb(207 174 126 / 0.2) 0%, rgb(207 174 126 / 0.1) 45%, rgb(207 174 126 / 0.03) 80%, rgb(207 174 126 / 0) 100%);
+}
+
+/* Thin gradient ring around it */
+@utility hero-ring {
+    padding: 1px;
+    background: linear-gradient(145deg, rgb(207 174 126 / 0.85) 0%, rgb(207 174 126 / 0.4) 45%, rgb(207 174 126 / 0.08) 100%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+
+/* Skyline fades out towards the top */
+@utility mask-fade-up {
+    -webkit-mask-image: linear-gradient(to top, #000 40%, rgb(0 0 0 / 0.35) 100%);
+    mask-image: linear-gradient(to top, #000 40%, rgb(0 0 0 / 0.35) 100%);
+}
+
+/* Round gold icon badge (specialisation cards) */
+@utility icon-badge {
+    fill: none;
+    stroke: var(--color-brass);
+    stroke-width: 1.4;
+    stroke-linejoin: round;
+    border-radius: 9999px;
+    background: radial-gradient(circle at 30% 25%, #fff 0%, #faf3e8 60%, var(--color-brass-soft) 100%);
+    box-shadow: inset 0 0 0 1px rgb(207 174 126 / 0.35), 0 6px 14px -8px rgb(150 110 55 / 0.45);
+}
+
+/* Photo placeholder in team cards */
+@utility person-photo {
+    background:
+        radial-gradient(120% 80% at 25% 10%, rgb(255 255 255 / 0.12) 0%, rgb(255 255 255 / 0) 55%),
+        linear-gradient(160deg, #4a6588 0%, #5f7a9c 50%, #86a0bd 100%);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08), 0 8px 18px -10px rgb(47 71 102 / 0.55);
+}
+
+/* Contact section background and glass form panel */
+@utility bg-contact {
+    background:
+        radial-gradient(900px 520px at 88% -10%, rgb(207 174 126 / 0.18) 0%, rgb(207 174 126 / 0) 60%),
+        radial-gradient(700px 480px at -5% 110%, rgb(255 255 255 / 0.07) 0%, rgb(255 255 255 / 0) 60%),
+        linear-gradient(160deg, #33496a 0%, #3f5a7e 50%, #56729a 100%);
+}
+
+@utility form-glass {
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.08) 0%, rgb(255 255 255 / 0.03) 100%);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08), 0 24px 50px -30px rgb(10 20 40 / 0.6);
+}
