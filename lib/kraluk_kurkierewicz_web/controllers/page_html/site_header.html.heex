@@ -24,31 +24,37 @@
     >
       <a
         class="border-b border-transparent py-1 hover:border-brass max-xl:border-line-soft max-xl:py-3 plausible-event-name=Menu plausible-event-pozycja=Specjalizacje"
+        data-nav="specjalizacje"
         href={~p"/#specjalizacje"}
       >
         Specjalizacje
       </a>
       <a
         class="border-b border-transparent py-1 hover:border-brass max-xl:border-line-soft max-xl:py-3 plausible-event-name=Menu plausible-event-pozycja=Jak+pracujemy"
+        data-nav="jak-pracujemy"
         href={~p"/#jak-pracujemy"}
       >
         Jak pracujemy
       </a>
       <a
         class="border-b border-transparent py-1 hover:border-brass max-xl:border-line-soft max-xl:py-3 plausible-event-name=Menu plausible-event-pozycja=O+kancelarii"
+        data-nav="o-nas"
         href={~p"/#o-nas"}
       >
         O kancelarii
       </a>
       <a
         class="border-b border-transparent py-1 hover:border-brass max-xl:border-line-soft max-xl:py-3 plausible-event-name=Menu plausible-event-pozycja=Zespol"
+        data-nav="zespol"
         href={~p"/#zespol"}
       >
         Zespół
       </a>
       <a
         class="border-b border-transparent py-1 hover:border-brass max-xl:border-line-soft max-xl:py-3 plausible-event-name=Menu plausible-event-pozycja=Blog"
-        href={~p"/#blog"}
+        data-nav="blog"
+        aria-current={if assigns[:active_nav] == "blog", do: "page"}
+        href={~p"/blog"}
       >
         Blog
       </a>

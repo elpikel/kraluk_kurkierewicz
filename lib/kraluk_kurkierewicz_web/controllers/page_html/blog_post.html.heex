@@ -1,0 +1,25 @@
+<.site_symbols />
+<.masthead />
+<.site_header active_nav={assigns[:active_nav]} />
+<script type="application/ld+json">
+  <%= Phoenix.HTML.raw(blog_post_json_ld(@post)) %>
+</script>
+<section class="border-y border-line-soft bg-linear-to-b/srgb from-paper to-[#f3f0e9] py-section max-sm:py-12">
+  <div class="wrap">
+    <p class="mb-6 text-[.9rem] font-semibold text-brass-deep">
+      <a class="hover:text-ink" href={~p"/blog"}>← Wróć do bloga</a>
+    </p>
+    <article class="max-w-[880px] rounded-[14px] border border-line-soft bg-cream p-[clamp(1.5rem,3.5vw,2.75rem)] shadow-card">
+      <p class="m-0 text-[.88rem] font-semibold text-brass-deep">
+        <time datetime={Date.to_iso8601(@post.date)}>{@post.date_display}</time>
+        · {@post.category}
+      </p>
+      <h1 class="mt-[.45rem] mb-[.8rem] text-[clamp(1.7rem,3vw,2.4rem)]">{@post.title}</h1>
+      <p class="text-[1.1rem] text-muted">{@post.excerpt}</p>
+      <div class="mt-7 border-t border-line pt-6 marker:text-brass [&_a]:border-b [&_a]:border-brass [&_a]:font-semibold [&_a]:text-ink [&_a:hover]:border-ink [&_a:hover]:text-ink-deep [&_h2]:mt-7 [&_h2]:mb-2 [&_h2]:font-display [&_h2]:text-[1.5rem] [&_h2]:font-semibold [&_h2]:text-ink [&_h2:first-child]:mt-0 [&_li]:leading-[1.75] [&_li+li]:mt-[.55rem] [&_p]:leading-[1.75] [&_p+p]:mt-[.8rem] [&_ul]:my-[.7rem] [&_ul]:list-disc [&_ul]:pl-5">
+        <.post_body post={@post} />
+      </div>
+    </article>
+  </div>
+</section>
+<.site_footer />

@@ -18,6 +18,8 @@ defmodule KralukKurkierewiczWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/blog", PageController, :blog
+    get "/blog/:slug", PageController, :blog_post
     get "/polityka-prywatnosci", PageController, :privacy
     get "/sitemap.xml", PageController, :sitemap
     post "/api/kontakt", PageController, :contact

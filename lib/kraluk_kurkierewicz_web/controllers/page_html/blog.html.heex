@@ -1,0 +1,29 @@
+<.site_symbols />
+<.masthead />
+<.site_header active_nav={assigns[:active_nav]} />
+<section class="border-y border-line-soft bg-linear-to-b/srgb from-paper to-[#f3f0e9] py-section max-sm:py-12">
+  <div class="wrap">
+    <h1 class="sr-only">Blog</h1>
+    <p class="max-w-[64ch] text-[1.1rem] text-muted">
+      Omawiamy orzecznictwo i zmiany w przepisach, które mają znaczenie dla naszych Klientów.
+    </p>
+    <div class="mt-10 grid grid-cols-1 gap-8">
+      <article
+        :for={post <- @posts}
+        class="max-w-[880px] rounded-[14px] border border-line-soft bg-cream p-[clamp(1.5rem,3.5vw,2.75rem)] shadow-card transition duration-250 hover:-translate-y-0.5 hover:shadow-card-hover motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+      >
+        <p class="m-0 text-[.88rem] font-semibold text-brass-deep">
+          <time datetime={Date.to_iso8601(post.date)}>{post.date_display}</time> · {post.category}
+        </p>
+        <h2 class="mt-[.45rem] mb-[.8rem] text-[clamp(1.6rem,2.8vw,2.2rem)]">
+          <a class="text-ink hover:text-ink-deep" href={~p"/blog/#{post.slug}"}>{post.title}</a>
+        </h2>
+        <p class="text-[1.05rem] text-muted">{post.excerpt}</p>
+        <a class="btn btn-ghost mt-[1.4rem]" href={~p"/blog/#{post.slug}"}>
+          Czytaj artykuł
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+<.site_footer />

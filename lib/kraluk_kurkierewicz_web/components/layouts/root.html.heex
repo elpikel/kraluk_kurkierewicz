@@ -8,11 +8,34 @@
     <meta name="google-site-verification" content="AJZr1paCxgjEBbNCTavBEtTt-5-jn_GAref_9lbOQDQ" />
     <meta
       name="description"
-      content="Kraluk Kurkierewicz Adwokacka Spółka Partnerska – kancelaria adwokacka w Gdańsku. Pomoc prawna dla osób prywatnych i przedsiębiorców."
+      content={
+        assigns[:meta_description] ||
+          "Kraluk Kurkierewicz Adwokacka Spółka Partnerska – kancelaria adwokacka w Gdańsku. Sprawy cywilne, rodzinne, spadkowe, odszkodowania oraz obsługa prawna firm. Pomoc prawna dla osób prywatnych i przedsiębiorców."
+      }
     />
     <.live_title default="Kraluk Kurkierewicz — Kancelaria Adwokacka Gdańsk">
       {assigns[:page_title]}
     </.live_title>
+    <% canonical_url =
+      KralukKurkierewiczWeb.Endpoint.url() <> (assigns[:canonical_path] || @conn.request_path) %>
+    <% social_image = KralukKurkierewiczWeb.Endpoint.url() <> "/images/og-image.png" %>
+    <% social_title = assigns[:page_title] || "Kraluk Kurkierewicz — Kancelaria Adwokacka Gdańsk" %>
+    <% social_description =
+      assigns[:meta_description] ||
+        "Kancelaria adwokacka w Gdańsku. Sprawy cywilne, rodzinne, spadkowe, odszkodowania oraz obsługa prawna firm." %>
+    <link rel="canonical" href={canonical_url} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Kraluk Kurkierewicz Adwokacka Spółka Partnerska" />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:title" content={social_title} />
+    <meta property="og:description" content={social_description} />
+    <meta property="og:url" content={canonical_url} />
+    <meta property="og:image" content={social_image} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={social_title} />
+    <meta name="twitter:description" content={social_description} />
+    <meta name="twitter:image" content={social_image} />
+    <.structured_data />
     <link rel="icon" href="/favicon.svg?v=3" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico?v=3" sizes="48x48 32x32 16x16" />
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png?v=3" />

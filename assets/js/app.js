@@ -121,17 +121,32 @@ document.querySelectorAll("[role=alert][data-flash]").forEach((el) => {
     })
   }
 
-  // Blog: expand / collapse article
-  document.querySelectorAll("[data-post-toggle]").forEach((btn) => {
-    const body = document.getElementById(btn.getAttribute("aria-controls"))
-    if (!body) return
-    btn.addEventListener("click", () => {
-      const open = body.hidden
-      body.hidden = !open
-      btn.setAttribute("aria-expanded", open)
-      btn.textContent = open ? "Zwiń artykuł" : "Czytaj artykuł"
-    })
-  })
+  // Scroll-spy: underline the nav item whose section is currently in view.
+  // No-op on pages without those sections (e.g. the blog), where the active
+  // item is already marked server-side via aria-current.
+  const spyLinks = Array.from(document.querySelectorAll("#nav a[data-nav]"))
+  const linkBySection = {}
+  const spySections = []
+  for (const link of spyLinks) {
+    const section = document.getElementById(link.dataset.nav)
+    if (section) {
+      linkBySection[link.dataset.nav] = link
+      spySections.push(section)
+    }
+  }
+  if (spySections.length && "IntersectionObserver" in window) {
+    const spy = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue
+          spyLinks.forEach((l) => l.removeAttribute("aria-current"))
+          linkBySection[entry.target.id]?.setAttribute("aria-current", "page")
+        }
+      },
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
+    )
+    spySections.forEach((s) => spy.observe(s))
+  }
 
   // Contact form – sends the message through the backend (Brevo).
   const form = document.getElementById("contact-form")
