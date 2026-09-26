@@ -168,7 +168,11 @@ document.querySelectorAll("[role=alert][data-flash]").forEach((el) => {
             ? "Wiadomość wysłana. Dziękujemy!"
             : "Nie udało się wysłać wiadomości. Spróbuj ponownie.")
 
-        if (res.ok) form.reset()
+        if (res.ok) {
+          form.reset()
+          // Custom Plausible goal: a real, successful contact-form send.
+          window.plausible?.("Kontakt")
+        }
       } catch {
         status.textContent = "Nie udało się wysłać wiadomości. Spróbuj ponownie."
       } finally {
@@ -177,4 +181,28 @@ document.querySelectorAll("[role=alert][data-flash]").forEach((el) => {
       }
     })
   }
+
+  // Scroll-depth goal: fire "Scroll" once per milestone the visitor reaches.
+  const scrollMilestones = [25, 50, 75, 90]
+  const firedMilestones = new Set()
+
+  const trackScrollDepth = () => {
+    const doc = document.documentElement
+    const scrollable = doc.scrollHeight - window.innerHeight
+    if (scrollable <= 0) return
+    const percent = (window.scrollY / scrollable) * 100
+
+    for (const milestone of scrollMilestones) {
+      if (percent >= milestone && !firedMilestones.has(milestone)) {
+        firedMilestones.add(milestone)
+        window.plausible?.("Scroll", { props: { glebokosc: `${milestone}%` } })
+      }
+    }
+
+    if (firedMilestones.size === scrollMilestones.length) {
+      window.removeEventListener("scroll", trackScrollDepth)
+    }
+  }
+
+  window.addEventListener("scroll", trackScrollDepth, { passive: true })
 })()
