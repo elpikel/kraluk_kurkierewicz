@@ -57,6 +57,12 @@ if config_env() == :prod do
 
   config :kraluk_kurkierewicz, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
+  # Brevo (formerly Sendinblue) — same setup as the ordo repository.
+  config :kraluk_kurkierewicz, KralukKurkierewicz.Mailer,
+    adapter: Swoosh.Adapters.Brevo,
+    api_key:
+      System.get_env("BREVO_API_KEY") || raise("environment variable BREVO_API_KEY is missing")
+
   config :kraluk_kurkierewicz, KralukKurkierewiczWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],
     http: [

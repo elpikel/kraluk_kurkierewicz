@@ -10,7 +10,8 @@ defmodule KralukKurkierewicz.Application do
     children = [
       KralukKurkierewiczWeb.Telemetry,
       KralukKurkierewicz.Repo,
-      {DNSCluster, query: Application.get_env(:kraluk_kurkierewicz, :dns_cluster_query) || :ignore},
+      {DNSCluster,
+       query: Application.get_env(:kraluk_kurkierewicz, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: KralukKurkierewicz.PubSub},
       # Start a worker by calling: KralukKurkierewicz.Worker.start_link(arg)
       # {KralukKurkierewicz.Worker, arg},

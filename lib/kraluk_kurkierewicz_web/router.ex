@@ -2,7 +2,7 @@ defmodule KralukKurkierewiczWeb.Router do
   use KralukKurkierewiczWeb, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
+    plug :accepts, ["html", "json"]
     plug :fetch_session
     plug :fetch_live_flash
     plug :put_root_layout, html: {KralukKurkierewiczWeb.Layouts, :root}
@@ -18,6 +18,9 @@ defmodule KralukKurkierewiczWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/polityka-prywatnosci", PageController, :privacy
+    get "/sitemap.xml", PageController, :sitemap
+    post "/api/kontakt", PageController, :contact
   end
 
   # Analytics event proxy to avoid ad blockers (no pipeline: POST /api/event must skip CSRF).
@@ -33,7 +36,6 @@ defmodule KralukKurkierewiczWeb.Router do
 
   # Enable Swoosh mailbox preview in development
   if Application.compile_env(:kraluk_kurkierewicz, :dev_routes) do
-
     scope "/dev" do
       pipe_through :browser
 

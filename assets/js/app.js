@@ -133,15 +133,48 @@ document.querySelectorAll("[role=alert][data-flash]").forEach((el) => {
     })
   })
 
-  // Contact form (demo – connect to your backend or form service)
+  // Contact form – sends the message through the backend (Brevo).
   const form = document.getElementById("contact-form")
   const status = document.getElementById("form-status")
   if (form && status) {
-    form.addEventListener("submit", (e) => {
+    const csrfToken = document
+      .querySelector("meta[name='csrf-token']")
+      ?.getAttribute("content")
+    const submitBtn = form.querySelector("button[type='submit']")
+
+    form.addEventListener("submit", async (e) => {
       e.preventDefault()
-      status.textContent = "Wiadomość wysłana (demo)."
-      status.hidden = false
-      form.reset()
+
+      const payload = Object.fromEntries(new FormData(form).entries())
+
+      if (submitBtn) submitBtn.disabled = true
+      status.hidden = true
+
+      try {
+        const res = await fetch("/api/kontakt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            accept: "application/json",
+            "x-csrf-token": csrfToken,
+          },
+          body: JSON.stringify(payload),
+        })
+        const data = await res.json().catch(() => ({}))
+
+        status.textContent =
+          data.message ||
+          (res.ok
+            ? "Wiadomość wysłana. Dziękujemy!"
+            : "Nie udało się wysłać wiadomości. Spróbuj ponownie.")
+
+        if (res.ok) form.reset()
+      } catch {
+        status.textContent = "Nie udało się wysłać wiadomości. Spróbuj ponownie."
+      } finally {
+        status.hidden = false
+        if (submitBtn) submitBtn.disabled = false
+      }
     })
   }
 })()

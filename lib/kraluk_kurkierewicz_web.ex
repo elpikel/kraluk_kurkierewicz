@@ -18,7 +18,8 @@ defmodule KralukKurkierewiczWeb do
   """
 
   def static_paths,
-    do: ~w(assets fonts images js favicon.ico favicon.svg favicon-96.png apple-touch-icon.png robots.txt)
+    do:
+      ~w(assets fonts images js favicon.ico favicon.svg favicon-96.png apple-touch-icon.png robots.txt)
 
   def router do
     quote do

@@ -1,0 +1,71 @@
+<header
+  class="group sticky top-[env(safe-area-inset-top,0px)] z-10 border-b border-line-soft bg-white/88 shadow-[0_10px_30px_-24px_rgba(47,71,102,.45)] backdrop-blur-[10px] backdrop-saturate-[1.4]"
+  id="header"
+>
+  <div class="wrap flex h-16 items-center justify-between gap-6 max-sm:h-[54px]">
+    <a
+      aria-label="Kraluk Kurkierewicz – strona główna"
+      class="invisible flex items-center gap-[.6rem] text-ink-deep opacity-0 transition-[opacity,visibility] duration-250 group-data-stuck:visible group-data-stuck:opacity-100 motion-reduce:transition-none"
+      href={~p"/"}
+      id="logo-mini"
+      tabindex="-1"
+    >
+      <svg aria-hidden="true" class="h-[38px] w-auto" viewBox="0 0 1426 1448">
+        <use height="1448" href="#kk-crane" width="1426"></use>
+      </svg>
+      <span class="font-display text-[1.05rem] font-semibold tracking-[.07em] whitespace-nowrap uppercase max-xl:hidden">
+        Kraluk
+        Kurkierewicz
+      </span>
+    </a>
+    <nav
+      class="hidden text-[.95rem] whitespace-nowrap xl:flex xl:items-center xl:gap-[clamp(1.1rem,2vw,2rem)] max-xl:data-open:absolute max-xl:data-open:inset-x-0 max-xl:data-open:top-16 max-xl:data-open:flex max-xl:data-open:flex-col max-xl:data-open:border-b max-xl:data-open:border-line-soft max-xl:data-open:bg-white max-xl:data-open:px-[clamp(20px,5vw,56px)] max-xl:data-open:pt-4 max-xl:data-open:pb-6 max-xl:data-open:shadow-[0_24px_40px_-28px_rgba(47,71,102,.45)] max-sm:data-open:top-[54px]"
+      id="nav"
+    >
+      <a
+        class="border-b border-transparent py-1 hover:border-brass max-xl:border-line-soft max-xl:py-3"
+        href={~p"/#specjalizacje"}
+      >
+        Specjalizacje
+      </a>
+      <a
+        class="border-b border-transparent py-1 hover:border-brass max-xl:border-line-soft max-xl:py-3"
+        href={~p"/#jak-pracujemy"}
+      >
+        Jak pracujemy
+      </a>
+      <a
+        class="border-b border-transparent py-1 hover:border-brass max-xl:border-line-soft max-xl:py-3"
+        href={~p"/#o-nas"}
+      >
+        O kancelarii
+      </a>
+      <a
+        class="border-b border-transparent py-1 hover:border-brass max-xl:border-line-soft max-xl:py-3"
+        href={~p"/#zespol"}
+      >
+        Zespół
+      </a>
+      <a
+        class="border-b border-transparent py-1 hover:border-brass max-xl:border-line-soft max-xl:py-3"
+        href={~p"/#blog"}
+      >
+        Blog
+      </a>
+      <a
+        class="btn border-b-transparent px-[1.1rem] py-[.6rem] text-[.9rem] max-xl:mt-4 max-xl:text-center"
+        href={~p"/#kontakt"}
+      >
+        Umów spotkanie
+      </a>
+    </nav>
+    <button
+      aria-expanded="false"
+      aria-label="Menu"
+      class="block cursor-pointer border-0 bg-transparent text-[1.6rem] leading-normal text-ink xl:hidden"
+      id="nav-toggle"
+    >
+      ☰
+    </button>
+  </div>
+</header>
