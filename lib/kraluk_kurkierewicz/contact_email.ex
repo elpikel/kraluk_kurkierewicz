@@ -13,7 +13,7 @@ defmodule KralukKurkierewicz.ContactEmail do
   @from {"Kraluk Kurkierewicz — formularz", "hello@kkadwokat.pl"}
 
   # Kancelaria inbox the contact messages land in.
-  @recipient {"Kraluk Kurkierewicz", "kkadwokaci.gda@gmail.com"}
+  @recipient {"Kraluk Kurkierewicz", "kontakt@kkadwokat.pl"}
 
   @doc """
   Builds and delivers the contact message. `params` is a map with the form
