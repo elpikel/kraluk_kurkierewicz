@@ -26,7 +26,7 @@ defmodule KralukKurkierewiczWeb.PageController do
       post ->
         conn
         |> assign(:active_nav, "blog")
-        |> assign(:page_title, post.title <> " — Kraluk Kurkierewicz")
+        |> assign(:page_title, post.meta_title || post.title <> " — Kraluk Kurkierewicz")
         |> assign(:meta_description, post.description)
         |> assign(:canonical_path, "/blog/#{post.slug}")
         |> render(:blog_post, post: post)

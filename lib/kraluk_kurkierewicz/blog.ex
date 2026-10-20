@@ -1,7 +1,7 @@
 defmodule KralukKurkierewicz.Blog.Post do
   @moduledoc "A single blog post's metadata."
   @enforce_keys [:slug, :title, :date, :date_display, :category, :excerpt, :description]
-  defstruct [:slug, :title, :date, :date_display, :category, :excerpt, :description]
+  defstruct [:slug, :title, :date, :date_display, :category, :excerpt, :description, :meta_title]
 end
 
 defmodule KralukKurkierewicz.Blog do
@@ -19,6 +19,18 @@ defmodule KralukKurkierewicz.Blog do
   alias KralukKurkierewicz.Blog.Post
 
   @posts [
+    %Post{
+      slug: "wysokosc-alimentow-na-dziecko",
+      title: "Ile wynoszą alimenty na dziecko i jak sąd ustala ich wysokość?",
+      meta_title: "Wysokość alimentów na dziecko – jak ją ustalić?",
+      date: ~D[2026-10-20],
+      date_display: "20 października 2026",
+      category: "Prawo rodzinne",
+      excerpt:
+        "Ile alimentów można uzyskać na dziecko? Czy istnieje minimalna kwota alimentów? Co sąd bierze pod uwagę, ustalając wysokość świadczenia? Czy sąd bierze pod uwagę faktyczne zarobki rodziców, a może również czas, jaki każdy z rodziców poświęca na opiekę? To pytania, które często zadają nam Klienci przy okazji konsultacji w sprawie rozwodowej czy alimentacyjnej.",
+      description:
+        "Od czego zależy wysokość alimentów? Dowiedz się, jak sąd ocenia potrzeby dziecka, możliwości rodziców i koszty utrzymania."
+    },
     %Post{
       slug: "zawyzony-metraz-scianki-dzialowe",
       title: "Zawyżony metraż przez ścianki działowe. Czy można odzyskać część ceny mieszkania?",

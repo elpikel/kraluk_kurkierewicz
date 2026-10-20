@@ -16,6 +16,10 @@ defmodule KralukKurkierewiczWeb.PageHTML do
   """
   attr :post, :map, required: true
 
+  def post_body(%{post: %{slug: "wysokosc-alimentow-na-dziecko"}} = assigns) do
+    wysokosc_alimentow_na_dziecko(assigns)
+  end
+
   def post_body(%{post: %{slug: "zawyzony-metraz-scianki-dzialowe"}} = assigns) do
     zawyzony_metraz_scianki_dzialowe(assigns)
   end
