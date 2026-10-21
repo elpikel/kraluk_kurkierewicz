@@ -21,8 +21,8 @@ defmodule KralukKurkierewicz.Blog do
   @posts [
     %Post{
       slug: "upadlosc-konsumencka",
-      title: "Upadłość konsumencka - czy pozwala uwolnić się od długów?",
-      meta_title: "Upadłość konsumencka - jak uwolnić się od długów?",
+      title: "Upadłość konsumencka — czy pozwala uwolnić się od długów?",
+      meta_title: "Upadłość konsumencka — jak uwolnić się od długów?",
       date: ~D[2026-10-21],
       date_display: "21 października 2026",
       category: "Upadłość konsumencka",
@@ -34,7 +34,7 @@ defmodule KralukKurkierewicz.Blog do
     %Post{
       slug: "wysokosc-alimentow-na-dziecko",
       title: "Ile wynoszą alimenty na dziecko i jak sąd ustala ich wysokość?",
-      meta_title: "Wysokość alimentów na dziecko - jak ją ustalić?",
+      meta_title: "Wysokość alimentów na dziecko — jak ją ustalić?",
       date: ~D[2026-10-20],
       date_display: "20 października 2026",
       category: "Prawo rodzinne",
