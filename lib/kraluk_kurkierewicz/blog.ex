@@ -20,9 +20,21 @@ defmodule KralukKurkierewicz.Blog do
 
   @posts [
     %Post{
+      slug: "upadlosc-konsumencka",
+      title: "Upadłość konsumencka - czy pozwala uwolnić się od długów?",
+      meta_title: "Upadłość konsumencka - jak uwolnić się od długów?",
+      date: ~D[2026-10-21],
+      date_display: "21 października 2026",
+      category: "Upadłość konsumencka",
+      excerpt:
+        "Osoby, które dotąd terminowo regulowały swoje zobowiązania, mogą z czasem utracić możliwość ich dalszej spłaty. Przyczyną bywa utrata pracy, choroba lub zmiana sytuacji rodzinnej. Gdy raty i zaległe rachunki zaczynają przekraczać możliwości domowego budżetu, pojawiają się pytania o przyszłość: co stanie się z mieszkaniem, jaka część dochodów pozostanie na utrzymanie i czy istnieje możliwość umorzenia długów?",
+      description:
+        "Czym jest upadłość konsumencka i które długi można umorzyć? Dowiedz się, co dzieje się z mieszkaniem i dochodami oraz jak przygotować wniosek o oddłużenie."
+    },
+    %Post{
       slug: "wysokosc-alimentow-na-dziecko",
       title: "Ile wynoszą alimenty na dziecko i jak sąd ustala ich wysokość?",
-      meta_title: "Wysokość alimentów na dziecko – jak ją ustalić?",
+      meta_title: "Wysokość alimentów na dziecko - jak ją ustalić?",
       date: ~D[2026-10-20],
       date_display: "20 października 2026",
       category: "Prawo rodzinne",

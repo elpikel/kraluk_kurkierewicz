@@ -18,7 +18,7 @@
 // To load it, simply add a second `<link>` to your `root.html.heex` file.
 
 // Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
-import "phoenix_html"
+import "phoenix_html";
 // Establish Phoenix Socket and LiveView configuration.
 // import {Socket} from "phoenix"
 // import {LiveSocket} from "phoenix_live_view"
@@ -57,7 +57,7 @@ import "phoenix_html"
 //     // Enable server log streaming to client.
 //     // Disable with reloader.disableServerLogs()
 //     reloader.enableServerLogs()
-// 
+//
 //     // Open configured PLUG_EDITOR at file:line of the clicked element's HEEx component
 //     //
 //     //   * click with "c" key pressed to open at caller location
@@ -76,94 +76,93 @@ import "phoenix_html"
 //         reloader.openEditorAtDef(e.target)
 //       }
 //     }, true)
-// 
+//
 //     window.liveReloader = reloader
 //   })
 // }
 
-
 // Handle flash close
 document.querySelectorAll("[role=alert][data-flash]").forEach((el) => {
   el.addEventListener("click", () => {
-    el.setAttribute("hidden", "")
-  })
-})
+    el.setAttribute("hidden", "");
+  });
+});
 
 // Kraluk Kurkierewicz home page interactions.
 // Guarded so it is a no-op on pages that don't render these elements.
-;(function () {
-  const header = document.getElementById("header")
-  const masthead = document.getElementById("masthead")
-  const logoMini = document.getElementById("logo-mini")
+(function () {
+  const header = document.getElementById("header");
+  const masthead = document.getElementById("masthead");
+  const logoMini = document.getElementById("logo-mini");
 
   // Compact logo in the sticky bar once the full logo scrolls away
   if (header && masthead && "IntersectionObserver" in window) {
     new IntersectionObserver((entries) => {
-      const stuck = !entries[0].isIntersecting
-      header.toggleAttribute("data-stuck", stuck)
-      if (logoMini) logoMini.tabIndex = stuck ? 0 : -1
-    }).observe(masthead)
+      const stuck = !entries[0].isIntersecting;
+      header.toggleAttribute("data-stuck", stuck);
+      if (logoMini) logoMini.tabIndex = stuck ? 0 : -1;
+    }).observe(masthead);
   }
 
   // Mobile menu
-  const nav = document.getElementById("nav")
-  const toggle = document.getElementById("nav-toggle")
+  const nav = document.getElementById("nav");
+  const toggle = document.getElementById("nav-toggle");
   if (nav && toggle) {
     toggle.addEventListener("click", () => {
-      const open = nav.toggleAttribute("data-open")
-      toggle.setAttribute("aria-expanded", open)
-    })
+      const open = nav.toggleAttribute("data-open");
+      toggle.setAttribute("aria-expanded", open);
+    });
     nav.addEventListener("click", (e) => {
       if (e.target.closest("a")) {
-        nav.removeAttribute("data-open")
-        toggle.setAttribute("aria-expanded", "false")
+        nav.removeAttribute("data-open");
+        toggle.setAttribute("aria-expanded", "false");
       }
-    })
+    });
   }
 
   // Scroll-spy: underline the nav item whose section is currently in view.
   // No-op on pages without those sections (e.g. the blog), where the active
   // item is already marked server-side via aria-current.
-  const spyLinks = Array.from(document.querySelectorAll("#nav a[data-nav]"))
-  const linkBySection = {}
-  const spySections = []
+  const spyLinks = Array.from(document.querySelectorAll("#nav a[data-nav]"));
+  const linkBySection = {};
+  const spySections = [];
   for (const link of spyLinks) {
-    const section = document.getElementById(link.dataset.nav)
+    const section = document.getElementById(link.dataset.nav);
     if (section) {
-      linkBySection[link.dataset.nav] = link
-      spySections.push(section)
+      linkBySection[link.dataset.nav] = link;
+      spySections.push(section);
     }
   }
   if (spySections.length && "IntersectionObserver" in window) {
     const spy = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (!entry.isIntersecting) continue
-          spyLinks.forEach((l) => l.removeAttribute("aria-current"))
-          linkBySection[entry.target.id]?.setAttribute("aria-current", "page")
+          if (!entry.isIntersecting) continue;
+          spyLinks.forEach((l) => l.removeAttribute("aria-current"));
+          linkBySection[entry.target.id]?.setAttribute("aria-current", "page");
         }
       },
       { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
-    )
-    spySections.forEach((s) => spy.observe(s))
+    );
+    spySections.forEach((s) => spy.observe(s));
   }
 
-  // Contact form – sends the message through the backend (Brevo).
-  const form = document.getElementById("contact-form")
-  const status = document.getElementById("form-status")
+  // Contact form - sends the message through the backend (Brevo).
+  const form = document.getElementById("contact-form");
+  const status = document.getElementById("form-status");
   if (form && status) {
     const csrfToken = document
       .querySelector("meta[name='csrf-token']")
-      ?.getAttribute("content")
-    const submitBtn = form.querySelector("button[type='submit']")
+      ?.getAttribute("content");
+    const submitBtn = form.querySelector("button[type='submit']");
 
     form.addEventListener("submit", async (e) => {
-      e.preventDefault()
+      e.preventDefault();
 
-      const payload = Object.fromEntries(new FormData(form).entries())
+      const payload = Object.fromEntries(new FormData(form).entries());
 
-      if (submitBtn) submitBtn.disabled = true
-      status.hidden = true
+      if (submitBtn) submitBtn.disabled = true;
+      status.hidden = true;
 
       try {
         const res = await fetch("/api/kontakt", {
@@ -174,50 +173,51 @@ document.querySelectorAll("[role=alert][data-flash]").forEach((el) => {
             "x-csrf-token": csrfToken,
           },
           body: JSON.stringify(payload),
-        })
-        const data = await res.json().catch(() => ({}))
+        });
+        const data = await res.json().catch(() => ({}));
 
         status.textContent =
           data.message ||
           (res.ok
             ? "Wiadomość wysłana. Dziękujemy!"
-            : "Nie udało się wysłać wiadomości. Spróbuj ponownie.")
+            : "Nie udało się wysłać wiadomości. Spróbuj ponownie.");
 
         if (res.ok) {
-          form.reset()
+          form.reset();
           // Custom Plausible goal: a real, successful contact-form send.
-          window.plausible?.("Kontakt")
+          window.plausible?.("Kontakt");
         }
       } catch {
-        status.textContent = "Nie udało się wysłać wiadomości. Spróbuj ponownie."
+        status.textContent =
+          "Nie udało się wysłać wiadomości. Spróbuj ponownie.";
       } finally {
-        status.hidden = false
-        if (submitBtn) submitBtn.disabled = false
+        status.hidden = false;
+        if (submitBtn) submitBtn.disabled = false;
       }
-    })
+    });
   }
 
   // Scroll-depth goal: fire "Scroll" once per milestone the visitor reaches.
-  const scrollMilestones = [25, 50, 75, 90]
-  const firedMilestones = new Set()
+  const scrollMilestones = [25, 50, 75, 90];
+  const firedMilestones = new Set();
 
   const trackScrollDepth = () => {
-    const doc = document.documentElement
-    const scrollable = doc.scrollHeight - window.innerHeight
-    if (scrollable <= 0) return
-    const percent = (window.scrollY / scrollable) * 100
+    const doc = document.documentElement;
+    const scrollable = doc.scrollHeight - window.innerHeight;
+    if (scrollable <= 0) return;
+    const percent = (window.scrollY / scrollable) * 100;
 
     for (const milestone of scrollMilestones) {
       if (percent >= milestone && !firedMilestones.has(milestone)) {
-        firedMilestones.add(milestone)
-        window.plausible?.("Scroll", { props: { glebokosc: `${milestone}%` } })
+        firedMilestones.add(milestone);
+        window.plausible?.("Scroll", { props: { glebokosc: `${milestone}%` } });
       }
     }
 
     if (firedMilestones.size === scrollMilestones.length) {
-      window.removeEventListener("scroll", trackScrollDepth)
+      window.removeEventListener("scroll", trackScrollDepth);
     }
-  }
+  };
 
-  window.addEventListener("scroll", trackScrollDepth, { passive: true })
-})()
+  window.addEventListener("scroll", trackScrollDepth, { passive: true });
+})();
