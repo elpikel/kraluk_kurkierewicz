@@ -4,7 +4,7 @@
 <section class="border-y border-line-soft bg-linear-to-b/srgb from-paper to-[#f3f0e9] py-section max-sm:py-12">
   <div class="wrap">
     <h1 class="sr-only">Blog</h1>
-    <p class="max-w-[64ch] text-[1.1rem] text-muted">
+    <p class="max-w-none text-[1.1rem] text-muted">
       Omawiamy orzecznictwo i zmiany w przepisach, które mają znaczenie dla naszych Klientów.
     </p>
     <div class="mt-10 grid grid-cols-1 gap-8">
@@ -18,7 +18,7 @@
         <h2 class="mt-[.45rem] mb-[.8rem] text-[clamp(1.6rem,2.8vw,2.2rem)]">
           <a class="text-ink hover:text-ink-deep" href={~p"/blog/#{post.slug}"}>{post.title}</a>
         </h2>
-        <p class="text-[1.05rem] text-muted">{post.excerpt}</p>
+        <p class="max-w-none text-[1.05rem] text-muted">{post.excerpt}</p>
         <a class="btn btn-ghost mt-[1.4rem]" href={~p"/blog/#{post.slug}"}>
           Czytaj artykuł
         </a>
