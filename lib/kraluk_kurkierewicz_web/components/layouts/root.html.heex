@@ -45,7 +45,8 @@
     <link
       :for={
         font <-
-          ~w(figtree-latin.woff2 figtree-latin-ext.woff2 cormorant-garamond-latin.woff2 cormorant-garamond-latin-ext.woff2)
+          ~w(figtree-latin.woff2 figtree-latin-ext.woff2 cormorant-garamond-latin.woff2 cormorant-garamond-latin-ext.woff2) ++
+            (assigns[:preload_fonts] || [])
       }
       rel="preload"
       href={~p"/fonts/#{font}"}

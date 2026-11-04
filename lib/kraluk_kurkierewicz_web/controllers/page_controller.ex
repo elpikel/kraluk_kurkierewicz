@@ -4,7 +4,13 @@ defmodule KralukKurkierewiczWeb.PageController do
   alias KralukKurkierewicz.Blog
 
   def home(conn, _params) do
-    render(conn, :home)
+    # The hero headline is set in Cormorant italic; preload it so it isn't discovered only after app.css
+    conn
+    |> assign(
+      :preload_fonts,
+      ~w(cormorant-garamond-italic-latin.woff2 cormorant-garamond-italic-latin-ext.woff2)
+    )
+    |> render(:home)
   end
 
   def blog(conn, _params) do
