@@ -20,6 +20,18 @@ defmodule KralukKurkierewicz.Blog do
 
   @posts [
     %Post{
+      slug: "kredyt-po-rozwodzie",
+      title: "Kredyt hipoteczny po rozwodzie – co z ratami i mieszkaniem?",
+      meta_title: "Kredyt po rozwodzie – podział majątku i hipoteka",
+      date: ~D[2026-11-04],
+      date_display: "4 listopada 2026",
+      category: "Prawo rodzinne",
+      excerpt:
+        "Co dzieje się ze wspólnym kredytem po rozwodzie? Czy były małżonek, który otrzymał mieszkanie, musi sam spłacać raty? Czy można domagać się zwrotu spłaconych rat kredytu od byłego małżonka? Jak ustalić wartość mieszkania obciążonego hipoteką?",
+      description:
+        "Kredyt po rozwodzie – kto spłaca raty? Jak wygląda podział majątku, wycena mieszkania z hipoteką i rozliczenie kredytu? Sprawdź, jakie są możliwości prawne."
+    },
+    %Post{
       slug: "upadlosc-konsumencka",
       title: "Upadłość konsumencka – czy pozwala uwolnić się od długów?",
       meta_title: "Upadłość konsumencka – jak uwolnić się od długów?",
