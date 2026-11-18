@@ -91,19 +91,6 @@ document.querySelectorAll("[role=alert][data-flash]").forEach((el) => {
 // Kraluk Kurkierewicz home page interactions.
 // Guarded so it is a no-op on pages that don't render these elements.
 (function () {
-  const header = document.getElementById("header");
-  const masthead = document.getElementById("masthead");
-  const logoMini = document.getElementById("logo-mini");
-
-  // Compact logo in the sticky bar once the full logo scrolls away
-  if (header && masthead && "IntersectionObserver" in window) {
-    new IntersectionObserver((entries) => {
-      const stuck = !entries[0].isIntersecting;
-      header.toggleAttribute("data-stuck", stuck);
-      if (logoMini) logoMini.tabIndex = stuck ? 0 : -1;
-    }).observe(masthead);
-  }
-
   // Mobile menu
   const nav = document.getElementById("nav");
   const toggle = document.getElementById("nav-toggle");

@@ -233,34 +233,6 @@
             transform: none;
         }
     }
-
-    /* Gdańsk skyline (inline SVG in the hero) */
-    .sk * {
-        stroke: var(--color-ink);
-        stroke-width: 1;
-        stroke-opacity: 0.55;
-        stroke-linejoin: round;
-        vector-effect: non-scaling-stroke;
-    }
-
-    .sk .t {
-        fill: none;
-        stroke-opacity: 0.3;
-    }
-
-    .sk .w {
-        fill: #efe9df;
-    }
-
-    .sk .dr {
-        fill: var(--color-ink);
-        fill-opacity: 0.35;
-    }
-
-    .sk .fin {
-        fill: var(--color-brass);
-        fill-opacity: 0.6;
-    }
 }
 
 /* ── Custom utilities (multi-layer gradients, masks) ──────────── */
@@ -282,28 +254,6 @@
 
 @utility border-rule-fade-y {
     border-image: linear-gradient(180deg, var(--color-brass), rgb(207 174 126 / 0.08)) 1;
-}
-
-/* Soft golden circle in the hero */
-@utility hero-orb {
-    background:
-        radial-gradient(circle at 38% 36%, rgb(232 205 160 / 0.38) 0%, rgb(232 205 160 / 0) 30%),
-        radial-gradient(circle closest-side, rgb(207 174 126 / 0.2) 0%, rgb(207 174 126 / 0.1) 45%, rgb(207 174 126 / 0.03) 80%, rgb(207 174 126 / 0) 100%);
-}
-
-/* Thin gradient ring around it */
-@utility hero-ring {
-    padding: 1px;
-    background: linear-gradient(145deg, rgb(207 174 126 / 0.85) 0%, rgb(207 174 126 / 0.4) 45%, rgb(207 174 126 / 0.08) 100%);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
-}
-
-/* Skyline fades out towards the top */
-@utility mask-fade-up {
-    -webkit-mask-image: linear-gradient(to top, #000 40%, rgb(0 0 0 / 0.35) 100%);
-    mask-image: linear-gradient(to top, #000 40%, rgb(0 0 0 / 0.35) 100%);
 }
 
 /* Round gold icon badge (specialisation cards) */

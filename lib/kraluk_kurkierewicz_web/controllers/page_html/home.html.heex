@@ -1,39 +1,74 @@
 <.site_symbols />
-<.masthead />
 <.site_header active_nav={assigns[:active_nav]} />
-<section class="relative overflow-hidden bg-linear-to-b/srgb from-[#f8f5ef] via-sky via-60% to-[#e7ecef] pt-[clamp(1.5rem,4.5svh,5rem)] pb-[clamp(90px,calc(18svh_-_10px),200px)] max-sm:pt-[1.4rem]">
-  <div
-    aria-hidden="true"
-    class="hero-orb pointer-events-none absolute -top-[22vh] -right-[14vw] size-[62vw] max-h-[780px] max-w-[780px] rounded-full max-md:-top-[55vw] max-md:-right-[50vw] max-md:size-[110vw]"
-  >
+<section class="relative overflow-hidden bg-[#1c2a3d] lg:grid lg:min-h-[clamp(560px,calc(100svh_-_64px),820px)] lg:grid-cols-2 lg:bg-[#cdc9c0]">
+  <%!-- Photo: full-bleed background on phones, right column on desktop --%>
+  <div class="absolute inset-0 lg:relative lg:col-start-2 lg:row-start-1">
+    <picture>
+      <source
+        media="(max-width: 959px)"
+        srcset={"#{~p"/images/hero-zespol-m-640.webp"} 640w, #{~p"/images/hero-zespol-m-960.webp"} 960w"}
+        sizes="100vw"
+        width="960"
+        height="1086"
+      />
+      <img
+        src={~p"/images/hero-zespol-900.webp"}
+        srcset={"#{~p"/images/hero-zespol-560.webp"} 560w, #{~p"/images/hero-zespol-900.webp"} 900w, #{~p"/images/hero-zespol-1400.webp"} 1400w"}
+        sizes="50vw"
+        alt="Adwokaci Milena Kraluk i Michał Kurkierewicz"
+        width="1400"
+        height="1768"
+        fetchpriority="high"
+        decoding="async"
+        class="absolute inset-0 h-full w-full object-cover object-top lg:object-[50%_30%]"
+      />
+    </picture>
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 bg-linear-to-t from-[#141e2c]/92 via-[#141e2c]/60 via-55% to-[#141e2c]/0 lg:hidden"
+    >
+    </div>
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-y-0 left-0 hidden w-[14%] bg-linear-to-r/srgb from-[#c9c5bb] via-[#c9c5bb]/60 via-40% to-transparent lg:block"
+    >
+    </div>
   </div>
-  <div class="wrap relative z-[2]">
-    <div>
-      <p class="mb-[.6rem] font-display text-[clamp(1.1rem,1.8vw,1.35rem)] text-brass-deep italic">
-        Kancelaria
-        adwokacka w Gdańsku
+  <div class="relative z-[2] flex flex-col overflow-hidden pt-[60vw] pr-[clamp(20px,5vw,56px)] pb-8 sm:pt-[52vw] md:pt-[44vw] pl-[calc(max(0px,(100vw_-_1140px)/2)_+_clamp(20px,5vw,56px))] lg:col-start-1 lg:row-start-1 lg:min-h-0 lg:justify-center lg:bg-linear-to-r/srgb lg:from-[#e4e0d9] lg:via-[#dbd7ce] lg:via-65% lg:to-[#c9c5bb] lg:py-[clamp(2.5rem,7svh,5.5rem)] lg:pr-[clamp(32px,4vw,64px)]">
+    <svg
+      aria-hidden="true"
+      class="pointer-events-none absolute top-[40%] -right-[12%] z-0 hidden w-[78%] -translate-y-1/2 text-ink opacity-[.05] lg:block"
+      viewBox="0 0 1302 921"
+    >
+      <use height="921" href="#kk-monogram" width="1302"></use>
+    </svg>
+    <div class="relative z-[2]">
+      <p class="mb-4 flex items-center gap-4 text-[.78rem] lg:mb-[clamp(1rem,3svh,1.75rem)] font-semibold tracking-[.28em] text-white/85 uppercase max-sm:gap-3 max-sm:text-[.62rem] max-sm:tracking-[.16em] lg:text-[#6b5129]">
+        <span aria-hidden="true" class="h-px w-12 flex-none bg-brass max-sm:w-8 max-xs:hidden">
+        </span>
+        Kancelaria adwokacka w Gdańsku
       </p>
-      <h1 class="text-[clamp(2.1rem,min(5.6vw,7svh),4.6rem)]">
+      <h1 class="text-[clamp(1.85rem,7.6vw,3.4rem)] text-white max-lg:leading-[1.1] lg:text-[clamp(2.2rem,min(3.3vw,6.4svh),3.3rem)] lg:text-ink">
         Pomoc prawna, która<br />
-        <em class="text-[.85em] whitespace-nowrap text-brass-text italic max-[700px]:whitespace-normal max-md:text-[.7em]">
+        <em class="text-[#e6cb98] italic lg:text-[#84633a]">
           skutecznie
           rozwiązuje Twoje problemy
         </em>
       </h1>
-      <p class="mt-[clamp(.8rem,2.2svh,1.5rem)] mb-[clamp(1.1rem,3svh,2.25rem)] text-[1.15rem] text-muted max-sm:text-[1.02rem]">
+      <p class="mt-4 mb-6 max-w-[34rem] text-[1.12rem] text-white/80 max-sm:text-[.95rem] lg:mt-[clamp(1rem,2.6svh,1.75rem)] lg:mb-[clamp(1.4rem,3.6svh,2.5rem)] lg:text-[#474e58]">
         Zapewniamy wsparcie prawne osobom prywatnym i przedsiębiorcom — od pojedynczych spraw po
         stałą obsługę firm i spory masowe.
       </p>
-      <div class="flex flex-wrap gap-4">
+      <div class="flex flex-wrap gap-4 max-sm:gap-3">
         <a
-          class="btn btn-ghost max-sm:w-full max-sm:text-center plausible-event-name=Telefon plausible-event-miejsce=Hero"
+          class="btn max-sm:w-full max-sm:text-center plausible-event-name=Telefon plausible-event-miejsce=Hero"
           href="tel:+48698359581"
         >
           Zadzwoń:
           698 359 581
         </a>
         <a
-          class="btn btn-ghost max-sm:w-full max-sm:text-center plausible-event-name=Telefon plausible-event-miejsce=Hero"
+          class="btn btn-ghost max-sm:w-full max-sm:text-center max-lg:border-white/60 max-lg:bg-white/10 max-lg:text-white max-lg:backdrop-blur-sm max-lg:hover:bg-white/20 max-lg:hover:text-white plausible-event-name=Telefon plausible-event-miejsce=Hero"
           href="tel:+48793102489"
         >
           Zadzwoń:
@@ -41,687 +76,6 @@
         </a>
       </div>
     </div>
-  </div>
-  <svg
-    aria-hidden="true"
-    class="sk mask-fade-up pointer-events-none absolute inset-x-0 bottom-0 z-0 block h-[clamp(110px,calc(24svh_-_20px),260px)] w-full opacity-50 max-sm:h-[clamp(96px,calc(20svh_-_24px),180px)]"
-    preserveAspectRatio="xMidYMax slice"
-    viewBox="0 0 3200 260"
-  >
-    <path d="M0,258 L0,132 L74,132 L74,258 Z" fill="#fbf3e9"></path>
-    <rect fill="#fbf3e9" height="11" width="70" x="2" y="121"></rect>
-    <path
-      class="t"
-      d="M6,123 V132 M12,123 V132 M18,123 V132 M24,123 V132 M30,123 V132 M36,123 V132 M42,123 V132 M48,123 V132 M54,123 V132 M60,123 V132 M66,123 V132"
-    >
-    </path>
-    <rect class="w" height="16" width="11" x="13" y="139"></rect>
-    <rect class="w" height="16" width="11" x="50" y="139"></rect>
-    <rect class="w" height="16" width="11" x="13" y="167"></rect>
-    <rect class="w" height="16" width="11" x="50" y="167"></rect>
-    <path class="dr" d="M30,258 V239 A7,7 0 0 1 44,239 V258 Z"></path>
-    <circle class="fin" cx="5" cy="118.2" r="2.3"></circle>
-    <circle class="fin" cx="69" cy="118.2" r="2.3"></circle>
-    <path
-      d="M74,258 L74,136 C87.4,133.5 79,107 92.5,104.5 L92.5,90.6 L116,73 L139.5,90.6 L139.5,104.5 C153,107 144.6,133.5 158,136 L158,258 Z"
-      fill="#ffffff"
-    >
-    </path>
-    <path class="t" d="M74,136 H158"></path>
-    <rect class="w" height="16" width="11" x="82.5" y="143"></rect>
-    <rect class="w" height="16" width="11" x="110.5" y="143"></rect>
-    <rect class="w" height="16" width="11" x="138.5" y="143"></rect>
-    <rect class="w" height="16" width="11" x="82.5" y="171"></rect>
-    <rect class="w" height="16" width="11" x="110.5" y="171"></rect>
-    <rect class="w" height="16" width="11" x="138.5" y="171"></rect>
-    <path class="dr" d="M109,258 V239 A7,7 0 0 1 123,239 V258 Z"></path>
-    <rect class="w" height="18" width="16.8" x="80.7" y="226"></rect>
-    <rect class="w" height="18" width="16.8" x="134.5" y="226"></rect>
-    <rect class="w" height="12" width="8" x="112" y="103.5"></rect>
-    <circle class="fin" cx="92.5" cy="88.1" r="2.3"></circle>
-    <circle class="fin" cx="139.5" cy="88.1" r="2.3"></circle>
-    <circle class="fin" cx="116" cy="70" r="2.3"></circle>
-    <path d="M158,258 L158,105 L222,105 L222,258 Z" fill="#fbf3e9"></path>
-    <rect fill="#fbf3e9" height="11" width="60" x="160" y="94"></rect>
-    <path
-      class="t"
-      d="M164,96 V105 M170,96 V105 M176,96 V105 M182,96 V105 M188,96 V105 M194,96 V105 M200,96 V105 M206,96 V105 M212,96 V105"
-    >
-    </path>
-    <rect class="w lit" height="16" width="11" x="168.5" y="112"></rect>
-    <rect class="w" height="16" width="11" x="200.5" y="112"></rect>
-    <rect class="w lit" height="16" width="11" x="168.5" y="140"></rect>
-    <rect class="w" height="16" width="11" x="200.5" y="140"></rect>
-    <rect class="w" height="16" width="11" x="168.5" y="168"></rect>
-    <rect class="w lit" height="16" width="11" x="200.5" y="168"></rect>
-    <path class="dr" d="M183,258 V239 A7,7 0 0 1 197,239 V258 Z"></path>
-    <circle class="fin" cx="163" cy="91.2" r="2.3"></circle>
-    <circle class="fin" cx="217" cy="91.2" r="2.3"></circle>
-    <path
-      d="M222,258 L222,106 L222,90.8 L230.9,90.8 L230.9,75.5 L239.8,75.5 L239.8,60.2 L248.6,60.2 L248.6,45 L269.4,45 L269.4,60.2 L278.2,60.2 L278.2,75.5 L287.1,75.5 L287.1,90.8 L296,90.8 L296,106 L296,258 Z"
-      fill="#eaf1f2"
-    >
-    </path>
-    <path class="t" d="M222,106 H296"></path>
-    <rect class="w" height="16" width="11" x="235" y="113"></rect>
-    <rect class="w" height="16" width="11" x="272" y="113"></rect>
-    <rect class="w" height="16" width="11" x="235" y="141"></rect>
-    <rect class="w" height="16" width="11" x="272" y="141"></rect>
-    <rect class="w" height="16" width="11" x="235" y="169"></rect>
-    <rect class="w lit" height="16" width="11" x="272" y="169"></rect>
-    <path class="dr" d="M252,258 V239 A7,7 0 0 1 266,239 V258 Z"></path>
-    <rect class="w" height="12" width="8" x="255" y="74.4"></rect>
-    <path d="M296,258 L296,126 L388,126 L388,258 Z" fill="#fbf3e9"></path>
-    <rect fill="#fbf3e9" height="11" width="88" x="298" y="115"></rect>
-    <path
-      class="t"
-      d="M302,117 V126 M308,117 V126 M314,117 V126 M320,117 V126 M326,117 V126 M332,117 V126 M338,117 V126 M344,117 V126 M350,117 V126 M356,117 V126 M362,117 V126 M368,117 V126 M374,117 V126 M380,117 V126"
-    >
-    </path>
-    <rect class="w" height="16" width="11" x="305.8" y="133"></rect>
-    <rect class="w lit" height="16" width="11" x="336.5" y="133"></rect>
-    <rect class="w" height="16" width="11" x="367.2" y="133"></rect>
-    <rect class="w" height="16" width="11" x="305.8" y="161"></rect>
-    <rect class="w lit" height="16" width="11" x="336.5" y="161"></rect>
-    <rect class="w" height="16" width="11" x="367.2" y="161"></rect>
-    <rect class="w" height="16" width="11" x="305.8" y="189"></rect>
-    <rect class="w" height="16" width="11" x="336.5" y="189"></rect>
-    <rect class="w" height="16" width="11" x="367.2" y="189"></rect>
-    <path class="dr" d="M335,258 V239 A7,7 0 0 1 349,239 V258 Z"></path>
-    <rect class="w" height="18" width="18.4" x="303.4" y="226"></rect>
-    <rect class="w" height="18" width="18.4" x="362.2" y="226"></rect>
-    <circle class="fin" cx="301" cy="112.2" r="2.3"></circle>
-    <circle class="fin" cx="383" cy="112.2" r="2.3"></circle>
-    <path
-      d="M388,258 L388,98 C399.2,96.2 392.2,76.8 403.4,75 L403.4,64.9 L423,52 L442.6,64.9 L442.6,75 C453.8,76.8 446.8,96.2 458,98 L458,258 Z"
-      fill="#ffffff"
-    >
-    </path>
-    <path class="t" d="M388,98 H458"></path>
-    <rect class="w" height="16" width="11" x="400" y="105"></rect>
-    <rect class="w" height="16" width="11" x="435" y="105"></rect>
-    <rect class="w" height="16" width="11" x="400" y="133"></rect>
-    <rect class="w" height="16" width="11" x="435" y="133"></rect>
-    <rect class="w" height="16" width="11" x="400" y="161"></rect>
-    <rect class="w" height="16" width="11" x="435" y="161"></rect>
-    <rect class="w" height="16" width="11" x="400" y="189"></rect>
-    <rect class="w" height="16" width="11" x="435" y="189"></rect>
-    <path class="dr" d="M416,258 V239 A7,7 0 0 1 430,239 V258 Z"></path>
-    <rect class="w" height="12" width="8" x="419" y="72.7"></rect>
-    <circle class="fin" cx="403.4" cy="62.4" r="2.3"></circle>
-    <circle class="fin" cx="442.6" cy="62.4" r="2.3"></circle>
-    <circle class="fin" cx="423" cy="49" r="2.3"></circle>
-    <path d="M458,258 L458,139 L493,87 L528,139 L528,258 Z" fill="#fbf3e9"></path>
-    <path class="t" d="M458,139 H528"></path>
-    <rect class="w" height="16" width="11" x="470" y="146"></rect>
-    <rect class="w" height="16" width="11" x="505" y="146"></rect>
-    <rect class="w" height="16" width="11" x="470" y="174"></rect>
-    <rect class="w" height="16" width="11" x="505" y="174"></rect>
-    <path class="dr" d="M486,258 V239 A7,7 0 0 1 500,239 V258 Z"></path>
-    <rect class="w" height="12" width="8" x="489" y="111.2"></rect>
-    <circle class="fin" cx="493" cy="84" r="2.3"></circle>
-    <path d="M528,258 L528,115 L620,115 L620,258 Z" fill="#eaf1f2"></path>
-    <rect fill="#eaf1f2" height="11" width="88" x="530" y="104"></rect>
-    <path
-      class="t"
-      d="M534,106 V115 M540,106 V115 M546,106 V115 M552,106 V115 M558,106 V115 M564,106 V115 M570,106 V115 M576,106 V115 M582,106 V115 M588,106 V115 M594,106 V115 M600,106 V115 M606,106 V115 M612,106 V115"
-    >
-    </path>
-    <rect class="w lit" height="16" width="11" x="537.8" y="122"></rect>
-    <rect class="w" height="16" width="11" x="568.5" y="122"></rect>
-    <rect class="w" height="16" width="11" x="599.2" y="122"></rect>
-    <rect class="w" height="16" width="11" x="537.8" y="150"></rect>
-    <rect class="w" height="16" width="11" x="568.5" y="150"></rect>
-    <rect class="w" height="16" width="11" x="599.2" y="150"></rect>
-    <rect class="w" height="16" width="11" x="537.8" y="178"></rect>
-    <rect class="w lit" height="16" width="11" x="568.5" y="178"></rect>
-    <rect class="w" height="16" width="11" x="599.2" y="178"></rect>
-    <path class="dr" d="M567,258 V239 A7,7 0 0 1 581,239 V258 Z"></path>
-    <rect class="w" height="18" width="18.4" x="535.4" y="226"></rect>
-    <rect class="w" height="18" width="18.4" x="594.2" y="226"></rect>
-    <circle class="fin" cx="533" cy="101.2" r="2.3"></circle>
-    <circle class="fin" cx="615" cy="101.2" r="2.3"></circle>
-    <path
-      d="M620,258 L620,134 L620,122.8 L631,122.8 L631,111.5 L642.1,111.5 L642.1,100.2 L653.1,100.2 L653.1,89 L678.9,89 L678.9,100.2 L689.9,100.2 L689.9,111.5 L701,111.5 L701,122.8 L712,122.8 L712,134 L712,258 Z"
-      fill="#ffffff"
-    >
-    </path>
-    <path class="t" d="M620,134 H712"></path>
-    <rect class="w" height="16" width="11" x="629.8" y="141"></rect>
-    <rect class="w" height="16" width="11" x="660.5" y="141"></rect>
-    <rect class="w" height="16" width="11" x="691.2" y="141"></rect>
-    <rect class="w" height="16" width="11" x="629.8" y="169"></rect>
-    <rect class="w lit" height="16" width="11" x="660.5" y="169"></rect>
-    <rect class="w" height="16" width="11" x="691.2" y="169"></rect>
-    <path class="dr" d="M659,258 V239 A7,7 0 0 1 673,239 V258 Z"></path>
-    <rect class="w" height="18" width="18.4" x="627.4" y="226"></rect>
-    <rect class="w" height="18" width="18.4" x="686.2" y="226"></rect>
-    <rect class="w" height="12" width="8" x="662" y="109.1"></rect>
-    <path d="M712,258 L712,124 L782,124 L782,258 Z" fill="#eaf1f2"></path>
-    <rect fill="#eaf1f2" height="11" width="66" x="714" y="113"></rect>
-    <path
-      class="t"
-      d="M718,115 V124 M724,115 V124 M730,115 V124 M736,115 V124 M742,115 V124 M748,115 V124 M754,115 V124 M760,115 V124 M766,115 V124 M772,115 V124"
-    >
-    </path>
-    <rect class="w" height="16" width="11" x="724" y="131"></rect>
-    <rect class="w" height="16" width="11" x="759" y="131"></rect>
-    <rect class="w lit" height="16" width="11" x="724" y="159"></rect>
-    <rect class="w" height="16" width="11" x="759" y="159"></rect>
-    <rect class="w" height="16" width="11" x="724" y="187"></rect>
-    <rect class="w" height="16" width="11" x="759" y="187"></rect>
-    <path class="dr" d="M740,258 V239 A7,7 0 0 1 754,239 V258 Z"></path>
-    <circle class="fin" cx="717" cy="110.2" r="2.3"></circle>
-    <circle class="fin" cx="777" cy="110.2" r="2.3"></circle>
-    <path
-      d="M782,258 L782,108 C782,82.8 806.6,88.4 806.6,74.4 L806.6,63.2 C808.4,48.6 843.6,48.6 845.4,63.2 L845.4,74.4 C845.4,88.4 870,82.8 870,108 L870,258 Z"
-      fill="#fbf3e9"
-    >
-    </path>
-    <path class="t" d="M782,108 H870"></path>
-    <rect class="w lit" height="16" width="11" x="791.2" y="115"></rect>
-    <rect class="w" height="16" width="11" x="820.5" y="115"></rect>
-    <rect class="w lit" height="16" width="11" x="849.8" y="115"></rect>
-    <rect class="w lit" height="16" width="11" x="791.2" y="143"></rect>
-    <rect class="w" height="16" width="11" x="820.5" y="143"></rect>
-    <rect class="w" height="16" width="11" x="849.8" y="143"></rect>
-    <rect class="w" height="16" width="11" x="791.2" y="171"></rect>
-    <rect class="w" height="16" width="11" x="820.5" y="171"></rect>
-    <rect class="w" height="16" width="11" x="849.8" y="171"></rect>
-    <path class="dr" d="M819,258 V239 A7,7 0 0 1 833,239 V258 Z"></path>
-    <rect class="w" height="18" width="17.6" x="789" y="226"></rect>
-    <rect class="w" height="18" width="17.6" x="845.4" y="226"></rect>
-    <rect class="w" height="12" width="8" x="822" y="78.5"></rect>
-    <circle class="fin" cx="826" cy="49" r="2.3"></circle>
-    <path d="M870,258 L870,126 L954,126 L954,258 Z" fill="#ffffff"></path>
-    <rect fill="#ffffff" height="11" width="80" x="872" y="115"></rect>
-    <path
-      class="t"
-      d="M876,117 V126 M882,117 V126 M888,117 V126 M894,117 V126 M900,117 V126 M906,117 V126 M912,117 V126 M918,117 V126 M924,117 V126 M930,117 V126 M936,117 V126 M942,117 V126 M948,117 V126"
-    >
-    </path>
-    <rect class="w" height="16" width="11" x="878.5" y="133"></rect>
-    <rect class="w lit" height="16" width="11" x="906.5" y="133"></rect>
-    <rect class="w" height="16" width="11" x="934.5" y="133"></rect>
-    <rect class="w lit" height="16" width="11" x="878.5" y="161"></rect>
-    <rect class="w" height="16" width="11" x="906.5" y="161"></rect>
-    <rect class="w" height="16" width="11" x="934.5" y="161"></rect>
-    <rect class="w" height="16" width="11" x="878.5" y="189"></rect>
-    <rect class="w" height="16" width="11" x="906.5" y="189"></rect>
-    <rect class="w" height="16" width="11" x="934.5" y="189"></rect>
-    <path class="dr" d="M905,258 V239 A7,7 0 0 1 919,239 V258 Z"></path>
-    <rect class="w" height="18" width="16.8" x="876.7" y="226"></rect>
-    <rect class="w" height="18" width="16.8" x="930.5" y="226"></rect>
-    <circle class="fin" cx="875" cy="112.2" r="2.3"></circle>
-    <circle class="fin" cx="949" cy="112.2" r="2.3"></circle>
-    <path d="M954,258 L954,102 L996,53 L1038,102 L1038,258 Z" fill="#fbf3e9"></path>
-    <path class="t" d="M954,102 H1038"></path>
-    <rect class="w" height="16" width="11" x="962.5" y="109"></rect>
-    <rect class="w" height="16" width="11" x="990.5" y="109"></rect>
-    <rect class="w" height="16" width="11" x="1018.5" y="109"></rect>
-    <rect class="w" height="16" width="11" x="962.5" y="137"></rect>
-    <rect class="w" height="16" width="11" x="990.5" y="137"></rect>
-    <rect class="w" height="16" width="11" x="1018.5" y="137"></rect>
-    <rect class="w lit" height="16" width="11" x="962.5" y="165"></rect>
-    <rect class="w" height="16" width="11" x="990.5" y="165"></rect>
-    <rect class="w" height="16" width="11" x="1018.5" y="165"></rect>
-    <rect class="w" height="16" width="11" x="962.5" y="193"></rect>
-    <rect class="w" height="16" width="11" x="990.5" y="193"></rect>
-    <rect class="w" height="16" width="11" x="1018.5" y="193"></rect>
-    <path class="dr" d="M989,258 V239 A7,7 0 0 1 1003,239 V258 Z"></path>
-    <rect class="w" height="18" width="16.8" x="960.7" y="226"></rect>
-    <rect class="w" height="18" width="16.8" x="1014.5" y="226"></rect>
-    <rect class="w" height="12" width="8" x="992" y="75.4"></rect>
-    <circle class="fin" cx="996" cy="50" r="2.3"></circle>
-    <path
-      d="M1038,258 L1038,100 L1038,84.5 L1048.1,84.5 L1048.1,69 L1058.2,69 L1058.2,53.5 L1068.2,53.5 L1068.2,38 L1091.8,38 L1091.8,53.5 L1101.8,53.5 L1101.8,69 L1111.9,69 L1111.9,84.5 L1122,84.5 L1122,100 L1122,258 Z"
-      fill="#eaf1f2"
-    >
-    </path>
-    <path class="t" d="M1038,100 H1122"></path>
-    <rect class="w" height="16" width="11" x="1046.5" y="107"></rect>
-    <rect class="w lit" height="16" width="11" x="1074.5" y="107"></rect>
-    <rect class="w lit" height="16" width="11" x="1102.5" y="107"></rect>
-    <rect class="w" height="16" width="11" x="1046.5" y="135"></rect>
-    <rect class="w" height="16" width="11" x="1074.5" y="135"></rect>
-    <rect class="w" height="16" width="11" x="1102.5" y="135"></rect>
-    <rect class="w" height="16" width="11" x="1046.5" y="163"></rect>
-    <rect class="w" height="16" width="11" x="1074.5" y="163"></rect>
-    <rect class="w" height="16" width="11" x="1102.5" y="163"></rect>
-    <rect class="w" height="16" width="11" x="1046.5" y="191"></rect>
-    <rect class="w" height="16" width="11" x="1074.5" y="191"></rect>
-    <rect class="w" height="16" width="11" x="1102.5" y="191"></rect>
-    <path class="dr" d="M1073,258 V239 A7,7 0 0 1 1087,239 V258 Z"></path>
-    <rect class="w" height="18" width="16.8" x="1044.7" y="226"></rect>
-    <rect class="w" height="18" width="16.8" x="1098.5" y="226"></rect>
-    <rect class="w" height="12" width="8" x="1076" y="68"></rect>
-    <path
-      d="M1122,258 L1122,136 C1134.5,133.6 1126.7,108.9 1139.2,106.5 L1139.2,93.5 L1161,77 L1182.8,93.5 L1182.8,106.5 C1195.3,108.9 1187.5,133.6 1200,136 L1200,258 Z"
-      fill="#ffffff"
-    >
-    </path>
-    <path class="t" d="M1122,136 H1200"></path>
-    <rect class="w" height="16" width="11" x="1136" y="143"></rect>
-    <rect class="w" height="16" width="11" x="1175" y="143"></rect>
-    <rect class="w" height="16" width="11" x="1136" y="171"></rect>
-    <rect class="w" height="16" width="11" x="1175" y="171"></rect>
-    <path class="dr" d="M1154,258 V239 A7,7 0 0 1 1168,239 V258 Z"></path>
-    <rect class="w" height="12" width="8" x="1157" y="105.2"></rect>
-    <circle class="fin" cx="1139.2" cy="91" r="2.3"></circle>
-    <circle class="fin" cx="1182.8" cy="91" r="2.3"></circle>
-    <circle class="fin" cx="1161" cy="74" r="2.3"></circle>
-    <path d="M1200,258 L1200,136 L1235,79 L1270,136 L1270,258 Z" fill="#fbf3e9"></path>
-    <path class="t" d="M1200,136 H1270"></path>
-    <rect class="w" height="16" width="11" x="1212" y="143"></rect>
-    <rect class="w" height="16" width="11" x="1247" y="143"></rect>
-    <rect class="w" height="16" width="11" x="1212" y="171"></rect>
-    <rect class="w" height="16" width="11" x="1247" y="171"></rect>
-    <path class="dr" d="M1228,258 V239 A7,7 0 0 1 1242,239 V258 Z"></path>
-    <rect class="w" height="12" width="8" x="1231" y="106.1"></rect>
-    <circle class="fin" cx="1235" cy="76" r="2.3"></circle>
-    <path
-      d="M1270,258 L1270,122 C1270,96.3 1286.8,102 1286.8,87.8 L1286.8,76.4 C1288,61.6 1312,61.6 1313.2,76.4 L1313.2,87.8 C1313.2,102 1330,96.3 1330,122 L1330,258 Z"
-      fill="#ffffff"
-    >
-    </path>
-    <path class="t" d="M1270,122 H1330"></path>
-    <rect class="w" height="16" width="11" x="1279.5" y="129"></rect>
-    <rect class="w" height="16" width="11" x="1309.5" y="129"></rect>
-    <rect class="w" height="16" width="11" x="1279.5" y="157"></rect>
-    <rect class="w" height="16" width="11" x="1309.5" y="157"></rect>
-    <rect class="w" height="16" width="11" x="1279.5" y="185"></rect>
-    <rect class="w lit" height="16" width="11" x="1309.5" y="185"></rect>
-    <path class="dr" d="M1293,258 V239 A7,7 0 0 1 1307,239 V258 Z"></path>
-    <rect class="w" height="12" width="8" x="1296" y="92.1"></rect>
-    <circle class="fin" cx="1300" cy="62" r="2.3"></circle>
-    <rect fill="#ffffff" height="120" width="130" x="1333" y="138"></rect>
-    <rect fill="#ffffff" height="5" width="136" x="1330" y="133"></rect>
-    <rect fill="#ffffff" height="3" width="134" x="1331" y="195"></rect>
-    <path class="dr" d="M1383,258 V226 A15,15 0 0 1 1413,226 V258 Z"></path>
-    <path class="dr" d="M1346,258 V234 A9,9 0 0 1 1364,234 V258 Z"></path>
-    <path class="dr" d="M1432,258 V234 A9,9 0 0 1 1450,234 V258 Z"></path>
-    <path
-      class="t"
-      d="M1340,198 V258 M1370,198 V258 M1426,198 V258 M1456,198 V258 M1365.5,138 V195 M1398,138 V195 M1430.5,138 V195 M1338,138 V195 M1458,138 V195"
-    >
-    </path>
-    <path class="w lit" d="M1342.2,190 V165 A7,7 0 0 1 1356.2,165 V190 Z"></path>
-    <path class="w" d="M1374.8,190 V165 A7,7 0 0 1 1388.8,165 V190 Z"></path>
-    <path class="w" d="M1407.2,190 V165 A7,7 0 0 1 1421.2,165 V190 Z"></path>
-    <path class="w" d="M1439.8,190 V165 A7,7 0 0 1 1453.8,165 V190 Z"></path>
-    <rect fill="#ffffff" height="11" width="126" x="1335" y="122"></rect>
-    <path
-      class="t"
-      d="M1340,124 V133 M1346,124 V133 M1352,124 V133 M1358,124 V133 M1364,124 V133 M1370,124 V133 M1376,124 V133 M1382,124 V133 M1388,124 V133 M1394,124 V133 M1400,124 V133 M1406,124 V133 M1412,124 V133 M1418,124 V133 M1424,124 V133 M1430,124 V133 M1436,124 V133 M1442,124 V133 M1448,124 V133 M1454,124 V133"
-    >
-    </path>
-    <path class="fin" d="M1344.8,122 L1346.8,107 L1351.8,107 L1353.8,122 Z"></path>
-    <circle class="fin" cx="1349.2" cy="103.5" r="2.8"></circle>
-    <path class="fin" d="M1377.2,122 L1379.2,107 L1384.2,107 L1386.2,122 Z"></path>
-    <circle class="fin" cx="1381.8" cy="103.5" r="2.8"></circle>
-    <path class="fin" d="M1409.8,122 L1411.8,107 L1416.8,107 L1418.8,122 Z"></path>
-    <circle class="fin" cx="1414.2" cy="103.5" r="2.8"></circle>
-    <path class="fin" d="M1442.2,122 L1444.2,107 L1449.2,107 L1451.2,122 Z"></path>
-    <circle class="fin" cx="1446.8" cy="103.5" r="2.8"></circle>
-    <path
-      d="M1466,258 L1466,108 L1466,94 L1475.4,94 L1475.4,80 L1484.7,80 L1484.7,66 L1494.1,66 L1494.1,52 L1515.9,52 L1515.9,66 L1525.3,66 L1525.3,80 L1534.6,80 L1534.6,94 L1544,94 L1544,108 L1544,258 Z"
-      fill="#eaf1f2"
-    >
-    </path>
-    <path class="t" d="M1466,108 H1544"></path>
-    <rect class="w" height="16" width="11" x="1480" y="115"></rect>
-    <rect class="w" height="16" width="11" x="1519" y="115"></rect>
-    <rect class="w" height="16" width="11" x="1480" y="143"></rect>
-    <rect class="w" height="16" width="11" x="1519" y="143"></rect>
-    <rect class="w" height="16" width="11" x="1480" y="171"></rect>
-    <rect class="w" height="16" width="11" x="1519" y="171"></rect>
-    <path class="dr" d="M1498,258 V239 A7,7 0 0 1 1512,239 V258 Z"></path>
-    <rect class="w" height="12" width="8" x="1501" y="78.5"></rect>
-    <path d="M1544,258 L1544,120 L1589,70 L1634,120 L1634,258 Z" fill="#ffffff"></path>
-    <path class="t" d="M1544,120 H1634"></path>
-    <rect class="w lit" height="16" width="11" x="1553.5" y="127"></rect>
-    <rect class="w" height="16" width="11" x="1583.5" y="127"></rect>
-    <rect class="w" height="16" width="11" x="1613.5" y="127"></rect>
-    <rect class="w" height="16" width="11" x="1553.5" y="155"></rect>
-    <rect class="w" height="16" width="11" x="1583.5" y="155"></rect>
-    <rect class="w" height="16" width="11" x="1613.5" y="155"></rect>
-    <rect class="w" height="16" width="11" x="1553.5" y="183"></rect>
-    <rect class="w" height="16" width="11" x="1583.5" y="183"></rect>
-    <rect class="w lit" height="16" width="11" x="1613.5" y="183"></rect>
-    <path class="dr" d="M1582,258 V239 A7,7 0 0 1 1596,239 V258 Z"></path>
-    <rect class="w" height="18" width="18" x="1551.2" y="226"></rect>
-    <rect class="w" height="18" width="18" x="1608.8" y="226"></rect>
-    <rect class="w" height="12" width="8" x="1585" y="93"></rect>
-    <circle class="fin" cx="1589" cy="67" r="2.3"></circle>
-    <path
-      d="M1634,258 L1634,108 C1634,81.9 1652.5,87.7 1652.5,73.2 L1652.5,61.6 C1653.8,46.5 1680.2,46.5 1681.5,61.6 L1681.5,73.2 C1681.5,87.7 1700,81.9 1700,108 L1700,258 Z"
-      fill="#ffffff"
-    >
-    </path>
-    <path class="t" d="M1634,108 H1700"></path>
-    <rect class="w" height="16" width="11" x="1645" y="115"></rect>
-    <rect class="w" height="16" width="11" x="1678" y="115"></rect>
-    <rect class="w lit" height="16" width="11" x="1645" y="143"></rect>
-    <rect class="w" height="16" width="11" x="1678" y="143"></rect>
-    <rect class="w" height="16" width="11" x="1645" y="171"></rect>
-    <rect class="w" height="16" width="11" x="1678" y="171"></rect>
-    <path class="dr" d="M1660,258 V239 A7,7 0 0 1 1674,239 V258 Z"></path>
-    <rect class="w" height="12" width="8" x="1663" y="77.6"></rect>
-    <circle class="fin" cx="1667" cy="47" r="2.3"></circle>
-    <path d="M1700,258 V118 H1820 V258 Z" fill="#fbf3e9"></path>
-    <path d="M1700,118 L1705,105 L1710,118 Z" fill="#fbf3e9"></path>
-    <path d="M1810,118 L1815,105 L1820,118 Z" fill="#fbf3e9"></path>
-    <path d="M1720,118 L1725,105 L1730,118 Z" fill="#fbf3e9"></path>
-    <path d="M1790,118 L1795,105 L1800,118 Z" fill="#fbf3e9"></path>
-    <path class="w lit" d="M1710,162 V137 A5,5 0 0 1 1720,137 V162 Z"></path>
-    <path class="w" d="M1740,162 V137 A5,5 0 0 1 1750,137 V162 Z"></path>
-    <path class="w" d="M1770,162 V137 A5,5 0 0 1 1780,137 V162 Z"></path>
-    <path class="w" d="M1800,162 V137 A5,5 0 0 1 1810,137 V162 Z"></path>
-    <path class="w" d="M1710,208 V183 A5,5 0 0 1 1720,183 V208 Z"></path>
-    <path class="w" d="M1740,208 V183 A5,5 0 0 1 1750,183 V208 Z"></path>
-    <path class="w" d="M1770,208 V183 A5,5 0 0 1 1780,183 V208 Z"></path>
-    <path class="w" d="M1800,208 V183 A5,5 0 0 1 1810,183 V208 Z"></path>
-    <path class="dr" d="M1750,258 V236 A10,10 0 0 1 1770,236 V258 Z"></path>
-    <rect fill="#fbf3e9" height="50" width="36" x="1742" y="68"></rect>
-    <path class="w lit" d="M1750,104 V81.5 A3.5,3.5 0 0 1 1757,81.5 V104 Z"></path>
-    <path class="w lit" d="M1763,104 V81.5 A3.5,3.5 0 0 1 1770,81.5 V104 Z"></path>
-    <rect fill="#ffffff" height="6" width="48" x="1736" y="62"></rect>
-    <rect fill="#fbf3e9" height="18" width="26" x="1747" y="44"></rect>
-    <path class="w" d="M1756,60 V52 A4,4 0 0 1 1764,52 V60 Z"></path>
-    <path d="M1745,44 C1745,31 1775,31 1775,44 Z" fill="#eadfcd"></path>
-    <path d="M1756,36 L1760,8 L1764,36 Z" fill="#eadfcd"></path>
-    <circle class="fin" cx="1760" cy="5" r="3"></circle>
-    <path
-      d="M1820,258 L1820,99 L1820,87.8 L1830.1,87.8 L1830.1,76.5 L1840.2,76.5 L1840.2,65.2 L1850.2,65.2 L1850.2,54 L1873.8,54 L1873.8,65.2 L1883.8,65.2 L1883.8,76.5 L1893.9,76.5 L1893.9,87.8 L1904,87.8 L1904,99 L1904,258 Z"
-      fill="#eaf1f2"
-    >
-    </path>
-    <path class="t" d="M1820,99 H1904"></path>
-    <rect class="w" height="16" width="11" x="1828.5" y="106"></rect>
-    <rect class="w" height="16" width="11" x="1856.5" y="106"></rect>
-    <rect class="w" height="16" width="11" x="1884.5" y="106"></rect>
-    <rect class="w lit" height="16" width="11" x="1828.5" y="134"></rect>
-    <rect class="w" height="16" width="11" x="1856.5" y="134"></rect>
-    <rect class="w" height="16" width="11" x="1884.5" y="134"></rect>
-    <rect class="w" height="16" width="11" x="1828.5" y="162"></rect>
-    <rect class="w" height="16" width="11" x="1856.5" y="162"></rect>
-    <rect class="w" height="16" width="11" x="1884.5" y="162"></rect>
-    <rect class="w lit" height="16" width="11" x="1828.5" y="190"></rect>
-    <rect class="w" height="16" width="11" x="1856.5" y="190"></rect>
-    <rect class="w" height="16" width="11" x="1884.5" y="190"></rect>
-    <path class="dr" d="M1855,258 V239 A7,7 0 0 1 1869,239 V258 Z"></path>
-    <rect class="w" height="18" width="16.8" x="1826.7" y="226"></rect>
-    <rect class="w" height="18" width="16.8" x="1880.5" y="226"></rect>
-    <rect class="w" height="12" width="8" x="1858" y="74.1"></rect>
-    <path d="M1904,258 L1904,103 L1938,58 L1972,103 L1972,258 Z" fill="#ffffff"></path>
-    <path class="t" d="M1904,103 H1972"></path>
-    <rect class="w" height="16" width="11" x="1915.5" y="110"></rect>
-    <rect class="w" height="16" width="11" x="1949.5" y="110"></rect>
-    <rect class="w" height="16" width="11" x="1915.5" y="138"></rect>
-    <rect class="w" height="16" width="11" x="1949.5" y="138"></rect>
-    <rect class="w" height="16" width="11" x="1915.5" y="166"></rect>
-    <rect class="w" height="16" width="11" x="1949.5" y="166"></rect>
-    <path class="dr" d="M1931,258 V239 A7,7 0 0 1 1945,239 V258 Z"></path>
-    <rect class="w" height="12" width="8" x="1934" y="78.1"></rect>
-    <circle class="fin" cx="1938" cy="55" r="2.3"></circle>
-    <path
-      d="M1972,258 L1972,135 C1972,109.3 1998.9,115 1998.9,100.8 L1998.9,89.4 C2000.8,74.6 2039.2,74.6 2041.1,89.4 L2041.1,100.8 C2041.1,115 2068,109.3 2068,135 L2068,258 Z"
-      fill="#fbf3e9"
-    >
-    </path>
-    <path class="t" d="M1972,135 H2068"></path>
-    <rect class="w" height="16" width="11" x="1982.5" y="142"></rect>
-    <rect class="w" height="16" width="11" x="2014.5" y="142"></rect>
-    <rect class="w" height="16" width="11" x="2046.5" y="142"></rect>
-    <rect class="w" height="16" width="11" x="1982.5" y="170"></rect>
-    <rect class="w" height="16" width="11" x="2014.5" y="170"></rect>
-    <rect class="w" height="16" width="11" x="2046.5" y="170"></rect>
-    <path class="dr" d="M2013,258 V239 A7,7 0 0 1 2027,239 V258 Z"></path>
-    <rect class="w" height="18" width="19.2" x="1979.7" y="226"></rect>
-    <rect class="w" height="18" width="19.2" x="2041.1" y="226"></rect>
-    <rect class="w" height="12" width="8" x="2016" y="105.1"></rect>
-    <circle class="fin" cx="2020" cy="75" r="2.3"></circle>
-    <path d="M2068,258 L2068,135 L2112,74 L2156,135 L2156,258 Z" fill="#eaf1f2"></path>
-    <path class="t" d="M2068,135 H2156"></path>
-    <rect class="w" height="16" width="11" x="2077.2" y="142"></rect>
-    <rect class="w" height="16" width="11" x="2106.5" y="142"></rect>
-    <rect class="w" height="16" width="11" x="2135.8" y="142"></rect>
-    <rect class="w" height="16" width="11" x="2077.2" y="170"></rect>
-    <rect class="w" height="16" width="11" x="2106.5" y="170"></rect>
-    <rect class="w lit" height="16" width="11" x="2135.8" y="170"></rect>
-    <path class="dr" d="M2105,258 V239 A7,7 0 0 1 2119,239 V258 Z"></path>
-    <rect class="w" height="18" width="17.6" x="2075" y="226"></rect>
-    <rect class="w" height="18" width="17.6" x="2131.4" y="226"></rect>
-    <rect class="w" height="12" width="8" x="2108" y="103.4"></rect>
-    <circle class="fin" cx="2112" cy="71" r="2.3"></circle>
-    <path
-      d="M2156,258 L2156,133 L2156,120.2 L2166.6,120.2 L2166.6,107.5 L2177.1,107.5 L2177.1,94.8 L2187.7,94.8 L2187.7,82 L2212.3,82 L2212.3,94.8 L2222.9,94.8 L2222.9,107.5 L2233.4,107.5 L2233.4,120.2 L2244,120.2 L2244,133 L2244,258 Z"
-      fill="#ffffff"
-    >
-    </path>
-    <path class="t" d="M2156,133 H2244"></path>
-    <rect class="w" height="16" width="11" x="2165.2" y="140"></rect>
-    <rect class="w" height="16" width="11" x="2194.5" y="140"></rect>
-    <rect class="w" height="16" width="11" x="2223.8" y="140"></rect>
-    <rect class="w" height="16" width="11" x="2165.2" y="168"></rect>
-    <rect class="w" height="16" width="11" x="2194.5" y="168"></rect>
-    <rect class="w" height="16" width="11" x="2223.8" y="168"></rect>
-    <path class="dr" d="M2193,258 V239 A7,7 0 0 1 2207,239 V258 Z"></path>
-    <rect class="w" height="18" width="17.6" x="2163" y="226"></rect>
-    <rect class="w" height="18" width="17.6" x="2219.4" y="226"></rect>
-    <rect class="w" height="12" width="8" x="2196" y="105.6"></rect>
-    <path d="M2244,258 L2244,126 L2308,126 L2308,258 Z" fill="#fbf3e9"></path>
-    <rect fill="#fbf3e9" height="11" width="60" x="2246" y="115"></rect>
-    <path
-      class="t"
-      d="M2250,117 V126 M2256,117 V126 M2262,117 V126 M2268,117 V126 M2274,117 V126 M2280,117 V126 M2286,117 V126 M2292,117 V126 M2298,117 V126"
-    >
-    </path>
-    <rect class="w" height="16" width="11" x="2254.5" y="133"></rect>
-    <rect class="w" height="16" width="11" x="2286.5" y="133"></rect>
-    <rect class="w" height="16" width="11" x="2254.5" y="161"></rect>
-    <rect class="w lit" height="16" width="11" x="2286.5" y="161"></rect>
-    <rect class="w" height="16" width="11" x="2254.5" y="189"></rect>
-    <rect class="w lit" height="16" width="11" x="2286.5" y="189"></rect>
-    <path class="dr" d="M2269,258 V239 A7,7 0 0 1 2283,239 V258 Z"></path>
-    <circle class="fin" cx="2249" cy="112.2" r="2.3"></circle>
-    <circle class="fin" cx="2303" cy="112.2" r="2.3"></circle>
-    <path
-      d="M2308,258 L2308,114 L2308,102 L2315.7,102 L2315.7,90 L2323.4,90 L2323.4,78 L2331,78 L2331,66 L2349,66 L2349,78 L2356.6,78 L2356.6,90 L2364.3,90 L2364.3,102 L2372,102 L2372,114 L2372,258 Z"
-      fill="#ffffff"
-    >
-    </path>
-    <path class="t" d="M2308,114 H2372"></path>
-    <rect class="w" height="16" width="11" x="2318.5" y="121"></rect>
-    <rect class="w" height="16" width="11" x="2350.5" y="121"></rect>
-    <rect class="w" height="16" width="11" x="2318.5" y="149"></rect>
-    <rect class="w" height="16" width="11" x="2350.5" y="149"></rect>
-    <rect class="w" height="16" width="11" x="2318.5" y="177"></rect>
-    <rect class="w" height="16" width="11" x="2350.5" y="177"></rect>
-    <path class="dr" d="M2333,258 V239 A7,7 0 0 1 2347,239 V258 Z"></path>
-    <rect class="w" height="12" width="8" x="2336" y="87.8"></rect>
-    <path d="M2372,258 L2372,105 L2420,56 L2468,105 L2468,258 Z" fill="#fbf3e9"></path>
-    <path class="t" d="M2372,105 H2468"></path>
-    <rect class="w" height="16" width="11" x="2382.5" y="112"></rect>
-    <rect class="w" height="16" width="11" x="2414.5" y="112"></rect>
-    <rect class="w lit" height="16" width="11" x="2446.5" y="112"></rect>
-    <rect class="w" height="16" width="11" x="2382.5" y="140"></rect>
-    <rect class="w" height="16" width="11" x="2414.5" y="140"></rect>
-    <rect class="w" height="16" width="11" x="2446.5" y="140"></rect>
-    <rect class="w" height="16" width="11" x="2382.5" y="168"></rect>
-    <rect class="w" height="16" width="11" x="2414.5" y="168"></rect>
-    <rect class="w" height="16" width="11" x="2446.5" y="168"></rect>
-    <path class="dr" d="M2413,258 V239 A7,7 0 0 1 2427,239 V258 Z"></path>
-    <rect class="w" height="18" width="19.2" x="2379.7" y="226"></rect>
-    <rect class="w" height="18" width="19.2" x="2441.1" y="226"></rect>
-    <rect class="w" height="12" width="8" x="2416" y="78.4"></rect>
-    <circle class="fin" cx="2420" cy="53" r="2.3"></circle>
-    <path
-      d="M2468,258 L2468,134 C2468,106.5 2487,112.7 2487,97.4 L2487,85.2 C2488.4,69.3 2515.6,69.3 2517,85.2 L2517,97.4 C2517,112.7 2536,106.5 2536,134 L2536,258 Z"
-      fill="#ffffff"
-    >
-    </path>
-    <path class="t" d="M2468,134 H2536"></path>
-    <rect class="w" height="16" width="11" x="2479.5" y="141"></rect>
-    <rect class="w" height="16" width="11" x="2513.5" y="141"></rect>
-    <rect class="w" height="16" width="11" x="2479.5" y="169"></rect>
-    <rect class="w" height="16" width="11" x="2513.5" y="169"></rect>
-    <path class="dr" d="M2495,258 V239 A7,7 0 0 1 2509,239 V258 Z"></path>
-    <rect class="w" height="12" width="8" x="2498" y="102.4"></rect>
-    <circle class="fin" cx="2502" cy="70" r="2.3"></circle>
-    <path d="M2536,258 L2536,109 L2570,48 L2604,109 L2604,258 Z" fill="#eaf1f2"></path>
-    <path class="t" d="M2536,109 H2604"></path>
-    <rect class="w" height="16" width="11" x="2547.5" y="116"></rect>
-    <rect class="w" height="16" width="11" x="2581.5" y="116"></rect>
-    <rect class="w" height="16" width="11" x="2547.5" y="144"></rect>
-    <rect class="w" height="16" width="11" x="2581.5" y="144"></rect>
-    <rect class="w" height="16" width="11" x="2547.5" y="172"></rect>
-    <rect class="w" height="16" width="11" x="2581.5" y="172"></rect>
-    <path class="dr" d="M2563,258 V239 A7,7 0 0 1 2577,239 V258 Z"></path>
-    <rect class="w" height="12" width="8" x="2566" y="77.4"></rect>
-    <circle class="fin" cx="2570" cy="45" r="2.3"></circle>
-    <path
-      d="M2604,258 L2604,103 C2618.1,100.7 2609.3,76.3 2623.4,74 L2623.4,61.2 L2648,45 L2672.6,61.2 L2672.6,74 C2686.7,76.3 2677.9,100.7 2692,103 L2692,258 Z"
-      fill="#fbf3e9"
-    >
-    </path>
-    <path class="t" d="M2604,103 H2692"></path>
-    <rect class="w" height="16" width="11" x="2613.2" y="110"></rect>
-    <rect class="w" height="16" width="11" x="2642.5" y="110"></rect>
-    <rect class="w lit" height="16" width="11" x="2671.8" y="110"></rect>
-    <rect class="w" height="16" width="11" x="2613.2" y="138"></rect>
-    <rect class="w" height="16" width="11" x="2642.5" y="138"></rect>
-    <rect class="w" height="16" width="11" x="2671.8" y="138"></rect>
-    <rect class="w" height="16" width="11" x="2613.2" y="166"></rect>
-    <rect class="w" height="16" width="11" x="2642.5" y="166"></rect>
-    <rect class="w" height="16" width="11" x="2671.8" y="166"></rect>
-    <path class="dr" d="M2641,258 V239 A7,7 0 0 1 2655,239 V258 Z"></path>
-    <rect class="w" height="18" width="17.6" x="2611" y="226"></rect>
-    <rect class="w" height="18" width="17.6" x="2667.4" y="226"></rect>
-    <rect class="w" height="12" width="8" x="2644" y="72.6"></rect>
-    <circle class="fin" cx="2623.4" cy="58.7" r="2.3"></circle>
-    <circle class="fin" cx="2672.6" cy="58.7" r="2.3"></circle>
-    <circle class="fin" cx="2648" cy="42" r="2.3"></circle>
-    <path
-      d="M2692,258 L2692,129 C2692,106 2715.5,111.2 2715.5,98.4 L2715.5,88.2 C2717.2,74.9 2750.8,74.9 2752.5,88.2 L2752.5,98.4 C2752.5,111.2 2776,106 2776,129 L2776,258 Z"
-      fill="#eaf1f2"
-    >
-    </path>
-    <path class="t" d="M2692,129 H2776"></path>
-    <rect class="w" height="16" width="11" x="2700.5" y="136"></rect>
-    <rect class="w" height="16" width="11" x="2728.5" y="136"></rect>
-    <rect class="w" height="16" width="11" x="2756.5" y="136"></rect>
-    <rect class="w" height="16" width="11" x="2700.5" y="164"></rect>
-    <rect class="w" height="16" width="11" x="2728.5" y="164"></rect>
-    <rect class="w" height="16" width="11" x="2756.5" y="164"></rect>
-    <rect class="w" height="16" width="11" x="2700.5" y="192"></rect>
-    <rect class="w" height="16" width="11" x="2728.5" y="192"></rect>
-    <rect class="w" height="16" width="11" x="2756.5" y="192"></rect>
-    <path class="dr" d="M2727,258 V239 A7,7 0 0 1 2741,239 V258 Z"></path>
-    <rect class="w" height="18" width="16.8" x="2698.7" y="226"></rect>
-    <rect class="w" height="18" width="16.8" x="2752.5" y="226"></rect>
-    <rect class="w" height="12" width="8" x="2730" y="101.6"></rect>
-    <circle class="fin" cx="2734" cy="75" r="2.3"></circle>
-    <path
-      d="M2776,258 L2776,109 C2786.9,106.8 2780.1,84.2 2791,82 L2791,70.1 L2810,55 L2829,70.1 L2829,82 C2839.9,84.2 2833.1,106.8 2844,109 L2844,258 Z"
-      fill="#ffffff"
-    >
-    </path>
-    <path class="t" d="M2776,109 H2844"></path>
-    <rect class="w" height="16" width="11" x="2787.5" y="116"></rect>
-    <rect class="w" height="16" width="11" x="2821.5" y="116"></rect>
-    <rect class="w lit" height="16" width="11" x="2787.5" y="144"></rect>
-    <rect class="w lit" height="16" width="11" x="2821.5" y="144"></rect>
-    <rect class="w" height="16" width="11" x="2787.5" y="172"></rect>
-    <rect class="w lit" height="16" width="11" x="2821.5" y="172"></rect>
-    <path class="dr" d="M2803,258 V239 A7,7 0 0 1 2817,239 V258 Z"></path>
-    <rect class="w" height="12" width="8" x="2806" y="80.3"></rect>
-    <circle class="fin" cx="2791" cy="67.6" r="2.3"></circle>
-    <circle class="fin" cx="2829" cy="67.6" r="2.3"></circle>
-    <circle class="fin" cx="2810" cy="52" r="2.3"></circle>
-    <path
-      d="M2844,258 L2844,133 C2844,106 2869.8,112 2869.8,97 L2869.8,85 C2871.6,69.4 2908.4,69.4 2910.2,85 L2910.2,97 C2910.2,112 2936,106 2936,133 L2936,258 Z"
-      fill="#fbf3e9"
-    >
-    </path>
-    <path class="t" d="M2844,133 H2936"></path>
-    <rect class="w" height="16" width="11" x="2853.8" y="140"></rect>
-    <rect class="w" height="16" width="11" x="2884.5" y="140"></rect>
-    <rect class="w" height="16" width="11" x="2915.2" y="140"></rect>
-    <rect class="w" height="16" width="11" x="2853.8" y="168"></rect>
-    <rect class="w lit" height="16" width="11" x="2884.5" y="168"></rect>
-    <rect class="w lit" height="16" width="11" x="2915.2" y="168"></rect>
-    <path class="dr" d="M2883,258 V239 A7,7 0 0 1 2897,239 V258 Z"></path>
-    <rect class="w" height="18" width="18.4" x="2851.4" y="226"></rect>
-    <rect class="w" height="18" width="18.4" x="2910.2" y="226"></rect>
-    <rect class="w" height="12" width="8" x="2886" y="101.8"></rect>
-    <circle class="fin" cx="2890" cy="70" r="2.3"></circle>
-    <path
-      d="M2936,258 L2936,131 L2936,116.2 L2946.6,116.2 L2946.6,101.5 L2957.1,101.5 L2957.1,86.8 L2967.7,86.8 L2967.7,72 L2992.3,72 L2992.3,86.8 L3002.9,86.8 L3002.9,101.5 L3013.4,101.5 L3013.4,116.2 L3024,116.2 L3024,131 L3024,258 Z"
-      fill="#ffffff"
-    >
-    </path>
-    <path class="t" d="M2936,131 H3024"></path>
-    <rect class="w" height="16" width="11" x="2945.2" y="138"></rect>
-    <rect class="w lit" height="16" width="11" x="2974.5" y="138"></rect>
-    <rect class="w" height="16" width="11" x="3003.8" y="138"></rect>
-    <rect class="w" height="16" width="11" x="2945.2" y="166"></rect>
-    <rect class="w" height="16" width="11" x="2974.5" y="166"></rect>
-    <rect class="w lit" height="16" width="11" x="3003.8" y="166"></rect>
-    <path class="dr" d="M2973,258 V239 A7,7 0 0 1 2987,239 V258 Z"></path>
-    <rect class="w" height="18" width="17.6" x="2943" y="226"></rect>
-    <rect class="w" height="18" width="17.6" x="2999.4" y="226"></rect>
-    <rect class="w" height="12" width="8" x="2976" y="100.2"></rect>
-    <path d="M3024,258 L3024,92 L3068,31 L3112,92 L3112,258 Z" fill="#fbf3e9"></path>
-    <path class="t" d="M3024,92 H3112"></path>
-    <rect class="w" height="16" width="11" x="3033.2" y="99"></rect>
-    <rect class="w" height="16" width="11" x="3062.5" y="99"></rect>
-    <rect class="w" height="16" width="11" x="3091.8" y="99"></rect>
-    <rect class="w" height="16" width="11" x="3033.2" y="127"></rect>
-    <rect class="w" height="16" width="11" x="3062.5" y="127"></rect>
-    <rect class="w" height="16" width="11" x="3091.8" y="127"></rect>
-    <rect class="w" height="16" width="11" x="3033.2" y="155"></rect>
-    <rect class="w" height="16" width="11" x="3062.5" y="155"></rect>
-    <rect class="w" height="16" width="11" x="3091.8" y="155"></rect>
-    <rect class="w" height="16" width="11" x="3033.2" y="183"></rect>
-    <rect class="w lit" height="16" width="11" x="3062.5" y="183"></rect>
-    <rect class="w" height="16" width="11" x="3091.8" y="183"></rect>
-    <path class="dr" d="M3061,258 V239 A7,7 0 0 1 3075,239 V258 Z"></path>
-    <rect class="w" height="18" width="17.6" x="3031" y="226"></rect>
-    <rect class="w" height="18" width="17.6" x="3087.4" y="226"></rect>
-    <rect class="w" height="12" width="8" x="3064" y="60.4"></rect>
-    <circle class="fin" cx="3068" cy="28" r="2.3"></circle>
-    <path
-      d="M3112,258 L3112,96 C3126.1,93.8 3117.3,70.7 3131.4,68.5 L3131.4,56.4 L3156,41 L3180.6,56.4 L3180.6,68.5 C3194.7,70.7 3185.9,93.8 3200,96 L3200,258 Z"
-      fill="#ffffff"
-    >
-    </path>
-    <path class="t" d="M3112,96 H3200"></path>
-    <rect class="w" height="16" width="11" x="3121.2" y="103"></rect>
-    <rect class="w" height="16" width="11" x="3150.5" y="103"></rect>
-    <rect class="w" height="16" width="11" x="3179.8" y="103"></rect>
-    <rect class="w" height="16" width="11" x="3121.2" y="131"></rect>
-    <rect class="w" height="16" width="11" x="3150.5" y="131"></rect>
-    <rect class="w" height="16" width="11" x="3179.8" y="131"></rect>
-    <rect class="w" height="16" width="11" x="3121.2" y="159"></rect>
-    <rect class="w" height="16" width="11" x="3150.5" y="159"></rect>
-    <rect class="w" height="16" width="11" x="3179.8" y="159"></rect>
-    <rect class="w" height="16" width="11" x="3121.2" y="187"></rect>
-    <rect class="w" height="16" width="11" x="3150.5" y="187"></rect>
-    <rect class="w lit" height="16" width="11" x="3179.8" y="187"></rect>
-    <path class="dr" d="M3149,258 V239 A7,7 0 0 1 3163,239 V258 Z"></path>
-    <rect class="w" height="18" width="17.6" x="3119" y="226"></rect>
-    <rect class="w" height="18" width="17.6" x="3175.4" y="226"></rect>
-    <rect class="w" height="12" width="8" x="3152" y="66.9"></rect>
-    <circle class="fin" cx="3131.4" cy="53.9" r="2.3"></circle>
-    <circle class="fin" cx="3180.6" cy="53.9" r="2.3"></circle>
-    <circle class="fin" cx="3156" cy="38" r="2.3"></circle>
-    <path class="t" d="M0,258 H3200"></path>
-  </svg>
-  <div
-    aria-hidden="true"
-    class="hero-ring pointer-events-none absolute -top-[22vh] -right-[14vw] size-[62vw] max-h-[780px] max-w-[780px] rounded-full max-md:-top-[55vw] max-md:-right-[50vw] max-md:size-[110vw]"
-  >
   </div>
 </section>
 <section
@@ -875,6 +229,15 @@
       Cztery kroki od pierwszego kontaktu do zakończenia sprawy. Na
       każdym wiesz, co się dzieje.
     </p>
+    <img
+      src={~p"/images/jak-pracujemy.webp"}
+      alt="Adwokaci Milena Kraluk i Michał Kurkierewicz omawiają sprawę przy laptopie"
+      width="1600"
+      height="900"
+      loading="lazy"
+      decoding="async"
+      class="mt-8 aspect-video w-full rounded-xl object-cover shadow-card max-sm:aspect-[4/3]"
+    />
     <ol class="mt-10 grid grid-cols-1 gap-8 [counter-reset:step] md:grid-cols-2 lg:grid-cols-4 *:border-t-2 *:border-rule *:pt-5 *:[counter-increment:step] *:before:mb-3 *:before:block *:before:font-display *:before:text-[2.6rem] *:before:leading-none *:before:text-brass *:before:content-[counter(step,decimal-leading-zero)] [&_h3]:text-[1.3rem] [&_p]:text-[.95rem] [&_p]:text-muted">
       <li>
         <h3>Poznajemy sprawę</h3>
@@ -966,24 +329,30 @@
       ponad 10-letnie doświadczenie zawodowe.</p>
     <div class="mt-8 grid grid-cols-1 gap-12 md:grid-cols-2">
       <article class="grid grid-cols-[130px_1fr] items-center gap-6 rounded-xl border border-line-soft bg-cream p-6 shadow-card transition duration-250 hover:-translate-y-0.5 hover:shadow-card-hover max-md:grid-cols-[96px_1fr] max-sm:grid-cols-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
-        <div
-          aria-hidden="true"
-          class="person-photo grid aspect-[3/4] place-items-center rounded-lg font-display text-[2.2rem] text-brass-soft max-sm:w-24"
-        >
-          MK
-        </div>
+        <img
+          src={~p"/images/milena-kraluk.webp"}
+          alt="Adwokat Milena Kraluk"
+          width="720"
+          height="960"
+          loading="lazy"
+          decoding="async"
+          class="person-photo aspect-[3/4] w-full rounded-lg object-cover max-sm:aspect-[4/5] max-sm:object-[50%_20%]"
+        />
         <div>
           <h3>adw. Milena Kraluk</h3>
           <div class="text-[.9rem] font-semibold text-brass-deep">Partner, adwokat</div>
         </div>
       </article>
       <article class="grid grid-cols-[130px_1fr] items-center gap-6 rounded-xl border border-line-soft bg-cream p-6 shadow-card transition duration-250 hover:-translate-y-0.5 hover:shadow-card-hover max-md:grid-cols-[96px_1fr] max-sm:grid-cols-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
-        <div
-          aria-hidden="true"
-          class="person-photo grid aspect-[3/4] place-items-center rounded-lg font-display text-[2.2rem] text-brass-soft max-sm:w-24"
-        >
-          MK
-        </div>
+        <img
+          src={~p"/images/michal-kurkierewicz.webp"}
+          alt="Adwokat Michał Kurkierewicz"
+          width="720"
+          height="960"
+          loading="lazy"
+          decoding="async"
+          class="person-photo aspect-[3/4] w-full rounded-lg object-cover max-sm:aspect-[4/5] max-sm:object-[50%_20%]"
+        />
         <div>
           <h3>adw. Michał Kurkierewicz</h3>
           <div class="text-[.9rem] font-semibold text-brass-deep">Partner, adwokat</div>

@@ -1,21 +1,39 @@
 <header
-  class="group sticky top-[env(safe-area-inset-top,0px)] z-10 border-b border-line-soft bg-white/88 shadow-[0_10px_30px_-24px_rgba(47,71,102,.45)] backdrop-blur-[10px] backdrop-saturate-[1.4]"
+  class="sticky top-[env(safe-area-inset-top,0px)] z-10 border-b border-line-soft bg-white/88 shadow-[0_10px_30px_-24px_rgba(47,71,102,.45)] backdrop-blur-[10px] backdrop-saturate-[1.4]"
   id="header"
 >
   <div class="wrap flex h-16 items-center justify-between gap-6 max-sm:h-[54px]">
     <a
-      aria-label="Kraluk Kurkierewicz - strona główna"
-      class="invisible flex items-center gap-[.6rem] text-ink-deep opacity-0 transition-[opacity,visibility] duration-250 group-data-stuck:visible group-data-stuck:opacity-100 motion-reduce:transition-none"
+      aria-label="Kraluk Kurkierewicz Adwokacka Spółka Partnerska - strona główna"
+      class="flex items-center gap-3 text-ink-deep max-sm:gap-[.6rem]"
       href={~p"/"}
-      id="logo-mini"
-      tabindex="-1"
+      id="logo"
     >
-      <svg aria-hidden="true" class="h-[38px] w-auto" viewBox="0 0 1426 1448">
+      <svg
+        aria-hidden="true"
+        class="h-[42px] w-auto flex-none max-sm:h-[34px]"
+        viewBox="0 0 1426 1448"
+      >
         <use height="1448" href="#kk-crane" width="1426"></use>
       </svg>
-      <span class="font-display text-[1.05rem] font-semibold tracking-[.07em] whitespace-nowrap uppercase max-xl:hidden">
-        Kraluk
-        Kurkierewicz
+      <span aria-hidden="true" class="h-9 w-px flex-none bg-current opacity-70 max-sm:hidden">
+      </span>
+      <svg
+        aria-hidden="true"
+        class="h-[26px] w-auto flex-none max-sm:hidden"
+        viewBox="0 0 1302 921"
+      >
+        <use height="921" href="#kk-monogram" width="1302"></use>
+      </svg>
+      <span class="flex flex-col items-start">
+        <span class="font-display text-[1.2rem] leading-none font-semibold tracking-[.07em] whitespace-nowrap uppercase max-sm:text-[1rem]">
+          Kraluk
+          Kurkierewicz
+        </span>
+        <span class="mt-[.35rem] text-[.56rem] leading-none font-medium tracking-[.28em] whitespace-nowrap uppercase max-sm:text-[.5rem] max-sm:tracking-[.18em]">
+          Adwokacka
+          Spółka Partnerska
+        </span>
       </span>
     </a>
     <nav
