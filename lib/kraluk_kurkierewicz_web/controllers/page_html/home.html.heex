@@ -23,6 +23,20 @@
         class="absolute inset-0 h-full w-full object-cover object-top lg:object-[50%_30%]"
       />
     </picture>
+    <%!-- Monogram half on the photo: the mask is opaque on the wall and transparent on the people;
+         mask-size/position mirror the photo's object-cover and object-position. --%>
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 z-[1] hidden overflow-hidden lg:block"
+      style={"-webkit-mask: url(#{~p"/images/hero-zespol-tlo-maska.webp"}) 50% 30% / cover no-repeat; mask: url(#{~p"/images/hero-zespol-tlo-maska.webp"}) 50% 30% / cover no-repeat;"}
+    >
+      <svg
+        class="absolute top-1/2 -left-[76%] w-[96%] -translate-y-1/2 text-ink opacity-[.05]"
+        viewBox="0 0 1302 921"
+      >
+        <use height="921" href="#kk-monogram" width="1302"></use>
+      </svg>
+    </div>
     <div
       aria-hidden="true"
       class="pointer-events-none absolute inset-0 bg-linear-to-t from-[#141e2c]/92 via-[#141e2c]/60 via-55% to-[#141e2c]/0 lg:hidden"
@@ -34,14 +48,22 @@
     >
     </div>
   </div>
-  <div class="relative z-[2] flex flex-col overflow-hidden pt-[60vw] pr-[clamp(20px,5vw,56px)] pb-8 sm:pt-[52vw] md:pt-[44vw] pl-[calc(max(0px,(100vw_-_1140px)/2)_+_clamp(20px,5vw,56px))] lg:col-start-1 lg:row-start-1 lg:min-h-0 lg:justify-center lg:bg-linear-to-r/srgb lg:from-[#e4e0d9] lg:via-[#dbd7ce] lg:via-65% lg:to-[#c9c5bb] lg:py-[clamp(2.5rem,7svh,5.5rem)] lg:pr-[clamp(32px,4vw,64px)]">
+  <%!-- Desktop: the KK monogram spans both columns but is drawn as two halves so the photo stays
+       untouched. This half sits on the text column's gradient; the other half is inside the photo
+       column, masked so it shows only on the wall and disappears behind the figures. Both halves
+       use the same size and position, expressed relative to their own column. --%>
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-y-0 left-0 z-0 hidden w-1/2 overflow-hidden bg-linear-to-r/srgb from-[#e4e0d9] via-[#dbd7ce] via-65% to-[#c9c5bb] lg:block"
+  >
     <svg
-      aria-hidden="true"
-      class="pointer-events-none absolute top-[40%] -right-[12%] z-0 hidden w-[78%] -translate-y-1/2 text-ink opacity-[.05] lg:block"
+      class="absolute top-1/2 left-[24%] w-[96%] -translate-y-1/2 text-ink opacity-[.05]"
       viewBox="0 0 1302 921"
     >
       <use height="921" href="#kk-monogram" width="1302"></use>
     </svg>
+  </div>
+  <div class="relative z-[2] flex flex-col pt-[60vw] pr-[clamp(20px,5vw,56px)] pb-8 sm:pt-[52vw] md:pt-[44vw] pl-[calc(max(0px,(100vw_-_1140px)/2)_+_clamp(20px,5vw,56px))] lg:col-start-1 lg:row-start-1 lg:min-h-0 lg:justify-center lg:py-[clamp(2.5rem,7svh,5.5rem)] lg:pr-[clamp(32px,4vw,64px)]">
     <div class="relative z-[2]">
       <%!-- The H1 carries the search phrase; it keeps the small eyebrow look so the slogan below stays the visual headline --%>
       <h1 class="mb-4 flex items-start gap-4 font-sans text-[.78rem] leading-[1.4] font-semibold tracking-[.28em] text-white/85 uppercase max-sm:gap-3 max-sm:text-[.62rem] max-sm:tracking-[.16em] lg:mb-[clamp(1rem,3svh,1.75rem)] lg:text-[#6b5129]">

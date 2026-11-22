@@ -23,6 +23,20 @@
         class="absolute inset-0 h-full w-full object-cover object-top lg:object-[50%_28%]"
       />
     </picture>
+    <%!-- Monogram half on the photo: the mask is opaque on the wall and transparent on the people;
+         mask-size/position mirror the photo's object-cover and object-position. --%>
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 z-[1] hidden overflow-hidden lg:block"
+      style={"-webkit-mask: url(#{~p"/images/hero-zespol-tlo-maska.webp"}) 50% 28% / cover no-repeat; mask: url(#{~p"/images/hero-zespol-tlo-maska.webp"}) 50% 28% / cover no-repeat;"}
+    >
+      <svg
+        class="absolute top-1/2 right-[94%] h-[86%] w-auto -translate-y-1/2 text-ink opacity-[.05]"
+        viewBox="0 0 1302 921"
+      >
+        <use height="921" href="#kk-monogram" width="1302"></use>
+      </svg>
+    </div>
     <div
       aria-hidden="true"
       class="pointer-events-none absolute inset-0 bg-linear-to-t from-[#141e2c]/92 via-[#141e2c]/60 via-55% to-[#141e2c]/0 lg:hidden"
@@ -34,42 +48,59 @@
     >
     </div>
   </div>
-  <div class="relative z-[2] flex flex-col pt-[60vw] pr-[clamp(20px,5vw,56px)] pb-8 pl-[calc(max(0px,(100vw_-_1140px)/2)_+_clamp(20px,5vw,56px))] sm:pt-[52vw] md:pt-[44vw] lg:col-start-1 lg:row-start-1 lg:justify-center lg:bg-linear-to-r/srgb lg:from-[#e4e0d9] lg:via-[#dbd7ce] lg:via-65% lg:to-[#c9c5bb] lg:py-[clamp(2.5rem,7svh,4.5rem)] lg:pr-[clamp(32px,4vw,64px)]">
-    <nav
-      aria-label="Ścieżka"
-      class="mb-5 text-[.85rem] text-white/75 lg:mb-6 lg:text-[.88rem] lg:text-[#474e58] [&_a:hover]:text-white lg:[&_a:hover]:text-ink"
+  <%!-- Desktop: the KK monogram spans both columns but is drawn as two halves so the photo stays
+       untouched. This half sits on the text column's gradient; the other half is inside the photo
+       column, masked so it shows only on the wall and disappears behind the figures. Both halves
+       use the same size and position, expressed relative to their own column. --%>
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-y-0 left-0 z-0 hidden w-1/2 overflow-hidden bg-linear-to-r/srgb from-[#e4e0d9] via-[#dbd7ce] via-65% to-[#c9c5bb] lg:block"
+  >
+    <svg
+      class="absolute top-1/2 -right-[6%] h-[86%] w-auto -translate-y-1/2 text-ink opacity-[.05]"
+      viewBox="0 0 1302 921"
     >
-      <a href={~p"/"}>Strona główna</a>
-      <span aria-hidden="true" class="mx-2 text-brass lg:text-brass-deep">/</span>
-      <a href={~p"/#specjalizacje"}>Specjalizacje</a>
-      <span aria-hidden="true" class="mx-2 text-brass lg:text-brass-deep">/</span>
-      <span aria-current="page" class="text-white lg:text-ink">{@service.name}</span>
-    </nav>
-    <%!-- Two-tone headline like the home hero: the part after "—" is the italic accent --%>
-    <% [headline | accent] = String.split(@service.title, " — ", parts: 2) %>
-    <h1 class="max-w-[22ch] text-[clamp(1.85rem,7vw,3rem)] text-white max-lg:leading-[1.12] lg:text-[clamp(2rem,min(3.2vw,6svh),3rem)] lg:text-ink">
-      {headline}
-      <%= if accent != [] do %>
-        <br />
-        <em class="text-[#e6cb98] italic lg:text-[#84633a]">{hd(accent)}</em>
-      <% end %>
-    </h1>
-    <p class="mt-4 mb-6 max-w-[34rem] text-[1.08rem] text-white/80 max-sm:text-[.95rem] lg:mt-5 lg:mb-8 lg:text-[1.12rem] lg:text-[#474e58]">
-      {@service.lead}
-    </p>
-    <div class="flex flex-wrap gap-4 max-sm:gap-3">
-      <a
-        class="btn max-sm:w-full max-sm:text-center plausible-event-name=Telefon plausible-event-miejsce=Usluga"
-        href="tel:+48698359581"
+      <use height="921" href="#kk-monogram" width="1302"></use>
+    </svg>
+  </div>
+  <div class="relative z-[2] flex flex-col pt-[60vw] pr-[clamp(20px,5vw,56px)] pb-8 pl-[calc(max(0px,(100vw_-_1140px)/2)_+_clamp(20px,5vw,56px))] sm:pt-[52vw] md:pt-[44vw] lg:col-start-1 lg:row-start-1 lg:justify-center lg:py-[clamp(2.5rem,7svh,4.5rem)] lg:pr-[clamp(32px,4vw,64px)]">
+    <div class="relative z-[2]">
+      <nav
+        aria-label="Ścieżka"
+        class="mb-5 text-[.85rem] text-white/75 lg:mb-6 lg:text-[.88rem] lg:text-[#474e58] [&_a:hover]:text-white lg:[&_a:hover]:text-ink"
       >
-        Zadzwoń: 698 359 581
-      </a>
-      <a
-        class="btn btn-ghost max-sm:w-full max-sm:text-center max-lg:border-white/60 max-lg:bg-white/10 max-lg:text-white max-lg:backdrop-blur-sm max-lg:hover:bg-white/20 max-lg:hover:text-white plausible-event-name=Telefon plausible-event-miejsce=Usluga"
-        href="tel:+48793102489"
-      >
-        Zadzwoń: 793 102 489
-      </a>
+        <a href={~p"/"}>Strona główna</a>
+        <span aria-hidden="true" class="mx-2 text-brass lg:text-brass-deep">/</span>
+        <a href={~p"/#specjalizacje"}>Specjalizacje</a>
+        <span aria-hidden="true" class="mx-2 text-brass lg:text-brass-deep">/</span>
+        <span aria-current="page" class="text-white lg:text-ink">{@service.name}</span>
+      </nav>
+      <%!-- Two-tone headline like the home hero: the part after "—" is the italic accent --%>
+      <% [headline | accent] = String.split(@service.title, " — ", parts: 2) %>
+      <h1 class="max-w-[22ch] text-[clamp(1.85rem,7vw,3rem)] text-white max-lg:leading-[1.12] lg:text-[clamp(2rem,min(3.2vw,6svh),3rem)] lg:text-ink">
+        {headline}
+        <%= if accent != [] do %>
+          <br />
+          <em class="text-[#e6cb98] italic lg:text-[#84633a]">{hd(accent)}</em>
+        <% end %>
+      </h1>
+      <p class="mt-4 mb-6 max-w-[34rem] text-[1.08rem] text-white/80 max-sm:text-[.95rem] lg:mt-5 lg:mb-8 lg:text-[1.12rem] lg:text-[#474e58]">
+        {@service.lead}
+      </p>
+      <div class="flex flex-wrap gap-4 max-sm:gap-3">
+        <a
+          class="btn max-sm:w-full max-sm:text-center plausible-event-name=Telefon plausible-event-miejsce=Usluga"
+          href="tel:+48698359581"
+        >
+          Zadzwoń: 698 359 581
+        </a>
+        <a
+          class="btn btn-ghost max-sm:w-full max-sm:text-center max-lg:border-white/60 max-lg:bg-white/10 max-lg:text-white max-lg:backdrop-blur-sm max-lg:hover:bg-white/20 max-lg:hover:text-white plausible-event-name=Telefon plausible-event-miejsce=Usluga"
+          href="tel:+48793102489"
+        >
+          Zadzwoń: 793 102 489
+        </a>
+      </div>
     </div>
   </div>
 </section>
