@@ -77,7 +77,9 @@ defmodule KralukKurkierewiczWeb.PageHTML do
     """
   end
 
-  @doc "Closing consultation upsell rendered after every blog post body."
+  @doc "Closing consultation upsell rendered after every blog post body and on service pages."
+  attr :place, :string, default: "Blog-koniec", doc: "Plausible `miejsce` event property"
+
   def post_end_cta(assigns) do
     ~H"""
     <aside
@@ -108,20 +110,20 @@ defmodule KralukKurkierewiczWeb.PageHTML do
         </p>
         <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-4">
           <a
-            class="btn max-sm:w-full max-sm:text-center plausible-event-name=CTA plausible-event-cel=Umow-spotkanie plausible-event-miejsce=Blog-koniec"
+            class={"btn max-sm:w-full max-sm:text-center plausible-event-name=CTA plausible-event-cel=Umow-spotkanie plausible-event-miejsce=#{@place}"}
             href={~p"/#kontakt"}
           >
             Umów konsultację
           </a>
           <div class="flex flex-wrap gap-x-5 gap-y-2 text-[1.02rem] [&_a]:border-b [&_a]:border-brass/70 [&_a]:transition-colors [&_a:hover]:border-brass">
             <a
-              class="plausible-event-name=Telefon plausible-event-miejsce=Blog-koniec"
+              class={"plausible-event-name=Telefon plausible-event-miejsce=#{@place}"}
               href="tel:+48698359581"
             >
               698 359 581
             </a>
             <a
-              class="plausible-event-name=Telefon plausible-event-miejsce=Blog-koniec"
+              class={"plausible-event-name=Telefon plausible-event-miejsce=#{@place}"}
               href="tel:+48793102489"
             >
               793 102 489
@@ -131,6 +133,163 @@ defmodule KralukKurkierewiczWeb.PageHTML do
         </div>
       </div>
     </aside>
+    """
+  end
+
+  @months ~w(stycznia lutego marca kwietnia maja czerwca lipca sierpnia września października listopada grudnia)
+
+  @doc "Formats a date in Polish, e.g. `22 listopada 2026`."
+  def format_date_pl(%Date{day: day, month: month, year: year}) do
+    "#{day} #{Enum.at(@months, month - 1)} #{year}"
+  end
+
+  @doc """
+  Link to a legal act on ISAP (isap.sejm.gov.pl), for "Podstawa prawna" boxes.
+  The link text is the act name unless an inner block is given.
+  """
+  attr :act, :atom, required: true, doc: "act key from `KralukKurkierewicz.Services` (e.g. :kro)"
+  slot :inner_block
+
+  def isap(assigns) do
+    {name, url} = KralukKurkierewicz.Services.act(assigns.act)
+    assigns = assign(assigns, name: name, url: url)
+
+    ~H"""
+    <a href={@url} rel="noopener" target="_blank">
+      {if @inner_block != [], do: render_slot(@inner_block), else: @name}
+    </a>
+    """
+  end
+
+  @doc "Card linking a blog post to its practice-area page."
+  attr :service, :map, required: true
+
+  def service_link(assigns) do
+    ~H"""
+    <a
+      class="group mt-9 flex items-center justify-between gap-5 rounded-[12px] border border-line bg-paper px-[clamp(1.1rem,3vw,1.6rem)] py-5 transition duration-200 hover:-translate-y-0.5 hover:border-brass/60 hover:shadow-card motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+      href={~p"/uslugi/#{@service.slug}"}
+      id="post-service-link"
+    >
+      <span>
+        <span class="block text-[.8rem] font-semibold tracking-[.12em] text-brass-deep uppercase">
+          Jak możemy pomóc
+        </span>
+        <span class="mt-1 block font-display text-[1.35rem] leading-snug font-semibold text-ink">
+          {@service.name}
+        </span>
+      </span>
+      <span
+        aria-hidden="true"
+        class="grid size-10 flex-none place-items-center rounded-full border border-brass/50 text-brass-deep transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none"
+      >
+        →
+      </span>
+    </a>
+    """
+  end
+
+  @doc "Author box with photo and bio, rendered after a blog post body."
+  attr :author, :map, required: true
+
+  def author_bio(assigns) do
+    ~H"""
+    <section
+      aria-labelledby="autor-name"
+      class="mt-9 grid grid-cols-[88px_1fr] items-start gap-5 border-t border-line pt-8 max-sm:grid-cols-[64px_1fr] max-sm:gap-4"
+      id="autor"
+    >
+      <img
+        src={@author.image}
+        alt={@author.display_name}
+        width="88"
+        height="88"
+        loading="lazy"
+        decoding="async"
+        class="aspect-square w-full rounded-full object-cover object-[50%_20%] ring-1 ring-line"
+      />
+      <div>
+        <p class="m-0 text-[.8rem] font-semibold tracking-[.12em] text-brass-deep uppercase">
+          O autorze
+        </p>
+        <h2
+          class="mt-1 mb-2 font-display text-[1.45rem] leading-snug font-semibold text-ink"
+          id="autor-name"
+        >
+          {@author.display_name}
+        </h2>
+        <p class="m-0 max-w-[60ch] text-[.98rem] leading-[1.7] text-muted">{@author.bio}</p>
+        <a
+          class="mt-3 inline-block text-[.92rem] font-semibold text-brass-deep transition-colors hover:text-ink"
+          href={~p"/zespol/#{@author.slug}"}
+        >
+          Więcej o autorze i pozostałe artykuły →
+        </a>
+      </div>
+    </section>
+    """
+  end
+
+  @doc "One \"Specjalizacje\" column on the home page; every item links to its service page."
+  attr :services, :list, required: true
+
+  def specialization_list(assigns) do
+    ~H"""
+    <ul class="*:border-b *:border-line *:last:border-b-0">
+      <li :for={service <- @services}>
+        <a
+          class="group relative block py-4 pl-[1.4rem] before:absolute before:top-6 before:left-0 before:size-[7px] before:rounded-full before:bg-brass before:shadow-[0_0_0_3px_rgba(207,174,126,.18)] before:transition-transform before:duration-200 hover:before:scale-125 motion-reduce:before:transition-none"
+          href={~p"/uslugi/#{service.slug}"}
+        >
+          <h4 class="mb-[.2rem] flex items-baseline justify-between gap-3 text-[1.02rem] font-semibold text-ink transition-colors group-hover:text-brass-deep">
+            {service.home_name}
+            <span
+              aria-hidden="true"
+              class="flex-none text-brass opacity-60 transition duration-200 group-hover:translate-x-0.5 group-hover:opacity-100 motion-reduce:transition-none"
+            >
+              →
+            </span>
+          </h4>
+          <p class="m-0 text-[.94rem] text-muted">{service.home_text}</p>
+        </a>
+      </li>
+    </ul>
+    """
+  end
+
+  @doc "The other partner (for cross-references on a partner's page)."
+  def other_partner(member) do
+    Enum.find(KralukKurkierewicz.Team.list(), &(&1.slug != member.slug))
+  end
+
+  @doc "\"Powiązane artykuły\" list rendered after a blog post."
+  attr :posts, :list, required: true
+
+  def related_posts(assigns) do
+    ~H"""
+    <section
+      :if={@posts != []}
+      aria-labelledby="related-title"
+      class="mt-9 border-t border-line pt-8"
+      id="related"
+    >
+      <h2 class="mb-4 font-display text-[1.45rem] font-semibold text-ink" id="related-title">
+        Powiązane artykuły
+      </h2>
+      <ul class="grid gap-4 sm:grid-cols-2">
+        <li :for={post <- @posts}>
+          <a
+            class="group block h-full rounded-[12px] border border-line bg-paper p-5 transition duration-200 hover:-translate-y-0.5 hover:border-brass/60 hover:shadow-card motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+            href={~p"/blog/#{post.slug}"}
+          >
+            <span class="block text-[.82rem] font-semibold text-brass-deep">{post.category}</span>
+            <span class="mt-1 block font-display text-[1.2rem] leading-snug font-semibold text-ink transition-colors group-hover:text-brass-deep">
+              {post.title}
+            </span>
+          </a>
+        </li>
+      </ul>
+    </section>
     """
   end
 end

@@ -1,0 +1,109 @@
+<.site_symbols />
+<.site_header active_nav={assigns[:active_nav]} />
+<section class="border-b border-line-soft bg-linear-to-b/srgb from-paper to-[#f3f0e9] py-[clamp(2.5rem,6vw,4.5rem)]">
+  <div class="wrap">
+    <nav aria-label="Ścieżka" class="mb-8 text-[.88rem] text-muted [&_a:hover]:text-ink">
+      <a href={~p"/"}>Strona główna</a>
+      <span aria-hidden="true" class="mx-2 text-brass-deep">/</span>
+      <a href={~p"/#zespol"}>Zespół</a>
+      <span aria-hidden="true" class="mx-2 text-brass-deep">/</span>
+      <span aria-current="page" class="text-ink">{@member.display_name}</span>
+    </nav>
+    <div class="grid grid-cols-1 items-center gap-10 md:grid-cols-[minmax(0,320px)_1fr] md:gap-14">
+      <img
+        src={@member.image}
+        alt={"Adwokat #{@member.name}"}
+        width="720"
+        height="960"
+        fetchpriority="high"
+        decoding="async"
+        class="person-photo aspect-[3/4] w-full max-w-[320px] rounded-[14px] object-cover shadow-card max-md:max-w-[260px]"
+      />
+      <div>
+        <p class="m-0 text-[.82rem] font-semibold tracking-[.16em] text-brass-deep uppercase">
+          {@member.role}
+        </p>
+        <h1 class="mt-3 text-[clamp(2.1rem,4.6vw,3.2rem)]">
+          {@member.display_name}
+        </h1>
+        <p class="mt-5 max-w-[60ch] text-[1.1rem] leading-[1.75] text-muted">{@member.bio}</p>
+        <p class="mt-4 max-w-[60ch] text-[1.02rem] leading-[1.75] text-muted">
+          Wraz z adw. {other_partner(@member).name} prowadzi Kancelarię Kraluk Kurkierewicz
+          Adwokacka Spółka Partnerska w Gdańsku, która świadczy pomoc prawną osobom prywatnym
+          i przedsiębiorcom.
+        </p>
+        <p :for={url <- @member.same_as} class="mt-5 text-[.95rem]">
+          <a
+            class="border-b border-brass font-semibold text-ink transition-colors hover:border-ink"
+            href={url}
+            rel="noopener"
+            target="_blank"
+          >
+            Wpis w Krajowym Rejestrze Adwokatów
+          </a>
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4 max-sm:gap-3">
+          <a
+            class="btn max-sm:w-full max-sm:text-center plausible-event-name=Telefon plausible-event-miejsce=Zespol"
+            href="tel:+48698359581"
+          >
+            Zadzwoń: 698 359 581
+          </a>
+          <a
+            class="btn btn-ghost max-sm:w-full max-sm:text-center plausible-event-name=Telefon plausible-event-miejsce=Zespol"
+            href="tel:+48793102489"
+          >
+            Zadzwoń: 793 102 489
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-cream py-section max-sm:py-12">
+  <div class="wrap grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+    <div>
+      <h2>Artykuły</h2>
+      <%= if @posts == [] do %>
+        <p class="text-muted">Wkrótce pojawią się tu artykuły autora.</p>
+      <% else %>
+        <ul class="border-t border-line">
+          <li :for={post <- @posts} class="border-b border-line">
+            <a class="group block py-5" href={~p"/blog/#{post.slug}"}>
+              <span class="block text-[.85rem] font-semibold text-brass-deep">
+                {post.date_display} · {post.category}
+              </span>
+              <span class="mt-1 block font-display text-[1.35rem] leading-snug font-semibold text-ink transition-colors group-hover:text-brass-deep">
+                {post.title}
+              </span>
+            </a>
+          </li>
+        </ul>
+      <% end %>
+    </div>
+    <div>
+      <h2>Specjalizacje kancelarii</h2>
+      <p class="text-[1.02rem] text-muted">
+        Prowadzimy sprawy osób prywatnych i przedsiębiorców — zobacz, w czym możemy pomóc.
+      </p>
+      <ul class="mt-5 flex flex-wrap gap-2">
+        <li :for={service <- KralukKurkierewicz.Services.list()}>
+          <a
+            class="inline-block rounded-full border border-line px-3 py-[.35rem] text-[.88rem] text-copy transition-colors hover:border-brass hover:text-ink"
+            href={~p"/uslugi/#{service.slug}"}
+          >
+            {service.name}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="bg-cream pb-section max-sm:pb-12">
+  <div class="wrap">
+    <.post_end_cta place="Zespol-koniec" />
+  </div>
+</section>
+<.site_footer />

@@ -40,13 +40,42 @@
       class="hidden text-[.95rem] whitespace-nowrap xl:flex xl:items-center xl:gap-[clamp(1.1rem,2vw,2rem)] max-xl:data-open:absolute max-xl:data-open:inset-x-0 max-xl:data-open:top-16 max-xl:data-open:flex max-xl:data-open:flex-col max-xl:data-open:border-b max-xl:data-open:border-line-soft max-xl:data-open:bg-white max-xl:data-open:px-[clamp(20px,5vw,56px)] max-xl:data-open:pt-4 max-xl:data-open:pb-6 max-xl:data-open:shadow-[0_24px_40px_-28px_rgba(47,71,102,.45)] max-sm:data-open:top-[54px]"
       id="nav"
     >
-      <a
-        class="border-b border-transparent py-1 hover:border-brass max-xl:border-line-soft max-xl:py-3 plausible-event-name=Menu plausible-event-pozycja=Specjalizacje"
-        data-nav="specjalizacje"
-        href={~p"/#specjalizacje"}
-      >
-        Specjalizacje
-      </a>
+      <%!-- Desktop: hover/focus panel with every service page; mobile menu keeps the plain link --%>
+      <div class="group/spec relative max-xl:contents">
+        <a
+          class="border-b border-transparent py-1 hover:border-brass max-xl:border-line-soft max-xl:py-3 plausible-event-name=Menu plausible-event-pozycja=Specjalizacje"
+          data-nav="specjalizacje"
+          aria-current={if assigns[:active_nav] == "specjalizacje", do: "page"}
+          aria-haspopup="true"
+          href={~p"/#specjalizacje"}
+        >
+          Specjalizacje
+        </a>
+        <div class="invisible absolute top-full left-1/2 z-20 w-[min(760px,90vw)] -translate-x-1/2 translate-y-1 pt-4 opacity-0 transition duration-200 group-focus-within/spec:visible group-focus-within/spec:translate-y-0 group-focus-within/spec:opacity-100 group-hover/spec:visible group-hover/spec:translate-y-0 group-hover/spec:opacity-100 max-xl:hidden motion-reduce:transition-none">
+          <div class="grid grid-cols-2 gap-8 rounded-[14px] border border-line-soft bg-white p-6 whitespace-normal shadow-[0_24px_50px_-28px_rgba(47,71,102,.45)]">
+            <div :for={
+              {label, audience} <- [
+                {"Dla osób prywatnych", :private},
+                {"Dla przedsiębiorców", :business}
+              ]
+            }>
+              <p class="m-0 mb-2 text-[.75rem] font-semibold tracking-[.14em] text-brass-deep uppercase">
+                {label}
+              </p>
+              <ul class="grid gap-[.15rem]">
+                <li :for={service <- KralukKurkierewicz.Services.home(audience)}>
+                  <a
+                    class="block rounded-md px-2 py-[.35rem] text-[.9rem] leading-snug text-copy transition-colors hover:bg-paper hover:text-ink"
+                    href={~p"/uslugi/#{service.slug}"}
+                  >
+                    {service.name}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
       <a
         class="border-b border-transparent py-1 hover:border-brass max-xl:border-line-soft max-xl:py-3 plausible-event-name=Menu plausible-event-pozycja=Jak+pracujemy"
         data-nav="jak-pracujemy"
@@ -67,6 +96,13 @@
         href={~p"/#zespol"}
       >
         Zespół
+      </a>
+      <a
+        class="border-b border-transparent py-1 hover:border-brass max-xl:border-line-soft max-xl:py-3 plausible-event-name=Menu plausible-event-pozycja=Cennik"
+        aria-current={if assigns[:active_nav] == "cennik", do: "page"}
+        href={~p"/cennik"}
+      >
+        Cennik
       </a>
       <a
         class="border-b border-transparent py-1 hover:border-brass max-xl:border-line-soft max-xl:py-3 plausible-event-name=Menu plausible-event-pozycja=Blog"

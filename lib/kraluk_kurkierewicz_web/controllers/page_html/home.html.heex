@@ -45,7 +45,10 @@
     <div class="relative z-[2]">
       <%!-- The H1 carries the search phrase; it keeps the small eyebrow look so the slogan below stays the visual headline --%>
       <h1 class="mb-4 flex items-start gap-4 font-sans text-[.78rem] leading-[1.4] font-semibold tracking-[.28em] text-white/85 uppercase max-sm:gap-3 max-sm:text-[.62rem] max-sm:tracking-[.16em] lg:mb-[clamp(1rem,3svh,1.75rem)] lg:text-[#6b5129]">
-        <span aria-hidden="true" class="mt-[.7em] h-px w-12 flex-none bg-brass max-sm:w-8 max-xs:hidden">
+        <span
+          aria-hidden="true"
+          class="mt-[.7em] h-px w-12 flex-none bg-brass max-sm:w-8 max-xs:hidden"
+        >
         </span>
         Kancelaria adwokacka Gdańsk – Kraluk Kurkierewicz
       </h1>
@@ -98,58 +101,7 @@
             <h3 class="m-0 text-[1.9rem]">Twoje sprawy</h3>
           </div>
         </header>
-        <ul class="*:relative *:border-b *:border-line *:py-4 *:pl-[1.4rem] *:last:border-b-0 *:last:pb-0 *:before:absolute *:before:top-6 *:before:left-0 *:before:size-[7px] *:before:rounded-full *:before:bg-brass *:before:shadow-[0_0_0_3px_rgba(207,174,126,.18)] [&_h4]:mb-[.2rem] [&_h4]:text-[1.02rem] [&_h4]:font-semibold [&_h4]:text-ink [&_p]:m-0 [&_p]:text-[.94rem] [&_p]:text-muted">
-          <li>
-            <h4>Sprawy o zapłatę i dochodzenie należności</h4>
-            <p>Dochodzenie roszczeń pieniężnych oraz obrona przed niezasadnymi
-              żądaniami zapłaty.</p>
-          </li>
-          <li>
-            <h4>Odszkodowania i zadośćuczynienia</h4>
-            <p>Dochodzenie roszczeń za szkody majątkowe i niemajątkowe, w
-              szczególności wynikające z czynów niedozwolonych i
-              wypadków.</p>
-          </li>
-          <li>
-            <h4>Roszczenia z tytułu zawyżonego metrażu</h4>
-            <p>Dochodzenie zwrotu części ceny, gdy rzeczywista powierzchnia lokalu jest
-              mniejsza niż wskazana w umowie.</p>
-          </li>
-          <li>
-            <h4>Nieruchomości</h4>
-            <p>Sprawy dotyczące własności, posiadania, zasiedzenia,
-              służebności, wydania nieruchomości oraz rozliczeń
-              związanych z nieruchomościami.</p>
-          </li>
-          <li>
-            <h4>Sprawy rodzinne</h4>
-            <p>Rozwody, separacje, alimenty, władza rodzicielska, kontakty z dziećmi oraz
-              ustalenie pochodzenia dziecka.</p>
-          </li>
-          <li>
-            <h4>Majątek małżonków</h4>
-            <p>Podział majątku wspólnego, rozliczenia nakładów i
-              wydatków oraz inne spory majątkowe między małżonkami.</p>
-          </li>
-          <li>
-            <h4>Ochrona praw konsumentów</h4>
-            <p>Dochodzenie roszczeń wynikających z umów konsumenckich oraz ochrona
-              przed nieuczciwymi praktykami przedsiębiorców.</p>
-          </li>
-          <li>
-            <h4>Upadłość konsumencka</h4>
-            <p>Przygotowanie wniosku i wsparcie na każdym etapie postępowania.</p>
-          </li>
-          <li>
-            <h4>Sprawy spadkowe</h4>
-            <p>Stwierdzenie nabycia spadku, dział spadku, zachowek, testamenty oraz
-              odpowiedzialność za długi spadkowe.</p>
-          </li>
-          <li>
-            <h4>Prawo karne</h4>
-            <p>Obrona i reprezentacja pokrzywdzonych.</p>
-          </li>
-        </ul>
+        <.specialization_list services={KralukKurkierewicz.Services.home(:private)} />
       </article>
       <article class="rounded-[14px] border border-line-soft bg-cream p-[clamp(1.5rem,3vw,2.25rem)] shadow-card">
         <header class="mb-1 flex items-center gap-4 border-b-2 border-rule pb-5">
@@ -162,63 +114,7 @@
             <h3 class="m-0 text-[1.9rem]">Twoja firma</h3>
           </div>
         </header>
-        <ul class="*:relative *:border-b *:border-line *:py-4 *:pl-[1.4rem] *:last:border-b-0 *:last:pb-0 *:before:absolute *:before:top-6 *:before:left-0 *:before:size-[7px] *:before:rounded-full *:before:bg-brass *:before:shadow-[0_0_0_3px_rgba(207,174,126,.18)] [&_h4]:mb-[.2rem] [&_h4]:text-[1.02rem] [&_h4]:font-semibold [&_h4]:text-ink [&_p]:m-0 [&_p]:text-[.94rem] [&_p]:text-muted">
-          <li>
-            <h4>Bieżąca obsługa przedsiębiorców</h4>
-            <p>Stałe wsparcie prawne w codziennym prowadzeniu firmy.</p>
-          </li>
-          <li>
-            <h4>Zakładanie i rejestracja spółek</h4>
-            <p>Wybór formy działalności, umowa spółki i rejestracja w
-              KRS.</p>
-          </li>
-          <li>
-            <h4>Analiza i sporządzanie umów</h4>
-            <p>Przygotowanie, weryfikacja i negocjowanie umów.</p>
-          </li>
-          <li>
-            <h4>Egzekucja wierzytelności</h4>
-            <p>Odzyskiwanie należności — od wezwania do zapłaty po
-              egzekucję komorniczą.</p>
-          </li>
-          <li>
-            <h4>Restrukturyzacja</h4>
-            <p>Wsparcie firm w trudnej sytuacji finansowej.</p>
-          </li>
-          <li>
-            <h4>Obsługa korporacyjna i spory masowe</h4>
-            <p>Stała obsługa spółek. Mamy też doświadczenie we
-              współpracy z innymi kancelariami przy obsłudze sporów
-              masowych.</p>
-          </li>
-          <li>
-            <h4>Sztuczna inteligencja i nowe technologie</h4>
-            <p>Wsparcie prawne przedsiębiorców przy wdrażaniu AI, automatyzacji procesów
-              oraz korzystaniu z nowych technologii w biznesie.</p>
-          </li>
-          <li>
-            <h4>Sukcesja i firmy rodzinne</h4>
-            <p>Planowanie sukcesji, zabezpieczenie ciągłości firmy oraz uporządkowanie
-              kwestii majątkowych i korporacyjnych związanych ze zmianą pokoleniową.</p>
-          </li>
-          <li>
-            <h4>Prawo medyczne i obsługa podmiotów leczniczych</h4>
-            <p>Obsługa prawna gabinetów, klinik i innych podmiotów leczniczych, w tym umów,
-              dokumentacji, praw pacjenta oraz odpowiedzialności związanej z udzielaniem
-              świadczeń.</p>
-          </li>
-          <li>
-            <h4>Spory gospodarcze</h4>
-            <p>Reprezentacja przedsiębiorców w sporach z kontrahentami oraz postępowaniach
-              sądowych związanych z prowadzeniem działalności.</p>
-          </li>
-          <li>
-            <h4>RODO i ochrona danych osobowych</h4>
-            <p>Wdrożenia RODO w przedsiębiorstwach i organizacjach, audyty zgodności,
-              tworzenie i aktualizacja dokumentacji, projektowanie procedur ochrony danych oraz
-              bieżące wsparcie w ich praktycznym stosowaniu.</p>
-          </li>
-        </ul>
+        <.specialization_list services={KralukKurkierewicz.Services.home(:business)} />
       </article>
     </div>
   </div>
@@ -329,7 +225,7 @@
       Gdańskiego, członkowie Pomorskiej Izby Adwokackiej w Gdańsku, posiadający
       ponad 10-letnie doświadczenie zawodowe.</p>
     <div class="mt-8 grid grid-cols-1 gap-12 md:grid-cols-2">
-      <article class="grid grid-cols-[130px_1fr] items-center gap-6 rounded-xl border border-line-soft bg-cream p-6 shadow-card transition duration-250 hover:-translate-y-0.5 hover:shadow-card-hover max-md:grid-cols-[96px_1fr] max-sm:grid-cols-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+      <article class="relative grid grid-cols-[130px_1fr] items-center gap-6 rounded-xl border border-line-soft bg-cream p-6 shadow-card transition duration-250 hover:-translate-y-0.5 hover:shadow-card-hover max-md:grid-cols-[96px_1fr] max-sm:grid-cols-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
         <img
           src={~p"/images/milena-kraluk.webp"}
           alt="Adwokat Milena Kraluk"
@@ -340,11 +236,18 @@
           class="person-photo aspect-[3/4] w-full rounded-lg object-cover max-sm:aspect-[4/5] max-sm:object-[50%_20%]"
         />
         <div>
-          <h3>adw. Milena Kraluk</h3>
+          <h3>
+            <a
+              class="transition-colors after:absolute after:inset-0 hover:text-brass-deep"
+              href={~p"/zespol/milena-kraluk"}
+            >
+              adw. Milena Kraluk
+            </a>
+          </h3>
           <div class="text-[.9rem] font-semibold text-brass-deep">Partner, adwokat</div>
         </div>
       </article>
-      <article class="grid grid-cols-[130px_1fr] items-center gap-6 rounded-xl border border-line-soft bg-cream p-6 shadow-card transition duration-250 hover:-translate-y-0.5 hover:shadow-card-hover max-md:grid-cols-[96px_1fr] max-sm:grid-cols-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+      <article class="relative grid grid-cols-[130px_1fr] items-center gap-6 rounded-xl border border-line-soft bg-cream p-6 shadow-card transition duration-250 hover:-translate-y-0.5 hover:shadow-card-hover max-md:grid-cols-[96px_1fr] max-sm:grid-cols-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0">
         <img
           src={~p"/images/michal-kurkierewicz.webp"}
           alt="Adwokat Michał Kurkierewicz"
@@ -355,7 +258,14 @@
           class="person-photo aspect-[3/4] w-full rounded-lg object-cover max-sm:aspect-[4/5] max-sm:object-[50%_20%]"
         />
         <div>
-          <h3>adw. Michał Kurkierewicz</h3>
+          <h3>
+            <a
+              class="transition-colors after:absolute after:inset-0 hover:text-brass-deep"
+              href={~p"/zespol/michal-kurkierewicz"}
+            >
+              adw. Michał Kurkierewicz
+            </a>
+          </h3>
           <div class="text-[.9rem] font-semibold text-brass-deep">Partner, adwokat</div>
         </div>
       </article>
@@ -395,12 +305,10 @@
       >
         <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 font-display text-[1.3rem] leading-snug font-semibold text-ink transition-colors hover:text-brass-deep [&::-webkit-details-marker]:hidden">
           {question}
-          <span
-            aria-hidden="true"
-            class="grid size-8 flex-none place-items-center rounded-full border border-brass/50 text-[1.1rem] text-brass-deep transition-transform duration-200 group-open:rotate-45 motion-reduce:transition-none"
-          >
-            +
-          </span>
+          <.icon
+            name="hero-chevron-down"
+            class="size-5 flex-none text-brass-deep transition-transform duration-300 group-open:rotate-180 motion-reduce:transition-none"
+          />
         </summary>
         <p class="pr-12 pb-5 text-[1.02rem] leading-[1.7] text-muted max-sm:pr-0">{answer}</p>
       </details>

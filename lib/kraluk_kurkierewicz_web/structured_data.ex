@@ -14,6 +14,21 @@ defmodule KralukKurkierewiczWeb.StructuredData do
 
   @firm_name "Kraluk Kurkierewicz Adwokacka Spółka Partnerska"
 
+  # Cities named in `areaServed`; `@area_sentence` below must list the same places.
+  @area_cities ~w(Gdańsk Gdynia Sopot) ++
+                 ["Pruszcz Gdański", "Tczew", "Wejherowo", "Rumia", "Reda", "Kartuzy"] ++
+                 ["Starogard Gdański"]
+
+  # One sentence about the service area, reused verbatim in the FAQ and /llms.txt.
+  @area_sentence "Obsługujemy Klientów z Gdańska, Gdyni, Sopotu, Pruszcza Gdańskiego, Tczewa, Wejherowa, Rumi, Redy, Kartuz, Starogardu Gdańskiego i całego województwa pomorskiego, a sprawy prowadzimy także w innych regionach Polski."
+
+  # Office location (OpenStreetMap building match for ul. Strzelecka 7B, 80-803 Gdańsk).
+  @geo %{latitude: 54.352435, longitude: 18.6382}
+
+  # Profiles describing the firm elsewhere: Google Business Profile, bar registry, etc.
+  # Empty entries are simply omitted from the JSON-LD.
+  @firm_same_as []
+
   @faq [
     {"Jak umówić konsultację z adwokatem?",
      "Zadzwoń pod numer 698 359 581 lub 793 102 489, napisz na kontakt@kkadwokat.pl albo skorzystaj z formularza kontaktowego. Spotykamy się w kancelarii przy ul. Strzeleckiej 7B w Gdańsku."},
@@ -24,7 +39,7 @@ defmodule KralukKurkierewiczWeb.StructuredData do
     {"Jakimi sprawami zajmuje się kancelaria?",
      "Pomagamy osobom prywatnym w sprawach cywilnych, rodzinnych, spadkowych, odszkodowawczych, konsumenckich, w sporach z deweloperami i w upadłości konsumenckiej. Przedsiębiorcom zapewniamy bieżącą obsługę prawną, przygotowanie umów, windykację należności, reprezentację w sporach gospodarczych oraz wsparcie w zakresie RODO i nowych technologii."},
     {"Czy prowadzicie sprawy poza Gdańskiem?",
-     "Tak. Kancelaria ma siedzibę w Gdańsku i świadczy pomoc prawną na terenie całego kraju."},
+     "Tak. Kancelaria ma siedzibę w Gdańsku. " <> @area_sentence},
     {"Kto prowadzi sprawy w kancelarii?",
      "Kancelarię tworzą adwokat Milena Kraluk i adwokat Michał Kurkierewicz — absolwenci Wydziału Prawa i Administracji Uniwersytetu Gdańskiego, członkowie Pomorskiej Izby Adwokackiej w Gdańsku, z ponad 10-letnim doświadczeniem zawodowym."},
     {"W jakich godzinach pracuje kancelaria?",
@@ -33,6 +48,22 @@ defmodule KralukKurkierewiczWeb.StructuredData do
 
   @doc "FAQ entries as `{question, answer}` tuples, rendered on the home page."
   def faq, do: @faq
+
+  @doc "Service-area sentence shared by the FAQ and /llms.txt."
+  def area_sentence, do: @area_sentence
+
+  @doc "`areaServed` value: the listed cities, województwo pomorskie and Polska."
+  def area_served do
+    Enum.map(@area_cities, &%{"@type" => "City", "name" => &1}) ++
+      [
+        %{"@type" => "AdministrativeArea", "name" => "województwo pomorskie"},
+        %{"@type" => "Country", "name" => "Polska"}
+      ]
+  end
+
+  # Drops `sameAs` when there are no profile URLs yet.
+  defp put_same_as(node, []), do: node
+  defp put_same_as(node, urls), do: Map.put(node, "sameAs", urls)
 
   @doc "Encodes the site graph plus `page_nodes` as an HTML-safe JSON string."
   def encode(page_nodes \\ []) do
@@ -61,7 +92,7 @@ defmodule KralukKurkierewiczWeb.StructuredData do
         "image" => base <> "/images/og-image.png",
         "telephone" => "+48698359581",
         "email" => "kontakt@kkadwokat.pl",
-        "priceRange" => "$$",
+        "priceRange" => price_range(),
         "address" => %{
           "@type" => "PostalAddress",
           "streetAddress" => "ul. Strzelecka 7B",
@@ -87,37 +118,45 @@ defmodule KralukKurkierewiczWeb.StructuredData do
               "availableLanguage" => "pl"
             }
           end),
-        "areaServed" => %{"@type" => "Country", "name" => "Polska"},
+        "geo" => %{
+          "@type" => "GeoCoordinates",
+          "latitude" => @geo.latitude,
+          "longitude" => @geo.longitude
+        },
+        "areaServed" => area_served(),
         "knowsLanguage" => "pl",
         "employee" => [
           %{"@id" => person_id("milena-kraluk")},
           %{"@id" => person_id("michal-kurkierewicz")}
         ]
-      },
-      person("milena-kraluk", "Milena Kraluk"),
-      person("michal-kurkierewicz", "Michał Kurkierewicz"),
-      %{
-        "@type" => "WebSite",
-        "@id" => base <> "/#website",
-        "url" => base <> "/",
-        "name" => "Kraluk Kurkierewicz — Kancelaria Adwokacka Gdańsk",
-        "inLanguage" => "pl-PL",
-        "publisher" => %{"@id" => org_id()}
       }
-    ]
+      |> put_same_as(@firm_same_as)
+    ] ++
+      Enum.map(KralukKurkierewicz.Team.list(), &person/1) ++
+      [
+        %{
+          "@type" => "WebSite",
+          "@id" => base <> "/#website",
+          "url" => base <> "/",
+          "name" => "Kraluk Kurkierewicz — Kancelaria Adwokacka Gdańsk",
+          "inLanguage" => "pl-PL",
+          "publisher" => %{"@id" => org_id()}
+        }
+      ]
   end
 
   defp person_id(slug), do: base() <> "/#" <> slug
 
-  defp person(slug, name) do
+  defp person(%{slug: slug} = member) do
     %{
       "@type" => "Person",
       "@id" => person_id(slug),
-      "name" => name,
+      "name" => member.name,
       "honorificPrefix" => "adw.",
       "jobTitle" => "Adwokat, Partner",
-      "image" => base() <> "/images/#{slug}.webp",
-      "url" => base() <> "/#zespol",
+      "description" => member.bio,
+      "image" => base() <> member.image,
+      "url" => base() <> "/zespol/" <> slug,
       "worksFor" => %{"@id" => org_id()},
       "alumniOf" => %{
         "@type" => "CollegeOrUniversity",
@@ -125,6 +164,83 @@ defmodule KralukKurkierewiczWeb.StructuredData do
       },
       "memberOf" => %{"@type" => "Organization", "name" => "Pomorska Izba Adwokacka w Gdańsku"},
       "knowsLanguage" => "pl"
+    }
+    |> put_same_as(member.same_as)
+  end
+
+  defp price_range do
+    {min, max} = KralukKurkierewicz.Pricing.bounds()
+    KralukKurkierewicz.Pricing.format_range(min, max)
+  end
+
+  @doc "`FAQPage` node for arbitrary `{question, answer}` pairs on `path`."
+  def faq_page(entries, path) do
+    %{
+      "@type" => "FAQPage",
+      "@id" => base() <> path <> "#faq",
+      "mainEntity" =>
+        Enum.map(entries, fn {question, answer} ->
+          %{
+            "@type" => "Question",
+            "name" => question,
+            "acceptedAnswer" => %{"@type" => "Answer", "text" => answer}
+          }
+        end)
+    }
+  end
+
+  @doc "`ProfilePage` node for a partner's page."
+  def profile_page(member) do
+    url = base() <> "/zespol/" <> member.slug
+
+    %{
+      "@type" => "ProfilePage",
+      "@id" => url,
+      "url" => url,
+      "name" => member.display_name,
+      "inLanguage" => "pl-PL",
+      "mainEntity" => %{"@id" => person_id(member.slug)},
+      "isPartOf" => %{"@id" => base() <> "/#website"}
+    }
+  end
+
+  @doc "`OfferCatalog` node for the price list."
+  def offer_catalog(sections) do
+    %{
+      "@type" => "OfferCatalog",
+      "@id" => base() <> "/cennik#cennik",
+      "name" => "Cennik usług prawnych",
+      "provider" => %{"@id" => org_id()},
+      "itemListElement" =>
+        for {_title, items} <- sections, {label, min, max, _service} <- items do
+          %{
+            "@type" => "Offer",
+            "itemOffered" => %{"@type" => "Service", "name" => label},
+            "priceSpecification" => %{
+              "@type" => "PriceSpecification",
+              "priceCurrency" => "PLN",
+              "minPrice" => min,
+              "maxPrice" => max,
+              "valueAddedTaxIncluded" => true
+            }
+          }
+        end
+    }
+  end
+
+  @doc "`Service` node for a practice-area page."
+  def service(service) do
+    url = base() <> "/uslugi/" <> service.slug
+
+    %{
+      "@type" => "Service",
+      "@id" => url <> "#service",
+      "name" => service.name,
+      "serviceType" => service.name,
+      "description" => service.description,
+      "url" => url,
+      "provider" => %{"@id" => org_id()},
+      "areaServed" => area_served()
     }
   end
 
@@ -162,7 +278,6 @@ defmodule KralukKurkierewiczWeb.StructuredData do
   @doc "`Article` node for a blog post."
   def article(post) do
     url = base() <> "/blog/" <> post.slug
-    date = Date.to_iso8601(post.date)
 
     %{
       "@type" => "Article",
@@ -171,12 +286,12 @@ defmodule KralukKurkierewiczWeb.StructuredData do
       "url" => url,
       "headline" => post.title,
       "description" => post.description,
-      "datePublished" => date,
-      "dateModified" => date,
+      "datePublished" => Date.to_iso8601(post.date),
+      "dateModified" => Date.to_iso8601(KralukKurkierewicz.Blog.last_modified(post)),
       "articleSection" => post.category,
       "inLanguage" => "pl-PL",
       "image" => base() <> "/images/og-image.png",
-      "author" => %{"@id" => org_id()},
+      "author" => %{"@id" => person_id(post.author)},
       "publisher" => %{"@id" => org_id()},
       "isPartOf" => %{"@id" => base() <> "/#website"}
     }

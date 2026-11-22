@@ -1,0 +1,180 @@
+<.site_symbols />
+<.site_header active_nav={assigns[:active_nav]} />
+<section class="relative overflow-hidden bg-[#1c2a3d] lg:grid lg:min-h-[clamp(460px,62svh,620px)] lg:grid-cols-2 lg:bg-[#cdc9c0]">
+  <%!-- Same as the home hero: full-bleed photo behind the text on phones, right column on desktop --%>
+  <div class="absolute inset-0 lg:relative lg:col-start-2 lg:row-start-1">
+    <picture>
+      <source
+        media="(max-width: 959px)"
+        srcset={"#{~p"/images/hero-zespol-m-640.webp"} 640w, #{~p"/images/hero-zespol-m-960.webp"} 960w"}
+        sizes="100vw"
+        width="960"
+        height="1086"
+      />
+      <img
+        src={~p"/images/hero-zespol-900.webp"}
+        srcset={"#{~p"/images/hero-zespol-560.webp"} 560w, #{~p"/images/hero-zespol-900.webp"} 900w, #{~p"/images/hero-zespol-1400.webp"} 1400w"}
+        sizes="50vw"
+        alt="Adwokaci Milena Kraluk i Michał Kurkierewicz"
+        width="1400"
+        height="1768"
+        fetchpriority="high"
+        decoding="async"
+        class="absolute inset-0 h-full w-full object-cover object-top lg:object-[50%_28%]"
+      />
+    </picture>
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 bg-linear-to-t from-[#141e2c]/92 via-[#141e2c]/60 via-55% to-[#141e2c]/0 lg:hidden"
+    >
+    </div>
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-y-0 left-0 hidden w-[14%] bg-linear-to-r/srgb from-[#c9c5bb] via-[#c9c5bb]/60 via-40% to-transparent lg:block"
+    >
+    </div>
+  </div>
+  <div class="relative z-[2] flex flex-col pt-[60vw] pr-[clamp(20px,5vw,56px)] pb-8 pl-[calc(max(0px,(100vw_-_1140px)/2)_+_clamp(20px,5vw,56px))] sm:pt-[52vw] md:pt-[44vw] lg:col-start-1 lg:row-start-1 lg:justify-center lg:bg-linear-to-r/srgb lg:from-[#e4e0d9] lg:via-[#dbd7ce] lg:via-65% lg:to-[#c9c5bb] lg:py-[clamp(2.5rem,7svh,4.5rem)] lg:pr-[clamp(32px,4vw,64px)]">
+    <nav
+      aria-label="Ścieżka"
+      class="mb-5 text-[.85rem] text-white/75 lg:mb-6 lg:text-[.88rem] lg:text-[#474e58] [&_a:hover]:text-white lg:[&_a:hover]:text-ink"
+    >
+      <a href={~p"/"}>Strona główna</a>
+      <span aria-hidden="true" class="mx-2 text-brass lg:text-brass-deep">/</span>
+      <a href={~p"/#specjalizacje"}>Specjalizacje</a>
+      <span aria-hidden="true" class="mx-2 text-brass lg:text-brass-deep">/</span>
+      <span aria-current="page" class="text-white lg:text-ink">{@service.name}</span>
+    </nav>
+    <%!-- Two-tone headline like the home hero: the part after "—" is the italic accent --%>
+    <% [headline | accent] = String.split(@service.title, " — ", parts: 2) %>
+    <h1 class="max-w-[22ch] text-[clamp(1.85rem,7vw,3rem)] text-white max-lg:leading-[1.12] lg:text-[clamp(2rem,min(3.2vw,6svh),3rem)] lg:text-ink">
+      {headline}
+      <%= if accent != [] do %>
+        <br />
+        <em class="text-[#e6cb98] italic lg:text-[#84633a]">{hd(accent)}</em>
+      <% end %>
+    </h1>
+    <p class="mt-4 mb-6 max-w-[34rem] text-[1.08rem] text-white/80 max-sm:text-[.95rem] lg:mt-5 lg:mb-8 lg:text-[1.12rem] lg:text-[#474e58]">
+      {@service.lead}
+    </p>
+    <div class="flex flex-wrap gap-4 max-sm:gap-3">
+      <a
+        class="btn max-sm:w-full max-sm:text-center plausible-event-name=Telefon plausible-event-miejsce=Usluga"
+        href="tel:+48698359581"
+      >
+        Zadzwoń: 698 359 581
+      </a>
+      <a
+        class="btn btn-ghost max-sm:w-full max-sm:text-center max-lg:border-white/60 max-lg:bg-white/10 max-lg:text-white max-lg:backdrop-blur-sm max-lg:hover:bg-white/20 max-lg:hover:text-white plausible-event-name=Telefon plausible-event-miejsce=Usluga"
+        href="tel:+48793102489"
+      >
+        Zadzwoń: 793 102 489
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="bg-cream py-section max-sm:py-12">
+  <div class="wrap grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-16">
+    <div class="[&_p]:text-[1.05rem] [&_p]:leading-[1.75] [&_p+p]:mt-4">
+      <p :for={paragraph <- @service.intro}>{paragraph}</p>
+
+      <h2 class="mt-12">W czym pomagamy</h2>
+      <ul class="mt-2 border-t border-line">
+        <li
+          :for={{title, text} <- @service.scope}
+          class="relative border-b border-line py-5 pl-[1.4rem] before:absolute before:top-[1.85rem] before:left-0 before:size-[7px] before:rounded-full before:bg-brass before:shadow-[0_0_0_3px_rgba(207,174,126,.18)]"
+        >
+          <h3 class="mb-1 font-sans text-[1.05rem] font-semibold text-ink">{title}</h3>
+          <p class="m-0 text-[.98rem]! text-muted">{text}</p>
+        </li>
+      </ul>
+
+      <h2 class="mt-12">Najczęstsze pytania</h2>
+      <div class="border-t border-line" id="faq">
+        <%!-- Same entries feed this page's FAQPage JSON-LD (Services.faq/1) --%>
+        <details
+          :for={{{question, answer}, i} <- Enum.with_index(@faq)}
+          id={"faq-#{i}"}
+          class="group border-b border-line"
+          open={i == 0}
+        >
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 font-display text-[1.3rem] leading-snug font-semibold text-ink transition-colors hover:text-brass-deep [&::-webkit-details-marker]:hidden">
+            {question}
+            <.icon
+              name="hero-chevron-down"
+              class="size-5 flex-none text-brass-deep transition-transform duration-300 group-open:rotate-180 motion-reduce:transition-none"
+            />
+          </summary>
+          <p class="mt-0! pr-12 pb-5 text-muted max-sm:pr-0">{answer}</p>
+        </details>
+      </div>
+
+      <div class="mt-10 rounded-[10px] border border-line-soft bg-paper px-[1.35rem] py-[1.1rem] text-[.92rem] text-muted">
+        <p class="m-0 text-[.92rem]!"><strong>Podstawa prawna</strong></p>
+        <ul class="mt-2 list-disc pl-5 [&_a]:border-b [&_a]:border-brass [&_a]:text-ink [&_a:hover]:border-ink">
+          <li :for={{name, url} <- KralukKurkierewicz.Services.acts(@service)} class="mt-1">
+            <a href={url} rel="noopener" target="_blank">{name}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <aside class="flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start">
+      <div class="rounded-[14px] border border-line-soft bg-paper p-6 shadow-card">
+        <p class="m-0 text-[.8rem] font-semibold tracking-[.12em] text-brass-deep uppercase">
+          Jak pracujemy
+        </p>
+        <ol class="mt-4 grid gap-3 text-[.98rem] text-copy [counter-reset:step] *:relative *:pl-9 *:[counter-increment:step] *:before:absolute *:before:top-0 *:before:left-0 *:before:grid *:before:size-6 *:before:place-items-center *:before:rounded-full *:before:border *:before:border-brass/60 *:before:text-[.78rem] *:before:font-semibold *:before:text-brass-deep *:before:content-[counter(step)]">
+          <li>Poznajemy sprawę i Twoje cele.</li>
+          <li>Przedstawiamy rekomendację, przewidywany czas i koszty.</li>
+          <li>Przygotowujemy pisma, negocjujemy i reprezentujemy Cię przed sądem.</li>
+          <li>Doprowadzamy sprawę do końca — także do wykonania wyroku.</li>
+        </ol>
+      </div>
+
+      <div :if={@prices != []} class="rounded-[14px] border border-line-soft bg-cream p-6">
+        <p class="m-0 text-[.8rem] font-semibold tracking-[.12em] text-brass-deep uppercase">
+          Orientacyjne ceny
+        </p>
+        <dl class="mt-3 grid gap-3">
+          <div :for={{label, min, max} <- @prices}>
+            <dt class="text-[.92rem] text-copy">{label}</dt>
+            <dd class="m-0 font-display text-[1.25rem] font-semibold text-ink">
+              {KralukKurkierewicz.Pricing.format_range(min, max)}
+            </dd>
+          </div>
+        </dl>
+        <p class="mt-3 text-[.82rem] text-muted">
+          Ceny z VAT, bez opłat sądowych.
+          <a class="font-semibold text-brass-deep hover:text-ink" href={~p"/cennik"}>
+            Pełny cennik →
+          </a>
+        </p>
+      </div>
+
+      <div :if={@posts != []} class="rounded-[14px] border border-line-soft bg-cream p-6">
+        <p class="m-0 text-[.8rem] font-semibold tracking-[.12em] text-brass-deep uppercase">
+          Z naszego bloga
+        </p>
+        <ul class="mt-3 grid gap-4">
+          <li :for={post <- @posts}>
+            <a class="group block" href={~p"/blog/#{post.slug}"}>
+              <span class="block font-display text-[1.2rem] leading-snug font-semibold text-ink transition-colors group-hover:text-brass-deep">
+                {post.title}
+              </span>
+              <span class="mt-1 block text-[.85rem] text-muted">{post.date_display}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="bg-cream pb-section max-sm:pb-12">
+  <div class="wrap">
+    <.post_end_cta place="Usluga-koniec" />
+  </div>
+</section>
+<.site_footer />

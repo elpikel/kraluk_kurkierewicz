@@ -11,10 +11,38 @@
         · {@post.category}
       </p>
       <h1 class="mt-[.8rem] mb-[1.1rem] text-[clamp(1.7rem,3vw,2.4rem)]">{@post.title}</h1>
+      <div class="mb-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-[.9rem] text-muted">
+        <a
+          class="group flex items-center gap-3"
+          href={~p"/zespol/#{@author.slug}"}
+          id="post-byline"
+        >
+          <img
+            src={@author.image}
+            alt=""
+            width="40"
+            height="40"
+            class="size-10 rounded-full object-cover object-[50%_20%] ring-1 ring-line"
+          />
+          <span>
+            Autor:
+            <span class="font-semibold text-ink transition-colors group-hover:text-brass-deep">
+              {@author.display_name}
+            </span>
+          </span>
+        </a>
+        <span :if={@post.updated && @post.updated != @post.date} id="post-updated">
+          Zaktualizowano:
+          <time datetime={Date.to_iso8601(@post.updated)}>{format_date_pl(@post.updated)}</time>
+        </span>
+      </div>
       <p class="max-w-none text-[1.1rem] text-muted">{@post.excerpt}</p>
       <div class="mt-5 border-t border-line pt-5 marker:text-brass [&_a]:border-b [&_a]:border-brass [&_a]:font-semibold [&_a]:text-ink [&_a:hover]:border-ink [&_a:hover]:text-ink-deep [&_h2]:mt-7 [&_h2]:mb-2 [&_h2]:font-display [&_h2]:text-[1.5rem] [&_h2]:font-semibold [&_h2]:text-ink [&_h2:first-child]:mt-0 [&_li]:leading-[1.75] [&_li+li]:mt-[.55rem] [&_p]:max-w-none [&_p]:leading-[1.75] [&_p+p]:mt-[.8rem] [&_ul]:my-[.7rem] [&_ul]:list-disc [&_ul]:pl-5">
         <.post_body post={@post} />
       </div>
+      <.service_link :if={@service} service={@service} />
+      <.author_bio author={@author} />
+      <.related_posts posts={@related} />
       <.post_end_cta />
     </article>
   </div>

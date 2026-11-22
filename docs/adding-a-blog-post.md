@@ -221,3 +221,15 @@ adresu i ewentualnie ponownie przesłać sitemapę.
 - [ ] `meta_title` ≤ ~60 znaków, fraza kluczowa z przodu.
 - [ ] Klauzula `post_body/1` w `page_html.ex`.
 - [ ] `mix compile` bez błędów; sprawdzone `/blog` i `/blog/<slug>`.
+
+---
+
+## Autor, aktualizacja, usługa i podstawa prawna
+
+W `%Post{}` w `blog.ex` ustaw również:
+
+- `author:` — slug autora z `lib/kraluk_kurkierewicz/team.ex` (`"milena-kraluk"` lub `"michal-kurkierewicz"`). Pod tytułem pojawi się podpis, a na końcu wpisu bio autora. Autor trafia też do JSON-LD (`Article.author`).
+- `service:` — slug podstrony usługi z `lib/kraluk_kurkierewicz/services.ex` (np. `"sprawy-rodzinne"`). Pod wpisem pojawi się karta z linkiem do usługi, a wpis zostanie wylistowany na jej stronie. W treści warto dodać też naturalny link: `<a href={~p"/uslugi/sprawy-rodzinne"}>…</a>`.
+- `updated:` — dodaj (np. `~D[2026-12-01]`) dopiero przy merytorycznej zmianie opublikowanego wpisu. Data pokaże się jako „Zaktualizowano: …” i trafi do `dateModified` oraz sitemapy.
+
+W ramce „Podstawa prawna” linkuj akty do ISAP komponentem `<.isap act={:kro} />` (tekst = pełna nazwa aktu) albo `<.isap act={:kc}>Kodeks cywilny</.isap>`. Dostępne klucze i identyfikatory ISAP są w `@acts` w `services.ex`. Nowy akt dodasz tam, podając jego ID `WDU…` z isap.sejm.gov.pl.

@@ -2,6 +2,9 @@ defmodule KralukKurkierewiczWeb.PageController do
   use KralukKurkierewiczWeb, :controller
 
   alias KralukKurkierewicz.Blog
+  alias KralukKurkierewicz.Pricing
+  alias KralukKurkierewicz.Services
+  alias KralukKurkierewicz.Team
   alias KralukKurkierewiczWeb.StructuredData
 
   def home(conn, _params) do
@@ -38,12 +41,108 @@ defmodule KralukKurkierewiczWeb.PageController do
         |> assign(:page_title, post.meta_title || post.title <> " — Kraluk Kurkierewicz")
         |> assign(:meta_description, post.description)
         |> assign(:canonical_path, "/blog/#{post.slug}")
+        |> assign(:og_type, "article")
+        |> assign(:og_article, %{
+          published: Date.to_iso8601(post.date),
+          modified: Date.to_iso8601(Blog.last_modified(post)),
+          author: Team.get!(post.author).name,
+          section: post.category
+        })
         |> assign(:json_ld, [
           StructuredData.article(post),
           StructuredData.breadcrumbs([{"Blog", "/blog"}, {post.title, "/blog/#{post.slug}"}])
         ])
-        |> render(:blog_post, post: post)
+        |> render(:blog_post,
+          post: post,
+          author: Team.get!(post.author),
+          service: post.service && Services.get(post.service),
+          related: Blog.related(post)
+        )
     end
+  end
+
+  def service(conn, %{"slug" => slug}) do
+    case Services.get(slug) do
+      nil ->
+        raise Phoenix.Router.NoRouteError, conn: conn, router: KralukKurkierewiczWeb.Router
+
+      service ->
+        conn
+        |> assign(:active_nav, "specjalizacje")
+        |> assign(:page_title, service.meta_title <> " — Kraluk Kurkierewicz")
+        |> assign(:meta_description, service.description)
+        |> assign(:canonical_path, "/uslugi/#{service.slug}")
+        |> assign(:json_ld, [
+          StructuredData.service(service),
+          StructuredData.faq_page(Services.faq(service), "/uslugi/#{service.slug}"),
+          StructuredData.breadcrumbs([{service.name, "/uslugi/#{service.slug}"}])
+        ])
+        |> render(:service,
+          service: service,
+          faq: Services.faq(service),
+          prices: Pricing.for_service(service.slug),
+          posts: Blog.posts_for_service(service.slug)
+        )
+    end
+  end
+
+  def team_member(conn, %{"slug" => slug}) do
+    case Enum.find(Team.list(), &(&1.slug == slug)) do
+      nil ->
+        raise Phoenix.Router.NoRouteError, conn: conn, router: KralukKurkierewiczWeb.Router
+
+      member ->
+        conn
+        |> assign(:active_nav, "zespol")
+        |> assign(:page_title, "#{member.display_name} — adwokat Gdańsk | Kraluk Kurkierewicz")
+        |> assign(
+          :meta_description,
+          "#{member.display_name} — adwokat i partner w Kancelarii Kraluk Kurkierewicz w Gdańsku. Członek Pomorskiej Izby Adwokackiej, ponad 10 lat doświadczenia. Artykuły i kontakt."
+        )
+        |> assign(:canonical_path, "/zespol/#{member.slug}")
+        |> assign(:json_ld, [
+          StructuredData.profile_page(member),
+          StructuredData.breadcrumbs([
+            {"Zespół", "/#zespol"},
+            {member.display_name, "/zespol/#{member.slug}"}
+          ])
+        ])
+        |> render(:team_member, member: member, posts: Blog.posts_by_author(member.slug))
+    end
+  end
+
+  def pricing(conn, _params) do
+    sections = pricing_sections()
+
+    conn
+    |> assign(:active_nav, "cennik")
+    |> assign(:page_title, "Cennik usług adwokackich — Gdańsk | Kraluk Kurkierewicz")
+    |> assign(
+      :meta_description,
+      "Orientacyjny cennik kancelarii adwokackiej w Gdańsku: konsultacja, rozwód, alimenty, podział majątku, upadłość konsumencka, obsługa firm. Ceny z VAT."
+    )
+    |> assign(:json_ld, [
+      StructuredData.offer_catalog(sections),
+      StructuredData.breadcrumbs([{"Cennik", "/cennik"}])
+    ])
+    |> render(:pricing, sections: sections, notes: Pricing.notes())
+  end
+
+  # `{title, items, service}` rows for the price list, grouped like the home page.
+  defp pricing_sections do
+    services = fn audience ->
+      for service <- Services.home(audience),
+          {label, min, max} <- Pricing.for_service(service.slug) do
+        {label, min, max, service}
+      end
+    end
+
+    [
+      {"Usługi podstawowe",
+       Enum.map(Pricing.general(), fn {l, min, max} -> {l, min, max, nil} end)},
+      {"Dla osób prywatnych", services.(:private)},
+      {"Dla przedsiębiorców", services.(:business)}
+    ]
   end
 
   def privacy(conn, _params) do
@@ -67,14 +166,20 @@ defmodule KralukKurkierewiczWeb.PageController do
 
     post_urls =
       Enum.map(Blog.list_posts(), fn post ->
-        {"/blog/#{post.slug}", "0.6", Date.to_iso8601(post.date)}
+        {"/blog/#{post.slug}", "0.6", Date.to_iso8601(Blog.last_modified(post))}
       end)
+
+    service_urls = Enum.map(Services.list(), &{"/uslugi/#{&1.slug}", "0.8", "2026-11-22"})
+    team_urls = Enum.map(Team.list(), &{"/zespol/#{&1.slug}", "0.6", "2026-11-22"})
 
     urls =
       [
-        {~p"/", "1.0", "2026-09-23"},
-        {~p"/blog", "0.7", "2026-09-23"}
-      ] ++ post_urls ++ [{~p"/polityka-prywatnosci", "0.5", "2026-09-23"}]
+        {~p"/", "1.0", "2026-11-22"},
+        {~p"/blog", "0.7", "2026-11-22"}
+      ] ++
+        service_urls ++
+        [{"/cennik", "0.7", "2026-11-22"}] ++
+        team_urls ++ post_urls ++ [{~p"/polityka-prywatnosci", "0.5", "2026-09-23"}]
 
     entries =
       Enum.map_join(urls, "\n", fn {path, priority, lastmod} ->
@@ -111,6 +216,21 @@ defmodule KralukKurkierewiczWeb.PageController do
         "- [#{post.title}](#{base}/blog/#{post.slug}): #{post.description}"
       end)
 
+    services =
+      Enum.map_join(Services.list(), "\n", fn service ->
+        "- [#{service.name}](#{base}/uslugi/#{service.slug}): #{service.description}"
+      end)
+
+    team_pages =
+      Enum.map_join(Team.list(), "\n", fn member ->
+        "- [#{member.display_name}](#{base}/zespol/#{member.slug}): #{member.role}"
+      end)
+
+    service_pages =
+      Enum.map_join(Services.list(), "\n", fn service ->
+        "- [#{service.name}](#{base}/uslugi/#{service.slug})"
+      end)
+
     faq =
       Enum.map_join(StructuredData.faq(), "\n\n", fn {question, answer} ->
         "### #{question}\n\n#{answer}"
@@ -119,7 +239,9 @@ defmodule KralukKurkierewiczWeb.PageController do
     body = """
     # Kraluk Kurkierewicz Adwokacka Spółka Partnerska
 
-    > Kancelaria adwokacka w Gdańsku (ul. Strzelecka 7B, 80-803 Gdańsk). Adwokaci Milena Kraluk i Michał Kurkierewicz prowadzą sprawy cywilne, rodzinne, spadkowe, odszkodowawcze, spory z deweloperami i upadłość konsumencką oraz zapewniają obsługę prawną przedsiębiorców. Pomoc prawna na terenie całej Polski, także w formie e-porady (telefon lub wideo).
+    > Kancelaria adwokacka w Gdańsku (ul. Strzelecka 7B, 80-803 Gdańsk). Adwokaci Milena Kraluk i Michał Kurkierewicz prowadzą sprawy cywilne, rodzinne, spadkowe, odszkodowawcze, spory z deweloperami i upadłość konsumencką oraz zapewniają obsługę prawną przedsiębiorców. Pomoc prawna także w formie e-porady (telefon lub wideo).
+
+    #{StructuredData.area_sentence()}
 
     ## Kontakt
 
@@ -142,6 +264,10 @@ defmodule KralukKurkierewiczWeb.PageController do
     - Dla osób prywatnych: sprawy o zapłatę, odszkodowania i zadośćuczynienia, zawyżony metraż mieszkań, nieruchomości, sprawy rodzinne (rozwody, alimenty, władza rodzicielska), podział majątku małżonków, prawa konsumentów, upadłość konsumencka, sprawy spadkowe, prawo karne (reprezentacja pokrzywdzonych).
     - Dla przedsiębiorców: bieżąca obsługa prawna, zakładanie spółek, umowy, egzekucja wierzytelności, restrukturyzacja, obsługa korporacyjna i spory masowe, AI i nowe technologie, sukcesja firm rodzinnych, prawo medyczne, spory gospodarcze, RODO.
 
+    ## Usługi
+
+    #{services}
+
     ## Najczęstsze pytania
 
     #{faq}
@@ -154,6 +280,9 @@ defmodule KralukKurkierewiczWeb.PageController do
 
     - [Strona główna](#{base}/): specjalizacje, sposób pracy, zespół, kontakt
     - [Blog](#{base}/blog): artykuły o orzecznictwie i zmianach w przepisach
+    - [Cennik](#{base}/cennik): orientacyjne ceny usług (z VAT)
+    #{team_pages}
+    #{service_pages}
     - [Polityka prywatności](#{base}/polityka-prywatnosci)
     """
 

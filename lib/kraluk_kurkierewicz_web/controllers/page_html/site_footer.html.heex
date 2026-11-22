@@ -1,12 +1,52 @@
-<footer class="border-t border-line-soft py-7 text-[.85rem] text-muted">
-  <div class="wrap flex flex-wrap justify-between gap-4 [&_a:hover]:text-ink">
-    <span>© 2026 Kraluk Kurkierewicz Adwokacka Spółka Partnerska · KRS
-      0001151792</span>
-    <span>
-      ul. Strzelecka 7B, 80-803 Gdańsk ·
-      <a href={~p"/polityka-prywatnosci"}>Polityka prywatności</a>
-      · <a href={~p"/polityka-prywatnosci#cookies"}>Pliki cookies</a>
-      · <a href={~p"/polityka-prywatnosci#uslugodawca"}>Informacje o usługodawcy</a>
-    </span>
+<footer class="border-t border-line-soft text-[.85rem] text-muted">
+  <div class="wrap grid grid-cols-1 gap-8 py-10 sm:grid-cols-2 lg:grid-cols-[1.1fr_1fr_1fr]">
+    <div>
+      <p class="m-0 font-display text-[1.15rem] font-semibold text-ink">
+        Kraluk Kurkierewicz
+      </p>
+      <p class="mt-2 leading-relaxed">
+        Adwokacka Spółka Partnerska<br />ul. Strzelecka 7B, 80-803 Gdańsk<br />
+        <a class="hover:text-ink" href="tel:+48698359581">698 359 581</a>
+        · <a class="hover:text-ink" href="tel:+48793102489">793 102 489</a>
+        <br />
+        <a class="hover:text-ink" href="mailto:kontakt@kkadwokat.pl">
+          kontakt@kkadwokat.pl
+        </a>
+      </p>
+      <p class="mt-3 flex flex-wrap gap-x-3 gap-y-1 [&_a:hover]:text-ink">
+        <a href={~p"/zespol/milena-kraluk"}>adw. Milena Kraluk</a>
+        <a href={~p"/zespol/michal-kurkierewicz"}>adw. Michał Kurkierewicz</a>
+        <a href={~p"/cennik"}>Cennik</a>
+        <a href={~p"/blog"}>Blog</a>
+      </p>
+    </div>
+    <nav
+      :for={
+        {label, audience} <- [
+          {"Dla osób prywatnych", :private},
+          {"Dla przedsiębiorców", :business}
+        ]
+      }
+      aria-label={label}
+    >
+      <p class="m-0 mb-2 text-[.75rem] font-semibold tracking-[.14em] text-brass-deep uppercase">
+        {label}
+      </p>
+      <ul class="grid gap-1 [&_a:hover]:text-ink">
+        <li :for={service <- KralukKurkierewicz.Services.home(audience)}>
+          <a href={~p"/uslugi/#{service.slug}"}>{service.name}</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="border-t border-line-soft py-6">
+    <div class="wrap flex flex-wrap justify-between gap-4 [&_a:hover]:text-ink">
+      <span>© 2026 Kraluk Kurkierewicz Adwokacka Spółka Partnerska · KRS 0001151792</span>
+      <span>
+        <a href={~p"/polityka-prywatnosci"}>Polityka prywatności</a>
+        · <a href={~p"/polityka-prywatnosci#cookies"}>Pliki cookies</a>
+        · <a href={~p"/polityka-prywatnosci#uslugodawca"}>Informacje o usługodawcy</a>
+      </span>
+    </div>
   </div>
 </footer>
