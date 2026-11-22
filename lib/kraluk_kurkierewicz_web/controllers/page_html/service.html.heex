@@ -90,6 +90,25 @@
         </li>
       </ul>
 
+      <.service_section
+        :for={{title, blocks} <- (@details && @details.sections) || []}
+        title={title}
+        blocks={blocks}
+      />
+
+      <div :if={@details} id="dokumenty">
+        <h2 class="mt-12">Jakie dokumenty przygotować</h2>
+        <ul class="mt-2 grid gap-2 sm:grid-cols-2">
+          <li
+            :for={document <- @details.documents}
+            class="flex items-start gap-3 rounded-[10px] border border-line-soft bg-paper px-4 py-3 text-[.96rem] leading-snug text-copy"
+          >
+            <.icon name="hero-document-text" class="mt-[.1rem] size-5 flex-none text-brass-deep" />
+            {document}
+          </li>
+        </ul>
+      </div>
+
       <h2 class="mt-12">Najczęstsze pytania</h2>
       <div class="border-t border-line" id="faq">
         <%!-- Same entries feed this page's FAQPage JSON-LD (Services.faq/1) --%>
@@ -121,6 +140,32 @@
     </div>
 
     <aside class="flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start">
+      <a
+        :if={@lead}
+        class="group grid grid-cols-[72px_1fr] items-center gap-4 rounded-[14px] border border-line-soft bg-cream p-5 shadow-card transition duration-200 hover:-translate-y-0.5 hover:shadow-card-hover motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+        href={~p"/zespol/#{@lead.slug}"}
+        id="service-lead"
+      >
+        <img
+          src={@lead.image}
+          alt=""
+          width="72"
+          height="72"
+          loading="lazy"
+          decoding="async"
+          class="aspect-square w-full rounded-full object-cover object-[50%_20%] ring-1 ring-line"
+        />
+        <span>
+          <span class="block text-[.8rem] font-semibold tracking-[.12em] text-brass-deep uppercase">
+            Sprawy prowadzi
+          </span>
+          <span class="mt-1 block font-display text-[1.3rem] leading-snug font-semibold text-ink transition-colors group-hover:text-brass-deep">
+            {@lead.display_name}
+          </span>
+          <span class="block text-[.86rem] text-muted">{@lead.role}</span>
+        </span>
+      </a>
+
       <div class="rounded-[14px] border border-line-soft bg-paper p-6 shadow-card">
         <p class="m-0 text-[.8rem] font-semibold tracking-[.12em] text-brass-deep uppercase">
           Jak pracujemy

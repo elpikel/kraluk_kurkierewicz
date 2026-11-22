@@ -172,12 +172,12 @@ defmodule KralukKurkierewicz.Services do
       home_text:
         "Dochodzenie zwrotu części ceny, gdy rzeczywista powierzchnia lokalu jest mniejsza niż wskazana w umowie.",
       name: "Zawyżony metraż mieszkania",
-      title: "Zawyżony metraż mieszkania — zwrot części ceny od dewelopera",
+      title: "Zawyżony metraż mieszkania — adwokat w Gdańsku",
       meta_title: "Zawyżony metraż mieszkania – adwokat Gdańsk",
       description:
         "Ścianki działowe wliczone do powierzchni użytkowej? Analizujemy umowę deweloperską i dochodzimy zwrotu nadpłaconej części ceny. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
       lead:
-        "Jeżeli rzeczywista powierzchnia mieszkania jest mniejsza niż ta, za którą zapłaciłeś, przeanalizujemy umowę i ocenimy, czy możesz odzyskać część ceny.",
+        "Jeżeli rzeczywista powierzchnia mieszkania jest mniejsza niż ta, za którą zapłaciłeś, przeanalizujemy umowę i ocenimy, czy możesz odzyskać od dewelopera część ceny.",
       intro: [
         "Cena mieszkania od dewelopera to zwykle iloczyn powierzchni użytkowej i ceny za metr kwadratowy. Część deweloperów wliczała do powierzchni użytkowej powierzchnię zajętą przez ścianki działowe — nabywca płacił więc za metry, z których nie może korzystać. Przy obecnych cenach nawet różnica jednego lub dwóch metrów oznacza realną kwotę.",
         "Sądy przyznają rację kupującym przede wszystkim wtedy, gdy ściany mają charakter stały, a umowa nie informowała w jasny sposób o metodzie pomiaru."
@@ -814,11 +814,33 @@ defmodule KralukKurkierewicz.Services do
   question answered by the service notes, and the indicative price.
   """
   def faq(service) do
-    [
-      {Map.get(@faq_questions, service.slug, service.notes_title), Enum.join(service.notes, " ")},
-      {"Ile kosztuje pomoc prawna w tym zakresie?",
-       KralukKurkierewicz.Pricing.faq_answer(service.slug)}
-    ]
+    extra =
+      case KralukKurkierewicz.ServiceDetails.get(service.slug) do
+        nil -> []
+        details -> details.faq
+      end
+
+    [{Map.get(@faq_questions, service.slug, service.notes_title), Enum.join(service.notes, " ")}] ++
+      extra ++
+      [
+        {"Ile kosztuje pomoc prawna w tym zakresie?",
+         KralukKurkierewicz.Pricing.faq_answer(service.slug)}
+      ]
+  end
+
+  # Day the service pages were first published; pages without extended content
+  # keep this date until their text really changes.
+  @published ~D[2026-11-22]
+
+  @doc """
+  Date of the last real content change of a service page (sitemap `lastmod`).
+  Set per page — never derived from the deploy date.
+  """
+  def updated(service) do
+    case KralukKurkierewicz.ServiceDetails.get(service.slug) do
+      %{updated: date} -> date
+      nil -> @published
+    end
   end
 
   @doc "Services for one home page column (`:private` or `:business`), in display order."

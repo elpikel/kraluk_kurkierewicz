@@ -223,7 +223,7 @@ defmodule KralukKurkierewiczWeb.PageControllerTest do
       for service <- KralukKurkierewicz.Services.list() do
         html = conn |> get(~p"/uslugi/#{service.slug}") |> html_response(200)
         faq = html |> json_ld_graph() |> Enum.find(&(&1["@type"] == "FAQPage"))
-        assert length(faq["mainEntity"]) == 2, service.slug
+        assert length(faq["mainEntity"]) == length(KralukKurkierewicz.Services.faq(service))
 
         for %{"name" => q} <- faq["mainEntity"] do
           assert html =~ q |> Phoenix.HTML.html_escape() |> Phoenix.HTML.safe_to_string()
@@ -251,6 +251,55 @@ defmodule KralukKurkierewiczWeb.PageControllerTest do
         assert html =~ ~s(href="#{path}")
         assert llms =~ path
         assert sitemap =~ path <> "</loc>"
+      end
+    end
+  end
+
+  describe "extended service pages" do
+    test "the key pages have 1000+ words, 6+ FAQ entries, documents and a lead lawyer",
+         %{conn: conn} do
+      for slug <- KralukKurkierewicz.ServiceDetails.slugs() do
+        html = conn |> get(~p"/uslugi/#{slug}") |> html_response(200)
+        [_, main] = Regex.run(~r{</header>(.*)<footer}s, html)
+
+        words =
+          main
+          |> String.replace(~r{<script.*?</script>}s, " ")
+          |> String.replace(~r{<[^>]+>}, " ")
+          |> String.split(~r/\s+/, trim: true)
+          |> length()
+
+        assert words >= 1000, "#{slug}: #{words} words"
+
+        faq = html |> json_ld_graph() |> Enum.find(&(&1["@type"] == "FAQPage"))
+        assert length(faq["mainEntity"]) >= 6, slug
+        assert html =~ ~s(id="dokumenty")
+        assert html =~ ~s(id="service-lead")
+      end
+    end
+
+    test "zawyżony metraż has the overpayment calculator and published rulings", %{conn: conn} do
+      html = conn |> get(~p"/uslugi/zawyzony-metraz") |> html_response(200)
+      assert html =~ ~s(id="metraz-calc")
+      assert html =~ "IV Ca 1735/23"
+      assert html =~ "orzeczenia.ms.gov.pl"
+      assert html =~ "sześcioletnim terminie"
+    end
+
+    test "every service H1 names the city", %{conn: conn} do
+      for service <- KralukKurkierewicz.Services.list() do
+        html = conn |> get(~p"/uslugi/#{service.slug}") |> html_response(200)
+        [_, h1] = Regex.run(~r{<h1[^>]*>(.*?)</h1>}s, html)
+        assert h1 =~ "Gdańsk", service.slug
+      end
+    end
+
+    test "sitemap lastmod comes from each page's own content date", %{conn: conn} do
+      sitemap = conn |> get(~p"/sitemap.xml") |> response(200)
+
+      for service <- KralukKurkierewicz.Services.list() do
+        date = Date.to_iso8601(KralukKurkierewicz.Services.updated(service))
+        assert sitemap =~ ~r{/uslugi/#{service.slug}</loc>\s*<lastmod>#{date}</lastmod>}
       end
     end
   end

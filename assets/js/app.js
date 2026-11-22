@@ -134,6 +134,51 @@ document.querySelectorAll("[role=alert][data-flash]").forEach((el) => {
     spySections.forEach((s) => spy.observe(s));
   }
 
+  // Overpayment calculator on /uslugi/zawyzony-metraz:
+  // (contract area - real area) x price per m2. Accepts "55,81" and "7 433".
+  const calc = document.getElementById("metraz-calc");
+  if (calc) {
+    const parse = (id) =>
+      parseFloat(
+        document.getElementById(id).value.replace(/\s/g, "").replace(",", "."),
+      );
+    const diffEl = document.getElementById("metraz-calc-diff");
+    const resultEl = document.getElementById("metraz-calc-result");
+    const noteEl = document.getElementById("metraz-calc-note");
+    const num = (value) =>
+      value.toLocaleString("pl-PL", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+
+    const update = () => {
+      const contract = parse("metraz-calc-contract");
+      const real = parse("metraz-calc-real");
+      const price = parse("metraz-calc-price");
+      const valid = [contract, real, price].every((v) => Number.isFinite(v) && v > 0);
+
+      if (!valid) {
+        diffEl.textContent = "—";
+        resultEl.textContent = "—";
+        noteEl.textContent = "Uzupełnij wszystkie trzy pola liczbami większymi od zera.";
+      } else if (real >= contract) {
+        diffEl.textContent = "0,00 m²";
+        resultEl.textContent = "0,00 zł";
+        noteEl.textContent =
+          "Powierzchnia bez ścianek nie jest mniejsza niż powierzchnia z umowy — brak nadpłaty.";
+      } else {
+        const diff = contract - real;
+        diffEl.textContent = `${num(diff)} m²`;
+        resultEl.textContent = `${num(diff * price)} zł`;
+        noteEl.textContent =
+          "Szacunek bez odsetek. O wyniku sprawy decyduje treść umowy i pomiar.";
+      }
+    };
+
+    calc.addEventListener("input", update);
+    calc.addEventListener("submit", (e) => e.preventDefault());
+  }
+
   // Contact form - sends the message through the backend (Brevo).
   const form = document.getElementById("contact-form");
   const status = document.getElementById("form-status");

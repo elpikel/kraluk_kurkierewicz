@@ -11,6 +11,8 @@ defmodule KralukKurkierewicz.Team do
       display_name: "adw. Milena Kraluk",
       role: "Partner, adwokat",
       image: "/images/milena-kraluk.webp",
+      # Date of the last change to this partner's page (sitemap `lastmod`).
+      updated: ~D[2026-11-22],
       # Profile URLs for JSON-LD `sameAs`, e.g. the rejestradwokatow.pl entry.
       same_as: ["https://rejestradwokatow.pl/adwokat/kraluk-milena-83554"],
       bio:
@@ -22,6 +24,8 @@ defmodule KralukKurkierewicz.Team do
       display_name: "adw. Michał Kurkierewicz",
       role: "Partner, adwokat",
       image: "/images/michal-kurkierewicz.webp",
+      # Date of the last change to this partner's page (sitemap `lastmod`).
+      updated: ~D[2026-11-22],
       # Profile URLs for JSON-LD `sameAs`, e.g. the rejestradwokatow.pl entry.
       same_as: ["https://rejestradwokatow.pl/adwokat/kurkierewicz-micha-81186"],
       bio:

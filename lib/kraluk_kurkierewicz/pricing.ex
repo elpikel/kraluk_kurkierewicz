@@ -69,6 +69,9 @@ defmodule KralukKurkierewicz.Pricing do
     "Wynagrodzenie za prowadzenie sprawy w II instancji ustalamy odrębnie."
   ]
 
+  @doc "Date of the last change to the price list (sitemap `lastmod`); bump when prices change."
+  def updated, do: ~D[2026-11-22]
+
   def general, do: @general
   def notes, do: @notes
 

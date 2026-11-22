@@ -67,6 +67,8 @@ defmodule KralukKurkierewiczWeb.PageController do
         raise Phoenix.Router.NoRouteError, conn: conn, router: KralukKurkierewiczWeb.Router
 
       service ->
+        details = KralukKurkierewicz.ServiceDetails.get(service.slug)
+
         conn
         |> assign(:active_nav, "specjalizacje")
         |> assign(:page_title, service.meta_title <> " — Kraluk Kurkierewicz")
@@ -80,6 +82,8 @@ defmodule KralukKurkierewiczWeb.PageController do
         |> render(:service,
           service: service,
           faq: Services.faq(service),
+          details: details,
+          lead: details && Team.get!(details.lead),
           prices: Pricing.for_service(service.slug),
           posts: Blog.posts_for_service(service.slug)
         )
@@ -159,6 +163,8 @@ defmodule KralukKurkierewiczWeb.PageController do
   end
 
   # Dynamic XML sitemap so the host is always correct across environments.
+  # Every `lastmod` is a date stored next to that page's content (Services.updated/1,
+  # ServiceDetails, Team, Pricing, Blog) — never the deploy date.
   # `lastmod` reflects the real last content update per page — bump it when the
   # page copy changes so the signal stays trustworthy to crawlers.
   def sitemap(conn, _params) do
@@ -169,8 +175,13 @@ defmodule KralukKurkierewiczWeb.PageController do
         {"/blog/#{post.slug}", "0.6", Date.to_iso8601(Blog.last_modified(post))}
       end)
 
-    service_urls = Enum.map(Services.list(), &{"/uslugi/#{&1.slug}", "0.8", "2026-11-22"})
-    team_urls = Enum.map(Team.list(), &{"/zespol/#{&1.slug}", "0.6", "2026-11-22"})
+    service_urls =
+      Enum.map(Services.list(), fn service ->
+        {"/uslugi/#{service.slug}", "0.8", Date.to_iso8601(Services.updated(service))}
+      end)
+
+    team_urls =
+      Enum.map(Team.list(), &{"/zespol/#{&1.slug}", "0.6", Date.to_iso8601(&1.updated)})
 
     urls =
       [
@@ -178,7 +189,7 @@ defmodule KralukKurkierewiczWeb.PageController do
         {~p"/blog", "0.7", "2026-11-22"}
       ] ++
         service_urls ++
-        [{"/cennik", "0.7", "2026-11-22"}] ++
+        [{"/cennik", "0.7", Date.to_iso8601(Pricing.updated())}] ++
         team_urls ++ post_urls ++ [{~p"/polityka-prywatnosci", "0.5", "2026-09-23"}]
 
     entries =

@@ -292,4 +292,118 @@ defmodule KralukKurkierewiczWeb.PageHTML do
     </section>
     """
   end
+
+  @doc """
+  One long-form section of an extended service page. `blocks` come from
+  `KralukKurkierewicz.ServiceDetails`: paragraph strings, `{:list, items}`,
+  `{:rulings, [{text, label, url}]}` or `:calculator`.
+  """
+  attr :title, :string, required: true
+  attr :blocks, :list, required: true
+
+  def service_section(assigns) do
+    ~H"""
+    <h2 class="mt-12">{@title}</h2>
+    <%= for block <- @blocks do %>
+      <%= case block do %>
+        <% text when is_binary(text) -> %>
+          <p>{text}</p>
+        <% {:list, items} -> %>
+          <ul class="my-4 grid gap-2 pl-5 marker:text-brass [&>li]:list-disc [&>li]:leading-[1.7]">
+            <li :for={item <- items}>{item}</li>
+          </ul>
+        <% {:rulings, rulings} -> %>
+          <ul class="my-5 grid gap-4">
+            <li
+              :for={{text, label, url} <- rulings}
+              class="rounded-[12px] border border-line-soft bg-paper px-5 py-4 text-[.98rem] leading-[1.7] shadow-[inset_3px_0_0_var(--color-brass)]"
+            >
+              {text}
+              <a
+                class="mt-2 block text-[.9rem] font-semibold text-brass-deep transition-colors hover:text-ink"
+                href={url}
+                rel="noopener"
+                target="_blank"
+              >
+                {label} →
+              </a>
+            </li>
+          </ul>
+        <% :calculator -> %>
+          <.overpayment_calculator />
+      <% end %>
+    <% end %>
+    """
+  end
+
+  @doc """
+  Overpayment calculator for the "zawyżony metraż" page: (contract area − real
+  area) × price per m². Behaviour lives in `assets/js/app.js` (`#metraz-calc`);
+  the result shown before any input matches the default example values.
+  """
+  def overpayment_calculator(assigns) do
+    ~H"""
+    <form
+      class="my-6 rounded-[14px] border border-brass/45 bg-brass-soft/50 p-[clamp(1.1rem,3vw,1.75rem)]"
+      id="metraz-calc"
+      novalidate
+    >
+      <div class="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+        <label class="flex flex-col justify-end gap-1 text-[.88rem] leading-snug font-semibold text-ink">
+          Powierzchnia z umowy, m²
+          <input
+            class="rounded-lg border border-line bg-white px-3 py-[.65rem] text-[1rem] font-normal text-copy tabular-nums transition focus:border-brass focus:shadow-[0_0_0_3px_rgba(207,174,126,.28)] focus:outline-none"
+            id="metraz-calc-contract"
+            inputmode="decimal"
+            name="contract"
+            type="text"
+            value="55,81"
+          />
+        </label>
+        <label class="flex flex-col justify-end gap-1 text-[.88rem] leading-snug font-semibold text-ink">
+          Bez ścianek działowych, m²
+          <input
+            class="rounded-lg border border-line bg-white px-3 py-[.65rem] text-[1rem] font-normal text-copy tabular-nums transition focus:border-brass focus:shadow-[0_0_0_3px_rgba(207,174,126,.28)] focus:outline-none"
+            id="metraz-calc-real"
+            inputmode="decimal"
+            name="real"
+            type="text"
+            value="52,88"
+          />
+        </label>
+        <label class="flex flex-col justify-end gap-1 text-[.88rem] leading-snug font-semibold text-ink">
+          Cena za m², zł
+          <input
+            class="rounded-lg border border-line bg-white px-3 py-[.65rem] text-[1rem] font-normal text-copy tabular-nums transition focus:border-brass focus:shadow-[0_0_0_3px_rgba(207,174,126,.28)] focus:outline-none"
+            id="metraz-calc-price"
+            inputmode="decimal"
+            name="price"
+            type="text"
+            value="7 433"
+          />
+        </label>
+      </div>
+      <div
+        aria-live="polite"
+        class="mt-5 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-t border-brass/40 pt-4"
+      >
+        <span class="text-[.95rem] text-copy">
+          Różnica powierzchni: <strong class="tabular-nums" id="metraz-calc-diff">2,93 m²</strong>
+        </span>
+        <span class="text-[.95rem] text-copy">
+          Szacowana nadpłata:
+          <strong
+            class="ml-1 font-display text-[1.9rem] leading-none font-semibold text-ink tabular-nums"
+            id="metraz-calc-result"
+          >
+            21 778,69 zł
+          </strong>
+        </span>
+      </div>
+      <p class="mt-2! text-[.82rem]! text-muted" id="metraz-calc-note">
+        Przykładowe dane — wpisz wartości ze swojej umowy i pomiaru.
+      </p>
+    </form>
+    """
+  end
 end
