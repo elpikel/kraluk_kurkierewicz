@@ -36,7 +36,7 @@
     <meta name="twitter:title" content={social_title} />
     <meta name="twitter:description" content={social_description} />
     <meta name="twitter:image" content={social_image} />
-    <.structured_data />
+    <.structured_data nodes={assigns[:json_ld] || []} />
     <link rel="icon" href="/favicon.svg?v=3" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico?v=3" sizes="48x48 32x32 16x16" />
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png?v=3" />

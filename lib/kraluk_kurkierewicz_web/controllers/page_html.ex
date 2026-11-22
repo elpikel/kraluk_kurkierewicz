@@ -133,36 +133,4 @@ defmodule KralukKurkierewiczWeb.PageHTML do
     </aside>
     """
   end
-
-  @doc """
-  Builds schema.org `BlogPosting` JSON-LD for a post as an encoded string.
-  """
-  def blog_post_json_ld(post) do
-    base = KralukKurkierewiczWeb.Endpoint.url()
-    url = base <> "/blog/" <> post.slug
-    image = base <> "/images/og-image.png"
-
-    org = %{
-      "@type" => "Organization",
-      "name" => "Kraluk Kurkierewicz Adwokacka Spółka Partnerska",
-      "url" => base <> "/"
-    }
-
-    Jason.encode!(%{
-      "@context" => "https://schema.org",
-      "@type" => "BlogPosting",
-      "@id" => url,
-      "mainEntityOfPage" => url,
-      "url" => url,
-      "headline" => post.title,
-      "description" => post.description,
-      "datePublished" => Date.to_iso8601(post.date),
-      "dateModified" => Date.to_iso8601(post.date),
-      "articleSection" => post.category,
-      "inLanguage" => "pl",
-      "image" => image,
-      "author" => org,
-      "publisher" => Map.put(org, "logo", %{"@type" => "ImageObject", "url" => image})
-    })
-  end
 end

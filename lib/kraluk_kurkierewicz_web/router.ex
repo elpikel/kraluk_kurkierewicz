@@ -29,6 +29,10 @@ defmodule KralukKurkierewiczWeb.Router do
   # The tracking script itself is a vendored static file at priv/static/js/stats.js.
   scope "/", KralukKurkierewiczWeb do
     post "/api/event", AnalyticsController, :event
+
+    # Plain-text site summary for LLM crawlers (https://llmstxt.org); outside :browser so
+    # a `text/plain`-only Accept header isn't rejected with 406.
+    get "/llms.txt", PageController, :llms_txt
   end
 
   # Other scopes may use custom stacks.

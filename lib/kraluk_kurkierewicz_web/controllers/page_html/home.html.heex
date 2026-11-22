@@ -43,18 +43,19 @@
       <use height="921" href="#kk-monogram" width="1302"></use>
     </svg>
     <div class="relative z-[2]">
-      <p class="mb-4 flex items-center gap-4 text-[.78rem] lg:mb-[clamp(1rem,3svh,1.75rem)] font-semibold tracking-[.28em] text-white/85 uppercase max-sm:gap-3 max-sm:text-[.62rem] max-sm:tracking-[.16em] lg:text-[#6b5129]">
-        <span aria-hidden="true" class="h-px w-12 flex-none bg-brass max-sm:w-8 max-xs:hidden">
+      <%!-- The H1 carries the search phrase; it keeps the small eyebrow look so the slogan below stays the visual headline --%>
+      <h1 class="mb-4 flex items-start gap-4 font-sans text-[.78rem] leading-[1.4] font-semibold tracking-[.28em] text-white/85 uppercase max-sm:gap-3 max-sm:text-[.62rem] max-sm:tracking-[.16em] lg:mb-[clamp(1rem,3svh,1.75rem)] lg:text-[#6b5129]">
+        <span aria-hidden="true" class="mt-[.7em] h-px w-12 flex-none bg-brass max-sm:w-8 max-xs:hidden">
         </span>
-        Kancelaria adwokacka w Gdańsku
-      </p>
-      <h1 class="text-[clamp(1.85rem,7.6vw,3.4rem)] text-white max-lg:leading-[1.1] lg:text-[clamp(2.2rem,min(3.3vw,6.4svh),3.3rem)] lg:text-ink">
+        Kancelaria adwokacka Gdańsk – Kraluk Kurkierewicz
+      </h1>
+      <p class="max-w-none font-display text-[clamp(1.85rem,7.6vw,3.4rem)] leading-[1.1] font-medium text-white lg:text-[clamp(2.2rem,min(3.3vw,6.4svh),3.3rem)] lg:text-ink">
         Pomoc prawna, która<br />
         <em class="text-[#e6cb98] italic lg:text-[#84633a]">
           skutecznie
           rozwiązuje Twoje problemy
         </em>
-      </h1>
+      </p>
       <p class="mt-4 mb-6 max-w-[34rem] text-[1.12rem] text-white/80 max-sm:text-[.95rem] lg:mt-[clamp(1rem,2.6svh,1.75rem)] lg:mb-[clamp(1.4rem,3.6svh,2.5rem)] lg:text-[#474e58]">
         Zapewniamy wsparcie prawne osobom prywatnym i przedsiębiorcom — od pojedynczych spraw po
         stałą obsługę firm i spory masowe.
@@ -374,6 +375,38 @@
     </div>
   </div>
 </section>
+<section class="border-t border-line-soft bg-paper py-section max-sm:py-12" id="faq">
+  <div class="wrap grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] lg:gap-16">
+    <div>
+      <p class="mb-3 text-[.78rem] font-semibold tracking-[.2em] text-brass-deep uppercase">
+        FAQ
+      </p>
+      <h2>Najczęstsze pytania</h2>
+      <p class="text-[1.05rem] text-muted">
+        Nie znalazłeś odpowiedzi? Zadzwoń lub napisz — chętnie pomożemy.
+      </p>
+    </div>
+    <div class="border-t border-line">
+      <%!-- Same entries feed the FAQPage JSON-LD (KralukKurkierewiczWeb.StructuredData.faq/0) --%>
+      <details
+        :for={{{question, answer}, i} <- Enum.with_index(@faq)}
+        id={"faq-#{i}"}
+        class="group border-b border-line"
+      >
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 font-display text-[1.3rem] leading-snug font-semibold text-ink transition-colors hover:text-brass-deep [&::-webkit-details-marker]:hidden">
+          {question}
+          <span
+            aria-hidden="true"
+            class="grid size-8 flex-none place-items-center rounded-full border border-brass/50 text-[1.1rem] text-brass-deep transition-transform duration-200 group-open:rotate-45 motion-reduce:transition-none"
+          >
+            +
+          </span>
+        </summary>
+        <p class="pr-12 pb-5 text-[1.02rem] leading-[1.7] text-muted max-sm:pr-0">{answer}</p>
+      </details>
+    </div>
+  </div>
+</section>
 <section class="bg-contact py-section text-cream max-sm:py-12" id="kontakt">
   <div class="wrap grid grid-cols-1 gap-12 md:grid-cols-2">
     <div>
@@ -387,6 +420,7 @@
           ustalimy termin.</div>
         <div><small>Kancelaria</small>Kraluk Kurkierewicz Adwokacka Spółka Partnerska<br />ul.
           Strzelecka 7B, 80-803 Gdańsk<br />KRS 0001151792</div>
+        <div><small>Godziny pracy</small>Poniedziałek – piątek, 9:00–17:00</div>
         <div>
           <small>Telefon</small>
           <div>
