@@ -1,23 +1,12 @@
 <.site_symbols />
 <.site_header active_nav={assigns[:active_nav]} />
-<section class="border-b border-line-soft bg-linear-to-b/srgb from-paper to-[#f3f0e9] py-[clamp(2.5rem,6vw,4.5rem)]">
-  <div class="wrap">
-    <nav aria-label="Ścieżka" class="mb-6 text-[.88rem] text-muted [&_a:hover]:text-ink">
-      <a href={~p"/"}>Strona główna</a>
-      <span aria-hidden="true" class="mx-2 text-brass-deep">/</span>
-      <span aria-current="page" class="text-ink">Cennik</span>
-    </nav>
-    <h1 class="text-[clamp(2.1rem,4.6vw,3.2rem)]">
-      Cennik usług<br />
-      <em class="text-[#84633a] italic">kancelaria adwokacka w Gdańsku</em>
-    </h1>
-    <p class="mt-5 max-w-[62ch] text-[1.12rem] text-muted">
-      Poniżej podajemy orientacyjne przedziały cenowe. Przed rozpoczęciem współpracy zawsze
-      przedstawiamy indywidualną wycenę — tak, abyś od początku wiedział, ile będzie kosztować
-      prowadzenie sprawy.
-    </p>
-  </div>
-</section>
+<.photo_hero
+  title="Cennik usług — adwokat w Gdańsku"
+  lead="Poniżej podajemy orientacyjne przedziały cenowe. Przed rozpoczęciem współpracy zawsze przedstawiamy indywidualną wycenę — tak, abyś od początku wiedział, ile będzie kosztować prowadzenie sprawy."
+  current="Cennik"
+  crumbs={[]}
+  place="Cennik"
+/>
 
 <section class="bg-cream py-section max-sm:py-12">
   <div class="wrap grid gap-12">
