@@ -83,6 +83,7 @@ defmodule KralukKurkierewicz.Blog do
     },
     %Post{
       slug: "zawyzony-metraz-scianki-dzialowe",
+      meta_title: "Zawyżony metraż przez ścianki działowe – zwrot części ceny",
       author: "milena-kraluk",
       updated: ~D[2026-11-22],
       service: "zawyzony-metraz",

@@ -305,6 +305,15 @@ defmodule KralukKurkierewiczWeb.PageControllerTest do
   end
 
   describe "audit follow-ups: divorce page, summaries, related services, profiles" do
+    test "no page title exceeds 70 characters", %{conn: conn} do
+      for {path, _priority, _date} <- KralukKurkierewicz.Sitemap.entries() do
+        html = conn |> get(path) |> html_response(200)
+        [_, title] = Regex.run(~r{<title[^>]*>\s*(.*?)\s*</title>}s, html)
+        title = title |> String.replace("&amp;", "&") |> String.replace("&#39;", "'")
+        assert String.length(title) <= 70, "#{path}: #{title}"
+      end
+    end
+
     test "rozwód has its own page, title and H1", %{conn: conn} do
       html = conn |> get(~p"/uslugi/rozwod") |> html_response(200)
       assert html =~ "<title"

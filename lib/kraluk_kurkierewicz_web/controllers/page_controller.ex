@@ -38,7 +38,7 @@ defmodule KralukKurkierewiczWeb.PageController do
       post ->
         conn
         |> assign(:active_nav, "blog")
-        |> assign(:page_title, post.meta_title || post.title <> " — Kraluk Kurkierewicz")
+        |> assign(:page_title, post.meta_title || branded_title(post.title))
         |> assign(:meta_description, post.description)
         |> assign(:canonical_path, "/blog/#{post.slug}")
         |> assign(:og_type, "article")
@@ -73,7 +73,7 @@ defmodule KralukKurkierewiczWeb.PageController do
 
         conn
         |> assign(:active_nav, "specjalizacje")
-        |> assign(:page_title, service.meta_title <> " — Kraluk Kurkierewicz")
+        |> assign(:page_title, branded_title(service.meta_title))
         |> assign(:meta_description, service.description)
         |> assign(:canonical_path, "/uslugi/#{service.slug}")
         |> assign(:json_ld, [
@@ -143,6 +143,13 @@ defmodule KralukKurkierewiczWeb.PageController do
   end
 
   # `{title, items, service}` rows for the price list, grouped like the home page.
+  # Search engines truncate (and Bing flags) titles over 70 characters, so the brand suffix
+  # is dropped when it would not fit.
+  defp branded_title(title) do
+    branded = title <> " — Kraluk Kurkierewicz"
+    if String.length(branded) <= 70, do: branded, else: title
+  end
+
   defp pricing_sections do
     services = fn audience ->
       for service <- Services.home(audience),
