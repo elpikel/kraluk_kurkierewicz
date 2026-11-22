@@ -8,6 +8,14 @@ defmodule KralukKurkierewicz.Team do
     "milena-kraluk" => %{
       slug: "milena-kraluk",
       name: "Milena Kraluk",
+      # Instrumental case ("wraz z adw. …").
+      name_instrumental: "Mileną Kraluk",
+      # `KralukKurkierewicz.Services` slugs listed on the profile ("Prowadzone sprawy").
+      # Every service belongs to exactly one partner and must agree with
+      # `ServiceDetails` `:lead`.
+      services: ~w(sprawy-o-zaplate odszkodowania zawyzony-metraz nieruchomosci rozwod
+                   sprawy-rodzinne podzial-majatku prawa-konsumentow sprawy-spadkowe
+                   prawo-karne prawo-medyczne),
       display_name: "adw. Milena Kraluk",
       role: "Partner, adwokat",
       image: "/images/milena-kraluk.webp",
@@ -21,6 +29,12 @@ defmodule KralukKurkierewicz.Team do
     "michal-kurkierewicz" => %{
       slug: "michal-kurkierewicz",
       name: "Michał Kurkierewicz",
+      # Instrumental case ("wraz z adw. …").
+      name_instrumental: "Michałem Kurkierewiczem",
+      # See the note on the other partner's `services`.
+      services: ~w(upadlosc-konsumencka obsluga-przedsiebiorcow zakladanie-spolek umowy
+                   egzekucja-wierzytelnosci restrukturyzacja obsluga-korporacyjna
+                   nowe-technologie sukcesja-firm spory-gospodarcze rodo),
       display_name: "adw. Michał Kurkierewicz",
       role: "Partner, adwokat",
       image: "/images/michal-kurkierewicz.webp",

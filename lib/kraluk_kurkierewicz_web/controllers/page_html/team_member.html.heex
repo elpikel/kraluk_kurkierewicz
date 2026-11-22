@@ -28,7 +28,7 @@
         </h1>
         <p class="mt-5 max-w-[60ch] text-[1.1rem] leading-[1.75] text-muted">{@member.bio}</p>
         <p class="mt-4 max-w-[60ch] text-[1.02rem] leading-[1.75] text-muted">
-          Wraz z adw. {other_partner(@member).name} prowadzi Kancelarię Kraluk Kurkierewicz
+          Wraz z adw. {other_partner(@member).name_instrumental} prowadzi Kancelarię Kraluk Kurkierewicz
           Adwokacka Spółka Partnerska w Gdańsku, która świadczy pomoc prawną osobom prywatnym
           i przedsiębiorcom.
         </p>
@@ -83,20 +83,32 @@
       <% end %>
     </div>
     <div>
-      <h2>Specjalizacje kancelarii</h2>
-      <p class="text-[1.02rem] text-muted">
-        Prowadzimy sprawy osób prywatnych i przedsiębiorców — zobacz, w czym możemy pomóc.
-      </p>
-      <ul class="mt-5 flex flex-wrap gap-2">
-        <li :for={service <- KralukKurkierewicz.Services.list()}>
-          <a
-            class="inline-block rounded-full border border-line px-3 py-[.35rem] text-[.88rem] text-copy transition-colors hover:border-brass hover:text-ink"
-            href={~p"/uslugi/#{service.slug}"}
-          >
-            {service.name}
+      <h2>Prowadzone sprawy</h2>
+      <ul class="border-t border-line" id="member-services">
+        <li :for={service <- @services} class="border-b border-line">
+          <a class="group block py-5" href={~p"/uslugi/#{service.slug}"}>
+            <span class="flex items-baseline justify-between gap-3 font-display text-[1.35rem] leading-snug font-semibold text-ink transition-colors group-hover:text-brass-deep">
+              {service.name}
+              <span
+                aria-hidden="true"
+                class="flex-none text-brass transition-transform duration-200 group-hover:translate-x-0.5 motion-reduce:transition-none"
+              >
+                →
+              </span>
+            </span>
+            <span class="mt-1 block text-[.95rem] text-muted">{service.home_text}</span>
           </a>
         </li>
       </ul>
+      <p class="mt-5 text-[.95rem] text-muted">
+        Kancelaria prowadzi też inne sprawy osób prywatnych i przedsiębiorców.
+        <a
+          class="font-semibold text-brass-deep transition-colors hover:text-ink"
+          href={~p"/#specjalizacje"}
+        >
+          Wszystkie specjalizacje →
+        </a>
+      </p>
     </div>
   </div>
 </section>

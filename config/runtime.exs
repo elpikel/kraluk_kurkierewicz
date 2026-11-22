@@ -57,6 +57,9 @@ if config_env() == :prod do
 
   config :kraluk_kurkierewicz, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
+  # Submit changed pages to IndexNow (Bing) on boot; set INDEXNOW=false to disable.
+  config :kraluk_kurkierewicz, :index_now, System.get_env("INDEXNOW") != "false"
+
   # Brevo (formerly Sendinblue) — same setup as the ordo repository.
   config :kraluk_kurkierewicz, KralukKurkierewicz.Mailer,
     adapter: Swoosh.Adapters.Brevo,

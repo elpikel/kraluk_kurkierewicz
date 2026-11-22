@@ -19,7 +19,8 @@ defmodule KralukKurkierewiczWeb do
 
   def static_paths,
     do:
-      ~w(assets fonts images js favicon.ico favicon.svg favicon-96.png apple-touch-icon.png robots.txt BingSiteAuth.xml)
+      ~w(assets fonts images js favicon.ico favicon.svg favicon-96.png apple-touch-icon.png robots.txt BingSiteAuth.xml) ++
+        [KralukKurkierewicz.IndexNow.key_file()]
 
   def router do
     quote do

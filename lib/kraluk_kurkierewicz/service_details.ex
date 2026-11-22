@@ -98,6 +98,85 @@ defmodule KralukKurkierewicz.ServiceDetails do
          "Niekoniecznie. Sąd Okręgowy w Warszawie w wyroku z 8 maja 2026 r. (V Ca 1440/25) podkreślił, że samo zaakceptowanie przez konsumenta warunków umowy nie oznacza akceptacji ich niedozwolonego charakteru."}
       ]
     },
+    "rozwod" => %{
+      updated: ~D[2026-11-22],
+      lead: "milena-kraluk",
+      sections: [
+        {"Kiedy sąd orzeknie rozwód",
+         [
+           "Warunkiem rozwodu jest zupełny i trwały rozkład pożycia (art. 56 § 1 k.r.o.). Zupełny oznacza ustanie więzi uczuciowej, fizycznej i gospodarczej między małżonkami, a trwały — że nie można oczekiwać powrotu do wspólnego życia. Przepisy nie wymagają określonego okresu rozłąki; sąd ocenia okoliczności konkretnego małżeństwa.",
+           "Mimo rozkładu pożycia sąd nie orzeknie rozwodu w trzech sytuacjach:",
+           {:list,
+            [
+              "gdyby wskutek rozwodu miało ucierpieć dobro wspólnych małoletnich dzieci,",
+              "gdyby orzeczenie rozwodu było z innych względów sprzeczne z zasadami współżycia społecznego,",
+              "gdy rozwodu żąda małżonek wyłącznie winny rozkładu pożycia — chyba że drugi małżonek wyrazi zgodę na rozwód albo jego odmowa jest sprzeczna z zasadami współżycia społecznego."
+            ]}
+         ]},
+        {"Rozwód z orzekaniem o winie czy bez",
+         [
+           "Co do zasady sąd orzeka, czy i który z małżonków ponosi winę rozkładu pożycia. Na zgodne żądanie obojga małżonków sąd zaniecha orzekania o winie — następują wtedy skutki takie, jakby żaden z małżonków nie ponosił winy (art. 57 k.r.o.).",
+           "Wybór ma praktyczne konsekwencje. Rozwód bez orzekania o winie jest szybszy i tańszy: zwykle nie wymaga przesłuchiwania świadków, a sąd zwraca połowę opłaty od pozwu. Orzeczenie o winie wymaga udowodnienia przyczyn rozkładu pożycia, ale wpływa na późniejsze alimenty między byłymi małżonkami — małżonek wyłącznie winny może zostać zobowiązany do alimentów na rzecz małżonka niewinnego, jeżeli rozwód pociąga za sobą istotne pogorszenie jego sytuacji materialnej, nawet gdy nie znajduje się on w niedostatku (art. 60 § 2 k.r.o.).",
+           "Decyzję o żądaniu orzeczenia o winie warto podjąć po ocenie dowodów i tego, co realnie można dzięki niemu uzyskać. Omawiamy to z Klientem przed złożeniem pozwu."
+         ]},
+        {"Co sąd rozstrzyga w wyroku rozwodowym",
+         [
+           "Wyrok rozwodowy to nie tylko rozwiązanie małżeństwa. Zgodnie z art. 58 k.r.o. sąd rozstrzyga w nim również o:",
+           {:list,
+            [
+              "władzy rodzicielskiej nad wspólnym małoletnim dzieckiem,",
+              "kontaktach rodziców z dzieckiem — na zgodny wniosek stron sąd nie orzeka o kontaktach,",
+              "alimentach na dziecko, czyli o tym, w jakiej wysokości każdy z małżonków ponosi koszty jego utrzymania i wychowania,",
+              "sposobie korzystania ze wspólnego mieszkania na czas wspólnego zamieszkiwania rozwiedzionych małżonków."
+            ]},
+           "Sąd uwzględnia pisemne porozumienie małżonków o sposobie wykonywania władzy rodzicielskiej i utrzymywaniu kontaktów z dzieckiem po rozwodzie, jeżeli jest ono zgodne z dobrem dziecka. Dobrze przygotowane porozumienie rodzicielskie skraca sprawę i ogranicza liczbę kwestii spornych."
+         ]},
+        {"Pozew o rozwód — sąd, opłata i przebieg sprawy",
+         [
+           "Pozew o rozwód wnosi się do sądu okręgowego, w którego okręgu małżonkowie mieli ostatnie wspólne miejsce zamieszkania, jeżeli choć jedno z nich nadal tam mieszka lub ma miejsce zwykłego pobytu. W braku takiej podstawy właściwy jest sąd miejsca zamieszkania strony pozwanej, a gdy i tej podstawy nie ma — sąd miejsca zamieszkania powoda. Małżonkowie mieszkający ostatnio wspólnie w Gdańsku składają więc pozew do Sądu Okręgowego w Gdańsku.",
+           "Opłata od pozwu jest stała i wynosi 600 zł. Jeżeli sąd orzeknie rozwód na zgodny wniosek stron bez orzekania o winie, po uprawomocnieniu się wyroku zwraca połowę opłaty. Osoba, której nie stać na poniesienie kosztów, może wnosić o zwolnienie od kosztów sądowych.",
+           "Po wniesieniu pozwu sąd doręcza jego odpis drugiemu małżonkowi i wyznacza termin na odpowiedź, a następnie termin rozprawy. Na czas trwania procesu można wnosić o zabezpieczenie — na przykład alimentów na dziecko, miejsca jego pobytu i kontaktów. W sprawie zgodnej rozprawa bywa jedna; w sprawie spornej sąd przesłuchuje świadków i strony, a w sprawach dotyczących dzieci może zlecić opinię zespołu specjalistów sądowych."
+         ]},
+        {"Alimenty między byłymi małżonkami",
+         [
+           "Rozwiedziony małżonek, który nie został uznany za wyłącznie winnego rozkładu pożycia i znajduje się w niedostatku, może żądać od drugiego byłego małżonka alimentów w zakresie odpowiadającym jego usprawiedliwionym potrzebom oraz możliwościom zarobkowym i majątkowym zobowiązanego (art. 60 § 1 k.r.o.).",
+           "Obowiązek ten wygasa, gdy uprawniony zawrze nowe małżeństwo. Jeżeli zobowiązanym jest małżonek, który nie został uznany za winnego rozkładu pożycia, obowiązek wygasa także z upływem pięciu lat od orzeczenia rozwodu, chyba że sąd ze względu na wyjątkowe okoliczności przedłuży ten termin."
+         ]},
+        {"Podział majątku a rozwód",
+         [
+           "Wspólność majątkowa ustaje z chwilą uprawomocnienia się wyroku rozwodowego. Sąd może dokonać podziału majątku wspólnego już w wyroku rozwodowym, ale tylko na wniosek jednego z małżonków i tylko wtedy, gdy nie spowoduje to nadmiernej zwłoki w postępowaniu. W praktyce majątek dzieli się najczęściej po rozwodzie — umownie albo w odrębnym postępowaniu przed sądem rejonowym.",
+           "Szczególnej uwagi wymaga mieszkanie obciążone kredytem hipotecznym: rozwód nie zwalnia żadnego z małżonków z odpowiedzialności wobec banku. Więcej na ten temat piszemy na stronie o podziale majątku."
+         ]},
+        {"Nazwisko po rozwodzie",
+         [
+           "Małżonek, który wskutek zawarcia małżeństwa zmienił nazwisko, może w ciągu trzech miesięcy od uprawomocnienia się wyroku rozwodowego wrócić do nazwiska noszonego przed zawarciem małżeństwa. Wystarczy oświadczenie złożone przed kierownikiem urzędu stanu cywilnego lub konsulem (art. 59 k.r.o.)."
+         ]}
+      ],
+      documents: [
+        "odpis aktu małżeństwa",
+        "odpisy aktów urodzenia wspólnych małoletnich dzieci",
+        "dokumenty dotyczące dochodów obojga małżonków, np. zaświadczenia o zarobkach lub zeznania podatkowe",
+        "zestawienie miesięcznych kosztów utrzymania dzieci wraz z rachunkami",
+        "projekt porozumienia rodzicielskiego, jeżeli małżonkowie są zgodni",
+        "dowody dotyczące przyczyn rozkładu pożycia, jeżeli sąd ma orzekać o winie",
+        "dokumenty dotyczące wspólnego mieszkania, np. umowa najmu lub odpis z księgi wieczystej",
+        "umowa majątkowa małżeńska (intercyza), jeżeli została zawarta"
+      ],
+      faq: [
+        {"Który sąd rozpoznaje sprawę o rozwód w Gdańsku?",
+         "Sąd Okręgowy w Gdańsku — jeżeli małżonkowie mieli w jego okręgu ostatnie wspólne miejsce zamieszkania, a choć jedno z nich nadal tam mieszka. W innym wypadku właściwy jest sąd okręgowy miejsca zamieszkania pozwanego, a w braku tej podstawy — powoda."},
+        {"Czy można wziąć rozwód na pierwszej rozprawie?",
+         "Tak, jest to możliwe, gdy małżonkowie zgodnie wnoszą o rozwód bez orzekania o winie i są zgodni co do władzy rodzicielskiej, kontaktów i alimentów. O przebiegu sprawy decyduje jednak sąd."},
+        {"Czym różni się rozwód z orzekaniem o winie od rozwodu bez orzekania o winie?",
+         "Przy rozwodzie bez orzekania o winie sąd nie bada przyczyn rozkładu pożycia, sprawa trwa krócej, a połowa opłaty od pozwu jest zwracana. Orzeczenie o winie wymaga postępowania dowodowego i wpływa na alimenty między byłymi małżonkami: małżonek wyłącznie winny nie może ich żądać, a sam może zostać do nich zobowiązany."},
+        {"Czy sąd może odmówić rozwodu?",
+         "Tak. Sąd nie orzeknie rozwodu, jeżeli miałoby na tym ucierpieć dobro wspólnych małoletnich dzieci, gdy rozwód byłby sprzeczny z zasadami współżycia społecznego albo gdy żąda go małżonek wyłącznie winny, a drugi małżonek zasadnie odmawia zgody."},
+        {"Czy przy rozwodzie sąd podzieli majątek?",
+         "Tylko na wniosek jednego z małżonków i tylko wtedy, gdy podział nie spowoduje nadmiernej zwłoki w postępowaniu. Najczęściej majątek dzieli się po rozwodzie, umownie albo przed sądem rejonowym."},
+        {"W jakim terminie po rozwodzie można wrócić do poprzedniego nazwiska?",
+         "W ciągu trzech miesięcy od uprawomocnienia się wyroku rozwodowego, przez oświadczenie złożone przed kierownikiem urzędu stanu cywilnego lub konsulem."}
+      ]
+    },
     "sprawy-rodzinne" => %{
       updated: ~D[2026-11-22],
       lead: "milena-kraluk",

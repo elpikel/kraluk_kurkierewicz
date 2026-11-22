@@ -25,11 +25,11 @@ defmodule KralukKurkierewicz.Pricing do
     "nieruchomosci" => [
       {"Zasiedzenie, służebność lub zniesienie współwłasności", 3000, 10_000}
     ],
-    "sprawy-rodzinne" => [
+    "rozwod" => [
       {"Rozwód bez orzekania o winie", 3000, 5000},
-      {"Rozwód z orzekaniem o winie", 6000, 12_000},
-      {"Sprawa o alimenty", 2500, 5000}
+      {"Rozwód z orzekaniem o winie", 6000, 12_000}
     ],
+    "sprawy-rodzinne" => [{"Sprawa o alimenty", 2500, 5000}],
     "podzial-majatku" => [{"Podział majątku wspólnego", 4000, 15_000}],
     "prawa-konsumentow" => [{"Spór z przedsiębiorcą (I instancja)", 2000, 6000}],
     "upadlosc-konsumencka" => [

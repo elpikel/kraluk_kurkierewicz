@@ -18,12 +18,21 @@ defmodule KralukKurkierewicz.Application do
           # {KralukKurkierewicz.Worker, arg},
           # Start to serve requests, typically the last entry
           KralukKurkierewiczWeb.Endpoint
-        ]
+        ] ++ index_now_children()
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: KralukKurkierewicz.Supervisor]
     Supervisor.start_link(children, opts)
+  end
+
+  # Production only (config/runtime.exs): tell IndexNow about pages changed by this deploy.
+  defp index_now_children do
+    if Application.get_env(:kraluk_kurkierewicz, :index_now, false) do
+      [{Task, &KralukKurkierewicz.IndexNow.submit_recent/0}]
+    else
+      []
+    end
   end
 
   # Only start the Repo when a database is actually configured. This app runs

@@ -55,7 +55,7 @@ defmodule KralukKurkierewicz.Services do
   # Order of the two "Specjalizacje" columns on the home page.
   @home_order [
     private:
-      ~w(sprawy-o-zaplate odszkodowania zawyzony-metraz nieruchomosci sprawy-rodzinne
+      ~w(sprawy-o-zaplate odszkodowania zawyzony-metraz nieruchomosci rozwod sprawy-rodzinne
                podzial-majatku prawa-konsumentow upadlosc-konsumencka sprawy-spadkowe prawo-karne),
     business: ~w(obsluga-przedsiebiorcow zakladanie-spolek umowy egzekucja-wierzytelnosci
                 restrukturyzacja obsluga-korporacyjna nowe-technologie sukcesja-firm
@@ -64,11 +64,46 @@ defmodule KralukKurkierewicz.Services do
 
   @services [
     %{
+      slug: "rozwod",
+      audience: :private,
+      home_name: "Rozwód",
+      home_text:
+        "Pozew o rozwód lub odpowiedź na pozew, rozwód z orzekaniem o winie i bez, uregulowanie spraw dzieci i mieszkania.",
+      name: "Rozwód",
+      title: "Rozwód — adwokat w Gdańsku",
+      meta_title: "Adwokat rozwód Gdańsk – pozew, wina, dzieci, koszty",
+      description:
+        "Rozwód w Gdańsku: pozew o rozwód, orzekanie o winie, władza rodzicielska, alimenty i mieszkanie. Opłata sądowa 600 zł. Kancelaria adwokacka Kraluk Kurkierewicz.",
+      lead:
+        "Prowadzimy sprawy rozwodowe od pierwszej rozmowy do prawomocnego wyroku — z orzekaniem o winie i bez, także gdy trzeba uregulować sprawy dzieci, alimentów i wspólnego mieszkania.",
+      intro: [
+        "Rozwód orzeka sąd okręgowy, jeżeli między małżonkami nastąpił zupełny i trwały rozkład pożycia (art. 56 § 1 Kodeksu rodzinnego i opiekuńczego). Opłata sądowa od pozwu o rozwód wynosi 600 zł. Gdy małżonkowie zgodnie wnoszą o rozwód bez orzekania o winie, sprawa może zakończyć się już na pierwszej rozprawie, a sąd zwraca połowę opłaty; orzekanie o winie wymaga postępowania dowodowego i wyraźnie wydłuża sprawę.",
+        "W wyroku rozwodowym sąd rozstrzyga nie tylko o rozwiązaniu małżeństwa, ale też o władzy rodzicielskiej, kontaktach z dziećmi, alimentach i sposobie korzystania ze wspólnego mieszkania. Dlatego przed złożeniem pozwu ustalamy z Klientem, o co wnosić w każdym z tych punktów i jakimi dowodami to poprzeć.",
+        "Reprezentujemy Klientów przed Sądem Okręgowym w Gdańsku oraz przed innymi sądami w Polsce — zarówno stronę wnoszącą pozew, jak i pozwaną."
+      ],
+      scope: [
+        {"Pozew o rozwód i odpowiedź na pozew",
+         "Przygotowanie pozwu albo odpowiedzi na pozew, wniosków dowodowych i stanowiska co do winy, dzieci, alimentów i mieszkania."},
+        {"Rozwód bez orzekania o winie",
+         "Uzgodnienie warunków rozstania i przygotowanie porozumienia rodzicielskiego, tak aby sprawa mogła zakończyć się możliwie szybko."},
+        {"Rozwód z orzekaniem o winie",
+         "Ocena, czy żądanie orzeczenia o winie jest uzasadnione, zebranie dowodów i reprezentacja w postępowaniu dowodowym."},
+        {"Dzieci, alimenty i mieszkanie",
+         "Władza rodzicielska, miejsce pobytu dziecka i kontakty, alimenty na dzieci i między małżonkami, korzystanie ze wspólnego mieszkania na czas po rozwodzie."}
+      ],
+      notes_title: "Ile kosztuje i jak długo trwa rozwód?",
+      notes: [
+        "Opłata sądowa od pozwu o rozwód jest stała i wynosi 600 zł. Jeżeli sąd orzeknie rozwód bez orzekania o winie na zgodny wniosek stron, po uprawomocnieniu się wyroku zwraca połowę opłaty, czyli 300 zł.",
+        "Czas trwania sprawy zależy przede wszystkim od tego, czy małżonkowie są zgodni. Rozwód bez orzekania o winie, przy uzgodnionych sprawach dzieci, może zakończyć się na pierwszej rozprawie. Spór o winę, władzę rodzicielską lub alimenty oznacza przesłuchania świadków, a często także opinię biegłych, i wydłuża postępowanie."
+      ],
+      acts: [:kro, :kpc, :uksc]
+    },
+    %{
       slug: "sprawy-rodzinne",
       audience: :private,
       home_name: "Sprawy rodzinne",
       home_text:
-        "Rozwody, separacje, alimenty, władza rodzicielska, kontakty z dziećmi oraz ustalenie pochodzenia dziecka.",
+        "Alimenty, władza rodzicielska, kontakty z dziećmi, separacja oraz ustalenie pochodzenia dziecka.",
       name: "Sprawy rodzinne i alimenty",
       title: "Sprawy rodzinne i alimenty — adwokat w Gdańsku",
       meta_title: "Sprawy rodzinne i alimenty – adwokat Gdańsk",
@@ -77,12 +112,13 @@ defmodule KralukKurkierewicz.Services do
       lead:
         "Prowadzimy sprawy rodzinne z dbałością o interesy Klienta i dzieci — od pierwszej rozmowy, przez przygotowanie pozwu i dowodów, po reprezentację przed sądem.",
       intro: [
+        "Sprawy o alimenty, kontakty z dzieckiem i władzę rodzicielską rozpoznaje sąd rejonowy, a sprawy o rozwód i separację — sąd okręgowy. Pozew o alimenty na dziecko, także o ich podwyższenie, jest wolny od opłat sądowych; w sprawie o obniżenie alimentów opłata wynosi 5% wartości przedmiotu sporu, a opłata od pozwu o rozwód — 600 zł. Przepisy nie przewidują tabel ani minimalnej kwoty alimentów: o ich wysokości decydują usprawiedliwione potrzeby dziecka oraz zarobkowe i majątkowe możliwości rodzica.",
         "Sprawy rodzinne wymagają nie tylko znajomości przepisów i doświadczenia procesowego, ale też indywidualnego podejścia. Każdą sprawę zaczynamy od rozmowy o Twojej sytuacji i celach, a następnie przedstawiamy możliwe rozwiązania, przewidywany czas trwania postępowania oraz jego koszty.",
         "Reprezentujemy Klientów przed sądami w Gdańsku i całym Trójmieście, a także w innych miastach w Polsce."
       ],
       scope: [
         {"Rozwód i separacja",
-         "Przygotowanie pozwu lub odpowiedzi na pozew, reprezentacja w sprawie rozwodowej, uregulowanie kwestii dotyczących dzieci i wspólnego mieszkania."},
+         "Przygotowanie pozwu lub odpowiedzi na pozew, reprezentacja w sprawie rozwodowej lub o separację, uregulowanie kwestii dotyczących dzieci i wspólnego mieszkania."},
         {"Alimenty",
          "Ustalenie, podwyższenie, obniżenie lub uchylenie alimentów — w tym przygotowanie zestawienia kosztów utrzymania dziecka i dokumentów, które je potwierdzają."},
         {"Władza rodzicielska i kontakty z dzieckiem",
@@ -112,6 +148,7 @@ defmodule KralukKurkierewicz.Services do
       lead:
         "Pomagamy uporządkować sprawy majątkowe po rozwodzie lub ustaniu wspólności — tak, aby podział był sprawiedliwy, a jego skutki przewidywalne.",
       intro: [
+        "Majątek wspólny można podzielić umową — u notariusza, jeżeli obejmuje nieruchomość — albo przed sądem rejonowym. Opłata od wniosku o podział majątku wynosi 1 000 zł, a przy zgodnym projekcie podziału 300 zł. Rozwód nie zmienia odpowiedzialności za wspólny kredyt: wobec banku oboje byli małżonkowie odpowiadają solidarnie, dopóki bank nie zgodzi się na zmianę umowy.",
         "Podział majątku wspólnego to często najtrudniejszy finansowo etap zakończenia małżeństwa. Trzeba ustalić, co wchodzi w skład majątku, jaka jest jego wartość, kto poniósł jakie nakłady oraz jak rozliczyć zobowiązania — zwłaszcza kredyt hipoteczny.",
         "Doradzamy przy podziale umownym, a gdy porozumienie nie jest możliwe, reprezentujemy Klientów w sądowym postępowaniu o podział majątku."
       ],
@@ -145,6 +182,7 @@ defmodule KralukKurkierewicz.Services do
       lead:
         "Pomagamy ocenić, czy upadłość konsumencka jest właściwym rozwiązaniem, przygotować wniosek i przejść przez postępowanie aż do oddłużenia.",
       intro: [
+        "Upadłość konsumencką może ogłosić osoba fizyczna nieprowadząca działalności gospodarczej, która stała się niewypłacalna. Wniosek składa się do sądu upadłościowego, a opłata od niego wynosi 30 zł. Plan spłaty wierzycieli trwa co do zasady do 3 lat, a od 3 do 7 lat — gdy dłużnik doprowadził do niewypłacalności umyślnie lub wskutek rażącego niedbalstwa. Umorzeniu nie podlegają między innymi alimenty i grzywny.",
         "Upadłość konsumencka może prowadzić do umorzenia części albo całości niespłaconych zobowiązań, ale wiąże się z obowiązkami i może oznaczać sprzedaż majątku. Przed złożeniem wniosku warto zrozumieć, jak postępowanie wpłynie na mieszkanie, dochody i rodzinę.",
         "Podczas konsultacji omawiamy możliwe skutki postępowania dla zadłużenia, majątku i bliskich oraz ustalamy zakres potrzebnej pomocy."
       ],
@@ -179,6 +217,7 @@ defmodule KralukKurkierewicz.Services do
       lead:
         "Jeżeli rzeczywista powierzchnia mieszkania jest mniejsza niż ta, za którą zapłaciłeś, przeanalizujemy umowę i ocenimy, czy możesz odzyskać od dewelopera część ceny.",
       intro: [
+        "Jeżeli deweloper wliczył do powierzchni użytkowej mieszkania stałe ścianki działowe, nabywca może żądać zwrotu części ceny: różnicy powierzchni pomnożonej przez cenę metra kwadratowego z umowy. W wyrokach opublikowanych przez sądy zasądzano od ok. 11 tys. do ok. 24 tys. zł na jednego nabywcę. Roszczenie przedawnia się co do zasady po 6 latach, a nowelizacja ustawy deweloperskiej z 13 lutego 2026 r. dotyczy wyłącznie umów zawartych od tego dnia.",
         "Cena mieszkania od dewelopera to zwykle iloczyn powierzchni użytkowej i ceny za metr kwadratowy. Część deweloperów wliczała do powierzchni użytkowej powierzchnię zajętą przez ścianki działowe — nabywca płacił więc za metry, z których nie może korzystać. Przy obecnych cenach nawet różnica jednego lub dwóch metrów oznacza realną kwotę.",
         "Sądy przyznają rację kupującym przede wszystkim wtedy, gdy ściany mają charakter stały, a umowa nie informowała w jasny sposób o metodzie pomiaru."
       ],
@@ -773,6 +812,170 @@ defmodule KralukKurkierewicz.Services do
       acts: [:rodo, :uodo]
     }
   ]
+
+  # "W skrócie" facts shown at the top of each service page: short, self-contained
+  # statements with numbers, taken from that page's own text (keep them in sync).
+  # `summary/1` appends the indicative price from `KralukKurkierewicz.Pricing`.
+  @summaries %{
+    "rozwod" => [
+      "Sąd: rozwód orzeka sąd okręgowy; przesłanką jest zupełny i trwały rozkład pożycia (art. 56 § 1 k.r.o.).",
+      "Opłata od pozwu: 600 zł; przy rozwodzie bez orzekania o winie na zgodny wniosek sąd zwraca połowę, czyli 300 zł.",
+      "Czas: rozwód bez orzekania o winie może zakończyć się na pierwszej rozprawie; spór o winę lub dzieci wydłuża sprawę."
+    ],
+    "sprawy-rodzinne" => [
+      "Alimenty na dziecko: brak tabel i kwot minimalnych — decydują potrzeby dziecka i możliwości zarobkowe rodzica (art. 135 § 1 k.r.o.).",
+      "Pozew o alimenty na dziecko i o ich podwyższenie: 0 zł opłaty sądowej.",
+      "Obniżenie alimentów: opłata 5% wartości przedmiotu sporu, liczonej jako suma świadczeń za rok."
+    ],
+    "podzial-majatku" => [
+      "Opłata od wniosku o podział majątku: 1 000 zł, a przy zgodnym projekcie podziału 300 zł.",
+      "Kredyt: po rozwodzie oboje byli małżonkowie odpowiadają wobec banku solidarnie, dopóki bank nie zgodzi się na zmianę umowy.",
+      "Wycena: mieszkanie z hipoteką wycenia się co do zasady według wartości rynkowej, bez odliczania kredytu (uchwała SN III CZP 14/19)."
+    ],
+    "upadlosc-konsumencka" => [
+      "Dla kogo: osoba fizyczna nieprowadząca działalności gospodarczej, która jest niewypłacalna.",
+      "Opłata od wniosku: 30 zł.",
+      "Plan spłaty: do 3 lat, a przy umyślnym lub rażąco niedbałym doprowadzeniu do niewypłacalności od 3 do 7 lat.",
+      "Umorzeniu nie podlegają m.in. alimenty i grzywny orzeczone przez sąd."
+    ],
+    "zawyzony-metraz" => [
+      "Kwota: różnica powierzchni × cena za m² z umowy; w opublikowanych wyrokach ok. 11–24 tys. zł na nabywcę.",
+      "Przedawnienie: co do zasady 6 lat, z końcem roku kalendarzowego.",
+      "Nowelizacja z 13 lutego 2026 r. dotyczy tylko umów zawartych od tego dnia — wcześniejsze ocenia się według dotychczasowych reguł."
+    ],
+    "sprawy-o-zaplate" => [
+      "Sprzeciw od nakazu zapłaty: 2 tygodnie od doręczenia.",
+      "Przedawnienie: co do zasady 6 lat; świadczenia okresowe i roszczenia z działalności gospodarczej — 3 lata.",
+      "Termin przedawnienia kończy się 31 grudnia, chyba że jest krótszy niż 2 lata."
+    ],
+    "odszkodowania" => [
+      "Przedawnienie: 3 lata od dowiedzenia się o szkodzie i osobie zobowiązanej, nie później niż 10 lat od zdarzenia.",
+      "Szkoda wynikła z przestępstwa: 20 lat od jego popełnienia.",
+      "Roszczenia: odszkodowanie za szkodę majątkową, zadośćuczynienie za krzywdę i renta."
+    ],
+    "nieruchomosci" => [
+      "Zasiedzenie nieruchomości: 20 lat w dobrej wierze, 30 lat w złej wierze.",
+      "Sąd stwierdza zasiedzenie, które nastąpiło z mocy prawa — nie przyznaje własności.",
+      "Zakres: współwłasność, służebności, wydanie nieruchomości, wpisy w księdze wieczystej."
+    ],
+    "prawa-konsumentow" => [
+      "Odstąpienie od umowy zawartej na odległość: 14 dni, bez podawania przyczyny (z ustawowymi wyjątkami).",
+      "Niedozwolone postanowienia umowne nie wiążą konsumenta; umowa obowiązuje w pozostałym zakresie.",
+      "Zakres: reklamacje, odstąpienie od umowy, spory z przedsiębiorcami."
+    ],
+    "sprawy-spadkowe" => [
+      "Przyjęcie lub odrzucenie spadku: 6 miesięcy od dowiedzenia się o tytule powołania.",
+      "Zachowek: 1/2 udziału ustawowego, a 2/3 dla małoletnich i trwale niezdolnych do pracy.",
+      "Roszczenie o zachowek z testamentu przedawnia się po 5 latach od ogłoszenia testamentu."
+    ],
+    "prawo-karne" => [
+      "Reprezentujemy na każdym etapie: przed policją, prokuraturą i sądem.",
+      "Pokrzywdzony może składać wnioski dowodowe, przeglądać akta i działać jako oskarżyciel posiłkowy.",
+      "W razie skazania sąd może orzec obowiązek naprawienia szkody lub zadośćuczynienia."
+    ],
+    "obsluga-przedsiebiorcow" => [
+      "Zakres: doradztwo bieżące, umowy, ocena ryzyka prawnego, spory i windykacja.",
+      "Początek współpracy: rozmowa o profilu działalności, a potem propozycja zakresu i kosztów obsługi."
+    ],
+    "zakladanie-spolek" => [
+      "Wnioski do KRS składa się wyłącznie elektronicznie, przez Portal Rejestrów Sądowych.",
+      "Sp. z o.o. można założyć w systemie S24 na wzorcu umowy — bez indywidualnych ustaleń wspólników.",
+      "Formy: sp. z o.o., prosta spółka akcyjna, spółka akcyjna i spółki osobowe."
+    ],
+    "umowy" => [
+      "Zakres: przygotowanie, weryfikacja i negocjowanie umów oraz regulaminów.",
+      "Sprawdzamy m.in. odpowiedzialność i jej ograniczenia, kary umowne, terminy, rozwiązanie umowy i rozstrzyganie sporów.",
+      "W umowach z konsumentami niedozwolone postanowienia nie wiążą klienta."
+    ],
+    "egzekucja-wierzytelnosci" => [
+      "Podstawa egzekucji: tytuł wykonawczy, czyli wyrok lub nakaz zapłaty z klauzulą wykonalności.",
+      "Przedawnienie roszczeń z działalności gospodarczej: co do zasady 3 lata, z końcem roku kalendarzowego.",
+      "Droga: wezwanie do zapłaty, nakaz zapłaty, klauzula wykonalności, komornik."
+    ],
+    "restrukturyzacja" => [
+      "Dla kogo: firma niewypłacalna albo zagrożona niewypłacalnością.",
+      "Cel: układ z wierzycielami i uniknięcie ogłoszenia upadłości.",
+      "4 postępowania: o zatwierdzenie układu, przyspieszone układowe, układowe i sanacyjne."
+    ],
+    "obsluga-korporacyjna" => [
+      "Zwyczajne zgromadzenie wspólników sp. z o.o.: w ciągu 6 miesięcy po zakończeniu roku obrotowego.",
+      "Zmiany w zarządzie i umowie spółki zgłasza się do KRS, a zmiany beneficjentów rzeczywistych — do CRBR.",
+      "Zakres: uchwały i zgromadzenia, zmiany korporacyjne, spory korporacyjne i masowe."
+    ],
+    "nowe-technologie" => [
+      "AI Act (rozporządzenie UE 2024/1689) nakłada obowiązki zależne od poziomu ryzyka systemu AI i wchodzi w życie etapami.",
+      "Korzystanie z AI podlega też RODO, prawu autorskiemu i ochronie tajemnicy przedsiębiorstwa.",
+      "Zakres: ocena wdrożeń AI, umowy IT i SLA, zasady korzystania z AI w firmie."
+    ],
+    "sukcesja-firm" => [
+      "Zarządca sukcesyjny pozwala jednoosobowej firmie działać po śmierci właściciela — z zachowaniem NIP, umów i zezwoleń.",
+      "Fundację rodzinną można utworzyć od 2023 r.",
+      "Zakres: plan sukcesji, przekształcenia, testamenty i zapisy windykacyjne."
+    ],
+    "prawo-medyczne" => [
+      "Dla kogo: gabinety, kliniki i inne podmioty lecznicze.",
+      "Dokumentację medyczną prowadzi się i udostępnia według ustawy o prawach pacjenta; dane o zdrowiu to szczególna kategoria danych w RODO.",
+      "Zakres: umowy z personelem, zgody pacjenta, regulaminy, spory z pacjentami."
+    ],
+    "spory-gospodarcze" => [
+      "Spory między przedsiębiorcami toczą się w odrębnym postępowaniu w sprawach gospodarczych.",
+      "Twierdzenia i dowody trzeba co do zasady powołać już w pozwie lub w odpowiedzi na pozew.",
+      "Zakres: spory o zapłatę, wykonanie umowy i kary umowne, mediacja, zabezpieczenie roszczeń."
+    ],
+    "rodo" => [
+      "Naruszenie ochrony danych zgłasza się do Prezesa UODO w ciągu 72 godzin od jego stwierdzenia.",
+      "Zakres: wdrożenia, audyty zgodności, dokumentacja i procedury ochrony danych.",
+      "Dokumentacja RODO musi odpowiadać rzeczywistym procesom w organizacji."
+    ]
+  }
+
+  # Related practice areas linked from each service page ("Powiązane usługi").
+  @related %{
+    "rozwod" => ~w(podzial-majatku sprawy-rodzinne nieruchomosci),
+    "sprawy-rodzinne" => ~w(rozwod podzial-majatku sprawy-spadkowe),
+    "podzial-majatku" => ~w(rozwod sprawy-rodzinne nieruchomosci),
+    "upadlosc-konsumencka" => ~w(sprawy-o-zaplate restrukturyzacja podzial-majatku),
+    "zawyzony-metraz" => ~w(prawa-konsumentow nieruchomosci sprawy-o-zaplate),
+    "sprawy-o-zaplate" => ~w(egzekucja-wierzytelnosci prawa-konsumentow odszkodowania),
+    "odszkodowania" => ~w(sprawy-o-zaplate prawo-karne prawa-konsumentow),
+    "nieruchomosci" => ~w(zawyzony-metraz sprawy-spadkowe podzial-majatku),
+    "prawa-konsumentow" => ~w(zawyzony-metraz sprawy-o-zaplate odszkodowania),
+    "sprawy-spadkowe" => ~w(sukcesja-firm nieruchomosci podzial-majatku),
+    "prawo-karne" => ~w(odszkodowania sprawy-o-zaplate),
+    "obsluga-przedsiebiorcow" => ~w(umowy obsluga-korporacyjna spory-gospodarcze),
+    "zakladanie-spolek" => ~w(obsluga-korporacyjna umowy obsluga-przedsiebiorcow),
+    "umowy" => ~w(obsluga-przedsiebiorcow spory-gospodarcze prawa-konsumentow),
+    "egzekucja-wierzytelnosci" => ~w(sprawy-o-zaplate spory-gospodarcze restrukturyzacja),
+    "restrukturyzacja" => ~w(egzekucja-wierzytelnosci upadlosc-konsumencka obsluga-korporacyjna),
+    "obsluga-korporacyjna" => ~w(zakladanie-spolek obsluga-przedsiebiorcow spory-gospodarcze),
+    "nowe-technologie" => ~w(rodo umowy obsluga-przedsiebiorcow),
+    "sukcesja-firm" => ~w(sprawy-spadkowe zakladanie-spolek obsluga-korporacyjna),
+    "prawo-medyczne" => ~w(rodo umowy odszkodowania),
+    "spory-gospodarcze" => ~w(egzekucja-wierzytelnosci umowy sprawy-o-zaplate),
+    "rodo" => ~w(nowe-technologie prawo-medyczne obsluga-przedsiebiorcow)
+  }
+
+  @doc "\"W skrócie\" points for a service page: its key facts plus the indicative price."
+  def summary(service) do
+    price =
+      case KralukKurkierewicz.Pricing.for_service(service.slug) do
+        [] ->
+          []
+
+        items ->
+          [
+            "Wynagrodzenie adwokata (orientacyjnie, z VAT): " <>
+              Enum.map_join(items, "; ", fn {label, min, max} ->
+                "#{label}: #{KralukKurkierewicz.Pricing.format_range(min, max)}"
+              end) <> "."
+          ]
+      end
+
+    Map.fetch!(@summaries, service.slug) ++ price
+  end
+
+  @doc "Related services linked from a service page, in display order."
+  def related(service), do: @related |> Map.fetch!(service.slug) |> Enum.map(&get/1)
 
   @doc "All service pages, in display order."
   def list, do: @services

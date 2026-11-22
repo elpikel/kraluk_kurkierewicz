@@ -68,6 +68,8 @@ defmodule KralukKurkierewiczWeb.PageController do
 
       service ->
         details = KralukKurkierewicz.ServiceDetails.get(service.slug)
+        lead = details && Team.get!(details.lead)
+        updated = Services.updated(service)
 
         conn
         |> assign(:active_nav, "specjalizacje")
@@ -76,6 +78,7 @@ defmodule KralukKurkierewiczWeb.PageController do
         |> assign(:canonical_path, "/uslugi/#{service.slug}")
         |> assign(:json_ld, [
           StructuredData.service(service),
+          StructuredData.service_page(service, updated, lead),
           StructuredData.faq_page(Services.faq(service), "/uslugi/#{service.slug}"),
           StructuredData.breadcrumbs([{service.name, "/uslugi/#{service.slug}"}])
         ])
@@ -83,7 +86,10 @@ defmodule KralukKurkierewiczWeb.PageController do
           service: service,
           faq: Services.faq(service),
           details: details,
-          lead: details && Team.get!(details.lead),
+          lead: lead,
+          updated: updated,
+          summary: Services.summary(service),
+          related: Services.related(service),
           prices: Pricing.for_service(service.slug),
           posts: Blog.posts_for_service(service.slug)
         )
@@ -111,7 +117,11 @@ defmodule KralukKurkierewiczWeb.PageController do
             {member.display_name, "/zespol/#{member.slug}"}
           ])
         ])
-        |> render(:team_member, member: member, posts: Blog.posts_by_author(member.slug))
+        |> render(:team_member,
+          member: member,
+          posts: Blog.posts_by_author(member.slug),
+          services: Enum.map(member.services, &Services.get/1)
+        )
     end
   end
 
@@ -163,43 +173,18 @@ defmodule KralukKurkierewiczWeb.PageController do
   end
 
   # Dynamic XML sitemap so the host is always correct across environments.
-  # Every `lastmod` is a date stored next to that page's content (Services.updated/1,
-  # ServiceDetails, Team, Pricing, Blog) — never the deploy date.
-  # `lastmod` reflects the real last content update per page — bump it when the
-  # page copy changes so the signal stays trustworthy to crawlers.
+  # Pages and their `lastmod` dates come from `KralukKurkierewicz.Sitemap`.
   def sitemap(conn, _params) do
     base = KralukKurkierewiczWeb.Endpoint.url()
 
-    post_urls =
-      Enum.map(Blog.list_posts(), fn post ->
-        {"/blog/#{post.slug}", "0.6", Date.to_iso8601(Blog.last_modified(post))}
-      end)
-
-    service_urls =
-      Enum.map(Services.list(), fn service ->
-        {"/uslugi/#{service.slug}", "0.8", Date.to_iso8601(Services.updated(service))}
-      end)
-
-    team_urls =
-      Enum.map(Team.list(), &{"/zespol/#{&1.slug}", "0.6", Date.to_iso8601(&1.updated)})
-
-    urls =
-      [
-        {~p"/", "1.0", "2026-11-22"},
-        {~p"/blog", "0.7", "2026-11-22"}
-      ] ++
-        service_urls ++
-        [{"/cennik", "0.7", Date.to_iso8601(Pricing.updated())}] ++
-        team_urls ++ post_urls ++ [{~p"/polityka-prywatnosci", "0.5", "2026-09-23"}]
-
     entries =
-      Enum.map_join(urls, "\n", fn {path, priority, lastmod} ->
+      Enum.map_join(KralukKurkierewicz.Sitemap.entries(), "\n", fn {path, priority, lastmod} ->
         loc = base <> String.trim_trailing(path, "/")
 
         """
           <url>
             <loc>#{loc}</loc>
-            <lastmod>#{lastmod}</lastmod>
+            <lastmod>#{Date.to_iso8601(lastmod)}</lastmod>
             <priority>#{priority}</priority>
           </url>\
         """
@@ -272,7 +257,7 @@ defmodule KralukKurkierewiczWeb.PageController do
 
     ## Specjalizacje
 
-    - Dla osób prywatnych: sprawy o zapłatę, odszkodowania i zadośćuczynienia, zawyżony metraż mieszkań, nieruchomości, sprawy rodzinne (rozwody, alimenty, władza rodzicielska), podział majątku małżonków, prawa konsumentów, upadłość konsumencka, sprawy spadkowe, prawo karne (reprezentacja pokrzywdzonych).
+    - Dla osób prywatnych: sprawy o zapłatę, odszkodowania i zadośćuczynienia, zawyżony metraż mieszkań, nieruchomości, rozwody, sprawy rodzinne (alimenty, władza rodzicielska), podział majątku małżonków, prawa konsumentów, upadłość konsumencka, sprawy spadkowe, prawo karne (reprezentacja pokrzywdzonych).
     - Dla przedsiębiorców: bieżąca obsługa prawna, zakładanie spółek, umowy, egzekucja wierzytelności, restrukturyzacja, obsługa korporacyjna i spory masowe, AI i nowe technologie, sukcesja firm rodzinnych, prawo medyczne, spory gospodarcze, RODO.
 
     ## Usługi

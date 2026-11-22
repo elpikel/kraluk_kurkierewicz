@@ -303,4 +303,78 @@ defmodule KralukKurkierewiczWeb.PageControllerTest do
       end
     end
   end
+
+  describe "audit follow-ups: divorce page, summaries, related services, profiles" do
+    test "rozwód has its own page, title and H1", %{conn: conn} do
+      html = conn |> get(~p"/uslugi/rozwod") |> html_response(200)
+      assert html =~ "<title"
+      assert html =~ "Adwokat rozwód Gdańsk"
+      [_, h1] = Regex.run(~r{<h1[^>]*>(.*?)</h1>}s, html)
+      assert h1 =~ "Rozwód"
+      assert html =~ "600 zł"
+      assert html =~ ~s(href="/uslugi/podzial-majatku")
+    end
+
+    test "every service page has a summary, an update date and links to related services",
+         %{conn: conn} do
+      for service <- KralukKurkierewicz.Services.list() do
+        html = conn |> get(~p"/uslugi/#{service.slug}") |> html_response(200)
+        assert html =~ ~s(id="w-skrocie")
+        assert html =~ "Zaktualizowano:"
+        assert length(KralukKurkierewicz.Services.summary(service)) in 3..5
+
+        related = KralukKurkierewicz.Services.related(service)
+        assert related != [] and Enum.all?(related, & &1), service.slug
+        for other <- related, do: assert(html =~ ~s(href="/uslugi/#{other.slug}"))
+
+        page = html |> json_ld_graph() |> Enum.find(&(&1["@type"] == "WebPage"))
+        assert page["dateModified"]
+      end
+    end
+
+    test "extended service pages name the reviewing lawyer", %{conn: conn} do
+      html = conn |> get(~p"/uslugi/upadlosc-konsumencka") |> html_response(200)
+      assert html =~ "Weryfikacja merytoryczna"
+      page = html |> json_ld_graph() |> Enum.find(&(&1["@type"] == "WebPage"))
+      assert page["reviewedBy"]["@id"] =~ "#michal-kurkierewicz"
+    end
+
+    test "partner page declines the other partner's name and lists only own services",
+         %{conn: conn} do
+      html = conn |> get(~p"/zespol/milena-kraluk") |> html_response(200)
+      assert html =~ "Wraz z adw. Michałem Kurkierewiczem prowadzi"
+      [_, own] = Regex.run(~r{id="member-services">(.*?)</ul>}s, html)
+      assert own =~ ~s(href="/uslugi/rozwod")
+      refute own =~ ~s(href="/uslugi/upadlosc-konsumencka")
+
+      html = conn |> get(~p"/zespol/michal-kurkierewicz") |> html_response(200)
+      assert html =~ "Wraz z adw. Mileną Kraluk prowadzi"
+    end
+
+    test "services are split evenly between the partners and agree with the page leads" do
+      [milena, michal] = KralukKurkierewicz.Team.list()
+      all = Enum.map(KralukKurkierewicz.Services.list(), & &1.slug)
+
+      assert Enum.sort(milena.services ++ michal.services) == Enum.sort(all)
+      assert length(milena.services) == length(michal.services)
+
+      for slug <- KralukKurkierewicz.ServiceDetails.slugs() do
+        lead = KralukKurkierewicz.ServiceDetails.get(slug).lead
+        assert slug in KralukKurkierewicz.Team.get!(lead).services, slug
+      end
+    end
+
+    test "IndexNow key file is served and the payload lists recently changed pages",
+         %{conn: conn} do
+      file = KralukKurkierewicz.IndexNow.key_file()
+      assert conn |> get("/" <> file) |> response(200) == String.trim_trailing(file, ".txt")
+
+      body = KralukKurkierewicz.IndexNow.payload(~D[2026-11-22], "https://kkadwokat.pl")
+      assert body.host == "kkadwokat.pl"
+      assert "https://kkadwokat.pl/uslugi/rozwod" in body.urlList
+      assert "https://kkadwokat.pl" in body.urlList
+      refute "https://kkadwokat.pl/polityka-prywatnosci" in body.urlList
+      assert KralukKurkierewicz.IndexNow.payload(~D[2100-01-01]) == nil
+    end
+  end
 end

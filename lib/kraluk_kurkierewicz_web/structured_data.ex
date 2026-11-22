@@ -244,6 +244,27 @@ defmodule KralukKurkierewiczWeb.StructuredData do
     }
   end
 
+  @doc """
+  `WebPage` node for a practice-area page: last content update and, when a
+  partner handles these cases, the reviewing lawyer (both visible on the page).
+  """
+  def service_page(service, %Date{} = updated, lead) do
+    url = base() <> "/uslugi/" <> service.slug
+
+    node = %{
+      "@type" => "WebPage",
+      "@id" => url,
+      "url" => url,
+      "name" => service.title,
+      "inLanguage" => "pl-PL",
+      "dateModified" => Date.to_iso8601(updated),
+      "mainEntity" => %{"@id" => url <> "#service"},
+      "isPartOf" => %{"@id" => base() <> "/#website"}
+    }
+
+    if lead, do: Map.put(node, "reviewedBy", %{"@id" => person_id(lead.slug)}), else: node
+  end
+
   @doc "`FAQPage` node built from `faq/0`."
   def faq_page do
     %{
