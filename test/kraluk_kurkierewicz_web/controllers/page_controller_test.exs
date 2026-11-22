@@ -274,7 +274,7 @@ defmodule KralukKurkierewiczWeb.PageControllerTest do
         faq = html |> json_ld_graph() |> Enum.find(&(&1["@type"] == "FAQPage"))
         assert length(faq["mainEntity"]) >= 6, slug
         assert html =~ ~s(id="dokumenty")
-        assert html =~ ~s(id="service-lead")
+        assert html =~ ~s(id="service-lead-)
       end
     end
 
@@ -351,17 +351,30 @@ defmodule KralukKurkierewiczWeb.PageControllerTest do
       assert html =~ "Wraz z adw. Mileną Kraluk prowadzi"
     end
 
-    test "services are split evenly between the partners and agree with the page leads" do
+    test "every service is on a partner profile and profiles agree with the page leads" do
       [milena, michal] = KralukKurkierewicz.Team.list()
       all = Enum.map(KralukKurkierewicz.Services.list(), & &1.slug)
 
-      assert Enum.sort(milena.services ++ michal.services) == Enum.sort(all)
-      assert length(milena.services) == length(michal.services)
+      assert Enum.sort(Enum.uniq(milena.services ++ michal.services)) == Enum.sort(all)
 
-      for slug <- KralukKurkierewicz.ServiceDetails.slugs() do
-        lead = KralukKurkierewicz.ServiceDetails.get(slug).lead
-        assert slug in KralukKurkierewicz.Team.get!(lead).services, slug
+      for slug <- all, member <- KralukKurkierewicz.Team.list() do
+        leads = KralukKurkierewicz.ServiceDetails.leads(slug)
+        if leads != [], do: assert(member.slug in leads == slug in member.services, slug)
       end
+    end
+
+    test "zawyżony metraż is handled by both partners", %{conn: conn} do
+      html = conn |> get(~p"/uslugi/zawyzony-metraz") |> html_response(200)
+      assert html =~ "Sprawy prowadzą"
+      assert html =~ ~s(id="service-lead-milena-kraluk")
+      assert html =~ ~s(id="service-lead-michal-kurkierewicz")
+
+      page = html |> json_ld_graph() |> Enum.find(&(&1["@type"] == "WebPage"))
+      assert length(page["reviewedBy"]) == 2
+
+      profile = conn |> get(~p"/zespol/michal-kurkierewicz") |> html_response(200)
+      [_, own] = Regex.run(~r{id="member-services">(.*?)</ul>}s, profile)
+      assert own =~ ~s(href="/uslugi/zawyzony-metraz")
     end
 
     test "IndexNow key file is served and the payload lists recently changed pages",

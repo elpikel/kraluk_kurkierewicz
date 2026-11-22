@@ -11,7 +11,8 @@ defmodule KralukKurkierewicz.ServiceDetails do
 
     * `:updated` — date of the last real content change (sitemap `lastmod`);
       bump it only when this page's text changes
-    * `:lead` — `KralukKurkierewicz.Team` slug of the partner handling these cases
+    * `:lead` — `KralukKurkierewicz.Team` slug of the partner handling these cases,
+      or a list of slugs when both do (see `leads/1`)
     * `:sections` — `{title, blocks}`; a block is a paragraph string,
       `{:list, items}`, `{:rulings, [{text, link_label, url}]}` or `:calculator`
     * `:documents` — checklist of documents to bring
@@ -21,7 +22,7 @@ defmodule KralukKurkierewicz.ServiceDetails do
   @details %{
     "zawyzony-metraz" => %{
       updated: ~D[2026-11-22],
-      lead: "milena-kraluk",
+      lead: ["milena-kraluk", "michal-kurkierewicz"],
       sections: [
         {"Jak mierzy się powierzchnię użytkową mieszkania",
          [
@@ -374,6 +375,14 @@ defmodule KralukKurkierewicz.ServiceDetails do
 
   @doc "Extended content for a service slug, or `nil` for a short page."
   def get(slug), do: Map.get(@details, slug)
+
+  @doc "`KralukKurkierewicz.Team` slugs of the partners handling a service (`[]` for a short page)."
+  def leads(slug) do
+    case get(slug) do
+      nil -> []
+      %{lead: lead} -> List.wrap(lead)
+    end
+  end
 
   @doc "Slugs of the service pages that have extended content."
   def slugs, do: Map.keys(@details)

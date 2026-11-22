@@ -68,7 +68,7 @@ defmodule KralukKurkierewiczWeb.PageController do
 
       service ->
         details = KralukKurkierewicz.ServiceDetails.get(service.slug)
-        lead = details && Team.get!(details.lead)
+        leads = Enum.map(KralukKurkierewicz.ServiceDetails.leads(service.slug), &Team.get!/1)
         updated = Services.updated(service)
 
         conn
@@ -78,7 +78,7 @@ defmodule KralukKurkierewiczWeb.PageController do
         |> assign(:canonical_path, "/uslugi/#{service.slug}")
         |> assign(:json_ld, [
           StructuredData.service(service),
-          StructuredData.service_page(service, updated, lead),
+          StructuredData.service_page(service, updated, leads),
           StructuredData.faq_page(Services.faq(service), "/uslugi/#{service.slug}"),
           StructuredData.breadcrumbs([{service.name, "/uslugi/#{service.slug}"}])
         ])
@@ -86,7 +86,7 @@ defmodule KralukKurkierewiczWeb.PageController do
           service: service,
           faq: Services.faq(service),
           details: details,
-          lead: lead,
+          leads: leads,
           updated: updated,
           summary: Services.summary(service),
           related: Services.related(service),

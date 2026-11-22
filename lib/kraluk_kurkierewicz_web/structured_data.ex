@@ -248,7 +248,7 @@ defmodule KralukKurkierewiczWeb.StructuredData do
   `WebPage` node for a practice-area page: last content update and, when a
   partner handles these cases, the reviewing lawyer (both visible on the page).
   """
-  def service_page(service, %Date{} = updated, lead) do
+  def service_page(service, %Date{} = updated, leads) do
     url = base() <> "/uslugi/" <> service.slug
 
     node = %{
@@ -262,7 +262,11 @@ defmodule KralukKurkierewiczWeb.StructuredData do
       "isPartOf" => %{"@id" => base() <> "/#website"}
     }
 
-    if lead, do: Map.put(node, "reviewedBy", %{"@id" => person_id(lead.slug)}), else: node
+    case Enum.map(leads, &%{"@id" => person_id(&1.slug)}) do
+      [] -> node
+      [reviewer] -> Map.put(node, "reviewedBy", reviewer)
+      reviewers -> Map.put(node, "reviewedBy", reviewers)
+    end
   end
 
   @doc "`FAQPage` node built from `faq/0`."

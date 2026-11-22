@@ -44,7 +44,7 @@ defmodule KralukKurkierewiczWeb.PageHTML do
   def post_cta(assigns) do
     ~H"""
     <aside
-      class="my-9 rounded-[12px] border border-brass/45 bg-brass-soft/60 px-[clamp(1.1rem,3vw,1.75rem)] py-[clamp(1.1rem,2.6vw,1.5rem)] shadow-[inset_4px_0_0_var(--color-brass)]"
+      class="my-9 border-l-[3px] border-brass py-1 pl-[clamp(1.1rem,3vw,1.5rem)]"
       aria-label="Konsultacja prawna"
     >
       <p class="m-0! font-display text-[1.3rem] leading-snug font-semibold text-ink">{@title}</p>
@@ -316,7 +316,7 @@ defmodule KralukKurkierewiczWeb.PageHTML do
           <ul class="my-5 grid gap-4">
             <li
               :for={{text, label, url} <- rulings}
-              class="rounded-[12px] border border-line-soft bg-paper px-5 py-4 text-[.98rem] leading-[1.7] shadow-[inset_3px_0_0_var(--color-brass)]"
+              class="border-l-[3px] border-brass py-1 pl-5 text-[.98rem] leading-[1.7]"
             >
               {text}
               <a
