@@ -259,13 +259,14 @@ defmodule KralukKurkierewicz.Services do
         "Dochodzenie zwrotu części ceny, gdy rzeczywista powierzchnia lokalu jest mniejsza niż wskazana w umowie.",
       name: "Zawyżony metraż mieszkania",
       title: "Zawyżony metraż mieszkania — adwokat w Gdańsku",
-      meta_title: "Zawyżony metraż mieszkania - adwokat Gdańsk",
+      meta_title: "Zaniżony metraż mieszkania - adwokat, zwrot od dewelopera",
       description:
-        "Ścianki działowe wliczone do powierzchni mieszkania? Analizujemy umowę deweloperską i dochodzimy zwrotu części ceny. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
+        "Deweloper zaniżył metraż albo wliczył ścianki działowe do powierzchni? Dochodzimy zwrotu części ceny w całej Polsce, także w Warszawie. Adwokaci z Gdańska.",
       lead:
         "Jeżeli rzeczywista powierzchnia mieszkania jest mniejsza niż ta, za którą zapłaciłeś, przeanalizujemy umowę i ocenimy, czy możesz odzyskać od dewelopera część ceny.",
       intro: [
         "Jeżeli deweloper wliczył do powierzchni użytkowej mieszkania stałe ścianki działowe, nabywca może żądać zwrotu części ceny: różnicy powierzchni pomnożonej przez cenę metra kwadratowego z umowy. W wyrokach opublikowanych przez sądy zasądzano od ok. 11 tys. do ok. 24 tys. zł na jednego nabywcę. Roszczenie przedawnia się co do zasady po 6 latach, a nowelizacja ustawy deweloperskiej z 13 lutego 2026 r. dotyczy wyłącznie umów zawartych od tego dnia.",
+        "Nabywcy opisują ten problem różnie: jako zaniżony metraż — bo mieszkanie jest mniejsze, niż wynika z umowy — albo zawyżony metraż, bo deweloper policzył więcej metrów, niż lokal rzeczywiście ma. Chodzi o to samo: zapłatę za powierzchnię, której nie ma. Potocznie mówi się o odszkodowaniu lub rekompensacie za metraż, a prawnie jest to zwrot nadpłaconej części ceny wraz z odsetkami.",
         "Cena mieszkania od dewelopera to zwykle iloczyn powierzchni użytkowej i ceny za metr kwadratowy. Część deweloperów wliczała do powierzchni użytkowej powierzchnię zajętą przez ścianki działowe — nabywca płacił więc za metry, z których nie może korzystać. Przy obecnych cenach nawet różnica jednego lub dwóch metrów oznacza realną kwotę.",
         "Sądy przyznają rację kupującym przede wszystkim wtedy, gdy ściany mają charakter stały, a umowa nie informowała w jasny sposób o metodzie pomiaru. To jeden z przykładów sporów, w których pomagamy w ramach [ochrony praw konsumentów](/uslugi/prawa-konsumentow)."
       ],
@@ -1111,7 +1112,7 @@ defmodule KralukKurkierewicz.Services do
     "upadlosc-konsumencka" =>
       "Sądem upadłościowym dla osób mieszkających w Gdańsku i Trójmieście jest Sąd Rejonowy Gdańsk-Północ w Gdańsku. Wniosek składa się elektronicznie przez Krajowy Rejestr Zadłużonych albo na formularzu papierowym, a dokumenty do niego można omówić w kancelarii w Gdańsku lub zdalnie.",
     "zawyzony-metraz" =>
-      "Nabywca będący konsumentem może pozwać dewelopera przed sąd właściwy dla swojego miejsca zamieszkania (art. 37² k.p.c.) — mieszkaniec Gdańska nie musi więc prowadzić sprawy w mieście, w którym deweloper ma siedzibę. Pomagamy nabywcom mieszkań w Gdańsku, Gdyni, Sopocie i w całym województwie pomorskim.",
+      "Nabywca będący konsumentem może pozwać dewelopera przed sąd właściwy dla swojego miejsca zamieszkania (art. 37² k.p.c.) — mieszkaniec Gdańska nie musi więc prowadzić sprawy w mieście, w którym deweloper ma siedzibę. Pomagamy nabywcom mieszkań w Gdańsku, Gdyni, Sopocie i w całym województwie pomorskim, a sprawy o zwrot za metraż prowadzimy także w Warszawie i innych miastach — dokumenty analizujemy zdalnie, a konsultację można odbyć telefonicznie lub przez wideo.",
     "sprawy-o-zaplate" =>
       "Sprawy o zapłatę do 100 000 zł rozpoznaje sąd rejonowy, a powyżej tej kwoty — sąd okręgowy. Co do zasady właściwy jest sąd miejsca zamieszkania pozwanego; w Gdańsku są to Sąd Rejonowy Gdańsk-Północ, Sąd Rejonowy Gdańsk-Południe albo Sąd Okręgowy w Gdańsku.",
     "odszkodowania" =>
@@ -1358,7 +1359,15 @@ defmodule KralukKurkierewicz.Services do
     "zawyzony-metraz" => [
       {"Jak liczy się powierzchnię użytkową mieszkania?",
        "Według Polskiej Normy PN-ISO 9836 — od 13 lutego 2026 r. ustawa deweloperska odsyła do niej wprost. W starszych umowach sposób pomiaru wynika z treści umowy i prospektu informacyjnego, dlatego trzeba je przeczytać przed oceną roszczenia."},
-      {"Co zrobić, gdy mieszkanie jest mniejsze niż w umowie deweloperskiej?",
+      {"Czy za zaniżony metraż mieszkania należy się odszkodowanie lub rekompensata?",
+       "Nabywca może żądać zwrotu nadpłaconej części ceny: różnicy powierzchni pomnożonej przez cenę metra kwadratowego z umowy, wraz z odsetkami. Potocznie nazywa się to odszkodowaniem albo rekompensatą za zaniżony lub zawyżony metraż."},
+      {"Czy prowadzicie sprawy o metraż mieszkania w Warszawie i innych miastach?",
+       "Tak. Sprawy o zwrot części ceny od dewelopera prowadzimy w całej Polsce. Umowę i pomiar analizujemy na podstawie przesłanych dokumentów, konsultację można odbyć telefonicznie lub przez wideo, a konsument może pozwać dewelopera przed sąd właściwy dla swojego miejsca zamieszkania."},
+      {"Co to jest powierzchnia rozliczeniowa mieszkania?",
+       "To powierzchnia, według której deweloper ostatecznie rozlicza cenę lokalu — ustalana zwykle w pomiarze powykonawczym. Sposób jej liczenia powinien wynikać z umowy. Spór powstaje najczęściej wtedy, gdy do powierzchni rozliczeniowej doliczono powierzchnię pod ściankami działowymi, której nie obejmuje powierzchnia użytkowa liczona według normy."},
+      {"Czy trzeba płacić za powierzchnię pod ściankami działowymi?",
+       "Zależy od rodzaju ścian i treści umowy. Sądy przyznają rację nabywcom zwłaszcza wtedy, gdy ściany są stałe, a umowa nie informowała jasno, że cena obejmuje także powierzchnię, którą zajmują. Nadpłaconej części ceny można wówczas dochodzić od dewelopera."},
+      {"Co zrobić przy niezgodności metrażu mieszkania z umową deweloperską?",
        "Najpierw sprawdzić w umowie postanowienia o różnicy powierzchni i sposobie pomiaru oraz porównać je z pomiarem powykonawczym. W razie wątpliwości warto zlecić własny pomiar geodecie, a następnie wezwać dewelopera do zwrotu nadpłaconej części ceny."},
       {"Kto wykonuje pomiar mieszkania i czy można go podważyć?",
        "Pomiar powykonawczy zleca zwykle deweloper. Nabywca może zlecić własny pomiar uprawnionemu geodecie, a w procesie powierzchnię ustala biegły powołany przez sąd."},

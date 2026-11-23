@@ -139,9 +139,9 @@ defmodule KralukKurkierewicz.Blog do
     },
     %Post{
       slug: "zawyzony-metraz-scianki-dzialowe",
-      meta_title: "Zawyżony metraż przez ścianki działowe - zwrot części ceny",
+      meta_title: "Zawyżony (zaniżony) metraż - zwrot za ścianki działowe",
       author: "milena-kraluk",
-      updated: ~D[2026-11-22],
+      updated: ~D[2026-11-23],
       service: "zawyzony-metraz",
       title: "Zawyżony metraż przez ścianki działowe. Czy można odzyskać część ceny mieszkania?",
       date: ~D[2026-09-23],
@@ -150,7 +150,7 @@ defmodule KralukKurkierewicz.Blog do
       excerpt:
         "Część deweloperów wliczała do powierzchni użytkowej lokalu powierzchnię zajętą przez ścianki działowe. Wyjaśniamy, jak do tego problemu podchodzą sądy, co zmieniła nowelizacja ustawy deweloperskiej i kiedy nabywca może domagać się zwrotu nadpłaconej części ceny.",
       description:
-        "Kiedy nabywca mieszkania może odzyskać część ceny za metry zajęte przez ścianki działowe — orzecznictwo sądów, norma PN-ISO 9836 i nowelizacja ustawy deweloperskiej."
+        "Deweloper zaniżył metraż mieszkania? Kiedy można uzyskać zwrot części ceny za powierzchnię pod ściankami działowymi: wyroki sądów i norma PN-ISO 9836."
     }
   ]
 
