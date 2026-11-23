@@ -165,7 +165,7 @@ document.querySelectorAll("[role=alert][data-flash]").forEach((el) => {
         diffEl.textContent = "0,00 m²";
         resultEl.textContent = "0,00 zł";
         noteEl.textContent =
-          "Powierzchnia bez ścianek nie jest mniejsza niż powierzchnia z umowy — brak nadpłaty.";
+          "Powierzchnia bez ścianek nie jest mniejsza niż powierzchnia rozliczona przez dewelopera — brak nadpłaty.";
       } else {
         const diff = contract - real;
         diffEl.textContent = `${num(diff)} m²`;

@@ -112,7 +112,7 @@ defmodule KralukKurkierewicz.Services do
       lead:
         "Prowadzimy sprawy rodzinne z dbałością o interesy Klienta i dzieci — od pierwszej rozmowy, przez przygotowanie pozwu i dowodów, po reprezentację przed sądem.",
       intro: [
-        "Sprawy o alimenty, kontakty z dzieckiem i władzę rodzicielską rozpoznaje sąd rejonowy, a sprawy o rozwód i separację — sąd okręgowy. Pozew o alimenty na dziecko, także o ich podwyższenie, jest wolny od opłat sądowych; w sprawie o obniżenie alimentów opłata wynosi 5% wartości przedmiotu sporu, a opłata od pozwu o rozwód — 600 zł. Przepisy nie przewidują tabel ani minimalnej kwoty alimentów: o ich wysokości decydują usprawiedliwione potrzeby dziecka oraz zarobkowe i majątkowe możliwości rodzica.",
+        "Sprawy o alimenty, kontakty z dzieckiem i władzę rodzicielską rozpoznaje sąd rejonowy, a sprawy o rozwód i separację — sąd okręgowy. Pozew o alimenty na dziecko, także o ich podwyższenie, jest wolny od opłat sądowych; w sprawie o obniżenie alimentów opłata zależy od wartości przedmiotu sporu (przy wartości do 20 000 zł jest stała, powyżej wynosi 5%), a opłata od pozwu o rozwód — 600 zł. Przepisy nie przewidują tabel ani minimalnej kwoty alimentów: o ich wysokości decydują usprawiedliwione potrzeby dziecka oraz zarobkowe i majątkowe możliwości rodzica.",
         "Sprawy rodzinne wymagają nie tylko znajomości przepisów i doświadczenia procesowego, ale też indywidualnego podejścia. Każdą sprawę zaczynamy od rozmowy o Twojej sytuacji i celach, a następnie przedstawiamy możliwe rozwiązania, przewidywany czas trwania postępowania oraz jego koszty.",
         "Reprezentujemy Klientów przed sądami w Gdańsku i całym Trójmieście, a także w innych miastach w Polsce."
       ],
@@ -413,23 +413,23 @@ defmodule KralukKurkierewicz.Services do
       slug: "prawo-karne",
       audience: :private,
       home_name: "Prawo karne",
-      home_text: "Obrona i reprezentacja pokrzywdzonych.",
+      home_text: "Reprezentacja pokrzywdzonych w postępowaniu karnym.",
       name: "Prawo karne",
-      title: "Prawo karne — obrońca i pełnomocnik pokrzywdzonego w Gdańsku",
+      title: "Prawo karne — pełnomocnik pokrzywdzonego w Gdańsku",
       meta_title: "Adwokat prawo karne – Gdańsk",
       description:
-        "Obrona w postępowaniu karnym oraz reprezentacja pokrzywdzonych — od postępowania przygotowawczego po postępowanie sądowe. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
+        "Reprezentacja pokrzywdzonych w postępowaniu karnym — od postępowania przygotowawczego po postępowanie sądowe. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
       lead:
-        "Bronimy w postępowaniu karnym i reprezentujemy osoby pokrzywdzone przestępstwem — na każdym etapie sprawy.",
+        "Reprezentujemy osoby pokrzywdzone przestępstwem — na każdym etapie postępowania karnego.",
       intro: [
-        "Postępowanie karne toczy się według ścisłych reguł i terminów, a decyzje podjęte na jego początku — choćby co do składania wyjaśnień — mogą mieć znaczenie dla całej sprawy. Dlatego warto skontaktować się z adwokatem jak najwcześniej.",
-        "Reprezentujemy Klientów w postępowaniu przygotowawczym przed policją i prokuraturą oraz w postępowaniu przed sądem."
+        "Postępowanie karne toczy się według ścisłych reguł i terminów, a decyzje podjęte na jego początku — choćby co do treści zawiadomienia o przestępstwie — mogą mieć znaczenie dla całej sprawy. Dlatego warto skontaktować się z adwokatem jak najwcześniej.",
+        "Reprezentujemy pokrzywdzonych w postępowaniu przygotowawczym przed policją i prokuraturą oraz w postępowaniu przed sądem."
       ],
       scope: [
-        {"Obrona w postępowaniu karnym",
-         "Udział w przesłuchaniach i czynnościach postępowania przygotowawczego, wnioski dowodowe i obrona przed sądem."},
+        {"Zawiadomienie o przestępstwie",
+         "Przygotowanie zawiadomienia o przestępstwie i udział w przesłuchaniu pokrzywdzonego."},
         {"Reprezentacja pokrzywdzonych",
-         "Zawiadomienie o przestępstwie, udział w postępowaniu jako pełnomocnik pokrzywdzonego oraz występowanie w roli oskarżyciela posiłkowego."},
+         "Udział w postępowaniu przygotowawczym jako pełnomocnik pokrzywdzonego, wnioski dowodowe oraz występowanie przed sądem w roli oskarżyciela posiłkowego."},
         {"Naprawienie szkody",
          "Wniosek o zobowiązanie sprawcy do naprawienia szkody lub zadośćuczynienia za doznaną krzywdę."},
         {"Środki zaskarżenia",
@@ -824,7 +824,7 @@ defmodule KralukKurkierewicz.Services do
     "sprawy-rodzinne" => [
       "Alimenty na dziecko: brak tabel i kwot minimalnych — decydują potrzeby dziecka i możliwości zarobkowe rodzica (art. 135 § 1 k.r.o.).",
       "Pozew o alimenty na dziecko i o ich podwyższenie: 0 zł opłaty sądowej.",
-      "Obniżenie alimentów: opłata 5% wartości przedmiotu sporu, liczonej jako suma świadczeń za rok."
+      "Obniżenie alimentów: opłata stała od 30 zł do 1 000 zł przy wartości przedmiotu sporu (suma świadczeń za rok) do 20 000 zł, powyżej — 5% tej wartości."
     ],
     "podzial-majatku" => [
       "Opłata od wniosku o podział majątku: 1 000 zł, a przy zgodnym projekcie podziału 300 zł.",
@@ -868,7 +868,7 @@ defmodule KralukKurkierewicz.Services do
       "Roszczenie o zachowek z testamentu przedawnia się po 5 latach od ogłoszenia testamentu."
     ],
     "prawo-karne" => [
-      "Reprezentujemy na każdym etapie: przed policją, prokuraturą i sądem.",
+      "Reprezentujemy pokrzywdzonych na każdym etapie: przed policją, prokuraturą i sądem.",
       "Pokrzywdzony może składać wnioski dowodowe, przeglądać akta i działać jako oskarżyciel posiłkowy.",
       "W razie skazania sąd może orzec obowiązek naprawienia szkody lub zadośćuczynienia."
     ],

@@ -150,7 +150,7 @@ defmodule KralukKurkierewicz.ServiceDetails do
          ]},
         {"Nazwisko po rozwodzie",
          [
-           "Małżonek, który wskutek zawarcia małżeństwa zmienił nazwisko, może w ciągu trzech miesięcy od uprawomocnienia się wyroku rozwodowego wrócić do nazwiska noszonego przed zawarciem małżeństwa. Wystarczy oświadczenie złożone przed kierownikiem urzędu stanu cywilnego lub konsulem (art. 59 k.r.o.)."
+           "Małżonek, który wskutek zawarcia małżeństwa zmienił nazwisko, może w ciągu roku od uprawomocnienia się wyroku rozwodowego wrócić do nazwiska noszonego przed zawarciem małżeństwa. Wystarczy oświadczenie złożone przed kierownikiem urzędu stanu cywilnego lub konsulem (art. 59 k.r.o.)."
          ]}
       ],
       documents: [
@@ -175,7 +175,7 @@ defmodule KralukKurkierewicz.ServiceDetails do
         {"Czy przy rozwodzie sąd podzieli majątek?",
          "Tylko na wniosek jednego z małżonków i tylko wtedy, gdy podział nie spowoduje nadmiernej zwłoki w postępowaniu. Najczęściej majątek dzieli się po rozwodzie, umownie albo przed sądem rejonowym."},
         {"W jakim terminie po rozwodzie można wrócić do poprzedniego nazwiska?",
-         "W ciągu trzech miesięcy od uprawomocnienia się wyroku rozwodowego, przez oświadczenie złożone przed kierownikiem urzędu stanu cywilnego lub konsulem."}
+         "W ciągu roku od uprawomocnienia się wyroku rozwodowego, przez oświadczenie złożone przed kierownikiem urzędu stanu cywilnego lub konsulem."}
       ]
     },
     "sprawy-rodzinne" => %{
@@ -212,7 +212,7 @@ defmodule KralukKurkierewicz.ServiceDetails do
          ]},
         {"Koszty sądowe w sprawach rodzinnych",
          [
-           "Osoba dochodząca alimentów na dziecko jest zwolniona od kosztów sądowych — także w sprawie o podwyższenie alimentów. Opłatę trzeba natomiast uiścić w sprawie o obniżenie alimentów albo uchylenie obowiązku alimentacyjnego: wynosi ona 5% wartości przedmiotu sporu, liczonej jako suma świadczeń za rok. Przykładowo, przy żądaniu obniżenia alimentów o 200 zł miesięcznie wartość przedmiotu sporu to 2 400 zł, a opłata — 120 zł.",
+           "Osoba dochodząca alimentów na dziecko jest zwolniona od kosztów sądowych — także w sprawie o podwyższenie alimentów. Opłatę trzeba natomiast uiścić w sprawie o obniżenie alimentów albo uchylenie obowiązku alimentacyjnego: jej wysokość zależy od wartości przedmiotu sporu, liczonej jako suma świadczeń za rok. Przy wartości do 20 000 zł opłata jest stała i wynosi od 30 zł do 1 000 zł, a powyżej tej kwoty — 5% wartości (art. 13 ustawy o kosztach sądowych w sprawach cywilnych). Przykładowo, przy żądaniu obniżenia alimentów o 200 zł miesięcznie wartość przedmiotu sporu to 2 400 zł, a opłata — 200 zł.",
            "Opłata stała od pozwu o rozwód wynosi 600 zł."
          ]},
         {"Władza rodzicielska i kontakty z dzieckiem",
@@ -239,7 +239,7 @@ defmodule KralukKurkierewicz.ServiceDetails do
         {"Czy można zmienić wysokość zasądzonych alimentów?",
          "Tak. W razie istotnej zmiany sytuacji można żądać podwyższenia lub obniżenia alimentów na podstawie art. 138 Kodeksu rodzinnego i opiekuńczego. Sam upływ czasu nie wystarcza — trzeba wykazać zmianę stosunków."},
         {"Ile wynosi opłata sądowa w sprawie o alimenty i o rozwód?",
-         "Osoba dochodząca alimentów na dziecko jest zwolniona od kosztów sądowych, także przy podwyższeniu alimentów. W sprawie o obniżenie alimentów opłata wynosi 5% wartości przedmiotu sporu, liczonej jako suma świadczeń za rok. Opłata od pozwu o rozwód wynosi 600 zł."},
+         "Osoba dochodząca alimentów na dziecko jest zwolniona od kosztów sądowych, także przy podwyższeniu alimentów. W sprawie o obniżenie alimentów opłata zależy od wartości przedmiotu sporu, liczonej jako suma świadczeń za rok: do 20 000 zł jest stała (od 30 zł do 1 000 zł), a powyżej tej kwoty wynosi 5%. Opłata od pozwu o rozwód wynosi 600 zł."},
         {"Czy sąd zawsze orzeka o winie przy rozwodzie?",
          "Co do zasady tak, ale na zgodne żądanie obojga małżonków sąd zaniecha orzekania o winie."},
         {"Jakie dokumenty przygotować do sprawy o alimenty?",

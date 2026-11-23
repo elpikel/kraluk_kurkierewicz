@@ -349,7 +349,7 @@ defmodule KralukKurkierewiczWeb.PageHTML do
     >
       <div class="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
         <label class="flex flex-col justify-end gap-1 text-[.88rem] leading-snug font-semibold text-ink">
-          Powierzchnia z umowy, m²
+          Powierzchnia rozliczona przez dewelopera,&nbsp;m²
           <input
             class="rounded-lg border border-line bg-white px-3 py-[.65rem] text-[1rem] font-normal text-copy tabular-nums transition focus:border-brass focus:shadow-[0_0_0_3px_rgba(207,174,126,.28)] focus:outline-none"
             id="metraz-calc-contract"
