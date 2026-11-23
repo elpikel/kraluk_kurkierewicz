@@ -761,7 +761,7 @@ defmodule KralukKurkierewicz.ServiceDetails do
            "Treść księgi wieczystej chroni nabywcę: kto w dobrej wierze odpłatnie nabywa nieruchomość od osoby wpisanej jako właściciel, co do zasady staje się właścicielem, nawet jeżeli wpis był niezgodny z rzeczywistym stanem prawnym (rękojmia wiary publicznej ksiąg wieczystych). Dlatego niezgodności nie warto zostawiać bez reakcji.",
            "Osoba, której prawo nie jest wpisane lub jest wpisane błędnie, może żądać usunięcia niezgodności w drodze powództwa o uzgodnienie treści księgi wieczystej z rzeczywistym stanem prawnym (art. 10 ustawy o księgach wieczystych i hipotece), a na czas procesu — wpisu ostrzeżenia, które wyłącza działanie rękojmi."
          ]},
-        {"Jak wygląda sprawa o nieruchomość krok po kroku?",
+        {"Jak wygląda analiza sprawy krok po kroku?",
          [
            {:list,
             [
@@ -770,7 +770,7 @@ defmodule KralukKurkierewicz.ServiceDetails do
               "Próba rozwiązania polubownego: umowa, ugoda albo mediacja.",
               "Wniosek lub pozew i reprezentacja przed sądem, w tym udział w oględzinach i czynnościach biegłych."
             ]},
-           "W sprawach o nieruchomości sąd zwykle korzysta z opinii biegłego geodety lub rzeczoznawcy majątkowego, co wpływa na czas i koszty postępowania — omawiamy je przed podjęciem działań."
+           "W sprawach działowych czy dotyczących ustanowienia służebności sąd zwykle korzysta z opinii biegłego geodety lub rzeczoznawcy majątkowego, co wpływa na czas i koszty postępowania — omawiamy je przed podjęciem działań."
          ]}
       ],
       documents: [
@@ -925,8 +925,8 @@ defmodule KralukKurkierewicz.ServiceDetails do
          ]},
         {"Co zrobić, gdy sprawa została już prawomocnie przegrana?",
          [
-           "Jeżeli sąd oddalił żądanie właściciela albo stwierdził zasiedzenie służebności na podstawie wykładni zakwestionowanej przez Trybunał, możliwa jest skarga o wznowienie postępowania (art. 401¹ Kodeksu postępowania cywilnego). Wnosi się ją w terminie trzech miesięcy, a wznowienia nie można żądać po upływie dziesięciu lat od uprawomocnienia się orzeczenia.",
-           "Wyrok Trybunału nie został ogłoszony w Dzienniku Ustaw; do jego skutków i biegu terminu na wniesienie skargi odniósł się Sąd Najwyższy w uchwale z 18 listopada 2026 r. (III CZP 41/26). O tym, czy w konkretnej sprawie termin jeszcze biegnie, decydują daty orzeczeń — dlatego analizę warto zlecić niezwłocznie."
+           "Kodeks postępowania cywilnego wyklucza wystąpienie z wnioskiem po upływie 10 lat od uprawomocnienia się wyroku.",
+           "Wyrok Trybunału nie został ogłoszony w Dzienniku Ustaw, co rodzi wątpliwości co do jego skutków i biegu terminu na wniesienie skargi. W dniu 18 listopada 2026 r. Sąd Najwyższy wydał uchwałę, w której przesądził, że wyrok TK obowiązuje od momentu jego wydania, a skargę można rozpoznać przed publikacją wyroku w Dzienniku Ustaw (III CZP 41/26). Jest to istotna kwestia przy badaniu podstaw zasadności skargi, dlatego analizę warto zlecić niezwłocznie."
          ]},
         {"Jak prowadzimy sprawę o służebność przesyłu?",
          [
