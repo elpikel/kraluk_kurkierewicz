@@ -13,8 +13,8 @@ defmodule KralukKurkierewicz.Team do
       # `KralukKurkierewicz.Services` slugs listed on the profile ("Prowadzone sprawy").
       # Every service is listed for at least one partner and must agree with
       # `ServiceDetails` `:lead`.
-      services: ~w(sprawy-o-zaplate odszkodowania zawyzony-metraz nieruchomosci rozwod
-                   sprawy-rodzinne podzial-majatku prawa-konsumentow sprawy-spadkowe
+      services: ~w(sprawy-o-zaplate odszkodowania zawyzony-metraz nieruchomosci rozwod alimenty
+                   sprawy-rodzinne podzial-majatku prawa-konsumentow sprawy-spadkowe zachowek
                    prawo-karne prawo-medyczne),
       display_name: "adw. Milena Kraluk",
       # Direct number, the only one shown on this partner's page: `{tel: href, display}`.

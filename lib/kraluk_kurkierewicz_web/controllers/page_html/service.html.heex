@@ -42,7 +42,7 @@
         </p>
       </div>
 
-      <p :for={paragraph <- @service.intro}>{paragraph}</p>
+      <p :for={paragraph <- @service.intro}>{linked(paragraph)}</p>
 
       <h2 class="mt-12">W czym pomagamy</h2>
       <ul class="mt-2 border-t border-line">
@@ -61,8 +61,13 @@
         blocks={blocks}
       />
 
+      <div id="w-gdansku">
+        <h2 class="mt-12">W Gdańsku i Trójmieście</h2>
+        <p>{linked(KralukKurkierewicz.Services.local(@service))}</p>
+      </div>
+
       <div :if={@details} id="dokumenty">
-        <h2 class="mt-12">Jakie dokumenty przygotować</h2>
+        <h2 class="mt-12">Jakie dokumenty przygotować?</h2>
         <ul class="mt-2 grid gap-2 sm:grid-cols-2">
           <li
             :for={document <- @details.documents}

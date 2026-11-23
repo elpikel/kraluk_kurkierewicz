@@ -7,6 +7,10 @@ defmodule KralukKurkierewicz.Services do
   `KralukKurkierewicz.Blog.Post.service`). Legal acts link to ISAP via their
   `WDU…` document id, or to a full URL (EU regulations on EUR-Lex).
 
+  `intro` paragraphs, `local/1` and the `ServiceDetails` section texts may link
+  to other pages with `[label](/uslugi/slug)` (see `PageHTML.linked/1`). FAQ
+  answers and `notes` stay plain text — they are copied into the JSON-LD.
+
   The home page "Specjalizacje" lists are rendered from `home/1`: each service's
   `audience` (`:private` / `:business`), `home_name` and `home_text`, in the
   order of `@home_order`.
@@ -49,14 +53,23 @@ defmodule KralukKurkierewicz.Services do
     sukcesja:
       {"Ustawa z dnia 5 lipca 2018 r. o zarządzie sukcesyjnym przedsiębiorstwem osoby fizycznej i innych ułatwieniach związanych z sukcesją przedsiębiorstw",
        "WDU20180001629"},
-    fundacja: {"Ustawa z dnia 26 stycznia 2023 r. o fundacji rodzinnej", "WDU20230000326"}
+    fundacja: {"Ustawa z dnia 26 stycznia 2023 r. o fundacji rodzinnej", "WDU20230000326"},
+    fa:
+      {"Ustawa z dnia 7 września 2007 r. o pomocy osobom uprawnionym do alimentów",
+       "WDU20071921378"},
+    uth:
+      {"Ustawa z dnia 8 marca 2013 r. o przeciwdziałaniu nadmiernym opóźnieniom w transakcjach handlowych",
+       "WDU20130000403"},
+    uoc:
+      {"Ustawa z dnia 22 maja 2003 r. o ubezpieczeniach obowiązkowych, Ubezpieczeniowym Funduszu Gwarancyjnym i Polskim Biurze Ubezpieczycieli Komunikacyjnych",
+       "WDU20031241152"}
   }
 
   # Order of the two "Specjalizacje" columns on the home page.
   @home_order [
-    private:
-      ~w(sprawy-o-zaplate odszkodowania zawyzony-metraz nieruchomosci rozwod sprawy-rodzinne
-               podzial-majatku prawa-konsumentow upadlosc-konsumencka sprawy-spadkowe prawo-karne),
+    private: ~w(sprawy-o-zaplate odszkodowania zawyzony-metraz nieruchomosci rozwod alimenty
+               sprawy-rodzinne podzial-majatku prawa-konsumentow upadlosc-konsumencka
+               sprawy-spadkowe zachowek prawo-karne),
     business: ~w(obsluga-przedsiebiorcow zakladanie-spolek umowy egzekucja-wierzytelnosci
                 restrukturyzacja obsluga-korporacyjna nowe-technologie sukcesja-firm
                 prawo-medyczne spory-gospodarcze rodo)
@@ -79,7 +92,7 @@ defmodule KralukKurkierewicz.Services do
       intro: [
         "Rozwód orzeka sąd okręgowy, jeżeli między małżonkami nastąpił zupełny i trwały rozkład pożycia (art. 56 § 1 Kodeksu rodzinnego i opiekuńczego). Opłata sądowa od pozwu o rozwód wynosi 600 zł. Gdy małżonkowie zgodnie wnoszą o rozwód bez orzekania o winie, sprawa może zakończyć się już na pierwszej rozprawie, a sąd zwraca połowę opłaty; orzekanie o winie wymaga postępowania dowodowego i wyraźnie wydłuża sprawę.",
         "W wyroku rozwodowym sąd rozstrzyga nie tylko o rozwiązaniu małżeństwa, ale też o władzy rodzicielskiej, kontaktach z dziećmi, alimentach i sposobie korzystania ze wspólnego mieszkania. Dlatego przed złożeniem pozwu ustalamy z Klientem, o co wnosić w każdym z tych punktów i jakimi dowodami to poprzeć.",
-        "Reprezentujemy Klientów przed Sądem Okręgowym w Gdańsku oraz przed innymi sądami w Polsce — zarówno stronę wnoszącą pozew, jak i pozwaną."
+        "Reprezentujemy Klientów przed Sądem Okręgowym w Gdańsku oraz przed innymi sądami w Polsce — zarówno stronę wnoszącą pozew, jak i pozwaną. Poza sprawą rozwodową osobno opisujemy [alimenty](/uslugi/alimenty) oraz kontakty z dzieckiem i władzę rodzicielską — na stronie o [sprawach rodzinnych](/uslugi/sprawy-rodzinne)."
       ],
       scope: [
         {"Pozew o rozwód i odpowiedź na pozew",
@@ -103,36 +116,70 @@ defmodule KralukKurkierewicz.Services do
       audience: :private,
       home_name: "Sprawy rodzinne",
       home_text:
-        "Alimenty, władza rodzicielska, kontakty z dziećmi, separacja oraz ustalenie pochodzenia dziecka.",
-      name: "Sprawy rodzinne i alimenty",
-      title: "Sprawy rodzinne i alimenty — adwokat w Gdańsku",
-      meta_title: "Sprawy rodzinne i alimenty – adwokat Gdańsk",
+        "Władza rodzicielska, kontakty z dziećmi, opieka naprzemienna, separacja oraz ustalenie pochodzenia dziecka.",
+      name: "Sprawy rodzinne",
+      title: "Kontakty z dzieckiem i władza rodzicielska — adwokat w Gdańsku",
+      meta_title: "Adwokat sprawy rodzinne Gdańsk – kontakty z dzieckiem",
       description:
-        "Rozwody, alimenty, władza rodzicielska i kontakty z dzieckiem. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku — konsultacje osobiście, telefonicznie i przez wideo.",
+        "Kontakty z dzieckiem, władza rodzicielska, opieka naprzemienna, ustalenie ojcostwa i separacja. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
       lead:
-        "Prowadzimy sprawy rodzinne z dbałością o interesy Klienta i dzieci — od pierwszej rozmowy, przez przygotowanie pozwu i dowodów, po reprezentację przed sądem.",
+        "Prowadzimy sprawy o kontakty z dzieckiem i władzę rodzicielską z dbałością o interesy Klienta i dziecka — od pierwszej rozmowy, przez wniosek i dowody, po reprezentację przed sądem.",
       intro: [
-        "Sprawy o alimenty, kontakty z dzieckiem i władzę rodzicielską rozpoznaje sąd rejonowy, a sprawy o rozwód i separację — sąd okręgowy. Pozew o alimenty na dziecko, także o ich podwyższenie, jest wolny od opłat sądowych; w sprawie o obniżenie alimentów opłata zależy od wartości przedmiotu sporu (przy wartości do 20 000 zł jest stała, powyżej wynosi 5%), a opłata od pozwu o rozwód — 600 zł. Przepisy nie przewidują tabel ani minimalnej kwoty alimentów: o ich wysokości decydują usprawiedliwione potrzeby dziecka oraz zarobkowe i majątkowe możliwości rodzica.",
+        "O kontaktach z dzieckiem, władzy rodzicielskiej i miejscu pobytu dziecka rozstrzyga sąd opiekuńczy, czyli sąd rejonowy właściwy dla miejsca zamieszkania dziecka. Opłata od wniosku wynosi 100 zł. Sąd kieruje się przede wszystkim dobrem dziecka, a nie oczekiwaniami rodziców — dlatego o wyniku decydują dowody pokazujące, jak naprawdę wygląda opieka nad dzieckiem.",
         "Sprawy rodzinne wymagają nie tylko znajomości przepisów i doświadczenia procesowego, ale też indywidualnego podejścia. Każdą sprawę zaczynamy od rozmowy o Twojej sytuacji i celach, a następnie przedstawiamy możliwe rozwiązania, przewidywany czas trwania postępowania oraz jego koszty.",
-        "Reprezentujemy Klientów przed sądami w Gdańsku i całym Trójmieście, a także w innych miastach w Polsce."
+        "Osobno opisujemy [alimenty](/uslugi/alimenty) oraz [rozwód](/uslugi/rozwod), w którym sąd okręgowy rozstrzyga o sprawach dzieci w jednym wyroku."
       ],
       scope: [
-        {"Rozwód i separacja",
-         "Przygotowanie pozwu lub odpowiedzi na pozew, reprezentacja w sprawie rozwodowej lub o separację, uregulowanie kwestii dotyczących dzieci i wspólnego mieszkania."},
-        {"Alimenty",
-         "Ustalenie, podwyższenie, obniżenie lub uchylenie alimentów — w tym przygotowanie zestawienia kosztów utrzymania dziecka i dokumentów, które je potwierdzają."},
-        {"Władza rodzicielska i kontakty z dzieckiem",
-         "Sprawy o ograniczenie lub pozbawienie władzy rodzicielskiej, ustalenie miejsca pobytu dziecka oraz uregulowanie kontaktów z dzieckiem."},
-        {"Ustalenie pochodzenia dziecka",
-         "Sprawy o ustalenie lub zaprzeczenie ojcostwa i macierzyństwa."}
+        {"Kontakty z dzieckiem",
+         "Ustalenie, zmiana lub ograniczenie kontaktów, zabezpieczenie kontaktów na czas postępowania oraz egzekwowanie orzeczenia, gdy drugi rodzic go nie wykonuje."},
+        {"Władza rodzicielska",
+         "Sprawy o powierzenie, ograniczenie, zawieszenie lub pozbawienie władzy rodzicielskiej, ustalenie miejsca pobytu dziecka i rozstrzygnięcie o istotnych sprawach dziecka."},
+        {"Opieka naprzemienna i porozumienie rodzicielskie",
+         "Przygotowanie porozumienia o sposobie wykonywania władzy rodzicielskiej i harmonogramu opieki, który sąd może zatwierdzić."},
+        {"Pochodzenie dziecka i separacja",
+         "Sprawy o ustalenie lub zaprzeczenie ojcostwa i macierzyństwa oraz reprezentacja w sprawie o separację."}
       ],
-      notes_title: "Jak sąd ustala wysokość alimentów?",
+      notes_title: "Jak sąd ustala kontakty z dzieckiem?",
       notes: [
-        "Przepisy nie przewidują jednej tabeli ani minimalnej kwoty alimentów. Zgodnie z art. 135 § 1 Kodeksu rodzinnego i opiekuńczego sąd bierze pod uwagę usprawiedliwione potrzeby dziecka oraz zarobkowe i majątkowe możliwości rodzica — nie tylko jego aktualne wynagrodzenie.",
-        "Znaczenie ma także osobista opieka nad dzieckiem: rodzic, który na co dzień się nim zajmuje, realizuje w ten sposób część obowiązku alimentacyjnego. Dlatego tak ważne jest rzetelne zestawienie kosztów utrzymania dziecka, poparte rachunkami i innymi dokumentami.",
-        "Osoba dochodząca alimentów na dziecko jest zwolniona od kosztów sądowych — dotyczy to także sprawy o podwyższenie alimentów."
+        "Jeżeli rodzice nie mogą dojść do porozumienia, sąd opiekuńczy ustala kontakty, kierując się dobrem dziecka i biorąc pod uwagę jego rozsądne życzenia. Przepisy nie przewidują jednego schematu — harmonogram zależy od wieku dziecka, jego dotychczasowej więzi z rodzicem, odległości między miejscami zamieszkania i trybu pracy rodziców.",
+        "Kontakty są prawem i obowiązkiem zarówno rodzica, jak i dziecka, i nie zależą od władzy rodzicielskiej. Postanowienie o kontaktach sąd może zmienić, jeżeli wymaga tego dobro dziecka."
       ],
       acts: [:kro, :kpc, :uksc]
+    },
+    %{
+      slug: "alimenty",
+      audience: :private,
+      home_name: "Alimenty",
+      home_text:
+        "Ustalenie, podwyższenie i obniżenie alimentów, zabezpieczenie na czas procesu oraz egzekucja zaległych świadczeń.",
+      name: "Alimenty",
+      title: "Alimenty — adwokat w Gdańsku",
+      meta_title: "Adwokat alimenty Gdańsk – pozew, podwyższenie, zaległości",
+      description:
+        "Pozew o alimenty, podwyższenie i obniżenie alimentów, zabezpieczenie na czas procesu, zaległe alimenty. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
+      lead:
+        "Pomagamy ustalić, podwyższyć lub obniżyć alimenty i wyegzekwować zaległe świadczenia — od zestawienia kosztów utrzymania dziecka po reprezentację przed sądem.",
+      intro: [
+        "Sprawy o alimenty rozpoznaje sąd rejonowy. Pozew o alimenty na dziecko, także o ich podwyższenie, jest wolny od opłat sądowych; w sprawie o obniżenie alimentów opłata zależy od wartości przedmiotu sporu (przy wartości do 20 000 zł jest stała, powyżej wynosi 5%). Przepisy nie przewidują tabel ani minimalnej kwoty alimentów: o ich wysokości decydują usprawiedliwione potrzeby dziecka oraz zarobkowe i majątkowe możliwości rodzica.",
+        "Reprezentujemy zarówno rodziców dochodzących alimentów na dziecko, jak i osoby zobowiązane do ich płacenia — także w sprawach o zabezpieczenie alimentów na czas procesu i o uchylenie obowiązku alimentacyjnego.",
+        "Kontakty z dzieckiem i władzę rodzicielską opisujemy na stronie o [sprawach rodzinnych](/uslugi/sprawy-rodzinne), a alimenty orzekane w wyroku rozwodowym — na stronie o [rozwodzie](/uslugi/rozwod)."
+      ],
+      scope: [
+        {"Pozew o alimenty",
+         "Przygotowanie pozwu z zestawieniem kosztów utrzymania dziecka i wnioskiem o zabezpieczenie alimentów na czas trwania procesu."},
+        {"Podwyższenie i obniżenie alimentów",
+         "Wykazanie zmiany stosunków — wzrostu potrzeb dziecka albo zmiany możliwości zarobkowych rodzica — oraz obrona przed nieuzasadnionym żądaniem."},
+        {"Uchylenie obowiązku alimentacyjnego",
+         "Sprawy o ustalenie, że obowiązek wygasł, na przykład wobec pełnoletniego dziecka, które może utrzymać się samodzielnie."},
+        {"Zaległe alimenty",
+         "Wniosek do komornika, świadczenia z funduszu alimentacyjnego i zawiadomienie o przestępstwie niealimentacji."}
+      ],
+      notes_title: "Ile wynoszą alimenty na dziecko w 2026 roku?",
+      notes: [
+        "Przepisy nie przewidują jednej tabeli ani minimalnej kwoty alimentów. Zgodnie z art. 135 § 1 Kodeksu rodzinnego i opiekuńczego sąd bierze pod uwagę usprawiedliwione potrzeby dziecka oraz zarobkowe i majątkowe możliwości rodzica — nie tylko jego aktualne wynagrodzenie.",
+        "Znaczenie ma także osobista opieka nad dzieckiem: rodzic, który na co dzień się nim zajmuje, realizuje w ten sposób część obowiązku alimentacyjnego. Dlatego tak ważne jest rzetelne zestawienie kosztów utrzymania dziecka, poparte rachunkami i innymi dokumentami."
+      ],
+      acts: [:kro, :kpc, :uksc, :fa, :kk]
     },
     %{
       slug: "podzial-majatku",
@@ -142,7 +189,7 @@ defmodule KralukKurkierewicz.Services do
         "Podział majątku wspólnego, rozliczenia nakładów i wydatków oraz inne spory majątkowe między małżonkami.",
       name: "Podział majątku małżonków",
       title: "Podział majątku po rozwodzie — adwokat w Gdańsku",
-      meta_title: "Podział majątku małżonków – adwokat Gdańsk",
+      meta_title: "Podział majątku po rozwodzie – adwokat Gdańsk",
       description:
         "Podział majątku wspólnego, mieszkanie z kredytem hipotecznym, rozliczenie nakładów i spłaconych rat. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
       lead:
@@ -150,7 +197,7 @@ defmodule KralukKurkierewicz.Services do
       intro: [
         "Majątek wspólny można podzielić umową — u notariusza, jeżeli obejmuje nieruchomość — albo przed sądem rejonowym. Opłata od wniosku o podział majątku wynosi 1 000 zł, a przy zgodnym projekcie podziału 300 zł. Rozwód nie zmienia odpowiedzialności za wspólny kredyt: wobec banku oboje byli małżonkowie odpowiadają solidarnie, dopóki bank nie zgodzi się na zmianę umowy.",
         "Podział majątku wspólnego to często najtrudniejszy finansowo etap zakończenia małżeństwa. Trzeba ustalić, co wchodzi w skład majątku, jaka jest jego wartość, kto poniósł jakie nakłady oraz jak rozliczyć zobowiązania — zwłaszcza kredyt hipoteczny.",
-        "Doradzamy przy podziale umownym, a gdy porozumienie nie jest możliwe, reprezentujemy Klientów w sądowym postępowaniu o podział majątku."
+        "Doradzamy przy podziale umownym, a gdy porozumienie nie jest możliwe, reprezentujemy Klientów w sądowym postępowaniu o podział majątku. Samą sprawę rozwodową opisujemy na stronie [rozwód — adwokat w Gdańsku](/uslugi/rozwod)."
       ],
       scope: [
         {"Podział majątku wspólnego",
@@ -184,7 +231,7 @@ defmodule KralukKurkierewicz.Services do
       intro: [
         "Upadłość konsumencką może ogłosić osoba fizyczna nieprowadząca działalności gospodarczej, która stała się niewypłacalna. Wniosek składa się do sądu upadłościowego, a opłata od niego wynosi 30 zł. Plan spłaty wierzycieli trwa co do zasady do 3 lat, a od 3 do 7 lat — gdy dłużnik doprowadził do niewypłacalności umyślnie lub wskutek rażącego niedbalstwa. Umorzeniu nie podlegają między innymi alimenty i grzywny.",
         "Upadłość konsumencka może prowadzić do umorzenia części albo całości niespłaconych zobowiązań, ale wiąże się z obowiązkami i może oznaczać sprzedaż majątku. Przed złożeniem wniosku warto zrozumieć, jak postępowanie wpłynie na mieszkanie, dochody i rodzinę.",
-        "Podczas konsultacji omawiamy możliwe skutki postępowania dla zadłużenia, majątku i bliskich oraz ustalamy zakres potrzebnej pomocy."
+        "Podczas konsultacji omawiamy możliwe skutki postępowania dla zadłużenia, majątku i bliskich oraz ustalamy zakres potrzebnej pomocy. Jeżeli wierzyciel uzyskał już nakaz zapłaty, sprawdzamy też, czy warto go zaskarżyć — piszemy o tym na stronie o [sprawach o zapłatę](/uslugi/sprawy-o-zaplate)."
       ],
       scope: [
         {"Ocena możliwości oddłużenia",
@@ -213,13 +260,13 @@ defmodule KralukKurkierewicz.Services do
       title: "Zawyżony metraż mieszkania — adwokat w Gdańsku",
       meta_title: "Zawyżony metraż mieszkania – adwokat Gdańsk",
       description:
-        "Ścianki działowe wliczone do powierzchni użytkowej? Analizujemy umowę deweloperską i dochodzimy zwrotu nadpłaconej części ceny. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
+        "Ścianki działowe wliczone do powierzchni mieszkania? Analizujemy umowę deweloperską i dochodzimy zwrotu części ceny. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
       lead:
         "Jeżeli rzeczywista powierzchnia mieszkania jest mniejsza niż ta, za którą zapłaciłeś, przeanalizujemy umowę i ocenimy, czy możesz odzyskać od dewelopera część ceny.",
       intro: [
         "Jeżeli deweloper wliczył do powierzchni użytkowej mieszkania stałe ścianki działowe, nabywca może żądać zwrotu części ceny: różnicy powierzchni pomnożonej przez cenę metra kwadratowego z umowy. W wyrokach opublikowanych przez sądy zasądzano od ok. 11 tys. do ok. 24 tys. zł na jednego nabywcę. Roszczenie przedawnia się co do zasady po 6 latach, a nowelizacja ustawy deweloperskiej z 13 lutego 2026 r. dotyczy wyłącznie umów zawartych od tego dnia.",
         "Cena mieszkania od dewelopera to zwykle iloczyn powierzchni użytkowej i ceny za metr kwadratowy. Część deweloperów wliczała do powierzchni użytkowej powierzchnię zajętą przez ścianki działowe — nabywca płacił więc za metry, z których nie może korzystać. Przy obecnych cenach nawet różnica jednego lub dwóch metrów oznacza realną kwotę.",
-        "Sądy przyznają rację kupującym przede wszystkim wtedy, gdy ściany mają charakter stały, a umowa nie informowała w jasny sposób o metodzie pomiaru."
+        "Sądy przyznają rację kupującym przede wszystkim wtedy, gdy ściany mają charakter stały, a umowa nie informowała w jasny sposób o metodzie pomiaru. To jeden z przykładów sporów, w których pomagamy w ramach [ochrony praw konsumentów](/uslugi/prawa-konsumentow)."
       ],
       scope: [
         {"Analiza umowy i dokumentów",
@@ -247,14 +294,14 @@ defmodule KralukKurkierewicz.Services do
         "Dochodzenie roszczeń pieniężnych oraz obrona przed niezasadnymi żądaniami zapłaty.",
       name: "Sprawy o zapłatę",
       title: "Sprawy o zapłatę i dochodzenie należności — adwokat w Gdańsku",
-      meta_title: "Sprawy o zapłatę – adwokat Gdańsk",
+      meta_title: "Nakaz zapłaty i sprawy o zapłatę – adwokat Gdańsk",
       description:
-        "Dochodzenie roszczeń pieniężnych i obrona przed niezasadnymi żądaniami zapłaty, także w postępowaniu upominawczym i nakazowym. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
+        "Pozew o zapłatę, sprzeciw od nakazu zapłaty, zarzut przedawnienia. Dochodzimy należności i bronimy przed niezasadnymi żądaniami. Kancelaria adwokacka w Gdańsku.",
       lead:
         "Pomagamy odzyskać pieniądze, które Ci się należą, i bronimy przed żądaniami zapłaty, które nie mają podstaw.",
       intro: [
         "Sprawy o zapłatę dotyczą najróżniejszych sytuacji: niezapłaconej pożyczki, wynagrodzenia za wykonaną pracę, zwrotu zaliczki czy kary umownej. Równie często zgłaszają się do nas osoby, które otrzymały wezwanie do zapłaty, nakaz zapłaty albo pozew i nie wiedzą, czy roszczenie jest zasadne.",
-        "Zaczynamy od analizy dokumentów i oceny szans, a następnie rekomendujemy sposób działania — od wezwania do zapłaty i negocjacji po postępowanie sądowe."
+        "Zaczynamy od analizy dokumentów i oceny szans, a następnie rekomendujemy sposób działania — od wezwania do zapłaty i negocjacji po postępowanie sądowe. Ta strona dotyczy przede wszystkim spraw osób prywatnych; przedsiębiorcom, którzy odzyskują niezapłacone faktury, polecamy stronę o [windykacji i egzekucji wierzytelności](/uslugi/egzekucja-wierzytelnosci)."
       ],
       scope: [
         {"Ocena roszczenia",
@@ -271,7 +318,7 @@ defmodule KralukKurkierewicz.Services do
         "Nakaz zapłaty wydany w postępowaniu upominawczym można zaskarżyć sprzeciwem w terminie dwóch tygodni od jego doręczenia. Jeżeli termin minie, nakaz się uprawomocni i może stać się podstawą egzekucji komorniczej.",
         "Roszczenia majątkowe ulegają przedawnieniu — co do zasady po sześciu latach, a roszczenia o świadczenia okresowe i związane z prowadzeniem działalności gospodarczej po trzech latach. Koniec terminu przypada na ostatni dzień roku kalendarzowego, chyba że termin jest krótszy niż dwa lata."
       ],
-      acts: [:kc, :kpc]
+      acts: [:kc, :kpc, :uksc]
     },
     %{
       slug: "odszkodowania",
@@ -288,7 +335,7 @@ defmodule KralukKurkierewicz.Services do
         "Pomagamy uzyskać należne odszkodowanie za szkodę majątkową i zadośćuczynienie za krzywdę — w rozmowach z ubezpieczycielem i przed sądem.",
       intro: [
         "Wypadek komunikacyjny, upadek na nieodśnieżonym chodniku, pogryzienie przez psa czy zalanie mieszkania — każde z tych zdarzeń może rodzić roszczenia wobec sprawcy lub jego ubezpieczyciela. Proponowane przez ubezpieczycieli kwoty nie zawsze odpowiadają rzeczywistym stratom.",
-        "Oceniamy, komu i w jakiej wysokości przysługują roszczenia, gromadzimy dowody i prowadzimy sprawę aż do uzyskania świadczenia."
+        "Oceniamy, komu i w jakiej wysokości przysługują roszczenia, gromadzimy dowody i prowadzimy sprawę aż do uzyskania świadczenia. Jeżeli szkoda wynika z przestępstwa, działamy także jako [pełnomocnik pokrzywdzonego](/uslugi/prawo-karne) w postępowaniu karnym."
       ],
       scope: [
         {"Odszkodowanie za szkodę majątkową",
@@ -305,7 +352,7 @@ defmodule KralukKurkierewicz.Services do
         "Roszczenie o naprawienie szkody wyrządzonej czynem niedozwolonym przedawnia się z upływem trzech lat od dnia, w którym poszkodowany dowiedział się o szkodzie i o osobie obowiązanej do jej naprawienia, ale nie później niż dziesięć lat od zdarzenia.",
         "Jeżeli szkoda wynikła ze zbrodni lub występku — na przykład z wypadku drogowego, który był przestępstwem — termin przedawnienia wynosi dwadzieścia lat od popełnienia przestępstwa."
       ],
-      acts: [:kc, :kpc]
+      acts: [:kc, :uoc, :kpc, :uksc]
     },
     %{
       slug: "nieruchomosci",
@@ -315,14 +362,14 @@ defmodule KralukKurkierewicz.Services do
         "Sprawy dotyczące własności, posiadania, zasiedzenia, służebności, wydania nieruchomości oraz rozliczeń związanych z nieruchomościami.",
       name: "Nieruchomości",
       title: "Sprawy o nieruchomości — adwokat w Gdańsku",
-      meta_title: "Prawo nieruchomości – adwokat Gdańsk",
+      meta_title: "Sprawy o nieruchomości – adwokat Gdańsk",
       description:
         "Własność, zasiedzenie, służebności, zniesienie współwłasności, wydanie nieruchomości i księgi wieczyste. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
       lead:
         "Pomagamy w sporach o własność i korzystanie z nieruchomości oraz w porządkowaniu ich stanu prawnego.",
       intro: [
         "Nieruchomość to dla wielu osób najcenniejszy składnik majątku, a spory jej dotyczące bywają długotrwałe i emocjonalne — zwłaszcza między sąsiadami lub członkami rodziny. Kluczowe jest dokładne ustalenie stanu prawnego i faktycznego jeszcze przed podjęciem działań.",
-        "Analizujemy księgi wieczyste, umowy i dokumentację geodezyjną, a następnie proponujemy rozwiązanie — polubowne lub sądowe."
+        "Analizujemy księgi wieczyste, umowy i dokumentację geodezyjną, a następnie proponujemy rozwiązanie — polubowne lub sądowe. Osobno opisujemy [podział majątku małżonków](/uslugi/podzial-majatku), [dział spadku](/uslugi/sprawy-spadkowe) oraz roszczenia nabywców wobec deweloperów z tytułu [zawyżonego metrażu](/uslugi/zawyzony-metraz)."
       ],
       scope: [
         {"Własność i współwłasność",
@@ -339,7 +386,7 @@ defmodule KralukKurkierewicz.Services do
         "Posiadacz samoistny nabywa własność nieruchomości przez zasiedzenie po dwudziestu latach nieprzerwanego posiadania, jeżeli uzyskał je w dobrej wierze, albo po trzydziestu latach — jeżeli w złej wierze.",
         "Sąd nie przyznaje własności w drodze zasiedzenia, lecz stwierdza, że nastąpiło ono z mocy prawa. Dlatego tak ważne jest udokumentowanie, od kiedy i w jaki sposób nieruchomość była posiadana."
       ],
-      acts: [:kc, :kw, :kpc]
+      acts: [:kc, :kw, :kpc, :uksc]
     },
     %{
       slug: "prawa-konsumentow",
@@ -356,7 +403,7 @@ defmodule KralukKurkierewicz.Services do
         "Pomagamy konsumentom egzekwować ich prawa wobec sprzedawców, usługodawców i innych przedsiębiorców.",
       intro: [
         "Przepisy zapewniają konsumentom szeroką ochronę, ale w praktyce przedsiębiorcy nie zawsze ją respektują — odmawiają uwzględnienia reklamacji, utrudniają odstąpienie od umowy albo stosują postanowienia, które nie powinny wiązać klienta.",
-        "Oceniamy umowę i okoliczności sprawy, przygotowujemy pisma i reprezentujemy Klientów w sporach z przedsiębiorcami."
+        "Oceniamy umowę i okoliczności sprawy, przygotowujemy pisma i reprezentujemy Klientów w sporach z przedsiębiorcami. Przykładem sporu konsumenckiego są roszczenia nabywców mieszkań o zwrot części ceny za [zawyżony metraż](/uslugi/zawyzony-metraz)."
       ],
       scope: [
         {"Reklamacje i niezgodność z umową",
@@ -380,34 +427,69 @@ defmodule KralukKurkierewicz.Services do
       audience: :private,
       home_name: "Sprawy spadkowe",
       home_text:
-        "Stwierdzenie nabycia spadku, dział spadku, zachowek, testamenty oraz odpowiedzialność za długi spadkowe.",
+        "Stwierdzenie nabycia spadku, dział spadku, testamenty oraz odpowiedzialność za długi spadkowe.",
       name: "Sprawy spadkowe",
-      title: "Sprawy spadkowe i zachowek — adwokat w Gdańsku",
-      meta_title: "Sprawy spadkowe i zachowek – adwokat Gdańsk",
+      title: "Sprawy spadkowe — adwokat w Gdańsku",
+      meta_title: "Adwokat sprawy spadkowe Gdańsk – spadek, dział, testament",
       description:
-        "Stwierdzenie nabycia spadku, dział spadku, zachowek, testamenty i długi spadkowe. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
+        "Stwierdzenie nabycia spadku, dział spadku, testamenty, odrzucenie spadku i długi spadkowe. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
       lead:
-        "Pomagamy uporządkować sprawy spadkowe — od stwierdzenia nabycia spadku, przez dział spadku, po spory o zachowek.",
+        "Pomagamy uporządkować sprawy spadkowe — od stwierdzenia nabycia spadku, przez przyjęcie lub odrzucenie spadku, po dział spadku.",
       intro: [
         "Sprawy spadkowe zbiegają się zwykle z trudnym okresem po stracie bliskiej osoby. Jednocześnie wymagają podjęcia decyzji w ściśle określonych terminach — przede wszystkim co do przyjęcia lub odrzucenia spadku.",
-        "Wyjaśniamy, jakie prawa i obowiązki przysługują spadkobiercom, a następnie prowadzimy sprawę przed sądem lub notariuszem."
+        "Wyjaśniamy, jakie prawa i obowiązki przysługują spadkobiercom, a następnie prowadzimy sprawę przed sądem lub notariuszem. Roszczenia osób pominiętych w testamencie opisujemy osobno na stronie o [zachowku](/uslugi/zachowek); gdy w skład spadku wchodzi przedsiębiorstwo, pomagamy także zaplanować [sukcesję firmy](/uslugi/sukcesja-firm)."
       ],
       scope: [
         {"Stwierdzenie nabycia spadku",
          "Wniosek do sądu lub przygotowanie do aktu poświadczenia dziedziczenia u notariusza."},
         {"Dział spadku",
          "Podział majątku spadkowego między spadkobierców, w tym nieruchomości i przedsiębiorstwa, wraz z rozliczeniem darowizn i nakładów."},
-        {"Zachowek",
-         "Dochodzenie zachowku przez osoby pominięte w testamencie oraz obrona przed roszczeniem o zachowek."},
-        {"Testamenty i długi spadkowe",
-         "Ocena ważności testamentu, przyjęcie lub odrzucenie spadku oraz ograniczenie odpowiedzialności za długi spadkowe."}
+        {"Testamenty",
+         "Ocena ważności testamentu, spory o jego treść oraz wykonanie zapisów i poleceń."},
+        {"Długi spadkowe",
+         "Przyjęcie lub odrzucenie spadku, także w imieniu dzieci, oraz ograniczenie odpowiedzialności za długi spadkowe."}
       ],
       notes_title: "Sześć miesięcy na decyzję o spadku",
       notes: [
         "Spadkobierca może przyjąć spadek wprost, przyjąć go z dobrodziejstwem inwentarza albo go odrzucić w terminie sześciu miesięcy od dnia, w którym dowiedział się o tytule swojego powołania. Brak oświadczenia w tym terminie oznacza przyjęcie spadku z dobrodziejstwem inwentarza.",
-        "Zachowek wynosi co do zasady połowę wartości udziału, który przypadłby uprawnionemu przy dziedziczeniu ustawowym, a dwie trzecie — gdy uprawniony jest trwale niezdolny do pracy lub małoletni. Roszczenie o zachowek z testamentu przedawnia się z upływem pięciu lat od ogłoszenia testamentu."
+        "Oświadczenie składa się przed sądem albo przed notariuszem. Przyjęcie spadku z dobrodziejstwem inwentarza ogranicza odpowiedzialność za długi spadkowe do wartości odziedziczonego majątku."
       ],
-      acts: [:kc, :kpc]
+      acts: [:kc, :kpc, :kro, :uksc]
+    },
+    %{
+      slug: "zachowek",
+      audience: :private,
+      home_name: "Zachowek",
+      home_text:
+        "Dochodzenie zachowku od spadkobierców i obdarowanych oraz obrona przed takim roszczeniem.",
+      name: "Zachowek",
+      title: "Zachowek — adwokat w Gdańsku",
+      meta_title: "Zachowek – adwokat Gdańsk: ile wynosi, komu przysługuje",
+      description:
+        "Zachowek po rodzicach: komu przysługuje, ile wynosi, zachowek od darowizny, przedawnienie i pozew. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
+      lead:
+        "Dochodzimy zachowku dla osób pominiętych w testamencie lub przy darowiznach i bronimy spadkobierców oraz obdarowanych przed zawyżonymi żądaniami.",
+      intro: [
+        "Zachowek to roszczenie o zapłatę, które chroni najbliższych spadkodawcy: zstępnych, małżonka i rodziców. Wynosi połowę wartości udziału, który przypadłby uprawnionemu przy dziedziczeniu ustawowym, a dwie trzecie — gdy uprawniony jest małoletni albo trwale niezdolny do pracy. Roszczenie przedawnia się z upływem pięciu lat.",
+        "W praktyce spór dotyczy najczęściej nie samego prawa do zachowku, lecz jego wysokości: wyceny nieruchomości, doliczenia darowizn sprzed lat i tego, co uprawniony sam już otrzymał od spadkodawcy. Dlatego zaczynamy od ustalenia składu spadku i historii darowizn.",
+        "Pozostałe sprawy po śmierci bliskiej osoby — stwierdzenie nabycia spadku, dział spadku i odrzucenie spadku — opisujemy na stronie o [sprawach spadkowych](/uslugi/sprawy-spadkowe)."
+      ],
+      scope: [
+        {"Obliczenie zachowku",
+         "Ustalenie wartości spadku, doliczenie darowizn i zapisów windykacyjnych oraz wyliczenie kwoty należnej uprawnionemu."},
+        {"Wezwanie do zapłaty i ugoda",
+         "Przedsądowe wezwanie do zapłaty zachowku i negocjacje, w tym co do rozłożenia płatności na raty."},
+        {"Pozew o zachowek",
+         "Przygotowanie pozwu, wnioski o opinię biegłego rzeczoznawcy i reprezentacja przed sądem."},
+        {"Obrona przed roszczeniem",
+         "Zarzut przedawnienia, wydziedziczenie, zaliczenie otrzymanych darowizn, wniosek o obniżenie zachowku lub rozłożenie go na raty."}
+      ],
+      notes_title: "Ile wynosi zachowek?",
+      notes: [
+        "Zachowek wynosi co do zasady połowę wartości udziału, który przypadłby uprawnionemu przy dziedziczeniu ustawowym, a dwie trzecie — gdy uprawniony jest trwale niezdolny do pracy lub małoletni (art. 991 § 1 k.c.).",
+        "Podstawą obliczeń jest czysta wartość spadku powiększona o doliczane darowizny i zapisy windykacyjne. Od wyliczonej kwoty odejmuje się to, co uprawniony sam otrzymał od spadkodawcy w darowiźnie, zapisie lub w spadku."
+      ],
+      acts: [:kc, :kpc, :uksc]
     },
     %{
       slug: "prawo-karne",
@@ -415,15 +497,15 @@ defmodule KralukKurkierewicz.Services do
       home_name: "Prawo karne",
       home_text: "Reprezentacja pokrzywdzonych w postępowaniu karnym.",
       name: "Prawo karne",
-      title: "Prawo karne — pełnomocnik pokrzywdzonego w Gdańsku",
-      meta_title: "Adwokat prawo karne – Gdańsk",
+      title: "Pełnomocnik pokrzywdzonego — adwokat w Gdańsku",
+      meta_title: "Pełnomocnik pokrzywdzonego – adwokat Gdańsk",
       description:
-        "Reprezentacja pokrzywdzonych w postępowaniu karnym — od postępowania przygotowawczego po postępowanie sądowe. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
+        "Reprezentacja pokrzywdzonych przestępstwem: zawiadomienie, postępowanie przygotowawcze, oskarżyciel posiłkowy, naprawienie szkody. Kancelaria w Gdańsku.",
       lead:
         "Reprezentujemy osoby pokrzywdzone przestępstwem — na każdym etapie postępowania karnego.",
       intro: [
         "Postępowanie karne toczy się według ścisłych reguł i terminów, a decyzje podjęte na jego początku — choćby co do treści zawiadomienia o przestępstwie — mogą mieć znaczenie dla całej sprawy. Dlatego warto skontaktować się z adwokatem jak najwcześniej.",
-        "Reprezentujemy pokrzywdzonych w postępowaniu przygotowawczym przed policją i prokuraturą oraz w postępowaniu przed sądem."
+        "Reprezentujemy pokrzywdzonych w postępowaniu przygotowawczym przed policją i prokuraturą oraz w postępowaniu przed sądem. Nie prowadzimy obron oskarżonych — zajmujemy się wyłącznie stroną pokrzywdzoną, w tym dochodzeniem [odszkodowania i zadośćuczynienia](/uslugi/odszkodowania) od sprawcy."
       ],
       scope: [
         {"Zawiadomienie o przestępstwie",
@@ -457,7 +539,7 @@ defmodule KralukKurkierewicz.Services do
         "Zapewniamy stałe wsparcie prawne, dzięki któremu możesz skupić się na prowadzeniu firmy.",
       intro: [
         "Celem stałej obsługi prawnej jest nie tylko reagowanie na pojawiające się problemy, ale przede wszystkim takie doradztwo, które pozwala ograniczać ryzyko i świadomie podejmować decyzje biznesowe.",
-        "Poznajemy Twoją firmę, jej model działania i potrzeby, a następnie ustalamy zakres i sposób współpracy dopasowany do skali działalności."
+        "Poznajemy Twoją firmę, jej model działania i potrzeby, a następnie ustalamy zakres i sposób współpracy dopasowany do skali działalności. Stała obsługa obejmuje codzienne sprawy firmy; formalności spółki — uchwały, zgromadzenia i wpisy w KRS — opisujemy na stronie o [obsłudze korporacyjnej](/uslugi/obsluga-korporacyjna), a pojedyncze zlecenia dotyczące kontraktów na stronie o [sporządzaniu i analizie umów](/uslugi/umowy)."
       ],
       scope: [
         {"Doradztwo bieżące",
@@ -483,14 +565,14 @@ defmodule KralukKurkierewicz.Services do
       home_text: "Wybór formy działalności, umowa spółki i rejestracja w KRS.",
       name: "Zakładanie i rejestracja spółek",
       title: "Zakładanie i rejestracja spółek — adwokat w Gdańsku",
-      meta_title: "Założenie spółki i rejestracja w KRS – Gdańsk",
+      meta_title: "Zakładanie spółek i rejestracja w KRS – adwokat Gdańsk",
       description:
         "Wybór formy prawnej, umowa spółki i rejestracja w KRS — sp. z o.o., spółki osobowe, prosta spółka akcyjna. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
       lead:
         "Pomagamy wybrać formę prawną działalności, przygotować umowę spółki i zarejestrować ją w Krajowym Rejestrze Sądowym.",
       intro: [
         "Wybór formy prawnej ma długofalowe skutki — dla odpowiedzialności wspólników, opodatkowania, sposobu podejmowania decyzji i możliwości pozyskania inwestora. Warto podjąć go świadomie, zanim firma zacznie działać.",
-        "Doradzamy przy wyborze formy, przygotowujemy dokumenty założycielskie dopasowane do potrzeb wspólników i przeprowadzamy rejestrację."
+        "Doradzamy przy wyborze formy, przygotowujemy dokumenty założycielskie dopasowane do potrzeb wspólników i przeprowadzamy rejestrację. Po rejestracji możemy przejąć bieżącą [obsługę korporacyjną](/uslugi/obsluga-korporacyjna) spółki."
       ],
       scope: [
         {"Wybór formy działalności",
@@ -523,7 +605,7 @@ defmodule KralukKurkierewicz.Services do
         "Przygotowujemy, sprawdzamy i negocjujemy umowy tak, aby chroniły Twoje interesy i ograniczały ryzyko sporów.",
       intro: [
         "Dobrze napisana umowa to najtańszy sposób na uniknięcie sporu. Wiele konfliktów, które trafiają do sądu, wynika z niejasnych postanowień, braku regulacji ważnych kwestii albo podpisania wzorca kontrahenta bez jego analizy.",
-        "Analizujemy umowy pod kątem ryzyk prawnych i biznesowych, proponujemy zmiany i wspieramy w negocjacjach."
+        "Analizujemy umowy pod kątem ryzyk prawnych i biznesowych, proponujemy zmiany i wspieramy w negocjacjach. Umowę można zlecić jednorazowo albo w ramach [stałej obsługi prawnej firmy](/uslugi/obsluga-przedsiebiorcow); gdy kontrahent umowy nie wykonuje, prowadzimy [spór gospodarczy](/uslugi/spory-gospodarcze)."
       ],
       scope: [
         {"Przygotowanie umów",
@@ -548,14 +630,14 @@ defmodule KralukKurkierewicz.Services do
       home_text: "Odzyskiwanie należności — od wezwania do zapłaty po egzekucję komorniczą.",
       name: "Egzekucja wierzytelności",
       title: "Windykacja i egzekucja wierzytelności — adwokat w Gdańsku",
-      meta_title: "Windykacja i egzekucja należności – Gdańsk",
+      meta_title: "Windykacja należności dla firm – adwokat Gdańsk",
       description:
-        "Odzyskiwanie należności dla firm: wezwanie do zapłaty, nakaz zapłaty, klauzula wykonalności i egzekucja komornicza. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
+        "Windykacja należności dla firm: wezwanie do zapłaty, nakaz zapłaty, klauzula wykonalności i egzekucja komornicza. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
       lead:
         "Odzyskujemy należności — od wezwania do zapłaty, przez uzyskanie nakazu zapłaty, po egzekucję komorniczą.",
       intro: [
-        "Nieopłacone faktury obciążają płynność firmy, a im dłużej wierzyciel zwleka, tym trudniej odzyskać pieniądze. Skuteczna windykacja wymaga szybkiego działania i właściwego wyboru drogi.",
-        "Prowadzimy cały proces odzyskiwania należności i na bieżąco informujemy o kolejnych krokach oraz ich kosztach."
+        "Nieopłacone faktury obciążają płynność firmy, a im dłużej wierzyciel zwleka, tym trudniej odzyskać pieniądze. Skuteczna windykacja wymaga szybkiego działania i właściwego wyboru drogi. Jeżeli zatory płatnicze zagrażają już wypłacalności Twojej firmy, warto równolegle rozważyć [restrukturyzację](/uslugi/restrukturyzacja).",
+        "Prowadzimy cały proces odzyskiwania należności i na bieżąco informujemy o kolejnych krokach oraz ich kosztach. Ta strona dotyczy bezspornych należności firm; gdy kontrahent kwestionuje roszczenie, sprawa staje się [sporem gospodarczym](/uslugi/spory-gospodarcze), a obronę przed nakazem zapłaty i sprawy osób prywatnych opisujemy na stronie o [sprawach o zapłatę](/uslugi/sprawy-o-zaplate)."
       ],
       scope: [
         {"Windykacja polubowna",
@@ -572,7 +654,7 @@ defmodule KralukKurkierewicz.Services do
         "Podstawą egzekucji jest tytuł wykonawczy, czyli tytuł egzekucyjny — najczęściej prawomocny wyrok lub nakaz zapłaty — zaopatrzony w klauzulę wykonalności.",
         "Roszczenia związane z prowadzeniem działalności gospodarczej przedawniają się co do zasady po trzech latach, z końcem roku kalendarzowego. Nie warto więc odkładać działań windykacyjnych."
       ],
-      acts: [:kpc, :kc]
+      acts: [:kpc, :kc, :uth]
     },
     %{
       slug: "restrukturyzacja",
@@ -581,14 +663,14 @@ defmodule KralukKurkierewicz.Services do
       home_text: "Wsparcie firm w trudnej sytuacji finansowej.",
       name: "Restrukturyzacja",
       title: "Restrukturyzacja firm — adwokat w Gdańsku",
-      meta_title: "Restrukturyzacja przedsiębiorstwa – Gdańsk",
+      meta_title: "Restrukturyzacja firmy – adwokat Gdańsk",
       description:
-        "Wsparcie firm w trudnej sytuacji finansowej: wybór postępowania restrukturyzacyjnego, układ z wierzycielami i negocjacje. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
+        "Wsparcie firm w trudnej sytuacji finansowej: wybór postępowania restrukturyzacyjnego i układ z wierzycielami. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
       lead:
         "Pomagamy firmom w trudnej sytuacji finansowej wybrać właściwą drogę naprawy i porozumieć się z wierzycielami.",
       intro: [
         "Restrukturyzacja daje przedsiębiorcy szansę na uniknięcie upadłości — przez zawarcie układu z wierzycielami, a w niektórych postępowaniach także przez przeprowadzenie działań sanacyjnych. Im wcześniej zostanie podjęta, tym więcej możliwości pozostaje.",
-        "Oceniamy sytuację firmy, przedstawiamy dostępne postępowania i ich konsekwencje oraz wspieramy przy przygotowaniu propozycji układowych."
+        "Oceniamy sytuację firmy, przedstawiamy dostępne postępowania i ich konsekwencje oraz wspieramy przy przygotowaniu propozycji układowych. Osobom, które nie prowadzą już działalności gospodarczej, pomagamy w [upadłości konsumenckiej](/uslugi/upadlosc-konsumencka)."
       ],
       scope: [
         {"Analiza sytuacji",
@@ -614,15 +696,16 @@ defmodule KralukKurkierewicz.Services do
       home_text:
         "Stała obsługa spółek. Mamy też doświadczenie we współpracy z innymi kancelariami przy obsłudze sporów masowych.",
       name: "Obsługa korporacyjna i spory masowe",
-      title: "Obsługa korporacyjna spółek i spory masowe — Gdańsk",
+      title: "Obsługa korporacyjna spółek i spory masowe — kancelaria w Gdańsku",
       meta_title: "Obsługa korporacyjna spółek – kancelaria Gdańsk",
       description:
-        "Stała obsługa korporacyjna spółek: uchwały, zgromadzenia, zmiany w KRS, a także współpraca przy obsłudze sporów masowych. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
+        "Obsługa korporacyjna spółek: uchwały, zgromadzenia, zmiany w KRS oraz współpraca przy sporach masowych. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
       lead:
         "Zapewniamy stałą obsługę korporacyjną spółek i wspieramy inne kancelarie w prowadzeniu sporów masowych.",
       intro: [
         "Życie spółki to nie tylko bieżące kontrakty, ale też formalności korporacyjne: zgromadzenia wspólników, uchwały, zmiany w składzie organów i umowie spółki oraz zgłoszenia do rejestrów. Zaniedbania w tym zakresie mogą skutkować nieważnością uchwał lub sankcjami.",
-        "Mamy też doświadczenie we współpracy z innymi kancelariami przy prowadzeniu sporów masowych — wymagających sprawnej organizacji pracy, konsekwentnej strategii procesowej i zarządzania dużą liczbą postępowań."
+        "Mamy też doświadczenie we współpracy z innymi kancelariami przy prowadzeniu sporów masowych — wymagających sprawnej organizacji pracy, konsekwentnej strategii procesowej i zarządzania dużą liczbą postępowań.",
+        "Nową spółkę pomagamy założyć i zarejestrować — piszemy o tym na stronie o [zakładaniu spółek](/uslugi/zakladanie-spolek). Codzienne doradztwo dla firmy obejmuje z kolei [bieżąca obsługa prawna](/uslugi/obsluga-przedsiebiorcow)."
       ],
       scope: [
         {"Organy spółki i uchwały",
@@ -651,12 +734,12 @@ defmodule KralukKurkierewicz.Services do
       title: "Prawo nowych technologii i AI — adwokat w Gdańsku",
       meta_title: "Prawo AI i nowych technologii – adwokat Gdańsk",
       description:
-        "Wsparcie prawne przy wdrażaniu sztucznej inteligencji, automatyzacji i nowych technologii: umowy IT, AI Act, dane osobowe. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
+        "Wsparcie prawne przy wdrażaniu sztucznej inteligencji i nowych technologii: umowy IT, AI Act, dane osobowe. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
       lead:
         "Wspieramy przedsiębiorców we wdrażaniu sztucznej inteligencji, automatyzacji procesów i nowych technologii — bezpiecznie i zgodnie z prawem.",
       intro: [
         "Sztuczna inteligencja i automatyzacja zmieniają sposób prowadzenia biznesu, ale rodzą też nowe pytania prawne: kto odpowiada za błędy systemu, do kogo należą prawa do wygenerowanych treści, jak chronić dane i tajemnice przedsiębiorstwa.",
-        "Sami wykorzystujemy nowe technologie w pracy kancelarii, dlatego rozumiemy zarówno ich możliwości, jak i ryzyka."
+        "Sami wykorzystujemy nowe technologie w pracy kancelarii, dlatego rozumiemy zarówno ich możliwości, jak i ryzyka. Wdrożenie AI prawie zawsze wiąże się z przetwarzaniem danych osobowych, dlatego łączymy je z doradztwem w zakresie [RODO](/uslugi/rodo) i z przygotowaniem [umów](/uslugi/umowy) z dostawcami."
       ],
       scope: [
         {"Wdrożenia AI",
@@ -690,7 +773,7 @@ defmodule KralukKurkierewicz.Services do
         "Pomagamy zaplanować przekazanie firmy następnemu pokoleniu tak, aby zachować jej ciągłość i uniknąć sporów w rodzinie.",
       intro: [
         "Sukcesja to jedno z największych wyzwań firm rodzinnych. Brak planu może sparaliżować działalność po śmierci właściciela, a niejasne zasady — doprowadzić do konfliktów między spadkobiercami.",
-        "Łączymy wiedzę z zakresu prawa spółek, prawa spadkowego i prawa rodzinnego, aby przygotować rozwiązanie dopasowane do firmy i rodziny."
+        "Łączymy wiedzę z zakresu prawa spółek, [prawa spadkowego](/uslugi/sprawy-spadkowe) i prawa rodzinnego, aby przygotować rozwiązanie dopasowane do firmy i rodziny. Jeżeli plan sukcesji wymaga przekształcenia działalności, pomagamy też [założyć spółkę](/uslugi/zakladanie-spolek). Plan powinien uwzględniać także roszczenia pominiętych członków rodziny o [zachowek](/uslugi/zachowek)."
       ],
       scope: [
         {"Plan sukcesji",
@@ -716,15 +799,15 @@ defmodule KralukKurkierewicz.Services do
       home_text:
         "Obsługa prawna gabinetów, klinik i innych podmiotów leczniczych, w tym umów, dokumentacji, praw pacjenta oraz odpowiedzialności związanej z udzielaniem świadczeń.",
       name: "Prawo medyczne",
-      title: "Prawo medyczne i obsługa podmiotów leczniczych — Gdańsk",
-      meta_title: "Prawo medyczne – obsługa gabinetów i klinik, Gdańsk",
+      title: "Prawo medyczne i obsługa podmiotów leczniczych — kancelaria w Gdańsku",
+      meta_title: "Prawo medyczne – kancelaria dla gabinetów i klinik, Gdańsk",
       description:
-        "Obsługa prawna gabinetów, klinik i podmiotów leczniczych: umowy, dokumentacja medyczna, prawa pacjenta i odpowiedzialność. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
+        "Obsługa prawna gabinetów, klinik i podmiotów leczniczych: umowy, dokumentacja medyczna, prawa pacjenta, spory. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
       lead:
         "Zapewniamy obsługę prawną gabinetów, klinik i innych podmiotów leczniczych — od umów i dokumentacji po spory z pacjentami.",
       intro: [
         "Działalność lecznicza podlega szczególnym wymogom — od rejestracji podmiotu, przez prowadzenie dokumentacji medycznej, po przestrzeganie praw pacjenta. Uchybienia w tym zakresie mogą prowadzić do odpowiedzialności cywilnej, zawodowej i administracyjnej.",
-        "Pomagamy uporządkować dokumentację i umowy, a w razie sporu reprezentujemy podmioty lecznicze przed sądami."
+        "Pomagamy uporządkować dokumentację i umowy, a w razie sporu reprezentujemy podmioty lecznicze przed sądami. Ochronę danych o zdrowiu opisujemy szerzej na stronie o [RODO](/uslugi/rodo)."
       ],
       scope: [
         {"Umowy w ochronie zdrowia",
@@ -757,8 +840,9 @@ defmodule KralukKurkierewicz.Services do
       lead:
         "Reprezentujemy przedsiębiorców w sporach z kontrahentami — w negocjacjach i przed sądem.",
       intro: [
-        "Szczególne miejsce w naszej praktyce zajmuje reprezentacja Klientów przed sądami. Mamy wieloletnie doświadczenie w prowadzeniu postępowań sądowych, w tym spraw o znacznym stopniu złożoności.",
-        "Zanim sprawa trafi do sądu, oceniamy jej perspektywy, ryzyka i koszty, a także możliwość polubownego rozwiązania."
+        "Spór gospodarczy zaczyna się zwykle od niezapłaconej faktury, wadliwie wykonanej umowy albo naliczonej kary umownej. Gdy kontrahent kwestionuje roszczenie i rozmowy nie przynoszą efektu, o wyniku decyduje sąd — a w sprawach między przedsiębiorcami także to, jak starannie przygotowano pozew lub odpowiedź na pozew.",
+        "Reprezentacja przed sądami zajmuje szczególne miejsce w naszej praktyce: mamy wieloletnie doświadczenie w prowadzeniu postępowań sądowych, w tym spraw o znacznym stopniu złożoności. Zanim sprawa trafi do sądu, oceniamy jej perspektywy, ryzyka i koszty, a także możliwość polubownego rozwiązania.",
+        "Bezsporne należności odzyskujemy w trybie opisanym na stronie o [windykacji i egzekucji wierzytelności](/uslugi/egzekucja-wierzytelnosci), a ryzyko przyszłych sporów ograniczają dobrze przygotowane [umowy](/uslugi/umowy)."
       ],
       scope: [
         {"Spory z kontrahentami",
@@ -784,15 +868,15 @@ defmodule KralukKurkierewicz.Services do
       home_text:
         "Wdrożenia RODO w przedsiębiorstwach i organizacjach, audyty zgodności, tworzenie i aktualizacja dokumentacji, projektowanie procedur ochrony danych oraz bieżące wsparcie w ich praktycznym stosowaniu.",
       name: "RODO i ochrona danych osobowych",
-      title: "RODO i ochrona danych osobowych — adwokat w Gdańsku",
-      meta_title: "RODO – wdrożenia i audyty, adwokat Gdańsk",
+      title: "RODO i ochrona danych osobowych — kancelaria w Gdańsku",
+      meta_title: "Wdrożenie i audyt RODO – kancelaria Gdańsk",
       description:
         "Wdrożenia RODO, audyty zgodności, dokumentacja i procedury ochrony danych oraz bieżące wsparcie. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
       lead:
         "Pomagamy firmom i organizacjom przetwarzać dane osobowe zgodnie z RODO — w sposób praktyczny i dopasowany do skali działalności.",
       intro: [
         "Ochrona danych osobowych dotyczy każdej firmy, która ma klientów, pracowników lub kontrahentów. Dokumentacja RODO powinna odpowiadać rzeczywistym procesom w organizacji — szablonowe rozwiązania rzadko spełniają ten warunek.",
-        "Zaczynamy od poznania, jakie dane i w jaki sposób przetwarza Twoja organizacja, a następnie przygotowujemy dokumentację i procedury, które da się stosować w praktyce."
+        "Zaczynamy od poznania, jakie dane i w jaki sposób przetwarza Twoja organizacja, a następnie przygotowujemy dokumentację i procedury, które da się stosować w praktyce. Osobno opisujemy ochronę danych przy [wdrażaniu sztucznej inteligencji](/uslugi/nowe-technologie) oraz dane o zdrowiu w [podmiotach leczniczych](/uslugi/prawo-medyczne)."
       ],
       scope: [
         {"Wdrożenia RODO",
@@ -822,9 +906,21 @@ defmodule KralukKurkierewicz.Services do
       "Czas: rozwód bez orzekania o winie może zakończyć się na pierwszej rozprawie; spór o winę lub dzieci wydłuża sprawę."
     ],
     "sprawy-rodzinne" => [
+      "Sąd: sprawy o kontakty i władzę rodzicielską rozpoznaje sąd rejonowy miejsca zamieszkania dziecka.",
+      "Opłata od wniosku o ustalenie kontaktów: 100 zł.",
+      "Utrudnianie kontaktów: sąd może nakazać zapłatę sumy pieniężnej za każde naruszenie."
+    ],
+    "alimenty" => [
       "Alimenty na dziecko: brak tabel i kwot minimalnych — decydują potrzeby dziecka i możliwości zarobkowe rodzica (art. 135 § 1 k.r.o.).",
       "Pozew o alimenty na dziecko i o ich podwyższenie: 0 zł opłaty sądowej.",
-      "Obniżenie alimentów: opłata stała od 30 zł do 1 000 zł przy wartości przedmiotu sporu (suma świadczeń za rok) do 20 000 zł, powyżej — 5% tej wartości."
+      "Do kiedy: do czasu, gdy dziecko jest w stanie utrzymać się samodzielnie — ukończenie 18 lat nie kończy obowiązku.",
+      "Zaległe raty alimentów przedawniają się po 3 latach."
+    ],
+    "zachowek" => [
+      "Wysokość: 1/2 udziału ustawowego, a 2/3 dla małoletnich i trwale niezdolnych do pracy.",
+      "Uprawnieni: zstępni, małżonek i rodzice spadkodawcy — rodzeństwo nie.",
+      "Przedawnienie: 5 lat od ogłoszenia testamentu albo od otwarcia spadku.",
+      "Darowizny dolicza się do spadku, z wyjątkami z art. 994 k.c."
     ],
     "podzial-majatku" => [
       "Opłata od wniosku o podział majątku: 1 000 zł, a przy zgodnym projekcie podziału 300 zł.",
@@ -864,8 +960,8 @@ defmodule KralukKurkierewicz.Services do
     ],
     "sprawy-spadkowe" => [
       "Przyjęcie lub odrzucenie spadku: 6 miesięcy od dowiedzenia się o tytule powołania.",
-      "Zachowek: 1/2 udziału ustawowego, a 2/3 dla małoletnich i trwale niezdolnych do pracy.",
-      "Roszczenie o zachowek z testamentu przedawnia się po 5 latach od ogłoszenia testamentu."
+      "Stwierdzenie nabycia spadku w sądzie: 100 zł opłaty i 5 zł za wpis do Rejestru Spadkowego.",
+      "Dział spadku: 500 zł, a przy zgodnym projekcie 300 zł."
     ],
     "prawo-karne" => [
       "Reprezentujemy pokrzywdzonych na każdym etapie: przed policją, prokuraturą i sądem.",
@@ -930,8 +1026,10 @@ defmodule KralukKurkierewicz.Services do
 
   # Related practice areas linked from each service page ("Powiązane usługi").
   @related %{
-    "rozwod" => ~w(podzial-majatku sprawy-rodzinne nieruchomosci),
-    "sprawy-rodzinne" => ~w(rozwod podzial-majatku sprawy-spadkowe),
+    "rozwod" => ~w(podzial-majatku alimenty sprawy-rodzinne),
+    "sprawy-rodzinne" => ~w(alimenty rozwod podzial-majatku),
+    "alimenty" => ~w(sprawy-rodzinne rozwod podzial-majatku),
+    "zachowek" => ~w(sprawy-spadkowe nieruchomosci sukcesja-firm),
     "podzial-majatku" => ~w(rozwod sprawy-rodzinne nieruchomosci),
     "upadlosc-konsumencka" => ~w(sprawy-o-zaplate restrukturyzacja podzial-majatku),
     "zawyzony-metraz" => ~w(prawa-konsumentow nieruchomosci sprawy-o-zaplate),
@@ -939,7 +1037,7 @@ defmodule KralukKurkierewicz.Services do
     "odszkodowania" => ~w(sprawy-o-zaplate prawo-karne prawa-konsumentow),
     "nieruchomosci" => ~w(zawyzony-metraz sprawy-spadkowe podzial-majatku),
     "prawa-konsumentow" => ~w(zawyzony-metraz sprawy-o-zaplate odszkodowania),
-    "sprawy-spadkowe" => ~w(sukcesja-firm nieruchomosci podzial-majatku),
+    "sprawy-spadkowe" => ~w(zachowek nieruchomosci sukcesja-firm),
     "prawo-karne" => ~w(odszkodowania sprawy-o-zaplate),
     "obsluga-przedsiebiorcow" => ~w(umowy obsluga-korporacyjna spory-gospodarcze),
     "zakladanie-spolek" => ~w(obsluga-korporacyjna umowy obsluga-przedsiebiorcow),
@@ -954,8 +1052,64 @@ defmodule KralukKurkierewicz.Services do
     "rodo" => ~w(nowe-technologie prawo-medyczne obsluga-przedsiebiorcow)
   }
 
+  # "W Gdańsku i Trójmieście" paragraph of each service page: which local court or
+  # office handles the matter. Court facts only — re-check after a court reorganisation.
+  @local %{
+    "rozwod" =>
+      "Sprawy rozwodowe małżonków, których ostatnie wspólne miejsce zamieszkania znajdowało się w Gdańsku, Gdyni lub Sopocie, rozpoznaje Sąd Okręgowy w Gdańsku przy ul. Nowe Ogrody 30/34. Kancelaria mieści się przy ul. Strzeleckiej 7B w Gdańsku; konsultację można też odbyć telefonicznie lub przez wideo.",
+    "sprawy-rodzinne" =>
+      "Sprawy o kontakty i władzę rodzicielską rozpoznaje sąd rejonowy właściwy dla miejsca zamieszkania dziecka. W Gdańsku jest to — zależnie od dzielnicy — Sąd Rejonowy Gdańsk-Północ albo Sąd Rejonowy Gdańsk-Południe; sprawy dzieci mieszkających w Gdyni i Sopocie trafiają do tamtejszych sądów rejonowych. Sprawy o separację rozpoznaje Sąd Okręgowy w Gdańsku.",
+    "alimenty" =>
+      "Pozew o alimenty można wnieść do sądu rejonowego właściwego dla miejsca zamieszkania osoby uprawnionej, czyli najczęściej dziecka (art. 32 k.p.c.). W Gdańsku jest to — zależnie od dzielnicy — Sąd Rejonowy Gdańsk-Północ albo Sąd Rejonowy Gdańsk-Południe; sprawy z Gdyni i Sopotu trafiają do tamtejszych sądów rejonowych. Rodzic mieszkający z dzieckiem w Gdańsku nie musi więc prowadzić sprawy w mieście, w którym mieszka pozwany.",
+    "zachowek" =>
+      "Pozew o zachowek rozpoznaje wyłącznie sąd ostatniego miejsca zwykłego pobytu spadkodawcy (art. 39 k.p.c.). Jeżeli zmarły mieszkał w Gdańsku, jest to Sąd Rejonowy Gdańsk-Północ albo Sąd Rejonowy Gdańsk-Południe, a przy roszczeniach powyżej 100 000 zł — Sąd Okręgowy w Gdańsku. Uprawniony może mieszkać w innym mieście lub za granicą.",
+    "podzial-majatku" =>
+      "Wniosek o podział majątku wspólnego składa się do sądu rejonowego właściwego dla miejsca położenia majątku (art. 566 k.p.c.). Gdy mieszkanie lub dom znajduje się w Gdańsku, sprawę prowadzi Sąd Rejonowy Gdańsk-Północ albo Sąd Rejonowy Gdańsk-Południe — zależnie od dzielnicy. Umowny podział majątku obejmujący nieruchomość wymaga wizyty u notariusza.",
+    "upadlosc-konsumencka" =>
+      "Sądem upadłościowym dla osób mieszkających w Gdańsku i Trójmieście jest Sąd Rejonowy Gdańsk-Północ w Gdańsku. Wniosek składa się elektronicznie przez Krajowy Rejestr Zadłużonych albo na formularzu papierowym, a dokumenty do niego można omówić w kancelarii w Gdańsku lub zdalnie.",
+    "zawyzony-metraz" =>
+      "Nabywca będący konsumentem może pozwać dewelopera przed sąd właściwy dla swojego miejsca zamieszkania (art. 37² k.p.c.) — mieszkaniec Gdańska nie musi więc prowadzić sprawy w mieście, w którym deweloper ma siedzibę. Pomagamy nabywcom mieszkań w Gdańsku, Gdyni, Sopocie i w całym województwie pomorskim.",
+    "sprawy-o-zaplate" =>
+      "Sprawy o zapłatę do 100 000 zł rozpoznaje sąd rejonowy, a powyżej tej kwoty — sąd okręgowy. Co do zasady właściwy jest sąd miejsca zamieszkania pozwanego; w Gdańsku są to Sąd Rejonowy Gdańsk-Północ, Sąd Rejonowy Gdańsk-Południe albo Sąd Okręgowy w Gdańsku.",
+    "odszkodowania" =>
+      "Roszczeń z ubezpieczenia OC można dochodzić przed sądem właściwym dla miejsca zamieszkania poszkodowanego, a roszczeń z czynu niedozwolonego — także przed sądem, w którego okręgu doszło do zdarzenia (art. 35 k.p.c.). Poszkodowani z Gdańska i Trójmiasta mogą więc zwykle prowadzić sprawę na miejscu: przed sądem rejonowym albo, przy roszczeniach powyżej 100 000 zł, przed Sądem Okręgowym w Gdańsku.",
+    "nieruchomosci" =>
+      "Sprawy o własność i inne prawa rzeczowe na nieruchomości rozpoznaje wyłącznie sąd miejsca jej położenia (art. 38 k.p.c.). Dla nieruchomości w Gdańsku jest to Sąd Rejonowy Gdańsk-Północ lub Sąd Rejonowy Gdańsk-Południe albo — w sprawach o wyższej wartości — Sąd Okręgowy w Gdańsku. Księgi wieczyste gdańskich nieruchomości prowadzi Sąd Rejonowy Gdańsk-Północ.",
+    "prawa-konsumentow" =>
+      "Konsument może pozwać przedsiębiorcę przed sąd właściwy dla swojego miejsca zamieszkania (art. 37² k.p.c.). Mieszkaniec Gdańska prowadzi więc spór przed sądem w Gdańsku — także wtedy, gdy sprzedawca lub usługodawca ma siedzibę w innym mieście.",
+    "sprawy-spadkowe" =>
+      "Sądem spadku jest sąd rejonowy ostatniego miejsca zwykłego pobytu spadkodawcy (art. 628 k.p.c.). Jeżeli zmarły mieszkał w Gdańsku, sprawę o stwierdzenie nabycia spadku i o dział spadku prowadzi Sąd Rejonowy Gdańsk-Północ albo Sąd Rejonowy Gdańsk-Południe — zależnie od dzielnicy.",
+    "prawo-karne" =>
+      "Reprezentujemy pokrzywdzonych w postępowaniach prowadzonych przez jednostki policji i prokuratury w Gdańsku i Trójmieście oraz przed sądami rejonowymi i Sądem Okręgowym w Gdańsku.",
+    "obsluga-przedsiebiorcow" =>
+      "Obsługujemy przedsiębiorców z Gdańska, Gdyni, Sopotu i całego województwa pomorskiego. Spotykamy się w kancelarii przy ul. Strzeleckiej 7B w Gdańsku albo pracujemy zdalnie — telefonicznie i przez wideo.",
+    "zakladanie-spolek" =>
+      "Spółki z siedzibą w Gdańsku, Gdyni i Sopocie rejestruje Sąd Rejonowy Gdańsk-Północ w Gdańsku — jego wydziały gospodarcze Krajowego Rejestru Sądowego. Wniosek składa się elektronicznie, więc całą rejestrację można przeprowadzić bez wizyty w sądzie.",
+    "umowy" =>
+      "Umowy przygotowujemy i sprawdzamy dla przedsiębiorców i osób prywatnych z Gdańska, Trójmiasta i całego województwa pomorskiego. W umowie między przedsiębiorcami warto świadomie wskazać sąd właściwy do rozstrzygania sporów (art. 46 k.p.c.) — na przykład sąd w Gdańsku, jeżeli tu działa Twoja firma.",
+    "egzekucja-wierzytelnosci" =>
+      "Wierzyciel może co do zasady wybrać komornika na obszarze właściwości sądu apelacyjnego, w którym działa komornik właściwy według przepisów ogólnych — przy dłużnikach z Pomorza jest to apelacja gdańska. Wyboru nie ma między innymi przy egzekucji z nieruchomości, którą prowadzi komornik miejsca jej położenia.",
+    "restrukturyzacja" =>
+      "Sądem restrukturyzacyjnym dla przedsiębiorców, których główny ośrodek działalności znajduje się w Gdańsku lub Trójmieście, jest Sąd Rejonowy Gdańsk-Północ w Gdańsku. Pisma w postępowaniu składa się elektronicznie przez Krajowy Rejestr Zadłużonych.",
+    "obsluga-korporacyjna" =>
+      "Wnioski o wpis zmian w spółkach z siedzibą w Gdańsku i Trójmieście rozpoznaje Sąd Rejonowy Gdańsk-Północ w Gdańsku (wydziały gospodarcze KRS), a sprawy o uchylenie lub stwierdzenie nieważności uchwał — Sąd Okręgowy w Gdańsku.",
+    "nowe-technologie" =>
+      "Doradzamy przedsiębiorcom z Gdańska, Gdyni, Sopotu i całego województwa pomorskiego, którzy wdrażają sztuczną inteligencję lub automatyzują procesy — w kancelarii w Gdańsku albo zdalnie.",
+    "sukcesja-firm" =>
+      "Doradzamy właścicielom firm rodzinnych z Gdańska, Trójmiasta i województwa pomorskiego. Zarządcę sukcesyjnego zgłasza się do CEIDG, a fundację rodzinną rejestruje Sąd Okręgowy w Piotrkowie Trybunalskim — niezależnie od tego, gdzie mieszka fundator.",
+    "prawo-medyczne" =>
+      "Obsługujemy gabinety, kliniki i inne podmioty lecznicze z Gdańska, Gdyni, Sopotu i województwa pomorskiego. Organem prowadzącym rejestr podmiotów leczniczych z Pomorza jest Wojewoda Pomorski.",
+    "spory-gospodarcze" =>
+      "Sprawy gospodarcze w Gdańsku rozpoznają wydziały gospodarcze Sądu Rejonowego Gdańsk-Północ w Gdańsku, a przy wartości przedmiotu sporu powyżej 100 000 zł — Sądu Okręgowego w Gdańsku.",
+    "rodo" =>
+      "Wdrożenia i audyty RODO prowadzimy dla firm i organizacji z Gdańska, Gdyni, Sopotu i całego województwa pomorskiego — w kancelarii w Gdańsku albo zdalnie. Organem nadzorczym dla całej Polski jest Prezes Urzędu Ochrony Danych Osobowych z siedzibą w Warszawie."
+  }
+
   @doc "\"W skrócie\" points for a service page."
   def summary(service), do: Map.fetch!(@summaries, service.slug)
+
+  @doc "Local paragraph (\"W Gdańsku i Trójmieście\") of a service page."
+  def local(service), do: Map.fetch!(@local, service.slug)
 
   @doc "Related services linked from a service page, in display order."
   def related(service), do: @related |> Map.fetch!(service.slug) |> Enum.map(&get/1)
@@ -995,24 +1149,413 @@ defmodule KralukKurkierewicz.Services do
     "rodo" => "Ile czasu jest na zgłoszenie naruszenia ochrony danych osobowych?"
   }
 
+  # Questions Clients ask about the topics of the pages whose `ServiceDetails`
+  # entry has no `:faq` of its own, phrased the way they are typed into a search engine or
+  # an AI assistant. Rendered in the page FAQ and its `FAQPage` JSON-LD — plain text only.
+  @questions %{
+    "prawa-konsumentow" => [
+      {"Ile czasu mam na reklamację towaru?",
+       "Sprzedawca odpowiada za brak zgodności towaru z umową, który istniał w chwili dostarczenia i ujawnił się w ciągu dwóch lat od tej chwili. Przez ten czas domniemywa się, że brak istniał już w chwili dostarczenia towaru."},
+      {"W jakim terminie sprzedawca musi odpowiedzieć na reklamację?",
+       "W ciągu 14 dni od jej otrzymania. Jeżeli przedsiębiorca nie odpowie w tym terminie, uważa się, że reklamację uznał."},
+      {"Czy można zwrócić towar kupiony w sklepie stacjonarnym?",
+       "Ustawowe prawo odstąpienia od umowy w ciągu 14 dni dotyczy umów zawartych na odległość i poza lokalem przedsiębiorstwa. W sklepie stacjonarnym zwrot pełnowartościowego towaru jest możliwy tylko wtedy, gdy sprzedawca sam na to pozwala."},
+      {"Kiedy mogę żądać zwrotu pieniędzy zamiast naprawy?",
+       "Co do zasady najpierw można żądać naprawy lub wymiany towaru. Obniżenie ceny albo odstąpienie od umowy wchodzi w grę między innymi wtedy, gdy sprzedawca odmówił doprowadzenia towaru do zgodności z umową, nie zrobił tego albo brak występuje nadal mimo próby naprawy. Od umowy nie można odstąpić, gdy brak zgodności jest nieistotny."}
+    ],
+    "prawo-karne" => [
+      {"Jak złożyć zawiadomienie o przestępstwie?",
+       "Ustnie do protokołu w jednostce policji lub w prokuraturze albo na piśmie. Zawiadomienie jest wolne od opłat. Warto od razu wskazać znane dowody: świadków, dokumenty, nagrania i korespondencję."},
+      {"Co zrobić, gdy prokurator umorzył postępowanie albo odmówił jego wszczęcia?",
+       "Pokrzywdzony może złożyć zażalenie do sądu w terminie 7 dni od doręczenia postanowienia. W zażaleniu wskazuje się, jakich dowodów nie przeprowadzono i dlaczego ocena sprawy jest błędna."},
+      {"Do kiedy można zostać oskarżycielem posiłkowym?",
+       "Oświadczenie, że pokrzywdzony będzie działał jako oskarżyciel posiłkowy, można złożyć do czasu rozpoczęcia przewodu sądowego na rozprawie głównej."},
+      {"Czy pokrzywdzony może uzyskać odszkodowanie w procesie karnym?",
+       "Tak. Pokrzywdzony może złożyć wniosek o orzeczenie obowiązku naprawienia szkody lub zadośćuczynienia za krzywdę — aż do zamknięcia przewodu sądowego na rozprawie głównej. Pozostałej części roszczeń można dochodzić w procesie cywilnym."}
+    ],
+    "obsluga-przedsiebiorcow" => [
+      {"Ile kosztuje stała obsługa prawna firmy?",
+       "Koszt zależy od zakresu obsługi i liczby spraw w miesiącu. Zanim zaczniemy współpracę, rozmawiamy o potrzebach firmy i przedstawiamy proponowany zakres oraz koszty."},
+      {"Czy mała firma potrzebuje stałej obsługi prawnej?",
+       "Nie każda. Stała obsługa ma sens, gdy firma regularnie zawiera umowy, zatrudnia ludzi albo dochodzi należności. Przy sporadycznych sprawach wystarczą pojedyncze zlecenia, na przykład sprawdzenie konkretnej umowy."},
+      {"Co to jest stała obsługa prawna i co obejmuje?",
+       "To umowa, na podstawie której kancelaria na bieżąco wspiera firmę, zamiast przyjmować pojedyncze zlecenia. Zwykle obejmuje konsultacje, przygotowanie i sprawdzanie umów, opinie prawne, wezwania do zapłaty oraz reprezentację w sporach; dokładny zakres ustala się w umowie."},
+      {"Czy stała obsługa prawna obejmuje sprawy sądowe?",
+       "To zależy od umowy. Bieżące doradztwo i przygotowanie umów mieszczą się zwykle w stałym wynagrodzeniu, a prowadzenie spraw sądowych bywa rozliczane odrębnie — warto ustalić to na początku współpracy."},
+      {"Czy obsługa prawna może odbywać się zdalnie?",
+       "Tak. Dokumenty przekazujemy elektronicznie, a konsultacje prowadzimy telefonicznie lub przez wideo; spotkać można się także w kancelarii w Gdańsku."}
+    ],
+    "zakladanie-spolek" => [
+      {"Ile kosztuje założenie spółki z o.o.?",
+       "Opłata sądowa za wpis do KRS wynosi 500 zł, a przy rejestracji w systemie S24 — 250 zł; w obu przypadkach dolicza się 100 zł za ogłoszenie w Monitorze Sądowym i Gospodarczym. Do tego dochodzi podatek od czynności cywilnoprawnych (0,5% podstawy opodatkowania) oraz — przy umowie w formie aktu notarialnego — taksa notarialna."},
+      {"Jaki jest minimalny kapitał zakładowy spółki?",
+       "W spółce z o.o. 5 000 zł, przy czym wartość nominalna udziału nie może być niższa niż 50 zł. W spółce akcyjnej kapitał zakładowy wynosi co najmniej 100 000 zł, a w prostej spółce akcyjnej kapitał akcyjny — co najmniej 1 zł."},
+      {"Ile trwa rejestracja spółki w KRS?",
+       "Przepisy przewidują rozpoznanie wniosku o wpis spółki założonej w S24 w ciągu jednego dnia, a pozostałych wniosków — w ciągu siedmiu dni. W praktyce czas zależy od obłożenia sądu i kompletności wniosku."},
+      {"Czy jedna osoba może założyć spółkę z o.o.?",
+       "Tak, spółka z o.o. może mieć jednego wspólnika. Nie może jej jednak zawiązać wyłącznie inna jednoosobowa spółka z ograniczoną odpowiedzialnością."},
+      {"Spółka z o.o. czy jednoosobowa działalność gospodarcza?",
+       "Przedsiębiorca prowadzący jednoosobową działalność odpowiada za zobowiązania firmy całym swoim majątkiem. Wspólnicy spółki z o.o. nie odpowiadają za jej zobowiązania, choć w określonych sytuacjach odpowiedzialność mogą ponosić członkowie zarządu. Spółka oznacza za to więcej formalności i pełną księgowość."}
+    ],
+    "umowy" => [
+      {"Czy umowa zawarta mailowo lub ustnie jest ważna?",
+       "Co do zasady tak — większość umów można zawrzeć w dowolnej formie. Wyjątkiem są umowy, dla których ustawa wymaga formy szczególnej, na przykład aktu notarialnego przy sprzedaży nieruchomości. Forma pisemna ułatwia jednak wykazanie treści ustaleń w razie sporu."},
+      {"Kiedy można odstąpić od umowy?",
+       "Wtedy, gdy przewiduje to sama umowa albo ustawa. W umowach wzajemnych podstawą bywa zwłoka drugiej strony: co do zasady trzeba najpierw wyznaczyć jej odpowiedni dodatkowy termin z zagrożeniem odstąpienia (art. 491 k.c.)."},
+      {"Czy karę umowną można obniżyć?",
+       "Tak. Dłużnik może żądać zmniejszenia kary umownej, jeżeli zobowiązanie zostało w znacznej części wykonane albo kara jest rażąco wygórowana (art. 484 § 2 k.c.). Karę umowną można zastrzec tylko na wypadek niewykonania lub nienależytego wykonania zobowiązania niepieniężnego."},
+      {"Ile kosztuje sprawdzenie umowy przez adwokata?",
+       "Zależy od objętości i stopnia skomplikowania umowy. Po zapoznaniu się z dokumentem podajemy koszt i termin, zanim przystąpimy do pracy."}
+    ],
+    "egzekucja-wierzytelnosci" => [
+      {"Jak odzyskać pieniądze za niezapłaconą fakturę?",
+       "Zwykle w czterech krokach: wezwanie do zapłaty, pozew o wydanie nakazu zapłaty, uzyskanie klauzuli wykonalności i wniosek do komornika. Na każdym etapie możliwe jest porozumienie z dłużnikiem, na przykład rozłożenie długu na raty."},
+      {"Jakie odsetki i rekompensata należą się za opóźnienie kontrahenta?",
+       "W transakcjach handlowych wierzycielowi przysługują odsetki ustawowe za opóźnienie w transakcjach handlowych oraz rekompensata za koszty odzyskiwania należności: równowartość 40 euro przy świadczeniu do 5 000 zł, 70 euro przy świadczeniu wyższym niż 5 000 zł, ale niższym niż 50 000 zł, oraz 100 euro przy świadczeniu od 50 000 zł."},
+      {"Kto płaci koszty egzekucji komorniczej?",
+       "Co do zasady dłużnik: komornik ściąga od niego opłatę egzekucyjną razem z egzekwowanym świadczeniem. Wierzyciel może zostać wezwany do wpłacenia zaliczki na wydatki, na przykład na koszty korespondencji i zapytań."},
+      {"Co zrobić, gdy komornik umorzył egzekucję jako bezskuteczną?",
+       "Tytuł wykonawczy zachowuje ważność, więc egzekucję można wszcząć ponownie, gdy dłużnik uzyska majątek. Roszczenie stwierdzone prawomocnym orzeczeniem przedawnia się co do zasady po sześciu latach, a każdy wniosek egzekucyjny przerywa bieg tego terminu. Przy długach spółki z o.o. warto też ocenić odpowiedzialność członków jej zarządu."}
+    ],
+    "restrukturyzacja" => [
+      {"Czy restrukturyzacja wstrzymuje egzekucję komorniczą?",
+       "Tak, w zakresie określonym dla danego postępowania. Otwarcie postępowania układowego zawiesza egzekucje wierzytelności objętych układem, a otwarcie postępowania sanacyjnego — egzekucje skierowane do majątku wchodzącego w skład masy sanacyjnej. W postępowaniu o zatwierdzenie układu ochrona działa od obwieszczenia o ustaleniu dnia układowego i trwa nie dłużej niż cztery miesiące."},
+      {"Czym różni się restrukturyzacja od upadłości?",
+       "Restrukturyzacja ma pozwolić firmie dalej działać dzięki układowi z wierzycielami — przedsiębiorca co do zasady zachowuje firmę. Upadłość prowadzi do sprzedaży majątku przez syndyka i podziału uzyskanych środków między wierzycieli."},
+      {"Kiedy zarząd musi złożyć wniosek o upadłość?",
+       "W terminie 30 dni od dnia, w którym wystąpiła podstawa do ogłoszenia upadłości, czyli niewypłacalność. Zwłoka może prowadzić do osobistej odpowiedzialności członków zarządu za długi spółki."},
+      {"Jaka większość wierzycieli jest potrzebna do przyjęcia układu?",
+       "Układ zostaje przyjęty, jeżeli opowie się za nim większość głosujących wierzycieli, mających łącznie co najmniej dwie trzecie sumy wierzytelności przysługujących głosującym wierzycielom. Przyjęty układ zatwierdza następnie sąd."}
+    ],
+    "obsluga-korporacyjna" => [
+      {"Do kiedy trzeba zatwierdzić i złożyć sprawozdanie finansowe?",
+       "Sprawozdanie finansowe zatwierdza się w ciągu sześciu miesięcy od dnia bilansowego, a następnie w ciągu 15 dni od zatwierdzenia składa do repozytorium dokumentów finansowych."},
+      {"W jakim terminie zgłosić zmianę zarządu do KRS?",
+       "Wniosek o wpis składa się w ciągu siedmiu dni od zmiany. Opłata sądowa wynosi 250 zł, a za ogłoszenie w Monitorze Sądowym i Gospodarczym dolicza się 100 zł. Sama zmiana jest skuteczna od chwili podjęcia uchwały — wpis ją jedynie ujawnia."},
+      {"Czy zmiana umowy spółki z o.o. wymaga notariusza?",
+       "Tak. Uchwałę o zmianie umowy spółki umieszcza się w protokole sporządzonym przez notariusza, a zmiana staje się skuteczna dopiero z chwilą wpisu do KRS. Wyjątkiem są spółki założone w S24, które mogą zmienić umowę w tym systemie w zakresie przewidzianym przez wzorzec."},
+      {"Jak zaskarżyć uchwałę wspólników?",
+       "Powództwo o uchylenie uchwały wnosi się w terminie miesiąca od otrzymania wiadomości o uchwale, nie później niż sześć miesięcy od jej powzięcia. Powództwo o stwierdzenie nieważności uchwały — w terminie sześciu miesięcy od otrzymania wiadomości o niej, nie później niż trzy lata od jej powzięcia."}
+    ],
+    "nowe-technologie" => [
+      {"Od kiedy stosuje się AI Act?",
+       "Rozporządzenie weszło w życie 1 sierpnia 2024 r. i jest stosowane etapami. Zakazy niedopuszczalnych praktyk oraz obowiązek zapewnienia pracownikom odpowiednich kompetencji w zakresie AI stosuje się od 2 lutego 2025 r., a obowiązki dostawców modeli ogólnego przeznaczenia — od 2 sierpnia 2025 r. Terminy dla systemów wysokiego ryzyka są późniejsze i były przedmiotem zmian, dlatego w każdej sprawie sprawdzamy aktualny stan prawny."},
+      {"Czy można wpisywać dane klientów do narzędzi takich jak ChatGPT?",
+       "Wpisanie danych osobowych do zewnętrznego narzędzia AI jest ich przetwarzaniem i wymaga podstawy prawnej z RODO. Trzeba sprawdzić warunki dostawcy: czy zawiera umowę powierzenia, gdzie przechowuje dane i czy używa ich do trenowania modelu. Osobną kwestią jest tajemnica przedsiębiorstwa i poufność wobec kontrahentów."},
+      {"Kto ma prawa autorskie do obrazów i tekstów wygenerowanych przez AI?",
+       "W polskim prawie utworem jest przejaw działalności twórczej człowieka, dlatego treści wygenerowane wyłącznie przez AI co do zasady nie korzystają z ochrony prawnoautorskiej. Chroniony może być twórczy wkład człowieka. Zakres dozwolonego korzystania z wyników określają też warunki licencji narzędzia."},
+      {"Kto odpowiada za błąd systemu AI?",
+       "Wobec klientów i kontrahentów co do zasady odpowiada firma, która posługuje się systemem — na ogólnych zasadach odpowiedzialności. To, czy może następnie żądać zwrotu od dostawcy, zależy od umowy z nim, dlatego postanowienia o odpowiedzialności warto negocjować przed wdrożeniem."}
+    ],
+    "sukcesja-firm" => [
+      {"Co dzieje się z jednoosobową firmą po śmierci właściciela?",
+       "Bez zarządcy sukcesyjnego działalność w praktyce ustaje: co do zasady wygasają umowy o pracę, pełnomocnictwa i część decyzji administracyjnych. Jeżeli zarządca został powołany, przedsiębiorstwo w spadku działa dalej pod dotychczasowym NIP do czasu uregulowania spraw spadkowych."},
+      {"Czy zarządcę sukcesyjnego można powołać po śmierci przedsiębiorcy?",
+       "Tak, w ciągu dwóch miesięcy od dnia śmierci. Zarządcę może powołać między innymi małżonek, któremu przysługuje udział w przedsiębiorstwie w spadku, albo spadkobierca, który przyjął spadek. Powołanie wymaga formy aktu notarialnego i zgody osób, którym łącznie przysługuje udział w przedsiębiorstwie większy niż 85/100."},
+      {"Jak długo trwa zarząd sukcesyjny?",
+       "Co do zasady do działu spadku obejmującego przedsiębiorstwo, nie dłużej niż dwa lata od śmierci przedsiębiorcy. Z ważnych przyczyn sąd może przedłużyć ten okres — do pięciu lat od dnia śmierci."},
+      {"Ile wynosi minimalny majątek fundacji rodzinnej?",
+       "Fundusz założycielski fundacji rodzinnej musi wynosić co najmniej 100 000 zł. Fundację ustanawia się w akcie założycielskim albo w testamencie, w formie aktu notarialnego, a osobowość prawną uzyskuje ona z chwilą wpisu do rejestru fundacji rodzinnych."}
+    ],
+    "prawo-medyczne" => [
+      {"W jakim terminie trzeba udostępnić pacjentowi dokumentację medyczną?",
+       "Bez zbędnej zwłoki. Pierwsza kopia dokumentacji w żądanym zakresie jest dla pacjenta bezpłatna; za kolejne podmiot może pobrać opłatę w wysokości ograniczonej ustawą."},
+      {"Jak długo przechowuje się dokumentację medyczną?",
+       "Co do zasady 20 lat, licząc od końca roku kalendarzowego, w którym dokonano ostatniego wpisu. Ustawa przewiduje wyjątki — na przykład 30 lat w razie zgonu pacjenta wskutek uszkodzenia ciała lub zatrucia oraz 22 lata dla dokumentacji dzieci do ukończenia drugiego roku życia."},
+      {"Czy zgoda pacjenta na zabieg musi być pisemna?",
+       "Forma pisemna jest wymagana przy zabiegu operacyjnym oraz przy metodzie leczenia lub diagnostyki stwarzającej podwyższone ryzyko dla pacjenta. W każdym przypadku zgodę musi poprzedzać przystępna informacja o stanie zdrowia, proponowanych metodach, ryzyku i następstwach."},
+      {"Czy gabinet lekarski musi mieć ubezpieczenie OC?",
+       "Tak. Podmiot wykonujący działalność leczniczą ma obowiązek zawrzeć umowę ubezpieczenia odpowiedzialności cywilnej, a ochrona powinna obowiązywać najpóźniej od dnia poprzedzającego rozpoczęcie działalności."},
+      {"Kiedy przedawniają się roszczenia pacjenta?",
+       "Co do zasady z upływem trzech lat od dnia, w którym pacjent dowiedział się o szkodzie i o osobie obowiązanej do jej naprawienia. W razie szkody na osobie termin nie może skończyć się wcześniej niż po trzech latach od uzyskania tej wiedzy."}
+    ],
+    "spory-gospodarcze" => [
+      {"Czy w sprawie gospodarczej można powołać świadków?",
+       "Tak, ale w ograniczonym zakresie. Sąd dopuszcza dowód z zeznań świadków dopiero wtedy, gdy po wyczerpaniu innych środków dowodowych pozostały niewyjaśnione fakty istotne dla sprawy. Czynności stron, takie jak zawarcie lub zmiana umowy, wykazuje się co do zasady dokumentami."},
+      {"Ile kosztuje pozew w sprawie gospodarczej?",
+       "Opłata od pozwu zależy od wartości przedmiotu sporu: do 20 000 zł jest stała i wynosi od 30 zł do 1 000 zł, a powyżej tej kwoty — 5% wartości, nie więcej niż 200 000 zł."},
+      {"Czy postępowanie gospodarcze dotyczy jednoosobowej działalności?",
+       "Tak. Strona, która jest przedsiębiorcą będącym osobą fizyczną albo nie jest przedsiębiorcą, może jednak złożyć wniosek o rozpoznanie sprawy z pominięciem przepisów o postępowaniu w sprawach gospodarczych."},
+      {"Kiedy przedawniają się roszczenia między przedsiębiorcami?",
+       "Co do zasady po trzech latach, z końcem roku kalendarzowego. Dla niektórych umów terminy są krótsze — na przykład dwa lata dla roszczeń ze sprzedaży dokonanej w zakresie działalności przedsiębiorstwa sprzedawcy i dla roszczeń z umowy o dzieło."},
+      {"Czy przed pozwem trzeba próbować mediacji?",
+       "Mediacja nie jest obowiązkowa, ale w pozwie trzeba wskazać, czy strony próbowały rozwiązać spór pozasądowo. Ugoda zawarta przed mediatorem i zatwierdzona przez sąd ma moc ugody sądowej."}
+    ],
+    "rodo" => [
+      {"Czy mała firma musi wdrożyć RODO?",
+       "Tak. RODO stosuje się do każdego przedsiębiorcy, który przetwarza dane osobowe klientów, pracowników lub kontrahentów — niezależnie od wielkości firmy. Zakres dokumentacji i zabezpieczeń powinien być jednak proporcjonalny do skali i ryzyka przetwarzania."},
+      {"Kiedy trzeba powołać inspektora ochrony danych?",
+       "Obowiązek dotyczy organów i podmiotów publicznych oraz firm, których główna działalność polega na regularnym i systematycznym monitorowaniu osób na dużą skalę albo na przetwarzaniu na dużą skalę szczególnych kategorii danych, na przykład danych o zdrowiu (art. 37 RODO)."},
+      {"Jakie kary grożą za naruszenie RODO?",
+       "Administracyjna kara pieniężna może wynieść do 20 mln euro albo do 4% całkowitego rocznego światowego obrotu przedsiębiorstwa — zastosowanie ma kwota wyższa. Za część naruszeń górna granica to 10 mln euro albo 2% obrotu."},
+      {"Kiedy potrzebna jest umowa powierzenia przetwarzania danych?",
+       "Zawsze wtedy, gdy inny podmiot przetwarza dane osobowe w imieniu administratora — na przykład biuro rachunkowe, dostawca hostingu albo firma serwisująca system informatyczny (art. 28 RODO)."},
+      {"W jakim terminie trzeba odpowiedzieć na żądanie dostępu do danych lub ich usunięcia?",
+       "Bez zbędnej zwłoki, najpóźniej w ciągu miesiąca od otrzymania żądania. W razie skomplikowanego charakteru żądania lub dużej ich liczby termin można przedłużyć o kolejne dwa miesiące, informując o tym osobę w ciągu pierwszego miesiąca."}
+    ]
+  }
+
+  # More questions per page, taken from what people actually type into Google:
+  # autocomplete suggestions collected on 2026-11-23 for each topic ("ile kosztuje…",
+  # "czy…", "kiedy…"), limited to legal questions within the scope of the page.
+  # Answers are our own, written from the statutes. Plain text only (JSON-LD).
+  @searched %{
+    "obsluga-przedsiebiorcow" => [
+      {"Czy jednoosobowa działalność może korzystać ze stałej obsługi prawnej?",
+       "Tak. Forma prawna i wielkość firmy nie mają znaczenia — zakres obsługi dopasowuje się do liczby i rodzaju spraw."},
+      {"Czy umowę o stałą obsługę prawną można wypowiedzieć?",
+       "Tak. Do umowy stosuje się przepisy o zleceniu, więc każda ze stron może ją wypowiedzieć; okres wypowiedzenia i zasady rozliczenia rozpoczętych spraw określa umowa."},
+      {"Czy rozmowy z adwokatem obsługującym firmę są poufne?",
+       "Tak. Adwokata obowiązuje tajemnica zawodowa, która obejmuje wszystko, o czym dowiedział się w związku z udzielaniem pomocy prawnej, i nie jest ograniczona w czasie."},
+      {"Czy adwokat może reprezentować firmę przed sądem i urzędami?",
+       "Tak. Adwokat może reprezentować przedsiębiorcę przed sądami wszystkich instancji, organami administracji i w negocjacjach z kontrahentami — na podstawie udzielonego pełnomocnictwa."}
+    ],
+    "zawyzony-metraz" => [
+      {"Jak liczy się powierzchnię użytkową mieszkania?",
+       "Według Polskiej Normy PN-ISO 9836 — od 13 lutego 2026 r. ustawa deweloperska odsyła do niej wprost. W starszych umowach sposób pomiaru wynika z treści umowy i prospektu informacyjnego, dlatego trzeba je przeczytać przed oceną roszczenia."},
+      {"Co zrobić, gdy mieszkanie jest mniejsze niż w umowie deweloperskiej?",
+       "Najpierw sprawdzić w umowie postanowienia o różnicy powierzchni i sposobie pomiaru oraz porównać je z pomiarem powykonawczym. W razie wątpliwości warto zlecić własny pomiar geodecie, a następnie wezwać dewelopera do zwrotu nadpłaconej części ceny."},
+      {"Kto wykonuje pomiar mieszkania i czy można go podważyć?",
+       "Pomiar powykonawczy zleca zwykle deweloper. Nabywca może zlecić własny pomiar uprawnionemu geodecie, a w procesie powierzchnię ustala biegły powołany przez sąd."},
+      {"Czy można żądać zwrotu od dewelopera kilka lat po zakupie mieszkania?",
+       "Tak, dopóki roszczenie nie jest przedawnione. Konsument dochodzi go co do zasady w terminie sześciu lat, liczonym do końca roku kalendarzowego, dlatego roszczenia dotyczące mieszkań kupionych kilka lat temu często nadal są aktualne."}
+    ],
+    "rozwod" => [
+      {"Kiedy wyrok rozwodowy staje się prawomocny?",
+       "Jeżeli żadna ze stron nie złoży w ciągu tygodnia od ogłoszenia wyroku wniosku o jego uzasadnienie, wyrok uprawomocnia się z upływem tego terminu. Gdy wniosek zostanie złożony — po bezskutecznym upływie dwóch tygodni na wniesienie apelacji, liczonych od doręczenia wyroku z uzasadnieniem."},
+      {"Czy rozwód z orzeczeniem o winie wpływa na podział majątku?",
+       "Bezpośrednio nie. Udziały małżonków w majątku wspólnym są co do zasady równe niezależnie od winy. Sąd może ustalić nierówne udziały tylko z ważnych powodów i z uwzględnieniem stopnia, w którym każde z małżonków przyczyniło się do powstania majątku. Wina ma natomiast znaczenie dla alimentów między byłymi małżonkami."},
+      {"Czym różni się rozwód od separacji?",
+       "Separację sąd orzeka, gdy rozkład pożycia jest zupełny, ale nie musi być trwały. Małżeństwo formalnie trwa, więc małżonkowie nie mogą zawrzeć nowego związku, a separację można znieść na ich zgodne żądanie. Poza tym separacja wywołuje co do zasady takie skutki jak rozwód, w tym rozdzielność majątkową."},
+      {"Czy można wycofać pozew o rozwód?",
+       "Tak. Pozew można cofnąć bez zgody drugiego małżonka do rozpoczęcia rozprawy, a później — za jego zgodą albo wraz ze zrzeczeniem się roszczenia."}
+    ],
+    "sprawy-rodzinne" => [
+      {"Czy kontakty z dzieckiem mogą odbywać się w obecności kuratora?",
+       "Tak. Jeżeli wymaga tego dobro dziecka, sąd może ograniczyć kontakty — między innymi zezwolić na spotkania tylko w obecności drugiego rodzica, opiekuna albo kuratora sądowego."}
+    ],
+    "podzial-majatku" => [
+      {"Ile jest czasu na podział majątku po rozwodzie?",
+       "Nie ma terminu. Podział majątku nie jest obowiązkowy, a żądanie podziału nie ulega przedawnieniu — można go przeprowadzić także wiele lat po rozwodzie. Z upływem czasu trudniej jednak wykazać skład majątku i poniesione nakłady."},
+      {"Co wchodzi w skład majątku wspólnego?",
+       "Przede wszystkim przedmioty nabyte w czasie trwania wspólności przez oboje małżonków lub jedno z nich, w tym wynagrodzenia za pracę i dochody z majątku. Do majątku osobistego należą między innymi przedmioty nabyte przed ślubem oraz otrzymane w spadku lub darowiźnie, chyba że spadkodawca lub darczyńca postanowił inaczej."},
+      {"Kiedy sąd ustali nierówne udziały w majątku wspólnym?",
+       "Z ważnych powodów każde z małżonków może żądać ustalenia udziałów z uwzględnieniem stopnia, w którym przyczyniło się do powstania majątku. Sąd bierze przy tym pod uwagę także nakład osobistej pracy przy wychowaniu dzieci i we wspólnym gospodarstwie domowym — sam brak pracy zarobkowej nie uzasadnia więc mniejszego udziału."},
+      {"Czy majątek można podzielić przed rozwodem?",
+       "Tylko po ustaniu wspólności majątkowej. Przed rozwodem wymaga to ustanowienia rozdzielności — umową zawartą u notariusza albo orzeczeniem sądu."},
+      {"Ile trwa sprawa o podział majątku?",
+       "Przy zgodnym wniosku sprawa może zakończyć się na jednym posiedzeniu. Spór o skład i wartość majątku, wymagający opinii biegłych, trwa wyraźnie dłużej."}
+    ],
+    "upadlosc-konsumencka" => [
+      {"Czy upadłość konsumencka obejmuje długi wobec ZUS i urzędu skarbowego?",
+       "Co do zasady tak — umorzenie może objąć także zaległości podatkowe i składkowe powstałe przed ogłoszeniem upadłości."},
+      {"Ile trwa upadłość konsumencka?",
+       "Nie da się tego określić z góry. Czas zależy od kompletności wniosku, liczby wierzycieli i tego, czy trzeba sprzedać majątek; gdy majątku nie ma, postępowanie jest zwykle krótsze. Sam plan spłaty trwa do trzech lat, a w określonych przypadkach od trzech do siedmiu."},
+      {"Czy długi po upadłości przechodzą na dzieci lub małżonka?",
+       "Nie. Sama więź rodzinna nie tworzy obowiązku spłaty cudzych długów. Inaczej jest ze współkredytobiorcą lub poręczycielem — umorzenie zobowiązań upadłego nie zwalnia ich z długu."},
+      {"Czy wniosek o upadłość konsumencką można złożyć samodzielnie?",
+       "Tak, udział adwokata nie jest obowiązkowy. Wniosek składa się przez Krajowy Rejestr Zadłużonych albo na formularzu. Trzeba w nim rzetelnie opisać majątek, wierzycieli i przyczyny niewypłacalności, bo braki i nieścisłości utrudniają oddłużenie."},
+      {"Jakie są skutki ogłoszenia upadłości konsumenckiej?",
+       "Majątek upadłego staje się masą upadłości, którą zarządza syndyk, a część wynagrodzenia podlegająca zajęciu trafia do masy. Między małżonkami powstaje rozdzielność majątkowa. W okresie wykonywania planu spłaty upadły nie może dokonywać czynności, które pogorszyłyby jego zdolność do wykonania planu."}
+    ],
+    "sprawy-o-zaplate" => [
+      {"Kiedy nakaz zapłaty staje się prawomocny?",
+       "Po bezskutecznym upływie terminu na wniesienie sprzeciwu albo zarzutów. Prawomocny nakaz zapłaty ma skutki prawomocnego wyroku."},
+      {"Czy nakaz zapłaty jest tytułem wykonawczym?",
+       "Prawomocny nakaz zapłaty jest tytułem egzekucyjnym. Tytułem wykonawczym, na podstawie którego działa komornik, staje się po nadaniu mu klauzuli wykonalności."},
+      {"Czy nakaz zapłaty można rozłożyć na raty?",
+       "Sąd może w szczególnie uzasadnionych wypadkach rozłożyć zasądzone świadczenie na raty, ale wymaga to zaskarżenia nakazu i wniosku pozwanego. Po uprawomocnieniu się nakazu raty można uzgodnić już tylko z wierzycielem."},
+      {"Jak długo ważny jest nakaz zapłaty?",
+       "Roszczenie stwierdzone prawomocnym nakazem zapłaty przedawnia się z upływem sześciu lat, a odsetki należne w przyszłości — trzech lat. Każdy wniosek o wszczęcie egzekucji przerywa bieg tego terminu."}
+    ],
+    "odszkodowania" => [
+      {"Ile wynosi zadośćuczynienie za wypadek?",
+       "Przepisy nie przewidują stawek ani tabel. Sąd ustala kwotę indywidualnie, biorąc pod uwagę rodzaj i trwałość obrażeń, przebieg leczenia, wiek poszkodowanego oraz wpływ wypadku na jego pracę i życie codzienne."},
+      {"Kto wypłaca odszkodowanie za wypadek przy pracy?",
+       "Jednorazowe odszkodowanie za stały lub długotrwały uszczerbek na zdrowiu wypłaca ZUS. Jeżeli świadczenia z ubezpieczenia wypadkowego nie pokrywają całej szkody, poszkodowany może dochodzić roszczeń uzupełniających od pracodawcy na podstawie przepisów prawa cywilnego."},
+      {"Czy za wypadek w drodze do pracy należy się odszkodowanie?",
+       "Jednorazowe odszkodowanie z ZUS w takim przypadku nie przysługuje, ale zasiłek chorobowy wynosi 100% podstawy wymiaru. Niezależnie od tego można dochodzić odszkodowania i zadośćuczynienia od sprawcy wypadku albo jego ubezpieczyciela."}
+    ],
+    "nieruchomosci" => [
+      {"Jak udowodnić zasiedzenie nieruchomości?",
+       "Trzeba wykazać samoistne posiadanie przez wymagany czas. Służą temu zeznania świadków, dowody opłacania podatku od nieruchomości, rachunki za remonty i budowę, ogrodzenie czy zagospodarowanie działki. Wnioskodawcy pomagają domniemania: posiadania samoistnego, jego ciągłości i dobrej wiary."},
+      {"Co przerywa bieg zasiedzenia?",
+       "Przede wszystkim czynność podjęta przed sądem bezpośrednio w celu odzyskania nieruchomości, na przykład pozew o jej wydanie, oraz uznanie prawa właściciela przez posiadacza. Samo pismo lub wezwanie skierowane do posiadacza biegu zasiedzenia nie przerywa."},
+      {"Czy zasiedzenie przechodzi na spadkobierców?",
+       "Tak. Spadkobierca może doliczyć do swojego czasu posiadania czas posiadania spadkodawcy, a nabywca — czas posiadania poprzednika."},
+      {"Czy można zasiedzieć nieruchomość Skarbu Państwa lub gminy?",
+       "Obecnie tak, na ogólnych zasadach, z ograniczeniami dotyczącymi okresu sprzed 1 października 1990 r., kiedy zasiedzenie nieruchomości państwowych było wyłączone."}
+    ],
+    "prawa-konsumentow" => [
+      {"Czy można reklamować towar bez paragonu?",
+       "Tak. Paragon nie jest warunkiem reklamacji — wystarczy inny dowód zakupu u danego sprzedawcy, na przykład potwierdzenie płatności kartą, wiadomość e-mail z zamówieniem albo zeznania świadka."},
+      {"Czy odstąpienie od umowy można wysłać mailem?",
+       "Tak. Oświadczenie o odstąpieniu od umowy zawartej na odległość lub poza lokalem można złożyć w dowolnej formie, także e-mailem; formularz sprzedawcy nie jest obowiązkowy. Do zachowania terminu wystarczy wysłanie oświadczenia przed jego upływem — warto zachować dowód wysyłki."},
+      {"Kiedy na odstąpienie od umowy jest 30 dni?",
+       "Gdy umowę zawarto poza lokalem przedsiębiorstwa podczas nieumówionej wizyty przedsiębiorcy w miejscu zamieszkania lub pobytu konsumenta albo podczas wycieczki. W pozostałych przypadkach termin wynosi 14 dni."},
+      {"Czym różni się odstąpienie od umowy od reklamacji?",
+       "Odstąpienie od umowy zawartej na odległość nie wymaga podania przyczyny i dotyczy także towaru bez wad. Reklamację składa się wtedy, gdy towar jest niezgodny z umową — prowadzi ona w pierwszej kolejności do naprawy lub wymiany."},
+      {"Kto płaci za odesłanie towaru przy odstąpieniu od umowy?",
+       "Co do zasady konsument — ponosi bezpośrednie koszty zwrotu towaru, chyba że sprzedawca zgodził się je pokryć albo nie poinformował o tym obowiązku. Sprzedawca zwraca natomiast cenę i koszt najtańszego oferowanego sposobu dostawy."}
+    ],
+    "sprawy-spadkowe" => [
+      {"Jak odrzucić spadek — w sądzie czy u notariusza?",
+       "Oświadczenie o odrzuceniu spadku składa się przed sądem albo przed notariuszem. Opłata sądowa za odebranie oświadczenia wynosi 100 zł; u notariusza płaci się taksę notarialną."},
+      {"Czy trzeba odrzucić spadek także w imieniu dziecka?",
+       "Zwykle tak. Udział rodzica, który odrzucił spadek, przypada jego dzieciom, więc aby i one nie odziedziczyły długów, spadek odrzuca się również w ich imieniu — w terminie sześciu miesięcy liczonym od dnia, w którym dziecko zostało powołane do spadku."},
+      {"Ile trwa sprawa o stwierdzenie nabycia spadku?",
+       "Gdy krąg spadkobierców jest jasny, a dokumenty kompletne, sąd może wydać postanowienie na pierwszej rozprawie. Spór o ważność testamentu albo konieczność odszukania spadkobierców wydłuża postępowanie."},
+      {"Czy testament napisany odręcznie jest ważny?",
+       "Tak, jeżeli spadkodawca napisał go w całości pismem ręcznym, podpisał i opatrzył datą. Brak daty nie powoduje nieważności, o ile nie wywołuje wątpliwości co do zdolności spadkodawcy do sporządzenia testamentu, jego treści albo wzajemnego stosunku kilku testamentów. Testament napisany na komputerze i jedynie podpisany jest nieważny."},
+      {"Czy dział spadku jest obowiązkowy?",
+       "Nie. Spadkobiercy mogą pozostać współwłaścicielami majątku spadkowego bezterminowo, a żądanie działu spadku nie ulega przedawnieniu. Bez działu każda ważniejsza decyzja dotycząca wspólnego majątku wymaga jednak zgody współspadkobierców."}
+    ],
+    "prawo-karne" => [
+      {"Czy można wycofać zawiadomienie o przestępstwie?",
+       "Przy przestępstwach ściganych z urzędu — nie: postępowanie toczy się niezależnie od woli zawiadamiającego. Przy przestępstwach ściganych na wniosek pokrzywdzony może cofnąć wniosek za zgodą prokuratora, a w postępowaniu sądowym za zgodą sądu — do rozpoczęcia przewodu sądowego na pierwszej rozprawie głównej."},
+      {"Co daje status oskarżyciela posiłkowego?",
+       "Pokrzywdzony staje się stroną postępowania sądowego: może zadawać pytania świadkom i oskarżonemu, składać wnioski dowodowe, zabierać głos na rozprawie i zaskarżyć wyrok apelacją."},
+      {"Czy oskarżyciel posiłkowy może mieć adwokata i czy ponosi koszty?",
+       "Może ustanowić pełnomocnika, który reprezentuje go w całym postępowaniu. W razie skazania sąd zasądza od oskarżonego na rzecz oskarżyciela posiłkowego poniesione wydatki, w tym koszty ustanowienia pełnomocnika."},
+      {"Czy oskarżyciel posiłkowy musi być na rozprawie?",
+       "Nie, jego obecność jest prawem, a nie obowiązkiem. Stawić się musi wtedy, gdy sąd wezwie go na przesłuchanie w charakterze świadka."},
+      {"Kto może złożyć zawiadomienie o przestępstwie?",
+       "Każdy, kto dowiedział się o popełnieniu przestępstwa ściganego z urzędu — nie tylko pokrzywdzony. Przy przestępstwach ściganych na wniosek potrzebny jest wniosek samego pokrzywdzonego."}
+    ],
+    "zakladanie-spolek" => [
+      {"Jak założyć spółkę z o.o. krok po kroku?",
+       "Trzeba zawrzeć umowę spółki — u notariusza albo w systemie S24 — wnieść wkłady na pokrycie kapitału zakładowego, powołać zarząd i złożyć wniosek o wpis do KRS. Po rejestracji spółka zgłasza beneficjentów rzeczywistych do CRBR w ciągu 14 dni oraz dane uzupełniające do urzędu skarbowego."},
+      {"Czy wspólnik spółki z o.o. płaci ZUS?",
+       "Wspólnik spółki wieloosobowej nie podlega ubezpieczeniom z samego tytułu posiadania udziałów. Jedyny wspólnik jednoosobowej spółki z o.o. jest natomiast traktowany jak osoba prowadząca pozarolniczą działalność i opłaca składki."},
+      {"Czy spółka z o.o. musi mieć zarząd i radę nadzorczą?",
+       "Zarząd jest obowiązkowy i może być jednoosobowy. Radę nadzorczą albo komisję rewizyjną trzeba ustanowić dopiero wtedy, gdy kapitał zakładowy przewyższa 500 000 zł, a wspólników jest więcej niż dwudziestu pięciu."},
+      {"Co daje założenie spółki z o.o.?",
+       "Przede wszystkim oddzielenie majątku prywatnego od ryzyka działalności: za zobowiązania odpowiada spółka, a nie wspólnicy. Spółka ułatwia też przyjęcie wspólnika lub inwestora oraz sprzedaż albo dziedziczenie firmy, bo przedmiotem obrotu są udziały."}
+    ],
+    "umowy" => [
+      {"Ile może wynosić kara umowna?",
+       "Przepisy nie określają górnej granicy. Kara musi być oznaczona kwotą albo sposobem jej wyliczenia, na przykład jako procent wynagrodzenia za każdy dzień. Kara rażąco wygórowana może jednak zostać obniżona przez sąd."},
+      {"Czy kara umowna wyłącza odszkodowanie?",
+       "Kara umowna należy się w zastrzeżonej wysokości bez względu na wysokość szkody. Odszkodowania przewyższającego karę można żądać tylko wtedy, gdy strony tak postanowiły w umowie (art. 484 § 1 k.c.)."},
+      {"Kara umowna za zwłokę czy za opóźnienie — jaka jest różnica?",
+       "Zwłoka to opóźnienie, za które dłużnik ponosi odpowiedzialność. Kara zastrzeżona za opóźnienie jest surowsza: należy się także wtedy, gdy termin nie został dotrzymany z przyczyn niezależnych od dłużnika."},
+      {"Kiedy przedawnia się kara umowna?",
+       "Tak jak roszczenia z umowy, z której wynika: co do zasady po sześciu latach, a w obrocie między przedsiębiorcami po trzech latach. Przy niektórych umowach termin jest krótszy — na przykład dwa lata przy umowie o dzieło."},
+      {"Czy umowa o współpracy to umowa B2B?",
+       "B2B to potoczne określenie umowy między przedsiębiorcami, najczęściej umowy o świadczenie usług. Jeżeli jednak praca jest w rzeczywistości wykonywana pod kierownictwem oraz w miejscu i czasie wyznaczonym przez zamawiającego, istnieje ryzyko uznania jej za stosunek pracy — bez względu na nazwę umowy."}
+    ],
+    "egzekucja-wierzytelnosci" => [
+      {"Kiedy przedawnia się niezapłacona faktura?",
+       "Zależy od rodzaju umowy. Roszczenia ze sprzedaży dokonanej w zakresie działalności przedsiębiorstwa przedawniają się po dwóch latach, a roszczenia z większości umów o świadczenie usług — po trzech latach. Koniec terminu przypada na ostatni dzień roku kalendarzowego."},
+      {"Po jakim czasie można oddać fakturę do windykacji?",
+       "Już od dnia następującego po terminie płatności — przepisy nie wymagają odczekania ani określonej liczby monitów."},
+      {"Ile trwa egzekucja komornicza?",
+       "To zależy od majątku dłużnika. Zajęcie rachunku bankowego lub wynagrodzenia następuje stosunkowo szybko, a egzekucja z nieruchomości trwa znacznie dłużej ze względu na opis i oszacowanie oraz licytację."},
+      {"Czy egzekucja komornicza przerywa bieg przedawnienia?",
+       "Tak. Wniosek o wszczęcie egzekucji przerywa bieg przedawnienia, a termin biegnie na nowo po zakończeniu postępowania egzekucyjnego."},
+      {"Ile kosztuje windykacja faktury?",
+       "Na koszty składają się opłata sądowa zależna od dochodzonej kwoty — w elektronicznym postępowaniu upominawczym 1,25%, nie mniej niż 30 zł — oraz wynagrodzenie pełnomocnika. W razie wygranej koszty procesu zwraca dłużnik, a wierzycielowi przysługuje dodatkowo rekompensata za koszty odzyskiwania należności."}
+    ],
+    "restrukturyzacja" => [
+      {"Ile trwa restrukturyzacja firmy?",
+       "Najszybsze jest postępowanie o zatwierdzenie układu: od ustalenia dnia układowego dłużnik ma cztery miesiące na złożenie wniosku o zatwierdzenie układu. Pozostałe postępowania trwają dłużej, a najdłużej — sanacyjne."},
+      {"Ile kosztuje restrukturyzacja firmy?",
+       "Opłata sądowa od wniosku restrukturyzacyjnego wynosi 1 000 zł. Głównym kosztem jest wynagrodzenie nadzorcy lub zarządcy; w postępowaniu o zatwierdzenie układu ustala się je w umowie z doradcą restrukturyzacyjnym."},
+      {"Kto prowadzi postępowanie restrukturyzacyjne?",
+       "Sąd restrukturyzacyjny oraz — zależnie od rodzaju postępowania — nadzorca układu, nadzorca sądowy albo zarządca. Funkcje te pełnią licencjonowani doradcy restrukturyzacyjni."},
+      {"Czy jednoosobowa firma może przejść restrukturyzację?",
+       "Tak. Postępowanie restrukturyzacyjne jest dostępne także dla osób fizycznych prowadzących działalność gospodarczą."},
+      {"Co restrukturyzacja oznacza dla pracowników?",
+       "Umowy o pracę trwają nadal. Wierzytelności ze stosunku pracy mogą zostać objęte układem tylko za zgodą pracownika. Ułatwienia w redukcji zatrudnienia przewiduje jedynie postępowanie sanacyjne."}
+    ],
+    "obsluga-korporacyjna" => [
+      {"Czy uchwałę wspólników można podjąć bez odbycia zgromadzenia?",
+       "Tak, jeżeli wszyscy wspólnicy wyrażą na piśmie zgodę na postanowienie, które ma być powzięte, albo na głosowanie pisemne. Możliwy jest też udział w zgromadzeniu przy wykorzystaniu środków komunikacji elektronicznej, chyba że umowa spółki stanowi inaczej."},
+      {"Kiedy uchwała wspólników wymaga notariusza?",
+       "Protokół notarialny jest wymagany między innymi przy zmianie umowy spółki, podwyższeniu kapitału zakładowego w drodze zmiany umowy, rozwiązaniu spółki oraz przy jej połączeniu, podziale i przekształceniu. Zwykłe uchwały, na przykład o zmianie zarządu, mogą mieć formę pisemną."},
+      {"Jakie dokumenty są potrzebne do zmiany zarządu w KRS?",
+       "Uchwała o odwołaniu i powołaniu członka zarządu, zgoda nowego członka zarządu na powołanie wraz z jego adresem do doręczeń oraz wniosek złożony elektronicznie przez Portal Rejestrów Sądowych."},
+      {"Ile trwa wpis zmiany zarządu w KRS?",
+       "Przepisy przewidują rozpoznanie wniosku w ciągu siedmiu dni, w praktyce czas zależy od obłożenia sądu i kompletności dokumentów. Nowy zarząd może działać od chwili podjęcia uchwały — nie musi czekać na wpis."},
+      {"Ile kosztuje zmiana umowy spółki?",
+       "Opłata sądowa za wpis zmiany w KRS wynosi 250 zł, a ogłoszenie w Monitorze Sądowym i Gospodarczym — 100 zł. Do tego dochodzi taksa notarialna za zaprotokołowanie uchwały, a przy podwyższeniu kapitału zakładowego także podatek od czynności cywilnoprawnych."}
+    ],
+    "nowe-technologie" => [
+      {"Czy AI Act obowiązuje w Polsce?",
+       "Tak. To rozporządzenie unijne, które stosuje się bezpośrednio we wszystkich państwach członkowskich — nie wymaga przeniesienia do polskiej ustawy. Przepisy krajowe określają jedynie organ nadzoru i procedury."},
+      {"Czy korzystanie z AI może naruszać cudze prawa autorskie?",
+       "Może. Jeżeli wygenerowany wynik odtwarza rozpoznawalne elementy cudzego utworu, jego rozpowszechnianie narusza prawa twórcy, a odpowiedzialność ponosi ten, kto z wyniku korzysta. Dlatego materiały przeznaczone do publikacji warto weryfikować."},
+      {"Co to jest AI Act?",
+       "To rozporządzenie Unii Europejskiej 2024/1689, które ustanawia zharmonizowane przepisy dotyczące sztucznej inteligencji. Nakłada obowiązki na dostawców i użytkowników systemów AI, zróżnicowane według poziomu ryzyka."},
+      {"Czy AI Act działa wstecz?",
+       "Co do zasady nie. Obowiązki stosuje się od dat wskazanych w rozporządzeniu, a dla systemów i modeli wprowadzonych do obrotu wcześniej przewidziano przepisy przejściowe."},
+      {"Jakie kary przewiduje AI Act?",
+       "Za stosowanie zakazanych praktyk — do 35 mln euro albo 7% całkowitego rocznego światowego obrotu, a za naruszenie większości pozostałych obowiązków — do 15 mln euro albo 3% obrotu. Dla małych i średnich przedsiębiorstw stosuje się niższą z tych wartości."}
+    ],
+    "sukcesja-firm" => [
+      {"Kto może być zarządcą sukcesyjnym?",
+       "Osoba fizyczna, która ma pełną zdolność do czynności prawnych i wobec której nie orzeczono zakazu prowadzenia działalności gospodarczej. Nie musi należeć do rodziny przedsiębiorcy. W tym samym czasie funkcję może pełnić tylko jedna osoba."},
+      {"Jak ustanowić zarządcę sukcesyjnego za życia?",
+       "Przedsiębiorca powołuje zarządcę na piśmie, zarządca wyraża pisemną zgodę, a powołanie zgłasza się do CEIDG. Wpis jest bezpłatny i można go złożyć przez internet."},
+      {"Czy zarządca sukcesyjny odpowiada za długi firmy?",
+       "Nie odpowiada za zobowiązania przedsiębiorstwa własnym majątkiem — działa w imieniu własnym, ale na rachunek właścicieli przedsiębiorstwa w spadku. Odpowiada natomiast za szkodę wyrządzoną nienależytym wykonywaniem swoich obowiązków."},
+      {"Czy fundacja rodzinna może prowadzić działalność gospodarczą?",
+       "Tylko w zakresie dozwolonym ustawą: między innymi może wynajmować i dzierżawić mienie, posiadać udziały w spółkach, nabywać i zbywać papiery wartościowe oraz udzielać pożyczek spółkom, w których uczestniczy, i beneficjentom."},
+      {"Czy fundacja rodzinna jest osobą prawną?",
+       "Tak. Osobowość prawną uzyskuje z chwilą wpisu do rejestru fundacji rodzinnych; wcześniej działa jako fundacja rodzinna w organizacji."}
+    ],
+    "prawo-medyczne" => [
+      {"Kto ma dostęp do dokumentacji medycznej pacjenta?",
+       "Pacjent, jego przedstawiciel ustawowy i osoba przez niego upoważniona. Po śmierci pacjenta — osoba upoważniona za życia oraz osoba bliska, o ile pacjent się temu nie sprzeciwił. Ustawa wymienia też uprawnione podmioty i organy, między innymi sądy, prokuraturę i NFZ."},
+      {"Czy dokumentacja medyczna może być prowadzona w formie papierowej?",
+       "Zasadą jest postać elektroniczna. Postać papierowa jest dopuszczalna, gdy przepis tak stanowi albo gdy warunki organizacyjno-techniczne uniemożliwiają prowadzenie dokumentacji elektronicznie."},
+      {"Kiedy zgoda pacjenta nie jest potrzebna?",
+       "Gdy pacjent wymaga niezwłocznej pomocy lekarskiej, a ze względu na stan zdrowia lub wiek nie może wyrazić zgody i nie ma możliwości porozumienia się z jego przedstawicielem ustawowym lub opiekunem faktycznym."},
+      {"Czy dokumentacja medyczna jest własnością pacjenta?",
+       "Nie. Dokumentacja należy do podmiotu, który ją prowadzi i odpowiada za jej przechowywanie. Pacjent ma natomiast prawo dostępu do niej — przez wgląd, kopię, odpis, wyciąg lub wydruk."}
+    ],
+    "spory-gospodarcze" => [
+      {"Co to jest sprawa gospodarcza?",
+       "To przede wszystkim sprawa ze stosunków cywilnych między przedsiębiorcami w zakresie prowadzonej przez nich działalności gospodarczej. Ustawa zalicza do nich także między innymi sprawy ze stosunku spółki oraz z umów o roboty budowlane i leasingu."},
+      {"Na czym polega prekluzja dowodowa w sprawie gospodarczej?",
+       "Powód musi powołać wszystkie twierdzenia i dowody w pozwie, a pozwany — w odpowiedzi na pozew. Późniejsze sąd pomija, chyba że strona wykaże, że ich powołanie nie było możliwe albo potrzeba wynikła później; wtedy ma na to dwa tygodnie."},
+      {"Czy sprawa gospodarcza jest sprawą cywilną?",
+       "Tak. To sprawa cywilna rozpoznawana w postępowaniu odrębnym, czyli według Kodeksu postępowania cywilnego ze zmianami przewidzianymi dla spraw gospodarczych."},
+      {"Który sąd rozpoznaje sprawy gospodarcze?",
+       "Wydziały gospodarcze sądów rejonowych, a przy wartości przedmiotu sporu powyżej 100 000 zł — sądów okręgowych. Strony będące przedsiębiorcami mogą w umowie wskazać sąd właściwy miejscowo."}
+    ],
+    "rodo" => [
+      {"Jak wdrożyć RODO w firmie krok po kroku?",
+       "Najpierw ustala się, jakie dane, w jakim celu i na jakiej podstawie firma przetwarza. Następnie przygotowuje się klauzule informacyjne, rejestr czynności przetwarzania i umowy powierzenia, ocenia ryzyko i dobiera zabezpieczenia, nadaje upoważnienia i szkoli pracowników, a na koniec wprowadza procedury obsługi żądań i naruszeń."},
+      {"Kto odpowiada za RODO w firmie?",
+       "Administrator danych, czyli sam przedsiębiorca albo spółka — nie pracownik ani inspektor ochrony danych. Inspektor doradza i monitoruje, ale odpowiedzialność wobec osób i organu nadzorczego ponosi administrator."},
+      {"Czy inspektor ochrony danych musi być pracownikiem firmy?",
+       "Nie. Inspektor może być członkiem personelu albo wykonywać zadania na podstawie umowy o świadczenie usług (art. 37 ust. 6 RODO)."},
+      {"Co musi zawierać umowa powierzenia przetwarzania danych?",
+       "Przedmiot, czas trwania, charakter i cel przetwarzania, rodzaj danych i kategorie osób oraz obowiązki stron. Podmiot przetwarzający zobowiązuje się między innymi przetwarzać dane wyłącznie na udokumentowane polecenie administratora, zapewnić poufność i zabezpieczenia, korzystać z dalszych podmiotów tylko za zgodą administratora oraz po zakończeniu umowy usunąć lub zwrócić dane (art. 28 ust. 3 RODO)."}
+    ]
+  }
+
   @doc """
   Visible FAQ for a service page (also its `FAQPage` JSON-LD): the topic
-  question answered by the service notes, then the extended FAQ.
+  question answered by the service notes, then the extended FAQ of
+  `ServiceDetails` or, on a short page, its `@questions`, then the questions
+  people search for (`@searched`).
   """
   def faq(service) do
     extra =
       case KralukKurkierewicz.ServiceDetails.get(service.slug) do
-        nil -> []
-        details -> details.faq
+        %{faq: faq} -> faq
+        _ -> Map.get(@questions, service.slug, [])
       end
 
     [{Map.get(@faq_questions, service.slug, service.notes_title), Enum.join(service.notes, " ")}] ++
-      extra
+      extra ++ Map.get(@searched, service.slug, [])
   end
 
-  # Day the service pages were first published; pages without extended content
-  # keep this date until their text really changes.
-  @published ~D[2026-11-22]
+  # Date of the last change to the pages without extended content (first
+  # published 2026-11-22); bump it only when their text really changes.
+  @published ~D[2026-11-23]
 
   @doc """
   Date of the last real content change of a service page (sitemap `lastmod`).

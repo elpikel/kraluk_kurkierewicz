@@ -121,7 +121,7 @@ defmodule KralukKurkierewiczWeb.PageControllerTest do
     end
 
     test "service page lists its related blog posts", %{conn: conn} do
-      html = conn |> get(~p"/uslugi/sprawy-rodzinne") |> html_response(200)
+      html = conn |> get(~p"/uslugi/alimenty") |> html_response(200)
       assert html =~ ~s(href="/blog/wysokosc-alimentow-na-dziecko")
     end
 
@@ -279,7 +279,7 @@ defmodule KralukKurkierewiczWeb.PageControllerTest do
         assert words >= 1000, "#{slug}: #{words} words"
 
         faq = html |> json_ld_graph() |> Enum.find(&(&1["@type"] == "FAQPage"))
-        assert length(faq["mainEntity"]) >= 6, slug
+        assert length(faq["mainEntity"]) >= 10, slug
         assert html =~ ~s(id="dokumenty")
         assert html =~ ~s(id="service-lead-)
       end
@@ -291,6 +291,49 @@ defmodule KralukKurkierewiczWeb.PageControllerTest do
       assert html =~ "IV Ca 1735/23"
       assert html =~ "orzeczenia.ms.gov.pl"
       assert html =~ "sześcioletnim terminie"
+    end
+
+    test "every service page has a local section, question FAQ and working inline links",
+         %{conn: conn} do
+      slugs = Enum.map(KralukKurkierewicz.Services.list(), & &1.slug)
+
+      for service <- KralukKurkierewicz.Services.list() do
+        html = conn |> get(~p"/uslugi/#{service.slug}") |> html_response(200)
+        [_, local] = Regex.run(~r{id="w-gdansku">(.*?)</div>}s, html)
+        assert local =~ ~r/Gdańsk/, service.slug
+
+        faq = KralukKurkierewicz.Services.faq(service)
+        assert length(faq) >= 10, service.slug
+        for {question, _answer} <- faq, do: assert(String.ends_with?(question, "?"), question)
+
+        # `[label](/path)` markup is always rendered, never shown raw
+        refute html =~ "](/", service.slug
+        for [_, slug] <- Regex.scan(~r{href="/uslugi/([^"#]+)"}, html), do: assert(slug in slugs)
+        assert String.length(service.description) <= 160, service.slug
+      end
+    end
+
+    test "inline links are rendered as anchors and other text is escaped" do
+      html =
+        "A <b> [strona](/uslugi/rozwod) [zewn](https://example.com)"
+        |> KralukKurkierewiczWeb.PageHTML.linked()
+        |> Phoenix.HTML.safe_to_string()
+
+      assert html =~ ~s(href="/uslugi/rozwod")
+      assert html =~ "&lt;b&gt;"
+      refute html =~ ~s(href="https://example.com")
+    end
+
+    test "every service page is a full page with question headings and a lead lawyer",
+         %{conn: conn} do
+      assert Enum.sort(KralukKurkierewicz.ServiceDetails.slugs()) ==
+               Enum.sort(Enum.map(KralukKurkierewicz.Services.list(), & &1.slug))
+
+      for service <- KralukKurkierewicz.Services.list() do
+        html = conn |> get(~p"/uslugi/#{service.slug}") |> html_response(200)
+        questions = Regex.scan(~r{<h2[^>]*>[^<]*\?\s*</h2>}, html)
+        assert length(questions) >= 4, service.slug
+      end
     end
 
     test "every service H1 names the city", %{conn: conn} do

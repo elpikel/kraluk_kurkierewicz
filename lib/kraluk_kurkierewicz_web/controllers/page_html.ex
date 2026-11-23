@@ -293,6 +293,35 @@ defmodule KralukKurkierewiczWeb.PageHTML do
   end
 
   @doc """
+  Service copy with internal links: `[label](/path)` becomes an anchor, all other
+  text is escaped. Only site-relative paths are linked.
+  """
+  def linked(text) when is_binary(text) do
+    link = ~r/\[([^\]]+)\]\((\/[^)\s]*)\)/
+
+    link
+    |> Regex.split(text, include_captures: true)
+    |> Enum.map(fn part ->
+      case Regex.run(link, part) do
+        [^part, label, path] ->
+          [
+            ~s(<a class="border-b border-brass text-ink transition-colors hover:border-ink" href="),
+            escape(path),
+            ~s(">),
+            escape(label),
+            "</a>"
+          ]
+
+        _ ->
+          escape(part)
+      end
+    end)
+    |> Phoenix.HTML.raw()
+  end
+
+  defp escape(text), do: text |> Phoenix.HTML.html_escape() |> Phoenix.HTML.safe_to_string()
+
+  @doc """
   One long-form section of an extended service page. `blocks` come from
   `KralukKurkierewicz.ServiceDetails`: paragraph strings, `{:list, items}`,
   `{:rulings, [{text, label, url}]}` or `:calculator`.
@@ -306,10 +335,10 @@ defmodule KralukKurkierewiczWeb.PageHTML do
     <%= for block <- @blocks do %>
       <%= case block do %>
         <% text when is_binary(text) -> %>
-          <p>{text}</p>
+          <p>{linked(text)}</p>
         <% {:list, items} -> %>
           <ul class="my-4 grid gap-2 pl-5 marker:text-brass [&>li]:list-disc [&>li]:leading-[1.7]">
-            <li :for={item <- items}>{item}</li>
+            <li :for={item <- items}>{linked(item)}</li>
           </ul>
         <% {:rulings, rulings} -> %>
           <ul class="my-5 grid gap-4">

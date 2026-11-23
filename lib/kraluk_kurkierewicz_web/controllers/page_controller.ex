@@ -128,11 +128,11 @@ defmodule KralukKurkierewiczWeb.PageController do
     conn |> put_status(:moved_permanently) |> redirect(to: ~p"/")
   end
 
-  # Search engines truncate (and Bing flags) titles over 70 characters, so the brand suffix
-  # is dropped when it would not fit.
+  # Google cuts titles at roughly 60 characters (and Bing flags those over 70), so the
+  # brand suffix is dropped when it would not fit.
   defp branded_title(title) do
     branded = title <> " — Kraluk Kurkierewicz"
-    if String.length(branded) <= 70, do: branded, else: title
+    if String.length(branded) <= 60, do: branded, else: title
   end
 
   def privacy(conn, _params) do
@@ -233,7 +233,7 @@ defmodule KralukKurkierewiczWeb.PageController do
 
     ## Specjalizacje
 
-    - Dla osób prywatnych: sprawy o zapłatę, odszkodowania i zadośćuczynienia, zawyżony metraż mieszkań, nieruchomości, rozwody, sprawy rodzinne (alimenty, władza rodzicielska), podział majątku małżonków, prawa konsumentów, upadłość konsumencka, sprawy spadkowe, prawo karne (reprezentacja pokrzywdzonych).
+    - Dla osób prywatnych: sprawy o zapłatę, odszkodowania i zadośćuczynienia, zawyżony metraż mieszkań, nieruchomości, rozwody, alimenty, sprawy rodzinne (kontakty z dzieckiem, władza rodzicielska), podział majątku małżonków, prawa konsumentów, upadłość konsumencka, sprawy spadkowe, zachowek, prawo karne (reprezentacja pokrzywdzonych).
     - Dla przedsiębiorców: bieżąca obsługa prawna, zakładanie spółek, umowy, egzekucja wierzytelności, restrukturyzacja, obsługa korporacyjna i spory masowe, AI i nowe technologie, sukcesja firm rodzinnych, prawo medyczne, spory gospodarcze, RODO.
 
     ## Usługi

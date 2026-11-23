@@ -70,7 +70,7 @@ defmodule KralukKurkierewicz.Blog do
       slug: "wysokosc-alimentow-na-dziecko",
       author: "milena-kraluk",
       updated: ~D[2026-11-22],
-      service: "sprawy-rodzinne",
+      service: "alimenty",
       title: "Ile wynoszą alimenty na dziecko i jak sąd ustala ich wysokość?",
       meta_title: "Wysokość alimentów na dziecko – jak ją ustalić?",
       date: ~D[2026-10-20],
