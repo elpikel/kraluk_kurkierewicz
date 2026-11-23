@@ -37,41 +37,13 @@ defmodule KralukKurkierewicz.Blog do
 
   @posts [
     %Post{
-      slug: "slup-energetyczny-na-dzialce-odszkodowanie",
-      author: "michal-kurkierewicz",
-      service: "sluzebnosc-przesylu",
-      title: "Słup energetyczny na działce - czy należy się odszkodowanie?",
-      meta_title: "Słup energetyczny na działce - czy należy się odszkodowanie?",
-      date: ~D[2026-11-23],
-      date_display: "23 listopada 2026",
-      category: "Służebność przesyłu",
-      excerpt:
-        "Na wielu prywatnych działkach od dziesięcioleci stoją słupy i biegną linie energetyczne, za które właściciele nigdy nie otrzymali zapłaty. Wyjaśniamy, jakie roszczenia przysługują właścicielowi i w jakich sytuacjach przedsiębiorca nie musi płacić.",
-      description:
-        "Słup lub linia energetyczna na działce: kiedy właścicielowi należy się wynagrodzenie, a kiedy przedsiębiorca ma tytuł prawny i nie musi płacić."
-    },
-    %Post{
-      slug: "ile-za-slup-energetyczny-na-dzialce",
-      author: "michal-kurkierewicz",
-      service: "sluzebnosc-przesylu",
-      title: "Ile można dostać za słup energetyczny na działce i za ile lat wstecz?",
-      meta_title: "Ile za słup energetyczny na działce? Wynagrodzenie i terminy",
-      date: ~D[2026-11-23],
-      date_display: "23 listopada 2026",
-      category: "Służebność przesyłu",
-      excerpt:
-        "Właściciele działek pytają najczęściej o kwoty: ile wynosi wynagrodzenie za słup lub linię energetyczną i za jaki okres można go żądać. Przepisy nie podają stawek, ale wiadomo, od czego zależy wysokość wynagrodzenia i jak daleko wstecz sięga roszczenie.",
-      description:
-        "Ile można dostać za słup energetyczny na działce? Od czego zależy wynagrodzenie za służebność przesyłu i za ile lat wstecz można żądać zapłaty."
-    },
-    %Post{
       slug: "zasiedzenie-sluzebnosci-przesylu-wyrok-tk",
       author: "michal-kurkierewicz",
       service: "sluzebnosc-przesylu",
       title: "Zasiedzenie służebności przesyłu po wyroku TK - co z przegranymi sprawami?",
       meta_title: "Zasiedzenie służebności przesyłu po wyroku TK P 10/16",
-      date: ~D[2026-11-23],
-      date_display: "23 listopada 2026",
+      date: ~D[2026-11-20],
+      date_display: "20 listopada 2026",
       category: "Służebność przesyłu",
       excerpt:
         "Przez lata przedsiębiorstwa przesyłowe wygrywały spory z właścicielami działek, powołując się na zasiedzenie służebności. Wyrok Trybunału Konstytucyjnego z 2 grudnia 2025 r. podważył tę linię obrony w odniesieniu do okresu sprzed 3 sierpnia 2008 r.",
@@ -84,13 +56,41 @@ defmodule KralukKurkierewicz.Blog do
       service: "sluzebnosc-przesylu",
       title: "Czy można przesunąć słup energetyczny na działce? Słup a budowa domu",
       meta_title: "Przesunięcie słupa energetycznego na działce a budowa domu",
-      date: ~D[2026-11-23],
-      date_display: "23 listopada 2026",
+      date: ~D[2026-11-13],
+      date_display: "13 listopada 2026",
       category: "Służebność przesyłu",
       excerpt:
         "Słup lub linia energetyczna potrafi uniemożliwić budowę domu w zaplanowanym miejscu. Wyjaśniamy, czy urządzenia można przesunąć lub usunąć, kto za to płaci i co sprawdzić przed zakupem działki.",
       description:
         "Czy można przesunąć lub usunąć słup energetyczny z działki, kto ponosi koszty przebudowy i co sprawdzić przed budową domu przy linii energetycznej."
+    },
+    %Post{
+      slug: "ile-za-slup-energetyczny-na-dzialce",
+      author: "michal-kurkierewicz",
+      service: "sluzebnosc-przesylu",
+      title: "Ile można dostać za słup energetyczny na działce i za ile lat wstecz?",
+      meta_title: "Ile za słup energetyczny na działce? Wynagrodzenie i terminy",
+      date: ~D[2026-11-06],
+      date_display: "6 listopada 2026",
+      category: "Służebność przesyłu",
+      excerpt:
+        "Właściciele działek pytają najczęściej o kwoty: ile wynosi wynagrodzenie za słup lub linię energetyczną i za jaki okres można go żądać. Przepisy nie podają stawek, ale wiadomo, od czego zależy wysokość wynagrodzenia i jak daleko wstecz sięga roszczenie.",
+      description:
+        "Ile można dostać za słup energetyczny na działce? Od czego zależy wynagrodzenie za służebność przesyłu i za ile lat wstecz można żądać zapłaty."
+    },
+    %Post{
+      slug: "slup-energetyczny-na-dzialce-odszkodowanie",
+      author: "michal-kurkierewicz",
+      service: "sluzebnosc-przesylu",
+      title: "Słup energetyczny na działce - czy należy się odszkodowanie?",
+      meta_title: "Słup energetyczny na działce - czy należy się odszkodowanie?",
+      date: ~D[2026-10-28],
+      date_display: "28 października 2026",
+      category: "Służebność przesyłu",
+      excerpt:
+        "Na wielu prywatnych działkach od dziesięcioleci stoją słupy i biegną linie energetyczne, za które właściciele nigdy nie otrzymali zapłaty. Wyjaśniamy, jakie roszczenia przysługują właścicielowi i w jakich sytuacjach przedsiębiorca nie musi płacić.",
+      description:
+        "Słup lub linia energetyczna na działce: kiedy właścicielowi należy się wynagrodzenie, a kiedy przedsiębiorca ma tytuł prawny i nie musi płacić."
     },
     %Post{
       slug: "kredyt-po-rozwodzie",

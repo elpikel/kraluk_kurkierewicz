@@ -916,12 +916,12 @@ defmodule KralukKurkierewicz.ServiceDetails do
         {"Jak ustanowić służebność przesyłu — umowa czy sąd?",
          [
            "Służebność można ustanowić umową z przedsiębiorcą; oświadczenie właściciela nieruchomości wymaga formy aktu notarialnego. Wpis do księgi wieczystej nie jest warunkiem powstania służebności, ale porządkuje stan prawny i jest widoczny dla przyszłych nabywców.",
-           "Jeżeli przedsiębiorca odmawia zawarcia umowy albo proponuje symboliczną kwotę, właściciel może złożyć wniosek o ustanowienie służebności do sądu rejonowego właściwego dla miejsca położenia nieruchomości. Opłata od wniosku wynosi 200 zł. Sąd określa zakres służebności i wysokość wynagrodzenia na podstawie opinii biegłych. Z takim samym wnioskiem może wystąpić przedsiębiorca, gdy to właściciel odmawia uregulowania stanu prawnego."
+           "Jeżeli przedsiębiorca odmawia zawarcia umowy albo proponuje symboliczną kwotę, właściciel może złożyć wniosek o ustanowienie służebności do sądu rejonowego właściwego dla miejsca położenia nieruchomości. Opłata od wniosku wynosi 100 zł. Sąd określa zakres służebności i wysokość wynagrodzenia na podstawie opinii biegłych. Z takim samym wnioskiem może wystąpić przedsiębiorca, gdy to właściciel odmawia uregulowania stanu prawnego."
          ]},
         {"Za ile lat wstecz można żądać zapłaty?",
          [
            "Wynagrodzenie za bezumowne korzystanie z nieruchomości przedawnia się na zasadach ogólnych — co do zasady po sześciu latach, a w przypadku roszczeń związanych z prowadzeniem działalności gospodarczej po trzech latach (art. 118 k.c.). Zapłaty można więc dochodzić za ostatnie lata, a nie za cały czas istnienia urządzeń.",
-           "Bieg przedawnienia przerywa wniesienie pozwu, a nie samo wezwanie do zapłaty. Z każdym rokiem zwłoki przepada wynagrodzenie za kolejny rok."
+           "Bieg przedawnienia przerywa wniesienie pozwu, a nie samo wezwanie do zapłaty. Z każdym rokiem zwłoki przepada wynagrodzenie za kolejny rok. Opłata od pozwu o wynagrodzenie za bezumowne korzystanie zależy od wartości przedmiotu sporu, czyli od dochodzonej kwoty."
          ]},
         {"Co zrobić, gdy sprawa została już prawomocnie przegrana?",
          [
@@ -971,6 +971,8 @@ defmodule KralukKurkierewicz.ServiceDetails do
          "Przedsiębiorca potrzebuje tytułu prawnego: umowy, służebności albo decyzji administracyjnej ograniczającej sposób korzystania z nieruchomości. Urządzenia posadowione bez takiego tytułu uprawniają właściciela do żądania wynagrodzenia."},
         {"Czy za gazociąg lub wodociąg na działce też należy się wynagrodzenie?",
          "Tak. Służebność przesyłu dotyczy wszystkich urządzeń służących do doprowadzania lub odprowadzania płynów, pary, gazu i energii elektrycznej, o ile należą do przedsiębiorcy."},
+        {"Ile kosztuje sprawa sądowa o służebność przesyłu?",
+         "Opłata od wniosku o ustanowienie służebności przesyłu wynosi 100 zł. Opłata od pozwu o wynagrodzenie za bezumowne korzystanie z nieruchomości zależy od wartości przedmiotu sporu. Do kosztów postępowania dochodzą wydatki na opinię biegłego."},
         {"Kto płaci za ustanowienie służebności przesyłu?",
          "Wynagrodzenie płaci przedsiębiorca, na którego rzecz służebność jest ustanawiana. Podział kosztów notarialnych ustalają strony w umowie, a o kosztach postępowania sądowego rozstrzyga sąd."},
         {"Czy służebność przesyłu obniża wartość nieruchomości?",

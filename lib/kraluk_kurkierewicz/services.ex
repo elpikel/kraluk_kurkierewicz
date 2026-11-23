@@ -993,7 +993,7 @@ defmodule KralukKurkierewicz.Services do
       "Roszczenia: ustanowienie służebności przesyłu za wynagrodzeniem oraz zapłata za bezumowne korzystanie z działki.",
       "Wyrok TK z 2 grudnia 2025 r. (P 10/16) zakwestionował zasiedzenie służebności przed 3 sierpnia 2008 r.",
       "Bezumowne korzystanie: co do zasady do 6 lat wstecz.",
-      "Wniosek o ustanowienie służebności przesyłu: sąd rejonowy miejsca położenia działki, opłata 200 zł."
+      "Wniosek o ustanowienie służebności przesyłu: sąd rejonowy miejsca położenia działki, opłata 100 zł."
     ],
     "prawa-konsumentow" => [
       "Odstąpienie od umowy zawartej na odległość: 14 dni, bez podawania przyczyny (z ustawowymi wyjątkami).",
