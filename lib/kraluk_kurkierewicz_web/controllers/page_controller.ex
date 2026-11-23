@@ -2,7 +2,6 @@ defmodule KralukKurkierewiczWeb.PageController do
   use KralukKurkierewiczWeb, :controller
 
   alias KralukKurkierewicz.Blog
-  alias KralukKurkierewicz.Pricing
   alias KralukKurkierewicz.Services
   alias KralukKurkierewicz.Team
   alias KralukKurkierewiczWeb.StructuredData
@@ -90,7 +89,6 @@ defmodule KralukKurkierewiczWeb.PageController do
           updated: updated,
           summary: Services.summary(service),
           related: Services.related(service),
-          prices: Pricing.for_service(service.slug),
           posts: Blog.posts_for_service(service.slug)
         )
     end
@@ -125,45 +123,16 @@ defmodule KralukKurkierewiczWeb.PageController do
     end
   end
 
+  # The price list was removed; its old address keeps working for existing links.
   def pricing(conn, _params) do
-    sections = pricing_sections()
-
-    conn
-    |> assign(:active_nav, "cennik")
-    |> assign(:page_title, "Cennik usług adwokackich — Gdańsk | Kraluk Kurkierewicz")
-    |> assign(
-      :meta_description,
-      "Orientacyjny cennik kancelarii adwokackiej w Gdańsku: konsultacja, rozwód, alimenty, podział majątku, upadłość konsumencka, obsługa firm. Ceny z VAT."
-    )
-    |> assign(:json_ld, [
-      StructuredData.offer_catalog(sections),
-      StructuredData.breadcrumbs([{"Cennik", "/cennik"}])
-    ])
-    |> render(:pricing, sections: sections, notes: Pricing.notes())
+    conn |> put_status(:moved_permanently) |> redirect(to: ~p"/")
   end
 
-  # `{title, items, service}` rows for the price list, grouped like the home page.
   # Search engines truncate (and Bing flags) titles over 70 characters, so the brand suffix
   # is dropped when it would not fit.
   defp branded_title(title) do
     branded = title <> " — Kraluk Kurkierewicz"
     if String.length(branded) <= 70, do: branded, else: title
-  end
-
-  defp pricing_sections do
-    services = fn audience ->
-      for service <- Services.home(audience),
-          {label, min, max} <- Pricing.for_service(service.slug) do
-        {label, min, max, service}
-      end
-    end
-
-    [
-      {"Usługi podstawowe",
-       Enum.map(Pricing.general(), fn {l, min, max} -> {l, min, max, nil} end)},
-      {"Dla osób prywatnych", services.(:private)},
-      {"Dla przedsiębiorców", services.(:business)}
-    ]
   end
 
   def privacy(conn, _params) do
@@ -283,7 +252,6 @@ defmodule KralukKurkierewiczWeb.PageController do
 
     - [Strona główna](#{base}/): specjalizacje, sposób pracy, zespół, kontakt
     - [Blog](#{base}/blog): artykuły o orzecznictwie i zmianach w przepisach
-    - [Cennik](#{base}/cennik): orientacyjne ceny usług (z VAT)
     #{team_pages}
     #{service_pages}
     - [Polityka prywatności](#{base}/polityka-prywatnosci)

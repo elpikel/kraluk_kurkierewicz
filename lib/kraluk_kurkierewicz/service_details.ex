@@ -213,7 +213,7 @@ defmodule KralukKurkierewicz.ServiceDetails do
         {"Koszty sądowe w sprawach rodzinnych",
          [
            "Osoba dochodząca alimentów na dziecko jest zwolniona od kosztów sądowych — także w sprawie o podwyższenie alimentów. Opłatę trzeba natomiast uiścić w sprawie o obniżenie alimentów albo uchylenie obowiązku alimentacyjnego: wynosi ona 5% wartości przedmiotu sporu, liczonej jako suma świadczeń za rok. Przykładowo, przy żądaniu obniżenia alimentów o 200 zł miesięcznie wartość przedmiotu sporu to 2 400 zł, a opłata — 120 zł.",
-           "Opłata stała od pozwu o rozwód wynosi 600 zł. Odrębnie ustalane jest wynagrodzenie adwokata — jego orientacyjne przedziały podajemy w cenniku."
+           "Opłata stała od pozwu o rozwód wynosi 600 zł."
          ]},
         {"Władza rodzicielska i kontakty z dzieckiem",
          [

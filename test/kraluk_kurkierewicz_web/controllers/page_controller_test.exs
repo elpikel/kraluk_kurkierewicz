@@ -196,27 +196,34 @@ defmodule KralukKurkierewiczWeb.PageControllerTest do
       assert person["url"] =~ "/zespol/milena-kraluk"
     end
 
+    test "partner page main content shows only that partner's phone", %{conn: conn} do
+      for {slug, own, other} <- [
+            {"milena-kraluk", "698359581", "793102489"},
+            {"michal-kurkierewicz", "793102489", "698359581"}
+          ] do
+        html = conn |> get(~p"/zespol/#{slug}") |> html_response(200)
+        [_, main] = Regex.run(~r{</header>(.*)<footer}s, html)
+        assert main =~ "tel:+48#{own}"
+        refute main =~ "tel:+48#{other}"
+      end
+    end
+
     test "unknown partner is a 404", %{conn: conn} do
       assert conn |> get("/zespol/nikt") |> response(404)
     end
 
-    test "pricing page lists ranges and emits an OfferCatalog", %{conn: conn} do
-      html = conn |> get(~p"/cennik") |> html_response(200)
-      assert html =~ "Konsultacja prawna"
-      assert html =~ "250–450 zł"
-      assert "OfferCatalog" in types(json_ld_graph(html))
-    end
+    test "the removed price list redirects home and no page shows lawyer fees", %{conn: conn} do
+      assert conn |> get("/cennik") |> redirected_to(301) == "/"
 
-    test "LegalService priceRange comes from the price list", %{conn: conn} do
-      firm =
-        conn
-        |> get(~p"/")
-        |> html_response(200)
-        |> json_ld_graph()
-        |> Enum.find(&(&1["@type"] == "LegalService"))
+      for {path, _priority, _date} <- KralukKurkierewicz.Sitemap.entries() do
+        html = conn |> get(path) |> html_response(200)
+        refute html =~ "/cennik"
+        refute html =~ "Orientacyjne ceny"
+        refute html =~ "Wynagrodzenie adwokata"
+        refute html =~ "priceRange"
+      end
 
-      {min, max} = KralukKurkierewicz.Pricing.bounds()
-      assert firm["priceRange"] == KralukKurkierewicz.Pricing.format_range(min, max)
+      refute conn |> get("/llms.txt") |> response(200) =~ "ennik"
     end
 
     test "every service page has a visible FAQ matching its FAQPage", %{conn: conn} do
@@ -238,14 +245,14 @@ defmodule KralukKurkierewiczWeb.PageControllerTest do
       assert html =~ ~s(href="/zespol/milena-kraluk")
     end
 
-    test "footer and llms.txt link every service, partner page and the price list", %{conn: conn} do
+    test "footer and llms.txt link every service, and partner page", %{conn: conn} do
       html = conn |> get(~p"/blog") |> html_response(200)
       llms = conn |> get("/llms.txt") |> response(200)
       sitemap = conn |> get(~p"/sitemap.xml") |> response(200)
 
       paths =
         Enum.map(KralukKurkierewicz.Services.list(), &"/uslugi/#{&1.slug}") ++
-          ["/zespol/milena-kraluk", "/zespol/michal-kurkierewicz", "/cennik"]
+          ["/zespol/milena-kraluk", "/zespol/michal-kurkierewicz"]
 
       for path <- paths do
         assert html =~ ~s(href="#{path}")
@@ -330,7 +337,7 @@ defmodule KralukKurkierewiczWeb.PageControllerTest do
         html = conn |> get(~p"/uslugi/#{service.slug}") |> html_response(200)
         assert html =~ ~s(id="w-skrocie")
         assert html =~ "Zaktualizowano:"
-        assert length(KralukKurkierewicz.Services.summary(service)) in 3..5
+        assert length(KralukKurkierewicz.Services.summary(service)) in 2..5
 
         related = KralukKurkierewicz.Services.related(service)
         assert related != [] and Enum.all?(related, & &1), service.slug

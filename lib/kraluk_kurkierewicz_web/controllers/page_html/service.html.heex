@@ -152,26 +152,6 @@
         </ol>
       </div>
 
-      <div :if={@prices != []} class="rounded-[14px] border border-line-soft bg-cream p-6">
-        <p class="m-0 text-[.8rem] font-semibold tracking-[.12em] text-brass-deep uppercase">
-          Orientacyjne ceny
-        </p>
-        <dl class="mt-3 grid gap-3">
-          <div :for={{label, min, max} <- @prices}>
-            <dt class="text-[.92rem] text-copy">{label}</dt>
-            <dd class="m-0 font-display text-[1.25rem] font-semibold text-ink">
-              {KralukKurkierewicz.Pricing.format_range(min, max)}
-            </dd>
-          </div>
-        </dl>
-        <p class="mt-3 text-[.82rem] text-muted">
-          Ceny z VAT, bez opłat sądowych.
-          <a class="font-semibold text-brass-deep hover:text-ink" href={~p"/cennik"}>
-            Pełny cennik →
-          </a>
-        </p>
-      </div>
-
       <nav
         aria-label="Powiązane usługi"
         class="rounded-[14px] border border-line-soft bg-cream p-6"

@@ -80,6 +80,10 @@ defmodule KralukKurkierewiczWeb.PageHTML do
   @doc "Closing consultation upsell rendered after every blog post body and on service pages."
   attr :place, :string, default: "Blog-koniec", doc: "Plausible `miejsce` event property"
 
+  attr :phones, :list,
+    default: [{"+48698359581", "698 359 581"}, {"+48793102489", "793 102 489"}],
+    doc: "`{tel, display}` numbers; partner pages pass only that partner's number"
+
   def post_end_cta(assigns) do
     ~H"""
     <aside
@@ -117,16 +121,11 @@ defmodule KralukKurkierewiczWeb.PageHTML do
           </a>
           <div class="flex flex-wrap gap-x-5 gap-y-2 text-[1.02rem] [&_a]:border-b [&_a]:border-brass/70 [&_a]:transition-colors [&_a:hover]:border-brass">
             <a
+              :for={{tel, phone} <- @phones}
               class={"plausible-event-name=Telefon plausible-event-miejsce=#{@place}"}
-              href="tel:+48698359581"
+              href={"tel:#{tel}"}
             >
-              698 359 581
-            </a>
-            <a
-              class={"plausible-event-name=Telefon plausible-event-miejsce=#{@place}"}
-              href="tel:+48793102489"
-            >
-              793 102 489
+              {phone}
             </a>
             <a href="mailto:kontakt@kkadwokat.pl">kontakt@kkadwokat.pl</a>
           </div>

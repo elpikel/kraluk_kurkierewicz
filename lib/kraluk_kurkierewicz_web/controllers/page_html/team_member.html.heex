@@ -43,17 +43,13 @@
           </a>
         </p>
         <div class="mt-8 flex flex-wrap gap-4 max-sm:gap-3">
+          <% {tel, phone} = @member.phone %>
           <a
             class="btn max-sm:w-full max-sm:text-center plausible-event-name=Telefon plausible-event-miejsce=Zespol"
-            href="tel:+48698359581"
+            href={"tel:#{tel}"}
+            id="member-phone"
           >
-            Zadzwoń: 698 359 581
-          </a>
-          <a
-            class="btn btn-ghost max-sm:w-full max-sm:text-center plausible-event-name=Telefon plausible-event-miejsce=Zespol"
-            href="tel:+48793102489"
-          >
-            Zadzwoń: 793 102 489
+            Zadzwoń: {phone}
           </a>
         </div>
       </div>
@@ -115,7 +111,7 @@
 
 <section class="bg-cream pb-section max-sm:pb-12">
   <div class="wrap">
-    <.post_end_cta place="Zespol-koniec" />
+    <.post_end_cta place="Zespol-koniec" phones={[@member.phone]} />
   </div>
 </section>
 <.site_footer />

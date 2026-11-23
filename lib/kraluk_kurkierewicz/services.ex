@@ -815,7 +815,6 @@ defmodule KralukKurkierewicz.Services do
 
   # "W skrócie" facts shown at the top of each service page: short, self-contained
   # statements with numbers, taken from that page's own text (keep them in sync).
-  # `summary/1` appends the indicative price from `KralukKurkierewicz.Pricing`.
   @summaries %{
     "rozwod" => [
       "Sąd: rozwód orzeka sąd okręgowy; przesłanką jest zupełny i trwały rozkład pożycia (art. 56 § 1 k.r.o.).",
@@ -955,24 +954,8 @@ defmodule KralukKurkierewicz.Services do
     "rodo" => ~w(nowe-technologie prawo-medyczne obsluga-przedsiebiorcow)
   }
 
-  @doc "\"W skrócie\" points for a service page: its key facts plus the indicative price."
-  def summary(service) do
-    price =
-      case KralukKurkierewicz.Pricing.for_service(service.slug) do
-        [] ->
-          []
-
-        items ->
-          [
-            "Wynagrodzenie adwokata (orientacyjnie, z VAT): " <>
-              Enum.map_join(items, "; ", fn {label, min, max} ->
-                "#{label}: #{KralukKurkierewicz.Pricing.format_range(min, max)}"
-              end) <> "."
-          ]
-      end
-
-    Map.fetch!(@summaries, service.slug) ++ price
-  end
+  @doc "\"W skrócie\" points for a service page."
+  def summary(service), do: Map.fetch!(@summaries, service.slug)
 
   @doc "Related services linked from a service page, in display order."
   def related(service), do: @related |> Map.fetch!(service.slug) |> Enum.map(&get/1)
@@ -1014,7 +997,7 @@ defmodule KralukKurkierewicz.Services do
 
   @doc """
   Visible FAQ for a service page (also its `FAQPage` JSON-LD): the topic
-  question answered by the service notes, and the indicative price.
+  question answered by the service notes, then the extended FAQ.
   """
   def faq(service) do
     extra =
@@ -1024,11 +1007,7 @@ defmodule KralukKurkierewicz.Services do
       end
 
     [{Map.get(@faq_questions, service.slug, service.notes_title), Enum.join(service.notes, " ")}] ++
-      extra ++
-      [
-        {"Ile kosztuje pomoc prawna w tym zakresie?",
-         KralukKurkierewicz.Pricing.faq_answer(service.slug)}
-      ]
+      extra
   end
 
   # Day the service pages were first published; pages without extended content

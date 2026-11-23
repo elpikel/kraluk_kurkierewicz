@@ -17,6 +17,8 @@ defmodule KralukKurkierewicz.Team do
                    sprawy-rodzinne podzial-majatku prawa-konsumentow sprawy-spadkowe
                    prawo-karne prawo-medyczne),
       display_name: "adw. Milena Kraluk",
+      # Direct number, the only one shown on this partner's page: `{tel: href, display}`.
+      phone: {"+48698359581", "698 359 581"},
       role: "Partner, adwokat",
       image: "/images/milena-kraluk.webp",
       # Date of the last change to this partner's page (sitemap `lastmod`).
@@ -37,6 +39,7 @@ defmodule KralukKurkierewicz.Team do
                    egzekucja-wierzytelnosci restrukturyzacja obsluga-korporacyjna
                    nowe-technologie sukcesja-firm spory-gospodarcze rodo),
       display_name: "adw. Michał Kurkierewicz",
+      phone: {"+48793102489", "793 102 489"},
       role: "Partner, adwokat",
       image: "/images/michal-kurkierewicz.webp",
       # Date of the last change to this partner's page (sitemap `lastmod`).

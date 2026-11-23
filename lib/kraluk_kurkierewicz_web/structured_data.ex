@@ -92,7 +92,6 @@ defmodule KralukKurkierewiczWeb.StructuredData do
         "image" => base <> "/images/og-image.png",
         "telephone" => "+48698359581",
         "email" => "kontakt@kkadwokat.pl",
-        "priceRange" => price_range(),
         "address" => %{
           "@type" => "PostalAddress",
           "streetAddress" => "ul. Strzelecka 7B",
@@ -157,6 +156,7 @@ defmodule KralukKurkierewiczWeb.StructuredData do
       "description" => member.bio,
       "image" => base() <> member.image,
       "url" => base() <> "/zespol/" <> slug,
+      "telephone" => elem(member.phone, 0),
       "worksFor" => %{"@id" => org_id()},
       "alumniOf" => %{
         "@type" => "CollegeOrUniversity",
@@ -166,11 +166,6 @@ defmodule KralukKurkierewiczWeb.StructuredData do
       "knowsLanguage" => "pl"
     }
     |> put_same_as(member.same_as)
-  end
-
-  defp price_range do
-    {min, max} = KralukKurkierewicz.Pricing.bounds()
-    KralukKurkierewicz.Pricing.format_range(min, max)
   end
 
   @doc "`FAQPage` node for arbitrary `{question, answer}` pairs on `path`."
@@ -201,30 +196,6 @@ defmodule KralukKurkierewiczWeb.StructuredData do
       "inLanguage" => "pl-PL",
       "mainEntity" => %{"@id" => person_id(member.slug)},
       "isPartOf" => %{"@id" => base() <> "/#website"}
-    }
-  end
-
-  @doc "`OfferCatalog` node for the price list."
-  def offer_catalog(sections) do
-    %{
-      "@type" => "OfferCatalog",
-      "@id" => base() <> "/cennik#cennik",
-      "name" => "Cennik usług prawnych",
-      "provider" => %{"@id" => org_id()},
-      "itemListElement" =>
-        for {_title, items} <- sections, {label, min, max, _service} <- items do
-          %{
-            "@type" => "Offer",
-            "itemOffered" => %{"@type" => "Service", "name" => label},
-            "priceSpecification" => %{
-              "@type" => "PriceSpecification",
-              "priceCurrency" => "PLN",
-              "minPrice" => min,
-              "maxPrice" => max,
-              "valueAddedTaxIncluded" => true
-            }
-          }
-        end
     }
   end
 
