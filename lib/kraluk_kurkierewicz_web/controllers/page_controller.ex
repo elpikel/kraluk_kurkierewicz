@@ -220,7 +220,7 @@ defmodule KralukKurkierewiczWeb.PageController do
     - Telefon: 698 359 581, 793 102 489
     - E-mail: kontakt@kkadwokat.pl
     - Adres: ul. Strzelecka 7B, 80-803 Gdańsk
-    - Godziny pracy: poniedziałek–piątek, 9:00–17:00
+    - Godziny pracy: poniedziałek-piątek, 9:00-17:00
     - KRS: 0001151792
     - Strona: #{base}/
 
@@ -233,7 +233,7 @@ defmodule KralukKurkierewiczWeb.PageController do
 
     ## Specjalizacje
 
-    - Dla osób prywatnych: sprawy o zapłatę, odszkodowania i zadośćuczynienia, zawyżony metraż mieszkań, nieruchomości, rozwody, alimenty, sprawy rodzinne (kontakty z dzieckiem, władza rodzicielska), podział majątku małżonków, prawa konsumentów, upadłość konsumencka, sprawy spadkowe, zachowek, prawo karne (reprezentacja pokrzywdzonych).
+    - Dla osób prywatnych: sprawy o zapłatę, odszkodowania i zadośćuczynienia, zawyżony metraż mieszkań, nieruchomości, służebność przesyłu (słupy i linie na działce), rozwody, alimenty, sprawy rodzinne (kontakty z dzieckiem, władza rodzicielska), podział majątku małżonków, prawa konsumentów, upadłość konsumencka, sprawy spadkowe, zachowek, prawo karne (reprezentacja pokrzywdzonych).
     - Dla przedsiębiorców: bieżąca obsługa prawna, zakładanie spółek, umowy, egzekucja wierzytelności, restrukturyzacja, obsługa korporacyjna i spory masowe, AI i nowe technologie, sukcesja firm rodzinnych, prawo medyczne, spory gospodarcze, RODO.
 
     ## Usługi

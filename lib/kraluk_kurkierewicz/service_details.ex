@@ -727,7 +727,7 @@ defmodule KralukKurkierewicz.ServiceDetails do
     },
     "nieruchomosci" => %{
       updated: ~D[2026-11-23],
-      lead: "milena-kraluk",
+      lead: ["milena-kraluk", "michal-kurkierewicz"],
       sections: [
         {"Jak znieść współwłasność nieruchomości?",
          [
@@ -749,7 +749,7 @@ defmodule KralukKurkierewicz.ServiceDetails do
         {"Jak uzyskać drogę konieczną albo wynagrodzenie za słupy i rury na działce?",
          [
            "Właściciel nieruchomości, która nie ma odpowiedniego dostępu do drogi publicznej, może żądać od właścicieli gruntów sąsiednich ustanowienia za wynagrodzeniem służebności drogi koniecznej (art. 145 k.c.). Sąd wyznacza jej przebieg z uwzględnieniem potrzeb nieruchomości pozbawionej dostępu i z najmniejszym obciążeniem gruntów, przez które droga ma prowadzić.",
-           "Jeżeli przez działkę przebiegają linie energetyczne, gazociąg lub wodociąg należące do przedsiębiorcy, właściciel może żądać ustanowienia służebności przesyłu za odpowiednim wynagrodzeniem (art. 305² k.c.). W tych sprawach przedsiębiorcy często bronią się zarzutem zasiedzenia służebności, dlatego znaczenie ma data budowy urządzeń i sposób korzystania z nich."
+           "Jeżeli przez działkę przebiegają linie energetyczne, gazociąg lub wodociąg należące do przedsiębiorcy, właściciel może żądać ustanowienia służebności przesyłu za odpowiednim wynagrodzeniem (art. 305² k.c.). Te sprawy — w tym skutki wyroku Trybunału Konstytucyjnego z 2 grudnia 2025 r. — opisujemy na osobnej stronie: [służebność przesyłu — adwokat w Gdańsku](/uslugi/sluzebnosc-przesylu)."
          ]},
         {"Jak odzyskać nieruchomość i zapłatę za bezumowne korzystanie?",
          [
@@ -874,6 +874,107 @@ defmodule KralukKurkierewicz.ServiceDetails do
          "To tryb dochodzenia roszczeń pieniężnych przez internet, prowadzony przez Sąd Rejonowy Lublin-Zachód w Lublinie. Pozew składa się elektronicznie, bez dołączania dowodów, a po wniesieniu sprzeciwu postępowanie jest umarzane."},
         {"Czy trzeba wysłać wezwanie do zapłaty przed pozwem?",
          "Nie jest to formalny warunek, ale w pozwie trzeba podać, czy strony próbowały rozwiązać spór pozasądowo. Wezwanie pozwala też wykazać, od kiedy dłużnik jest w opóźnieniu."}
+      ]
+    },
+    "sluzebnosc-przesylu" => %{
+      updated: ~D[2026-11-23],
+      lead: "michal-kurkierewicz",
+      sections: [
+        {"Czym jest służebność przesyłu?",
+         [
+           "Służebność przesyłu to prawo przedsiębiorcy do korzystania z cudzej nieruchomości w oznaczonym zakresie, zgodnie z przeznaczeniem urządzeń przesyłowych: linii energetycznych, gazociągów, wodociągów, kanalizacji czy sieci ciepłowniczej (art. 305¹ Kodeksu cywilnego). Obejmuje nie tylko samo posadowienie urządzeń, ale też dostęp do nich w celu konserwacji, napraw i usuwania awarii.",
+           "Służebność obciąża nieruchomość, a nie konkretnego właściciela — po sprzedaży działki wiąże nabywcę. Przechodzi też na każdego, kto nabędzie przedsiębiorstwo albo same urządzenia. Dlatego jej zakres warto ustalić precyzyjnie: szerokość pasa, przebieg i zasady wstępu na grunt."
+         ]},
+        {"Kiedy właścicielowi działki należy się wynagrodzenie?",
+         [
+           "Gdy przedsiębiorca korzysta z nieruchomości bez tytułu prawnego. Właściciel może wtedy żądać:",
+           {:list,
+            [
+              "ustanowienia służebności przesyłu za odpowiednim wynagrodzeniem (art. 305² § 2 k.c.) — to rozliczenie na przyszłość,",
+              "wynagrodzenia za bezumowne korzystanie z nieruchomości — za przeszłość, w granicach przedawnienia."
+            ]},
+           "Wynagrodzenie nie przysługuje, jeżeli przedsiębiorca dysponuje umową, służebnością ustanowioną wcześniej, decyzją administracyjną zezwalającą na założenie i utrzymywanie urządzeń albo prawomocnym orzeczeniem stwierdzającym zasiedzenie. Takie decyzje wydawano także kilkadziesiąt lat temu i wiążą one kolejnych właścicieli, dlatego sprawę zaczyna się od ustalenia, na jakiej podstawie urządzenia znalazły się na działce."
+         ]},
+        {"Co zmienił wyrok Trybunału Konstytucyjnego P 10/16?",
+         [
+           "Służebność przesyłu istnieje w Kodeksie cywilnym od 3 sierpnia 2008 r. Sądy przyjmowały jednak, że przedsiębiorstwa mogły wcześniej zasiedzieć służebność gruntową o treści odpowiadającej służebności przesyłu — i na tej podstawie oddalały żądania właścicieli działek, na których urządzenia stały od dziesięcioleci.",
+           "Wyrokiem z 2 grudnia 2025 r. Trybunał Konstytucyjny orzekł, że art. 292 w związku z art. 285 § 1 i 2 k.c., rozumiane jako podstawa nabycia takiej służebności przez zasiedzenie przed 3 sierpnia 2008 r., są niezgodne z Konstytucją. Wyrok nie wyłącza zasiedzenia służebności przesyłu, którego bieg rozpoczął się od tej daty — przy dwudziesto- lub trzydziestoletnim terminie zasiedzenia nieuregulowany stan prawny z czasem znów zacznie działać na korzyść przedsiębiorcy."
+         ]},
+        {"Ile wynosi wynagrodzenie za służebność przesyłu?",
+         [
+           "Nie ma stawek ustawowych ani ceny za metr. Wynagrodzenie ma odpowiadać temu, w jakim stopniu służebność ogranicza prawo własności; w sporze sądowym ustala je biegły rzeczoznawca majątkowy. Pod uwagę bierze się:",
+           {:list,
+            [
+              "powierzchnię pasa służebności, a nie tylko grunt zajęty przez słup,",
+              "rodzaj i parametry urządzeń, na przykład napięcie linii,",
+              "przeznaczenie działki i jej wartość rynkową,",
+              "ograniczenia w zabudowie i w sposobie korzystania z gruntu,",
+              "obniżenie wartości całej nieruchomości."
+            ]},
+           "Wynagrodzenie jest co do zasady jednorazowe, choć strony mogą umówić się na świadczenia okresowe. Różnice między sprawami są bardzo duże, dlatego przed wezwaniem operatora warto mieć realistyczną wycenę."
+         ]},
+        {"Jak ustanowić służebność przesyłu — umowa czy sąd?",
+         [
+           "Służebność można ustanowić umową z przedsiębiorcą; oświadczenie właściciela nieruchomości wymaga formy aktu notarialnego. Wpis do księgi wieczystej nie jest warunkiem powstania służebności, ale porządkuje stan prawny i jest widoczny dla przyszłych nabywców.",
+           "Jeżeli przedsiębiorca odmawia zawarcia umowy albo proponuje symboliczną kwotę, właściciel może złożyć wniosek o ustanowienie służebności do sądu rejonowego właściwego dla miejsca położenia nieruchomości. Opłata od wniosku wynosi 200 zł. Sąd określa zakres służebności i wysokość wynagrodzenia na podstawie opinii biegłych. Z takim samym wnioskiem może wystąpić przedsiębiorca, gdy to właściciel odmawia uregulowania stanu prawnego."
+         ]},
+        {"Za ile lat wstecz można żądać zapłaty?",
+         [
+           "Wynagrodzenie za bezumowne korzystanie z nieruchomości przedawnia się na zasadach ogólnych — co do zasady po sześciu latach, a w przypadku roszczeń związanych z prowadzeniem działalności gospodarczej po trzech latach (art. 118 k.c.). Zapłaty można więc dochodzić za ostatnie lata, a nie za cały czas istnienia urządzeń.",
+           "Bieg przedawnienia przerywa wniesienie pozwu, a nie samo wezwanie do zapłaty. Z każdym rokiem zwłoki przepada wynagrodzenie za kolejny rok."
+         ]},
+        {"Co zrobić, gdy sprawa została już prawomocnie przegrana?",
+         [
+           "Jeżeli sąd oddalił żądanie właściciela albo stwierdził zasiedzenie służebności na podstawie wykładni zakwestionowanej przez Trybunał, możliwa jest skarga o wznowienie postępowania (art. 401¹ Kodeksu postępowania cywilnego). Wnosi się ją w terminie trzech miesięcy, a wznowienia nie można żądać po upływie dziesięciu lat od uprawomocnienia się orzeczenia.",
+           "Wyrok Trybunału nie został ogłoszony w Dzienniku Ustaw; do jego skutków i biegu terminu na wniesienie skargi odniósł się Sąd Najwyższy w uchwale z 18 listopada 2026 r. (III CZP 41/26). O tym, czy w konkretnej sprawie termin jeszcze biegnie, decydują daty orzeczeń — dlatego analizę warto zlecić niezwłocznie."
+         ]},
+        {"Jak prowadzimy sprawę o służebność przesyłu?",
+         [
+           {:list,
+            [
+              "Analiza księgi wieczystej, dokumentów nabycia działki i mapy z przebiegiem urządzeń.",
+              "Wystąpienie do operatora o wskazanie tytułu prawnego do korzystania z nieruchomości.",
+              "Wstępna wycena wynagrodzenia i wezwanie do zawarcia umowy oraz zapłaty.",
+              "Wniosek do sądu o ustanowienie służebności i pozew o wynagrodzenie za bezumowne korzystanie."
+            ]},
+           "Po analizie dokumentów mówimy wprost, czy roszczenie ma szanse powodzenia, jakiej kwoty można się spodziewać i z jakimi kosztami — w tym opinii biegłego — należy się liczyć."
+         ]}
+      ],
+      documents: [
+        "numer księgi wieczystej nieruchomości",
+        "akt notarialny lub inny dokument nabycia działki",
+        "mapa albo szkic z przebiegiem linii i lokalizacją słupów",
+        "wypis z rejestru gruntów oraz plan miejscowy lub decyzja o warunkach zabudowy",
+        "pisma i decyzje administracyjne dotyczące urządzeń, także sprzed lat",
+        "korespondencja z operatorem sieci",
+        "zdjęcia urządzeń i terenu",
+        "wcześniejsze orzeczenia sądu w sprawie służebności lub zasiedzenia"
+      ],
+      faq: [
+        {"Ile można dostać za służebność przesyłu?",
+         "Nie ma stawek ani ceny za metr. Wynagrodzenie zależy od powierzchni pasa służebności, rodzaju urządzeń, przeznaczenia działki i tego, jak bardzo ograniczają one zabudowę; w sądzie ustala je biegły rzeczoznawca."},
+        {"Czy wynagrodzenie za służebność przesyłu jest jednorazowe czy okresowe?",
+         "Co do zasady jednorazowe. Strony mogą jednak umówić się na wynagrodzenie płatne okresowo."},
+        {"Czy służebność przesyłu można zasiedzieć?",
+         "Tak, jeżeli przedsiębiorca korzysta z trwałego i widocznego urządzenia przez dwadzieścia lat w dobrej wierze albo trzydzieści lat w złej wierze. Trybunał Konstytucyjny zakwestionował natomiast zasiedzenie służebności o takiej treści przed 3 sierpnia 2008 r."},
+        {"Jak sprawdzić, czy na działce jest służebność przesyłu?",
+         "W dziale III księgi wieczystej. Brak wpisu nie oznacza jednak, że przedsiębiorca nie ma tytułu prawnego — może nim być umowa albo dawna decyzja administracyjna, dlatego warto zwrócić się z pytaniem do operatora sieci."},
+        {"Czy służebność przesyłu musi być wpisana do księgi wieczystej?",
+         "Nie. Służebność powstaje na podstawie umowy albo orzeczenia sądu, a wpis jedynie ją ujawnia. Wpis jest jednak zalecany, bo porządkuje stan prawny nieruchomości."},
+        {"Czy ustanowienie służebności przesyłu wymaga aktu notarialnego?",
+         "Oświadczenie właściciela nieruchomości o ustanowieniu służebności wymaga formy aktu notarialnego. Aktu nie potrzeba, gdy służebność ustanawia sąd."},
+        {"Czy służebność przesyłu przechodzi na nowego właściciela działki?",
+         "Tak. Służebność obciąża nieruchomość, więc wiąże każdego kolejnego właściciela. Dlatego przed zakupem działki warto sprawdzić jej zakres."},
+        {"Do kiedy można żądać wynagrodzenia za słupy na działce?",
+         "Wynagrodzenia za bezumowne korzystanie można dochodzić za okres nieobjęty przedawnieniem — co do zasady sześć lat wstecz. Z żądaniem ustanowienia służebności nie warto zwlekać, ponieważ od 3 sierpnia 2008 r. biegnie termin jej zasiedzenia."},
+        {"Czy można postawić słup na działce bez zgody właściciela?",
+         "Przedsiębiorca potrzebuje tytułu prawnego: umowy, służebności albo decyzji administracyjnej ograniczającej sposób korzystania z nieruchomości. Urządzenia posadowione bez takiego tytułu uprawniają właściciela do żądania wynagrodzenia."},
+        {"Czy za gazociąg lub wodociąg na działce też należy się wynagrodzenie?",
+         "Tak. Służebność przesyłu dotyczy wszystkich urządzeń służących do doprowadzania lub odprowadzania płynów, pary, gazu i energii elektrycznej, o ile należą do przedsiębiorcy."},
+        {"Kto płaci za ustanowienie służebności przesyłu?",
+         "Wynagrodzenie płaci przedsiębiorca, na którego rzecz służebność jest ustanawiana. Podział kosztów notarialnych ustalają strony w umowie, a o kosztach postępowania sądowego rozstrzyga sąd."},
+        {"Czy służebność przesyłu obniża wartość nieruchomości?",
+         "Może ją obniżać, zwłaszcza gdy urządzenia ograniczają możliwość zabudowy. Obniżenie wartości nieruchomości uwzględnia się przy ustalaniu wynagrodzenia."}
       ]
     },
     "prawa-konsumentow" => %{

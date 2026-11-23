@@ -67,7 +67,8 @@ defmodule KralukKurkierewicz.Services do
 
   # Order of the two "Specjalizacje" columns on the home page.
   @home_order [
-    private: ~w(sprawy-o-zaplate odszkodowania zawyzony-metraz nieruchomosci rozwod alimenty
+    private:
+      ~w(sprawy-o-zaplate odszkodowania zawyzony-metraz nieruchomosci sluzebnosc-przesylu rozwod alimenty
                sprawy-rodzinne podzial-majatku prawa-konsumentow upadlosc-konsumencka
                sprawy-spadkowe zachowek prawo-karne),
     business: ~w(obsluga-przedsiebiorcow zakladanie-spolek umowy egzekucja-wierzytelnosci
@@ -84,7 +85,7 @@ defmodule KralukKurkierewicz.Services do
         "Pozew o rozwód lub odpowiedź na pozew, rozwód z orzekaniem o winie i bez, uregulowanie spraw dzieci i mieszkania.",
       name: "Rozwód",
       title: "Rozwód — adwokat w Gdańsku",
-      meta_title: "Adwokat rozwód Gdańsk – pozew, wina, dzieci, koszty",
+      meta_title: "Adwokat rozwód Gdańsk - pozew, wina, dzieci, koszty",
       description:
         "Rozwód w Gdańsku: pozew o rozwód, orzekanie o winie, władza rodzicielska, alimenty i mieszkanie. Opłata sądowa 600 zł. Kancelaria adwokacka Kraluk Kurkierewicz.",
       lead:
@@ -119,7 +120,7 @@ defmodule KralukKurkierewicz.Services do
         "Władza rodzicielska, kontakty z dziećmi, opieka naprzemienna, separacja oraz ustalenie pochodzenia dziecka.",
       name: "Sprawy rodzinne",
       title: "Kontakty z dzieckiem i władza rodzicielska — adwokat w Gdańsku",
-      meta_title: "Adwokat sprawy rodzinne Gdańsk – kontakty z dzieckiem",
+      meta_title: "Adwokat sprawy rodzinne Gdańsk - kontakty z dzieckiem",
       description:
         "Kontakty z dzieckiem, władza rodzicielska, opieka naprzemienna, ustalenie ojcostwa i separacja. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
       lead:
@@ -154,7 +155,7 @@ defmodule KralukKurkierewicz.Services do
         "Ustalenie, podwyższenie i obniżenie alimentów, zabezpieczenie na czas procesu oraz egzekucja zaległych świadczeń.",
       name: "Alimenty",
       title: "Alimenty — adwokat w Gdańsku",
-      meta_title: "Adwokat alimenty Gdańsk – pozew, podwyższenie, zaległości",
+      meta_title: "Adwokat alimenty Gdańsk - pozew, podwyższenie, zaległości",
       description:
         "Pozew o alimenty, podwyższenie i obniżenie alimentów, zabezpieczenie na czas procesu, zaległe alimenty. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
       lead:
@@ -189,7 +190,7 @@ defmodule KralukKurkierewicz.Services do
         "Podział majątku wspólnego, rozliczenia nakładów i wydatków oraz inne spory majątkowe między małżonkami.",
       name: "Podział majątku małżonków",
       title: "Podział majątku po rozwodzie — adwokat w Gdańsku",
-      meta_title: "Podział majątku po rozwodzie – adwokat Gdańsk",
+      meta_title: "Podział majątku po rozwodzie - adwokat Gdańsk",
       description:
         "Podział majątku wspólnego, mieszkanie z kredytem hipotecznym, rozliczenie nakładów i spłaconych rat. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
       lead:
@@ -223,7 +224,7 @@ defmodule KralukKurkierewicz.Services do
       home_text: "Przygotowanie wniosku i wsparcie na każdym etapie postępowania.",
       name: "Upadłość konsumencka",
       title: "Upadłość konsumencka — pomoc adwokata w Gdańsku",
-      meta_title: "Upadłość konsumencka – adwokat Gdańsk",
+      meta_title: "Upadłość konsumencka - adwokat Gdańsk",
       description:
         "Ocena możliwości oddłużenia, przygotowanie wniosku o upadłość konsumencką i reprezentacja w postępowaniu. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
       lead:
@@ -258,7 +259,7 @@ defmodule KralukKurkierewicz.Services do
         "Dochodzenie zwrotu części ceny, gdy rzeczywista powierzchnia lokalu jest mniejsza niż wskazana w umowie.",
       name: "Zawyżony metraż mieszkania",
       title: "Zawyżony metraż mieszkania — adwokat w Gdańsku",
-      meta_title: "Zawyżony metraż mieszkania – adwokat Gdańsk",
+      meta_title: "Zawyżony metraż mieszkania - adwokat Gdańsk",
       description:
         "Ścianki działowe wliczone do powierzchni mieszkania? Analizujemy umowę deweloperską i dochodzimy zwrotu części ceny. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
       lead:
@@ -294,7 +295,7 @@ defmodule KralukKurkierewicz.Services do
         "Dochodzenie roszczeń pieniężnych oraz obrona przed niezasadnymi żądaniami zapłaty.",
       name: "Sprawy o zapłatę",
       title: "Sprawy o zapłatę i dochodzenie należności — adwokat w Gdańsku",
-      meta_title: "Nakaz zapłaty i sprawy o zapłatę – adwokat Gdańsk",
+      meta_title: "Nakaz zapłaty i sprawy o zapłatę - adwokat Gdańsk",
       description:
         "Pozew o zapłatę, sprzeciw od nakazu zapłaty, zarzut przedawnienia. Dochodzimy należności i bronimy przed niezasadnymi żądaniami. Kancelaria adwokacka w Gdańsku.",
       lead:
@@ -328,7 +329,7 @@ defmodule KralukKurkierewicz.Services do
         "Dochodzenie roszczeń za szkody majątkowe i niemajątkowe, w szczególności wynikające z czynów niedozwolonych i wypadków.",
       name: "Odszkodowania i zadośćuczynienia",
       title: "Odszkodowania i zadośćuczynienia — adwokat w Gdańsku",
-      meta_title: "Odszkodowania i zadośćuczynienia – adwokat Gdańsk",
+      meta_title: "Odszkodowania i zadośćuczynienia - adwokat Gdańsk",
       description:
         "Dochodzenie odszkodowania i zadośćuczynienia po wypadkach i innych zdarzeniach, także od ubezpieczyciela. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
       lead:
@@ -362,7 +363,7 @@ defmodule KralukKurkierewicz.Services do
         "Sprawy dotyczące własności, posiadania, zasiedzenia, służebności, wydania nieruchomości oraz rozliczeń związanych z nieruchomościami.",
       name: "Nieruchomości",
       title: "Sprawy o nieruchomości — adwokat w Gdańsku",
-      meta_title: "Sprawy o nieruchomości – adwokat Gdańsk",
+      meta_title: "Sprawy o nieruchomości - adwokat Gdańsk",
       description:
         "Własność, zasiedzenie, służebności, zniesienie współwłasności, wydanie nieruchomości i księgi wieczyste. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
       lead:
@@ -389,6 +390,41 @@ defmodule KralukKurkierewicz.Services do
       acts: [:kc, :kw, :kpc, :uksc]
     },
     %{
+      slug: "sluzebnosc-przesylu",
+      audience: :private,
+      home_name: "Służebność przesyłu i słupy na działce",
+      home_text:
+        "Wynagrodzenie za słupy, linie energetyczne i gazociągi na prywatnej działce oraz uregulowanie służebności przesyłu.",
+      name: "Służebność przesyłu",
+      title: "Służebność przesyłu — adwokat w Gdańsku",
+      meta_title: "Służebność przesyłu Gdańsk - wynagrodzenie za słupy",
+      description:
+        "Słup, linia energetyczna lub gazociąg na działce? Dochodzimy wynagrodzenia za służebność przesyłu i bezumowne korzystanie. Kancelaria adwokacka w Gdańsku.",
+      lead:
+        "Pomagamy właścicielom działek, przez które biegną linie energetyczne, gazociągi lub wodociągi, uzyskać wynagrodzenie i uregulować stan prawny urządzeń.",
+      intro: [
+        "Jeżeli na działce stoją słupy albo biegną linie i rury należące do przedsiębiorcy, a nie ma on do tego tytułu prawnego, właściciel może żądać ustanowienia służebności przesyłu za wynagrodzeniem oraz zapłaty za bezumowne korzystanie z gruntu. Przepisy nie przewidują stawek — wysokość wynagrodzenia zależy od rodzaju urządzeń i tego, jak ograniczają korzystanie z nieruchomości.",
+        "Przez lata przedsiębiorstwa przesyłowe broniły się zarzutem zasiedzenia służebności. Wyrokiem z 2 grudnia 2025 r. (P 10/16) Trybunał Konstytucyjny zakwestionował zasiedzenie takiej służebności przed 3 sierpnia 2008 r., co zmieniło sytuację wielu właścicieli — także tych, którzy wcześniej przegrali sprawę.",
+        "Pozostałe spory dotyczące gruntów — zasiedzenie, współwłasność i drogę konieczną — opisujemy na stronie o [sprawach o nieruchomości](/uslugi/nieruchomosci)."
+      ],
+      scope: [
+        {"Analiza stanu prawnego",
+         "Sprawdzenie księgi wieczystej, decyzji administracyjnych i umów oraz ustalenie, czy przedsiębiorca ma tytuł prawny do korzystania z działki."},
+        {"Wezwanie i negocjacje z operatorem",
+         "Wystąpienie do przedsiębiorcy przesyłowego o zawarcie umowy i zapłatę oraz negocjowanie wysokości wynagrodzenia."},
+        {"Ustanowienie służebności przesyłu przed sądem",
+         "Wniosek o ustanowienie służebności za wynagrodzeniem i udział w postępowaniu z opinią biegłego rzeczoznawcy."},
+        {"Bezumowne korzystanie i wznowienie postępowania",
+         "Pozew o wynagrodzenie za bezumowne korzystanie z nieruchomości oraz ocena możliwości wznowienia prawomocnie przegranej sprawy."}
+      ],
+      notes_title: "Czy za słup energetyczny na działce należy się odszkodowanie?",
+      notes: [
+        "Właścicielowi mogą przysługiwać dwa roszczenia: o ustanowienie służebności przesyłu za odpowiednim wynagrodzeniem oraz o wynagrodzenie za bezumowne korzystanie z nieruchomości za okres nieobjęty przedawnieniem. Warunkiem jest to, że przedsiębiorca nie ma tytułu prawnego do korzystania z działki — umowy, służebności, decyzji administracyjnej ani orzeczenia stwierdzającego zasiedzenie.",
+        "To samo dotyczy innych urządzeń przesyłowych: linii kablowych, gazociągów, wodociągów i sieci ciepłowniczej."
+      ],
+      acts: [:kc, :kpc, :uksc]
+    },
+    %{
       slug: "prawa-konsumentow",
       audience: :private,
       home_name: "Ochrona praw konsumentów",
@@ -396,7 +432,7 @@ defmodule KralukKurkierewicz.Services do
         "Dochodzenie roszczeń wynikających z umów konsumenckich oraz ochrona przed nieuczciwymi praktykami przedsiębiorców.",
       name: "Ochrona praw konsumentów",
       title: "Ochrona praw konsumentów — adwokat w Gdańsku",
-      meta_title: "Prawa konsumenta – adwokat Gdańsk",
+      meta_title: "Prawa konsumenta - adwokat Gdańsk",
       description:
         "Reklamacje, odstąpienie od umowy, niedozwolone postanowienia umowne i spory z przedsiębiorcami. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
       lead:
@@ -430,7 +466,7 @@ defmodule KralukKurkierewicz.Services do
         "Stwierdzenie nabycia spadku, dział spadku, testamenty oraz odpowiedzialność za długi spadkowe.",
       name: "Sprawy spadkowe",
       title: "Sprawy spadkowe — adwokat w Gdańsku",
-      meta_title: "Adwokat sprawy spadkowe Gdańsk – spadek, dział, testament",
+      meta_title: "Adwokat sprawy spadkowe Gdańsk - spadek, dział, testament",
       description:
         "Stwierdzenie nabycia spadku, dział spadku, testamenty, odrzucenie spadku i długi spadkowe. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
       lead:
@@ -464,7 +500,7 @@ defmodule KralukKurkierewicz.Services do
         "Dochodzenie zachowku od spadkobierców i obdarowanych oraz obrona przed takim roszczeniem.",
       name: "Zachowek",
       title: "Zachowek — adwokat w Gdańsku",
-      meta_title: "Zachowek – adwokat Gdańsk: ile wynosi, komu przysługuje",
+      meta_title: "Zachowek - adwokat Gdańsk: ile wynosi, komu przysługuje",
       description:
         "Zachowek po rodzicach: komu przysługuje, ile wynosi, zachowek od darowizny, przedawnienie i pozew. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
       lead:
@@ -498,7 +534,7 @@ defmodule KralukKurkierewicz.Services do
       home_text: "Reprezentacja pokrzywdzonych w postępowaniu karnym.",
       name: "Prawo karne",
       title: "Pełnomocnik pokrzywdzonego — adwokat w Gdańsku",
-      meta_title: "Pełnomocnik pokrzywdzonego – adwokat Gdańsk",
+      meta_title: "Pełnomocnik pokrzywdzonego - adwokat Gdańsk",
       description:
         "Reprezentacja pokrzywdzonych przestępstwem: zawiadomienie, postępowanie przygotowawcze, oskarżyciel posiłkowy, naprawienie szkody. Kancelaria w Gdańsku.",
       lead:
@@ -532,7 +568,7 @@ defmodule KralukKurkierewicz.Services do
       home_text: "Stałe wsparcie prawne w codziennym prowadzeniu firmy.",
       name: "Bieżąca obsługa prawna firm",
       title: "Bieżąca obsługa prawna firm — kancelaria w Gdańsku",
-      meta_title: "Obsługa prawna firm – kancelaria Gdańsk",
+      meta_title: "Obsługa prawna firm - kancelaria Gdańsk",
       description:
         "Stałe wsparcie prawne w codziennym prowadzeniu firmy: umowy, opinie prawne, spory i decyzje biznesowe. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
       lead:
@@ -565,7 +601,7 @@ defmodule KralukKurkierewicz.Services do
       home_text: "Wybór formy działalności, umowa spółki i rejestracja w KRS.",
       name: "Zakładanie i rejestracja spółek",
       title: "Zakładanie i rejestracja spółek — adwokat w Gdańsku",
-      meta_title: "Zakładanie spółek i rejestracja w KRS – adwokat Gdańsk",
+      meta_title: "Zakładanie spółek i rejestracja w KRS - adwokat Gdańsk",
       description:
         "Wybór formy prawnej, umowa spółki i rejestracja w KRS — sp. z o.o., spółki osobowe, prosta spółka akcyjna. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
       lead:
@@ -598,7 +634,7 @@ defmodule KralukKurkierewicz.Services do
       home_text: "Przygotowanie, weryfikacja i negocjowanie umów.",
       name: "Analiza i sporządzanie umów",
       title: "Sporządzanie i analiza umów — adwokat w Gdańsku",
-      meta_title: "Sporządzanie i analiza umów – adwokat Gdańsk",
+      meta_title: "Sporządzanie i analiza umów - adwokat Gdańsk",
       description:
         "Przygotowanie, weryfikacja i negocjowanie umów handlowych, umów o współpracy i umów z klientami. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
       lead:
@@ -630,7 +666,7 @@ defmodule KralukKurkierewicz.Services do
       home_text: "Odzyskiwanie należności — od wezwania do zapłaty po egzekucję komorniczą.",
       name: "Egzekucja wierzytelności",
       title: "Windykacja i egzekucja wierzytelności — adwokat w Gdańsku",
-      meta_title: "Windykacja należności dla firm – adwokat Gdańsk",
+      meta_title: "Windykacja należności dla firm - adwokat Gdańsk",
       description:
         "Windykacja należności dla firm: wezwanie do zapłaty, nakaz zapłaty, klauzula wykonalności i egzekucja komornicza. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
       lead:
@@ -663,7 +699,7 @@ defmodule KralukKurkierewicz.Services do
       home_text: "Wsparcie firm w trudnej sytuacji finansowej.",
       name: "Restrukturyzacja",
       title: "Restrukturyzacja firm — adwokat w Gdańsku",
-      meta_title: "Restrukturyzacja firmy – adwokat Gdańsk",
+      meta_title: "Restrukturyzacja firmy - adwokat Gdańsk",
       description:
         "Wsparcie firm w trudnej sytuacji finansowej: wybór postępowania restrukturyzacyjnego i układ z wierzycielami. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
       lead:
@@ -697,7 +733,7 @@ defmodule KralukKurkierewicz.Services do
         "Stała obsługa spółek. Mamy też doświadczenie we współpracy z innymi kancelariami przy obsłudze sporów masowych.",
       name: "Obsługa korporacyjna i spory masowe",
       title: "Obsługa korporacyjna spółek i spory masowe — kancelaria w Gdańsku",
-      meta_title: "Obsługa korporacyjna spółek – kancelaria Gdańsk",
+      meta_title: "Obsługa korporacyjna spółek - kancelaria Gdańsk",
       description:
         "Obsługa korporacyjna spółek: uchwały, zgromadzenia, zmiany w KRS oraz współpraca przy sporach masowych. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
       lead:
@@ -732,7 +768,7 @@ defmodule KralukKurkierewicz.Services do
         "Wsparcie prawne przedsiębiorców przy wdrażaniu AI, automatyzacji procesów oraz korzystaniu z nowych technologii w biznesie.",
       name: "Sztuczna inteligencja i nowe technologie",
       title: "Prawo nowych technologii i AI — adwokat w Gdańsku",
-      meta_title: "Prawo AI i nowych technologii – adwokat Gdańsk",
+      meta_title: "Prawo AI i nowych technologii - adwokat Gdańsk",
       description:
         "Wsparcie prawne przy wdrażaniu sztucznej inteligencji i nowych technologii: umowy IT, AI Act, dane osobowe. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
       lead:
@@ -766,7 +802,7 @@ defmodule KralukKurkierewicz.Services do
         "Planowanie sukcesji, zabezpieczenie ciągłości firmy oraz uporządkowanie kwestii majątkowych i korporacyjnych związanych ze zmianą pokoleniową.",
       name: "Sukcesja i firmy rodzinne",
       title: "Sukcesja firm rodzinnych — adwokat w Gdańsku",
-      meta_title: "Sukcesja firmy rodzinnej – adwokat Gdańsk",
+      meta_title: "Sukcesja firmy rodzinnej - adwokat Gdańsk",
       description:
         "Planowanie sukcesji, zarząd sukcesyjny, fundacja rodzinna i zabezpieczenie ciągłości firmy przy zmianie pokoleniowej. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
       lead:
@@ -800,7 +836,7 @@ defmodule KralukKurkierewicz.Services do
         "Obsługa prawna gabinetów, klinik i innych podmiotów leczniczych, w tym umów, dokumentacji, praw pacjenta oraz odpowiedzialności związanej z udzielaniem świadczeń.",
       name: "Prawo medyczne",
       title: "Prawo medyczne i obsługa podmiotów leczniczych — kancelaria w Gdańsku",
-      meta_title: "Prawo medyczne – kancelaria dla gabinetów i klinik, Gdańsk",
+      meta_title: "Prawo medyczne - kancelaria dla gabinetów i klinik, Gdańsk",
       description:
         "Obsługa prawna gabinetów, klinik i podmiotów leczniczych: umowy, dokumentacja medyczna, prawa pacjenta, spory. Kancelaria Kraluk Kurkierewicz, Gdańsk.",
       lead:
@@ -834,7 +870,7 @@ defmodule KralukKurkierewicz.Services do
         "Reprezentacja przedsiębiorców w sporach z kontrahentami oraz postępowaniach sądowych związanych z prowadzeniem działalności.",
       name: "Spory gospodarcze",
       title: "Spory gospodarcze — adwokat w Gdańsku",
-      meta_title: "Spory gospodarcze – adwokat Gdańsk",
+      meta_title: "Spory gospodarcze - adwokat Gdańsk",
       description:
         "Reprezentacja przedsiębiorców w sporach z kontrahentami i postępowaniach w sprawach gospodarczych. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
       lead:
@@ -869,7 +905,7 @@ defmodule KralukKurkierewicz.Services do
         "Wdrożenia RODO w przedsiębiorstwach i organizacjach, audyty zgodności, tworzenie i aktualizacja dokumentacji, projektowanie procedur ochrony danych oraz bieżące wsparcie w ich praktycznym stosowaniu.",
       name: "RODO i ochrona danych osobowych",
       title: "RODO i ochrona danych osobowych — kancelaria w Gdańsku",
-      meta_title: "Wdrożenie i audyt RODO – kancelaria Gdańsk",
+      meta_title: "Wdrożenie i audyt RODO - kancelaria Gdańsk",
       description:
         "Wdrożenia RODO, audyty zgodności, dokumentacja i procedury ochrony danych oraz bieżące wsparcie. Kancelaria adwokacka Kraluk Kurkierewicz w Gdańsku.",
       lead:
@@ -934,7 +970,7 @@ defmodule KralukKurkierewicz.Services do
       "Umorzeniu nie podlegają m.in. alimenty i grzywny orzeczone przez sąd."
     ],
     "zawyzony-metraz" => [
-      "Kwota: różnica powierzchni × cena za m² z umowy; w opublikowanych wyrokach ok. 11–24 tys. zł na nabywcę.",
+      "Kwota: różnica powierzchni × cena za m² z umowy; w opublikowanych wyrokach ok. 11-24 tys. zł na nabywcę.",
       "Przedawnienie: co do zasady 6 lat, z końcem roku kalendarzowego.",
       "Nowelizacja z 13 lutego 2026 r. dotyczy tylko umów zawartych od tego dnia — wcześniejsze ocenia się według dotychczasowych reguł."
     ],
@@ -952,6 +988,12 @@ defmodule KralukKurkierewicz.Services do
       "Zasiedzenie nieruchomości: 20 lat w dobrej wierze, 30 lat w złej wierze.",
       "Sąd stwierdza zasiedzenie, które nastąpiło z mocy prawa — nie przyznaje własności.",
       "Zakres: współwłasność, służebności, wydanie nieruchomości, wpisy w księdze wieczystej."
+    ],
+    "sluzebnosc-przesylu" => [
+      "Roszczenia: ustanowienie służebności przesyłu za wynagrodzeniem oraz zapłata za bezumowne korzystanie z działki.",
+      "Wyrok TK z 2 grudnia 2025 r. (P 10/16) zakwestionował zasiedzenie służebności przed 3 sierpnia 2008 r.",
+      "Bezumowne korzystanie: co do zasady do 6 lat wstecz.",
+      "Wniosek o ustanowienie służebności przesyłu: sąd rejonowy miejsca położenia działki, opłata 200 zł."
     ],
     "prawa-konsumentow" => [
       "Odstąpienie od umowy zawartej na odległość: 14 dni, bez podawania przyczyny (z ustawowymi wyjątkami).",
@@ -1035,7 +1077,8 @@ defmodule KralukKurkierewicz.Services do
     "zawyzony-metraz" => ~w(prawa-konsumentow nieruchomosci sprawy-o-zaplate),
     "sprawy-o-zaplate" => ~w(egzekucja-wierzytelnosci prawa-konsumentow odszkodowania),
     "odszkodowania" => ~w(sprawy-o-zaplate prawo-karne prawa-konsumentow),
-    "nieruchomosci" => ~w(zawyzony-metraz sprawy-spadkowe podzial-majatku),
+    "nieruchomosci" => ~w(sluzebnosc-przesylu zawyzony-metraz sprawy-spadkowe),
+    "sluzebnosc-przesylu" => ~w(nieruchomosci odszkodowania sprawy-o-zaplate),
     "prawa-konsumentow" => ~w(zawyzony-metraz sprawy-o-zaplate odszkodowania),
     "sprawy-spadkowe" => ~w(zachowek nieruchomosci sukcesja-firm),
     "prawo-karne" => ~w(odszkodowania sprawy-o-zaplate),
@@ -1075,6 +1118,8 @@ defmodule KralukKurkierewicz.Services do
       "Roszczeń z ubezpieczenia OC można dochodzić przed sądem właściwym dla miejsca zamieszkania poszkodowanego, a roszczeń z czynu niedozwolonego — także przed sądem, w którego okręgu doszło do zdarzenia (art. 35 k.p.c.). Poszkodowani z Gdańska i Trójmiasta mogą więc zwykle prowadzić sprawę na miejscu: przed sądem rejonowym albo, przy roszczeniach powyżej 100 000 zł, przed Sądem Okręgowym w Gdańsku.",
     "nieruchomosci" =>
       "Sprawy o własność i inne prawa rzeczowe na nieruchomości rozpoznaje wyłącznie sąd miejsca jej położenia (art. 38 k.p.c.). Dla nieruchomości w Gdańsku jest to Sąd Rejonowy Gdańsk-Północ lub Sąd Rejonowy Gdańsk-Południe albo — w sprawach o wyższej wartości — Sąd Okręgowy w Gdańsku. Księgi wieczyste gdańskich nieruchomości prowadzi Sąd Rejonowy Gdańsk-Północ.",
+    "sluzebnosc-przesylu" =>
+      "Operatorem sieci dystrybucyjnej energii elektrycznej na większości obszaru województwa pomorskiego jest Energa-Operator. Wniosek o ustanowienie służebności przesyłu rozpoznaje sąd rejonowy właściwy dla miejsca położenia działki — dla nieruchomości w Gdańsku jest to Sąd Rejonowy Gdańsk-Północ albo Sąd Rejonowy Gdańsk-Południe. Prowadzimy sprawy właścicieli działek z Gdańska, Trójmiasta i całego Pomorza.",
     "prawa-konsumentow" =>
       "Konsument może pozwać przedsiębiorcę przed sąd właściwy dla swojego miejsca zamieszkania (art. 37² k.p.c.). Mieszkaniec Gdańska prowadzi więc spór przed sądem w Gdańsku — także wtedy, gdy sprzedawca lub usługodawca ma siedzibę w innym mieście.",
     "sprawy-spadkowe" =>

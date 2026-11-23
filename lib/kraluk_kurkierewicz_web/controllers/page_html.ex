@@ -16,6 +16,22 @@ defmodule KralukKurkierewiczWeb.PageHTML do
   """
   attr :post, :map, required: true
 
+  def post_body(%{post: %{slug: "slup-energetyczny-na-dzialce-odszkodowanie"}} = assigns) do
+    slup_energetyczny_na_dzialce_odszkodowanie(assigns)
+  end
+
+  def post_body(%{post: %{slug: "ile-za-slup-energetyczny-na-dzialce"}} = assigns) do
+    ile_za_slup_energetyczny_na_dzialce(assigns)
+  end
+
+  def post_body(%{post: %{slug: "zasiedzenie-sluzebnosci-przesylu-wyrok-tk"}} = assigns) do
+    zasiedzenie_sluzebnosci_przesylu_wyrok_tk(assigns)
+  end
+
+  def post_body(%{post: %{slug: "przesuniecie-slupa-energetycznego-na-dzialce"}} = assigns) do
+    przesuniecie_slupa_energetycznego_na_dzialce(assigns)
+  end
+
   def post_body(%{post: %{slug: "kredyt-po-rozwodzie"}} = assigns) do
     kredyt_po_rozwodzie(assigns)
   end
@@ -39,6 +55,7 @@ defmodule KralukKurkierewiczWeb.PageHTML do
   re-asserts its own colors with `!` overrides.
   """
   attr :title, :string, required: true
+  attr :place, :string, default: "Blog-srodek", doc: "Plausible `miejsce` event property"
   slot :inner_block, required: true
 
   def post_cta(assigns) do
@@ -51,7 +68,7 @@ defmodule KralukKurkierewiczWeb.PageHTML do
       <p class="mt-2! text-[.98rem] text-copy">{render_slot(@inner_block)}</p>
       <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3">
         <a
-          class="btn border-[#bf9c6a]! px-[1.3rem] py-[.7rem] text-[.95rem] text-ink-deep! hover:border-[#bf9c6a]! max-sm:w-full max-sm:text-center plausible-event-name=CTA plausible-event-cel=Umow-spotkanie plausible-event-miejsce=Blog-srodek"
+          class={"btn border-[#bf9c6a]! px-[1.3rem] py-[.7rem] text-[.95rem] text-ink-deep! hover:border-[#bf9c6a]! max-sm:w-full max-sm:text-center plausible-event-name=CTA plausible-event-cel=Umow-spotkanie plausible-event-miejsce=#{@place}"}
           href={~p"/#kontakt"}
         >
           Umów konsultację
@@ -59,14 +76,14 @@ defmodule KralukKurkierewiczWeb.PageHTML do
         <span class="text-[.92rem] text-muted">
           lub zadzwoń:
           <a
-            class="plausible-event-name=Telefon plausible-event-miejsce=Blog-srodek"
+            class={"plausible-event-name=Telefon plausible-event-miejsce=#{@place}"}
             href="tel:+48698359581"
           >
             698 359 581
           </a>
           lub
           <a
-            class="plausible-event-name=Telefon plausible-event-miejsce=Blog-srodek"
+            class={"plausible-event-name=Telefon plausible-event-miejsce=#{@place}"}
             href="tel:+48793102489"
           >
             793 102 489

@@ -37,27 +37,83 @@ defmodule KralukKurkierewicz.Blog do
 
   @posts [
     %Post{
+      slug: "slup-energetyczny-na-dzialce-odszkodowanie",
+      author: "michal-kurkierewicz",
+      service: "sluzebnosc-przesylu",
+      title: "Słup energetyczny na działce - czy należy się odszkodowanie?",
+      meta_title: "Słup energetyczny na działce - czy należy się odszkodowanie?",
+      date: ~D[2026-11-23],
+      date_display: "23 listopada 2026",
+      category: "Służebność przesyłu",
+      excerpt:
+        "Na wielu prywatnych działkach od dziesięcioleci stoją słupy i biegną linie energetyczne, za które właściciele nigdy nie otrzymali zapłaty. Wyjaśniamy, jakie roszczenia przysługują właścicielowi i w jakich sytuacjach przedsiębiorca nie musi płacić.",
+      description:
+        "Słup lub linia energetyczna na działce: kiedy właścicielowi należy się wynagrodzenie, a kiedy przedsiębiorca ma tytuł prawny i nie musi płacić."
+    },
+    %Post{
+      slug: "ile-za-slup-energetyczny-na-dzialce",
+      author: "michal-kurkierewicz",
+      service: "sluzebnosc-przesylu",
+      title: "Ile można dostać za słup energetyczny na działce i za ile lat wstecz?",
+      meta_title: "Ile za słup energetyczny na działce? Wynagrodzenie i terminy",
+      date: ~D[2026-11-23],
+      date_display: "23 listopada 2026",
+      category: "Służebność przesyłu",
+      excerpt:
+        "Właściciele działek pytają najczęściej o kwoty: ile wynosi wynagrodzenie za słup lub linię energetyczną i za jaki okres można go żądać. Przepisy nie podają stawek, ale wiadomo, od czego zależy wysokość wynagrodzenia i jak daleko wstecz sięga roszczenie.",
+      description:
+        "Ile można dostać za słup energetyczny na działce? Od czego zależy wynagrodzenie za służebność przesyłu i za ile lat wstecz można żądać zapłaty."
+    },
+    %Post{
+      slug: "zasiedzenie-sluzebnosci-przesylu-wyrok-tk",
+      author: "michal-kurkierewicz",
+      service: "sluzebnosc-przesylu",
+      title: "Zasiedzenie służebności przesyłu po wyroku TK - co z przegranymi sprawami?",
+      meta_title: "Zasiedzenie służebności przesyłu po wyroku TK P 10/16",
+      date: ~D[2026-11-23],
+      date_display: "23 listopada 2026",
+      category: "Służebność przesyłu",
+      excerpt:
+        "Przez lata przedsiębiorstwa przesyłowe wygrywały spory z właścicielami działek, powołując się na zasiedzenie służebności. Wyrok Trybunału Konstytucyjnego z 2 grudnia 2025 r. podważył tę linię obrony w odniesieniu do okresu sprzed 3 sierpnia 2008 r.",
+      description:
+        "Wyrok TK P 10/16 o zasiedzeniu służebności przesyłu: co orzekł Trybunał i czy można wznowić prawomocnie przegraną sprawę o słupy na działce."
+    },
+    %Post{
+      slug: "przesuniecie-slupa-energetycznego-na-dzialce",
+      author: "michal-kurkierewicz",
+      service: "sluzebnosc-przesylu",
+      title: "Czy można przesunąć słup energetyczny na działce? Słup a budowa domu",
+      meta_title: "Przesunięcie słupa energetycznego na działce a budowa domu",
+      date: ~D[2026-11-23],
+      date_display: "23 listopada 2026",
+      category: "Służebność przesyłu",
+      excerpt:
+        "Słup lub linia energetyczna potrafi uniemożliwić budowę domu w zaplanowanym miejscu. Wyjaśniamy, czy urządzenia można przesunąć lub usunąć, kto za to płaci i co sprawdzić przed zakupem działki.",
+      description:
+        "Czy można przesunąć lub usunąć słup energetyczny z działki, kto ponosi koszty przebudowy i co sprawdzić przed budową domu przy linii energetycznej."
+    },
+    %Post{
       slug: "kredyt-po-rozwodzie",
       author: "milena-kraluk",
       updated: ~D[2026-11-22],
       service: "podzial-majatku",
-      title: "Kredyt hipoteczny po rozwodzie – co z ratami i mieszkaniem?",
-      meta_title: "Kredyt po rozwodzie – podział majątku i hipoteka",
+      title: "Kredyt hipoteczny po rozwodzie - co z ratami i mieszkaniem?",
+      meta_title: "Kredyt po rozwodzie - podział majątku i hipoteka",
       date: ~D[2026-11-04],
       date_display: "4 listopada 2026",
       category: "Prawo rodzinne",
       excerpt:
         "Co dzieje się ze wspólnym kredytem po rozwodzie? Czy były małżonek, który otrzymał mieszkanie, musi sam spłacać raty? Czy można domagać się zwrotu spłaconych rat kredytu od byłego małżonka? Jak ustalić wartość mieszkania obciążonego hipoteką?",
       description:
-        "Kredyt po rozwodzie – kto spłaca raty? Jak wygląda podział majątku, wycena mieszkania z hipoteką i rozliczenie kredytu? Sprawdź, jakie są możliwości prawne."
+        "Kredyt po rozwodzie - kto spłaca raty? Jak wygląda podział majątku, wycena mieszkania z hipoteką i rozliczenie kredytu? Sprawdź, jakie są możliwości prawne."
     },
     %Post{
       slug: "upadlosc-konsumencka",
       author: "michal-kurkierewicz",
       updated: ~D[2026-11-22],
       service: "upadlosc-konsumencka",
-      title: "Upadłość konsumencka – czy pozwala uwolnić się od długów?",
-      meta_title: "Upadłość konsumencka – jak uwolnić się od długów?",
+      title: "Upadłość konsumencka - czy pozwala uwolnić się od długów?",
+      meta_title: "Upadłość konsumencka - jak uwolnić się od długów?",
       date: ~D[2026-10-21],
       date_display: "21 października 2026",
       category: "Upadłość konsumencka",
@@ -72,7 +128,7 @@ defmodule KralukKurkierewicz.Blog do
       updated: ~D[2026-11-22],
       service: "alimenty",
       title: "Ile wynoszą alimenty na dziecko i jak sąd ustala ich wysokość?",
-      meta_title: "Wysokość alimentów na dziecko – jak ją ustalić?",
+      meta_title: "Wysokość alimentów na dziecko - jak ją ustalić?",
       date: ~D[2026-10-20],
       date_display: "20 października 2026",
       category: "Prawo rodzinne",
@@ -83,7 +139,7 @@ defmodule KralukKurkierewicz.Blog do
     },
     %Post{
       slug: "zawyzony-metraz-scianki-dzialowe",
-      meta_title: "Zawyżony metraż przez ścianki działowe – zwrot części ceny",
+      meta_title: "Zawyżony metraż przez ścianki działowe - zwrot części ceny",
       author: "milena-kraluk",
       updated: ~D[2026-11-22],
       service: "zawyzony-metraz",

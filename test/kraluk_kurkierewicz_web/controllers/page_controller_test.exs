@@ -23,7 +23,7 @@ defmodule KralukKurkierewiczWeb.PageControllerTest do
     assert [h1] = Regex.scan(~r{<h1[^>]*>(.*?)</h1>}s, html, capture: :all_but_first)
 
     assert h1 |> hd() |> String.replace(~r/<[^>]+>|\s+/, " ") =~
-             "Kancelaria adwokacka Gdańsk – Kraluk Kurkierewicz"
+             "Kancelaria adwokacka Gdańsk - Kraluk Kurkierewicz"
   end
 
   test "home page JSON-LD has firm, both partners and an FAQPage matching the visible FAQ",

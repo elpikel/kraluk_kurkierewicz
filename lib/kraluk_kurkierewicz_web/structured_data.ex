@@ -43,7 +43,7 @@ defmodule KralukKurkierewiczWeb.StructuredData do
     {"Kto prowadzi sprawy w kancelarii?",
      "Kancelarię tworzą adwokat Milena Kraluk i adwokat Michał Kurkierewicz — absolwenci Wydziału Prawa i Administracji Uniwersytetu Gdańskiego, członkowie Pomorskiej Izby Adwokackiej w Gdańsku, z ponad 10-letnim doświadczeniem zawodowym."},
     {"W jakich godzinach pracuje kancelaria?",
-     "Kancelaria pracuje od poniedziałku do piątku w godzinach 9:00–17:00."}
+     "Kancelaria pracuje od poniedziałku do piątku w godzinach 9:00-17:00."}
   ]
 
   @doc "FAQ entries as `{question, answer}` tuples, rendered on the home page."

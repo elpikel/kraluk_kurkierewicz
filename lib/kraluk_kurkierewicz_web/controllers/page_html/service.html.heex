@@ -55,11 +55,24 @@
         </li>
       </ul>
 
-      <.service_section
-        :for={{title, blocks} <- (@details && @details.sections) || []}
-        title={title}
-        blocks={blocks}
-      />
+      <%!-- In-text upsell for phones and tablets only: on desktop the sticky contact
+           card in the sidebar does this job. --%>
+      <div class="lg:hidden" id="service-cta-1">
+        <.post_cta title="Masz podobną sprawę?" place="Usluga-srodek">
+          Opowiedz nam o niej. Ocenimy Twoją sytuację i przed podjęciem działań przedstawimy
+          rekomendację, przewidywany czas oraz koszty.
+        </.post_cta>
+      </div>
+
+      <%= for {{title, blocks}, i} <- Enum.with_index((@details && @details.sections) || []) do %>
+        <.service_section title={title} blocks={blocks} />
+        <div :if={i == 3 and length(@details.sections) > 5} class="lg:hidden" id="service-cta-2">
+          <.post_cta title="Wolisz omówić to z adwokatem?" place="Usluga-sekcje">
+            Każda sprawa ma swoje szczegóły, których nie rozstrzygnie ogólny opis. Konsultację
+            prowadzimy w kancelarii w Gdańsku, telefonicznie lub przez wideo.
+          </.post_cta>
+        </div>
+      <% end %>
 
       <div id="w-gdansku">
         <h2 class="mt-12">W Gdańsku i Trójmieście</h2>
@@ -109,7 +122,7 @@
       </div>
     </div>
 
-    <aside class="flex flex-col gap-6 lg:self-start">
+    <aside class="flex flex-col gap-6">
       <div
         :if={@leads != []}
         class="rounded-[14px] border border-line-soft bg-cream p-5 shadow-card"
@@ -199,6 +212,41 @@
             </a>
           </li>
         </ul>
+      </div>
+
+      <%!-- Contact card: last in the sidebar and sticky, so on desktop it stays in view
+           next to the long article once the cards above have scrolled away. Hidden below
+           `lg`, where the sidebar stacks right above the closing CTA and would repeat it. --%>
+      <div
+        class="bg-contact hidden rounded-[14px] p-6 text-cream shadow-card lg:sticky lg:top-24 lg:block"
+        id="service-contact"
+      >
+        <p class="m-0 text-[.8rem] font-semibold tracking-[.12em] text-brass uppercase">
+          Porozmawiaj z adwokatem
+        </p>
+        <p class="mt-2 font-display text-[1.45rem] leading-snug font-semibold text-cream">
+          Umów konsultację w sprawie: {@service.name}
+        </p>
+        <p class="mt-2 text-[.95rem] text-white/80">
+          W kancelarii w Gdańsku, telefonicznie lub przez wideo. Pon.-pt. 9:00-17:00.
+        </p>
+        <div class="mt-4 grid gap-2">
+          <a
+            :for={
+              {tel, phone} <- [{"+48698359581", "698 359 581"}, {"+48793102489", "793 102 489"}]
+            }
+            class="btn text-center plausible-event-name=Telefon plausible-event-miejsce=Usluga-bok"
+            href={"tel:#{tel}"}
+          >
+            Zadzwoń: {phone}
+          </a>
+          <a
+            class="btn btn-ghost border-white/50 bg-white/10 text-center text-white hover:bg-white/20 hover:text-white plausible-event-name=CTA plausible-event-cel=Umow-spotkanie plausible-event-miejsce=Usluga-bok"
+            href={~p"/#kontakt"}
+          >
+            Napisz do nas
+          </a>
+        </div>
       </div>
     </aside>
   </div>

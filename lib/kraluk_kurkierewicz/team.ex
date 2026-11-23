@@ -35,7 +35,7 @@ defmodule KralukKurkierewicz.Team do
       name_instrumental: "Michałem Kurkierewiczem",
       # See the note on the other partner's `services`.
       services:
-        ~w(zawyzony-metraz upadlosc-konsumencka obsluga-przedsiebiorcow zakladanie-spolek umowy
+        ~w(zawyzony-metraz nieruchomosci sluzebnosc-przesylu upadlosc-konsumencka obsluga-przedsiebiorcow zakladanie-spolek umowy
                    egzekucja-wierzytelnosci restrukturyzacja obsluga-korporacyjna
                    nowe-technologie sukcesja-firm spory-gospodarcze rodo),
       display_name: "adw. Michał Kurkierewicz",
