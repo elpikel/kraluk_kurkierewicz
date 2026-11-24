@@ -39,6 +39,7 @@ defmodule KralukKurkierewicz.Blog do
     %Post{
       slug: "zasiedzenie-sluzebnosci-przesylu-wyrok-tk",
       author: "michal-kurkierewicz",
+      updated: ~D[2026-11-23],
       service: "sluzebnosc-przesylu",
       title: "Zasiedzenie służebności przesyłu po wyroku TK - co z przegranymi sprawami?",
       meta_title: "Zasiedzenie służebności przesyłu po wyroku TK P 10/16",
@@ -53,6 +54,7 @@ defmodule KralukKurkierewicz.Blog do
     %Post{
       slug: "przesuniecie-slupa-energetycznego-na-dzialce",
       author: "michal-kurkierewicz",
+      updated: ~D[2026-11-23],
       service: "sluzebnosc-przesylu",
       title: "Czy można przesunąć słup energetyczny na działce? Słup a budowa domu",
       meta_title: "Przesunięcie słupa energetycznego na działce a budowa domu",
@@ -67,6 +69,7 @@ defmodule KralukKurkierewicz.Blog do
     %Post{
       slug: "ile-za-slup-energetyczny-na-dzialce",
       author: "michal-kurkierewicz",
+      updated: ~D[2026-11-23],
       service: "sluzebnosc-przesylu",
       title: "Ile można dostać za słup energetyczny na działce i za ile lat wstecz?",
       meta_title: "Ile za słup energetyczny na działce? Wynagrodzenie i terminy",
@@ -81,6 +84,7 @@ defmodule KralukKurkierewicz.Blog do
     %Post{
       slug: "slup-energetyczny-na-dzialce-odszkodowanie",
       author: "michal-kurkierewicz",
+      updated: ~D[2026-11-23],
       service: "sluzebnosc-przesylu",
       title: "Słup energetyczny na działce - czy należy się odszkodowanie?",
       meta_title: "Słup energetyczny na działce - czy należy się odszkodowanie?",
