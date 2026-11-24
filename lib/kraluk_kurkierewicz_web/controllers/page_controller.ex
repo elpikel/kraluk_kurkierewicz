@@ -23,7 +23,7 @@ defmodule KralukKurkierewiczWeb.PageController do
     |> assign(:page_title, "Blog — Kraluk Kurkierewicz")
     |> assign(
       :meta_description,
-      "Blog kancelarii Kraluk Kurkierewicz — omawiamy orzecznictwo i zmiany w przepisach istotne dla naszych Klientów: spory z deweloperami, prawo cywilne, rodzinne i gospodarcze."
+      "Blog kancelarii Kraluk Kurkierewicz — orzecznictwo i zmiany w przepisach: spory z deweloperami, prawo cywilne, rodzinne i gospodarcze."
     )
     |> assign(:json_ld, [StructuredData.breadcrumbs([{"Blog", "/blog"}])])
     |> render(:blog, posts: Blog.list_posts())
@@ -105,7 +105,7 @@ defmodule KralukKurkierewiczWeb.PageController do
         |> assign(:page_title, "#{member.display_name} — adwokat Gdańsk | Kraluk Kurkierewicz")
         |> assign(
           :meta_description,
-          "#{member.display_name} — adwokat i partner w Kancelarii Kraluk Kurkierewicz w Gdańsku. Członek Pomorskiej Izby Adwokackiej, ponad 10 lat doświadczenia. Artykuły i kontakt."
+          "#{member.display_name} — adwokat i partner w Kancelarii Kraluk Kurkierewicz w Gdańsku. Członek Pomorskiej Izby Adwokackiej, ponad 10 lat doświadczenia."
         )
         |> assign(:canonical_path, "/zespol/#{member.slug}")
         |> assign(:json_ld, [

@@ -20,7 +20,11 @@ defmodule KralukKurkierewicz.Sitemap do
     team = Enum.map(Team.list(), &{"/zespol/#{&1.slug}", "0.6", &1.updated})
     posts = Enum.map(Blog.list_posts(), &{"/blog/#{&1.slug}", "0.6", Blog.last_modified(&1)})
 
-    [{"/", "1.0", ~D[2026-11-22]}, {"/blog", "0.7", ~D[2026-11-22]}] ++
+    # The blog index changes whenever a post is added or updated, or when its
+    # own copy changes (the date below).
+    blog = Enum.max([~D[2026-11-24] | Enum.map(posts, &elem(&1, 2))], Date)
+
+    [{"/", "1.0", ~D[2026-11-24]}, {"/blog", "0.7", blog}] ++
       services ++
       team ++ posts ++ [{"/polityka-prywatnosci", "0.5", ~D[2026-09-23]}]
   end

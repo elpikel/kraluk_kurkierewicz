@@ -364,6 +364,15 @@ defmodule KralukKurkierewiczWeb.PageControllerTest do
       end
     end
 
+    test "every meta description is 25-160 characters long", %{conn: conn} do
+      for {path, _priority, _date} <- KralukKurkierewicz.Sitemap.entries() do
+        html = conn |> get(path) |> html_response(200)
+        [_, description] = Regex.run(~r{<meta name="description" content="([^"]*)"}, html)
+        description = description |> String.replace("&amp;", "&") |> String.replace("&#39;", "'")
+        assert String.length(description) in 25..160, "#{path}: #{description}"
+      end
+    end
+
     test "rozwód has its own page, title and H1", %{conn: conn} do
       html = conn |> get(~p"/uslugi/rozwod") |> html_response(200)
       assert html =~ "<title"
